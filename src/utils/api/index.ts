@@ -1,5 +1,5 @@
 import 'whatwg-fetch'
-import { pathCreator, checkHttpStatus, parseJSON } from './helpers'
+import { pathCreator, checkHttpStatus, parseJSON, authHeader } from './helpers'
 
 /**
  * Fetch wrapper function
@@ -12,7 +12,8 @@ function apiFetch (path: string, options: RequestInit = {}): Promise<Response> {
   return fetch(pathCreator(path), {
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      ...authHeader()
     },
     ...options
   })

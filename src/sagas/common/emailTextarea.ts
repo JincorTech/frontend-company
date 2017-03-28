@@ -1,21 +1,44 @@
 import { SagaIterator } from 'redux-saga'
-import { takeEvery, put, fork, select } from 'redux-saga/effects'
+import { takeEvery, put, fork, select, call } from 'redux-saga/effects'
 import { Action } from '../../utils/actions'
 
-import { addEmails, changeValue, removeLastEmail, removeEmail, unselectEmail, HANDLE_EMAIL_REMOVE, VALIDATE_EMAIL, KEY_PRESS } from '../../redux/modules/common/emailTextarea'
-import { isValidEmails, getEmails } from '../../helpers/common/emailTextarea'
+import {
+  addEmails,
+  changeValue,
+  removeLastEmail,
+  removeEmail,
+  unselectEmail,
+  setValidateState,
+  validateEmail,
+  HANDLE_EMAIL_REMOVE,
+  VALIDATE_EMAIL, KEY_PRESS
+} from '../../redux/modules/common/emailTextarea'
+
+import { canGetEmails, getEmails, isEmail } from '../../helpers/common/emailTextarea'
+
+const getState = (state) => state.common.emailTextarea
 
 /**
  * Take email from string or change value 
  */
 function* validateEmailIterator({ payload }: Action<string>): SagaIterator {
-  if (isValidEmails(payload)) {
-    const emails = getEmails(payload)
-    const action = addEmails(emails)
-    yield put(action)
+  const { valid, emails } = yield select(getState)
+
+  if (!valid && (isEmail(payload) || emails.length)) {
+    yield put(setValidateState(true))
+  }
+
+  if (valid && !(isEmail(payload) || emails.length)) {
+    yield put(setValidateState(false))
+  }
+
+  if (canGetEmails(payload)) {
+    const emails = yield call(getEmails, payload)
+
+    yield put(addEmails(emails))
+    yield put(changeValue(''))
   } else {
-    const action = changeValue(payload)
-    yield put(action)
+    yield put(changeValue(payload))
   }
 }
 
@@ -29,8 +52,6 @@ export function* validateEmailSaga(): SagaIterator {
 /**
  * Handle backspace
  */
-const getState = (state) => state.common.emailTextarea
-
 function* handleBackspaceIterator({ payload: btnKey }: Action<string>): SagaIterator {
   const { selectedEmail, value } = yield select(getState)
 
@@ -49,6 +70,8 @@ function* handleBackspaceIterator({ payload: btnKey }: Action<string>): SagaIter
       yield put(unselectEmail())
     }
   }
+
+  yield put(validateEmail(value))
 }
 
 export function* handleBackspaceSaga(): SagaIterator {

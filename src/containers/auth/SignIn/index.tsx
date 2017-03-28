@@ -13,7 +13,29 @@ const SignUp: SFC<SignInProps> = (props) => {
       case 'login':
         return <LogInForm passwordVisible={false} onSubmit={null} onChangePasswordVibility={null}/>
       case 'companies':
-        return <CompanyList companies={[]} onSelect={null}/>
+        return <CompanyList companies={[
+          {
+            id: 'string',
+            legalName: 'string',
+            country: 'string',
+            formattedAddress: 'string',
+            type: 'string'
+          },
+          {
+            id: 'string',
+            legalName: 'string',
+            country: 'string',
+            formattedAddress: 'string',
+            type: 'string'
+          },
+          {
+            id: 'string',
+            legalName: 'string',
+            country: 'string',
+            formattedAddress: 'string',
+            type: 'string'
+          }
+        ]} onSelect={null}/>
     }
   }
 

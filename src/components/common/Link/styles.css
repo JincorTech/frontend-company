@@ -4,8 +4,11 @@
   display: inline-block;
   font-size: 15px/20px;
   color: #0070e0;
-  text-decoration: none !important;
   letter-spacing: -0.2px;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .default {
@@ -22,6 +25,7 @@
   transition: background-color 0.3s ease-out, border-color 0.3s ease-out;
 
   &:hover {
+    text-decoration: none;
     background-color: #fcfcfc;
     border: solid 1px #0070e0;
   }

@@ -8,6 +8,7 @@ import { fetchCountries, fetchCompanyTypes } from '../../../redux/modules/auth/c
 import { companyTypeOptionSelector, countryOptionSelector } from '../../../selectors/auth/createCompany'
 import { ActionCreator } from '../../../utils/actions'
 import { CompanyType, Country } from '../../../redux/modules/auth/createCompany'
+import { initialValues, validate } from '../../../helpers/auth/createCompany'
 
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
@@ -63,6 +64,7 @@ class CreateCompanyForm extends Component<Props, {}> {
 
     return (
       <Form
+        onSubmit={handleSubmit}
         styleName="create-company"
         title="Регистрация компании"
         hint="Чтобы начать совместную работу со своими коллегами, нужно добавить свою компанию">
@@ -97,7 +99,9 @@ class CreateCompanyForm extends Component<Props, {}> {
 const StyledComponent = CSSModules(CreateCompanyForm, require('./styles.css'))
 
 const FormComponent = reduxForm<FormFields, ComponentProps>({
-  form: 'company'
+  form: 'company',
+  initialValues,
+  validate
 })(StyledComponent)
 
 export default connect<StateProps, DispatchProps, ReduxFormProps>(

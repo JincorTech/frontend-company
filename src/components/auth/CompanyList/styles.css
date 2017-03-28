@@ -1,8 +1,30 @@
 @use postcss-short;
 @use postcss-center;
+@use postcss-clearfix;
 
-/*Item*/
-.item {
+/*Company List*/
+
+.company-list-wrap {
+  margin-bottom: 20px;
+}
+
+.company-list {
+  max-width: 360px;
+  margin: * auto;
+  border: solid 1px #dbdfe4;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.company-list-title {
+  font: normal 36px/36px 'Open Sans';
+  color: #000000;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/*Company Item*/
+.company-item {
   position: relative;
   clear: fix;
   padding: 16px;
@@ -20,7 +42,7 @@
   }
 }
 
-.logo, .info {
+.company-logo, .company-info {
   float: left;
 }
 
@@ -30,48 +52,29 @@
   right: 21px;
 }
 
-.logo {
+.company-logo {
   size: 48px;
   background-color: #d8d8d8;
   border-radius: 4px;
   overflow: hidden;
 }
 
-.info {
+.company-info {
   padding-left: 17px;
 }
 
-.name {
-  font: 600 16px/1 'SF UI Display';
+.company-name {
+  font: 600 16px/16px 'Open Sans';
   margin: 2px * 1px;
 }
 
-.type {
-  font: 400 10px/1 'SF UI Text';
+.company-type {
+  font: 400 10px/10px 'Open Sans';
   color: #9da0a4;
   margin-bottom: 6px;
 }
 
-.country {
-  font: 400 13px/1 'SF UI Text';
+.company-country {
+  font: 400 13px/13px 'Open Sans';
   color: #9da0a4;
-}
-
-/*List*/
-.list {
-  max-width: 360px;
-  margin: * auto;
-  border: solid 1px #dbdfe4;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.list-wrap {}
-
-.list-title {
-  display: block;
-  font: normal 36px/1 'SF UI Display';
-  color: #000;
-  text-align: center;
-  margin-bottom: 15px;
 }

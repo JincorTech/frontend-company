@@ -12,8 +12,8 @@ const Form = (props) => {
 
   return (
     <div styleName="form-wrap" className={className}>
-      <h2 styleName="form-title">{title}</h2>
-      <p styleName="form-hint">{hint}</p>
+      <h2 styleName={hint ? 'form-title' : 'without-hint'}>{title}</h2>
+      {hint && <p styleName="form-hint">{hint}</p>}
 
       <form styleName="form" {...formProps}>
         {children}

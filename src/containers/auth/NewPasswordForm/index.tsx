@@ -30,7 +30,7 @@ class NewPasswordForm extends Component<NewPasswordProps, {}> {
       <Form
         styleName="new-password-form"
         title="Восстановление пароля"
-        hint="Введите код из письма или перейдите по ссылке, отправленного на ваш email, после чего вы сможете назначить себе новый пароль.">
+        hint="Введите email, указанный при регистрации, на который придет ссылка и код для сброса пароля.">
 
         <Field
           component={RenderPassword}

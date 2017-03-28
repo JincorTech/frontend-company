@@ -1,23 +1,58 @@
 import * as React from 'react'
-import { SFC } from 'react'
+import { SFC, Component } from 'react'
 import { WrappedFieldProps } from 'redux-form'
 
-import Password, { PasswordProps } from './components/Password'
+import Password from './components/Password'
+import Error from '../Error'
 
-
-export type ControlPasswordProps = PasswordProps & WrappedFieldProps<any>
-
-const ControlPassword: SFC<ControlPasswordProps> = (props) => {
-  const { visible, onChangeVisibility, placeholder, input, meta } = props
-  const { invalid, touched, active, dirty } = meta
-  const hasErrors = invalid && touched && !active && dirty
-
-  return <Password
-    invalid={hasErrors}
-    visible={visible}
-    placeholder={placeholder}
-    onChangeVisibility={onChangeVisibility}
-    {...input}/>
+/**
+ * Types
+ */
+export type Props = WrappedFieldProps<any> & {
+  placeholder?: string
 }
 
-export default ControlPassword
+export type State = {
+  visible: boolean
+}
+
+/**
+ * Component
+ */
+class RenderPassword extends Component<Props, State> {
+  public state: State = {
+    visible: false
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.handleChangeVisibility = this.handleChangeVisibility.bind(this)
+  }
+
+  private handleChangeVisibility(visible: boolean): void {
+    this.setState({ visible })
+  }
+
+  public render(): JSX.Element {
+    const { visible } = this.state
+    const { placeholder, input, meta } = this.props
+    const { invalid, touched, active, dirty, error } = meta
+    const hasError = invalid && touched && !active && dirty
+
+    return (
+      <div>
+        {hasError && <Error msg={error}/>}
+
+        <Password
+          invalid={hasError}
+          visible={visible}
+          placeholder={placeholder}
+          onChangeVisibility={this.handleChangeVisibility}
+          {...input}/>
+      </div>
+    )
+  }
+}
+
+export default RenderPassword

@@ -9,7 +9,7 @@ import { requestActivities } from '../../../redux/modules/profile/activityTypes'
 import InfoItem from '../../../components/profile/InfoItem'
 import CompanyLogoEdit from '../../../components/profile/CompanyLogoEdit'
 import RenderInput from '../../../components/form/RenderInput'
-import RenderCountrySelect from '../../../components/form/RenderCountrySelect'
+import RenderFilterSelect from '../../../containers/form/RenderFilterSelect'
 import RenderSelect from '../../../components/form/RenderSelect'
 import RenderTextarea from '../../../components/form/RenderTextarea'
 import RenderLinkInputs from '../../../components/profile/RenderLinkInputs'
@@ -82,11 +82,13 @@ class ProfileEdit extends Component<Props, {}> {
 
           <Field
             name="country"
-            component={RenderCountrySelect}/>
+            selectOptions={[]}
+            component={RenderFilterSelect}/>
 
           <Field
             name="city"
-            component={RenderCountrySelect}/>
+            selectOptions={[]}
+            component={RenderFilterSelect}/>
 
           <InfoItem title="Описание компании">
             <Field

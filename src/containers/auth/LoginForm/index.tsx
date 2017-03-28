@@ -6,24 +6,29 @@ import { ActionCreator } from '../../../utils/actions'
 
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
+import Link from '../../../components/common/Link'
 import RenderInput from '../../../components/form/RenderInput'
 import RenderPassword from '../../../components/form/RenderPassword'
 
-
-export type LogInFormFields = {
+/**
+ * Types
+ */
+export type FormFields = {
   email: string
   password: string
 }
 
-export type LogInComponentProps = {
+export type ComponentProps = {
   passwordVisible: boolean
-  onSubmit: SubmitHandler<LogInFormFields, LogInComponentProps, any>
+  onSubmit: SubmitHandler<FormFields, ComponentProps, any>
   onChangePasswordVibility: ActionCreator<boolean>
 }
 
-export type LogInFormProps = LogInComponentProps & FormProps<LogInFormFields, LogInComponentProps, any>
+export type LogInFormProps = ComponentProps & FormProps<FormFields, ComponentProps, any>
 
-
+/**
+ * Component
+ */
 class LogInForm extends Component<LogInFormProps, {}> {
   public render(): JSX.Element {
     const { invalid, passwordVisible, onChangePasswordVibility } = this.props
@@ -47,6 +52,8 @@ class LogInForm extends Component<LogInFormProps, {}> {
           placeholder="Пароль"/>
 
         <Button type="submit" disabled={invalid}>Далее</Button>
+
+        <Link styleName="restore-password" to="/auth/restore">Забыли пароль?</Link>
       </Form>
     )
   }
@@ -54,6 +61,6 @@ class LogInForm extends Component<LogInFormProps, {}> {
 
 const StyledComponent = CSSModules(LogInForm, require('./styles.css'))
 
-export default reduxForm<LogInFormFields, LogInComponentProps>({
+export default reduxForm<FormFields, ComponentProps>({
   form: 'account'
 })(StyledComponent)

@@ -16,17 +16,17 @@ const CompanyItem: SFC<CompanyProps> = (props) => {
   const { src, name, country, type, ...divProps } = props
 
   return (
-    <div styleName="item" {...divProps}>
-      <div styleName="logo">
+    <div styleName="company-item" {...divProps}>
+      <div styleName="company-logo">
         {src && <img src={src} alt=""/>}
       </div>
 
-      <div styleName="info">
-        <h4 styleName="name">
+      <div styleName="company-info">
+        <h4 styleName="company-name">
           {name}
         </h4>
-        <div styleName="type">{type}</div>
-        <div styleName="country">{country}</div>
+        <div styleName="company-type">{type}</div>
+        <div styleName="company-country">{country}</div>
       </div>
 
       <Icon

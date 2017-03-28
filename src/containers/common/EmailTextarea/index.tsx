@@ -59,17 +59,20 @@ class EmailTextarea extends Component<Props, {}> {
     setInputWidth(this.textarea.clientWidth)
   }
 
-  public componentWillReceiveProps(nextProps: Props): void {
-    const { value, setInputWidth } = nextProps
+  public componentDidUpdate(): void {
+    const { value, setInputWidth, inputWidth, emails } = this.props
+
     const hiddenInputWidth = this.calcInputValueWidth(value)
     const availableWidth = this.calcAvailableSpace()
     const textareaWidth = this.textarea.clientWidth
 
-    const width = hiddenInputWidth > availableWidth
-      ? textareaWidth
-      : availableWidth
+    if (availableWidth !== inputWidth || hiddenInputWidth > inputWidth) {
+      const width = hiddenInputWidth > availableWidth
+        ? textareaWidth
+        : availableWidth
 
-    setInputWidth(width)
+      setInputWidth(width)
+    }
   }
 
   private handleChange(e: FormEvent<HTMLInputElement>): void {
@@ -109,7 +112,7 @@ class EmailTextarea extends Component<Props, {}> {
     let rowWidth = 0
 
     while (child.tagName !== 'INPUT') {
-      let emailWidth = child.clientWidth + this.EMAIL_ITEM_RIGTH_PEDDING
+      let emailWidth = (child as HTMLElement).offsetWidth + this.EMAIL_ITEM_RIGTH_PEDDING
 
       rowWidth = textareaWidth > rowWidth + emailWidth
         ? rowWidth + emailWidth
@@ -148,6 +151,7 @@ class EmailTextarea extends Component<Props, {}> {
             <div
               ref={(input) => this.input = input}
               styleName="input-hidden"/>
+
             <div
               ref={(email) => this.emailItem = email}
               styleName="email-item-hidden"/>

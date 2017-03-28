@@ -14,6 +14,7 @@ import {
 import { optionsFilterSelector } from '../../../selectors/form/renderFilterSelect'
 
 import FilterSelect, { Props as SelectProps } from './components/FilterSelect'
+import Error from '../../../components/form/Error'
 import { Option } from './components/OptionItem'
 
 /**
@@ -48,20 +49,27 @@ const RenderFilterSelect: SFC<Props> = (props) => {
     selectOptions
   } = props
 
-  const { invalid, touched, active, dirty } = meta
+  const { invalid, touched, active, dirty, error } = meta
+  const hasError = touched && !active && invalid && dirty
 
-  return <FilterSelect
-          open={open}
-          optionFilter={optionFilter}
-          options={options}
-          selectOptions={selectOptions}
-          placeholder={placeholder}
-          invalid={touched && !active && invalid && dirty}
-          openPopup={openPopup}
-          closePopup={closePopup}
-          changeFilter={changeFilter}
-          setOptions={setOptions}
-          {...input}/>
+  return (
+    <div>
+      {hasError && <Error msg={error}/>}
+
+      <FilterSelect
+        open={open}
+        optionFilter={optionFilter}
+        options={options}
+        selectOptions={selectOptions}
+        placeholder={placeholder}
+        invalid={hasError}
+        openPopup={openPopup}
+        closePopup={closePopup}
+        changeFilter={changeFilter}
+        setOptions={setOptions}
+        {...input}/>
+    </div>
+  )
 }
 
 const StyledComponent = CSSModules(RenderFilterSelect, require('./styles.css'))

@@ -1,5 +1,15 @@
-import { createReducer, createSubmitAction, createAsyncAction } from '../../../utils/actions'
 import { from, ImmutableObject } from 'seamless-immutable'
+import {
+  createReducer,
+  createSubmitAction,
+  createAction,
+  createAsyncAction,
+  Action
+} from '../../../utils/actions'
+
+import { FormFields as CompanyFields } from '../../../containers/auth/CreateCompanyForm'
+import { FormFields as AccountFields } from '../../../containers/auth/CreateAccountForm'
+import { FormFields as ConfirmFields } from '../../../containers/auth/ConfirmEmailForm'
 
 /**
  * Types
@@ -13,7 +23,7 @@ export type StateMap = {
   employee: Employee
 }
 
-export type Step = 'company' | 'Account' | 'confirmEmail' | 'inviteEmployee'
+export type Step = 'company' | 'account' | 'email' | 'employee'
 
 export type StepIndex = 1 | 2 | 3
 
@@ -32,19 +42,26 @@ export type Company = {
 /**
  * Action types
  */
-export const CREATE_COMPANY = 'jincor/auth/signUp/CREATE_COMPANY'
-export const VERIFY_EMAIL = 'jincor/auth/signUp/VERIFY_EMAIL'
-export const CONFIRM_EMAIL = 'jincor/auth/signUp/CONFIRM_EMAIL'
-export const INVITE_EMPLOYEE = 'jincor/auth/signUp/EMPLOYEE'
-export const RESET_SIGN_UP = 'jincor/auth/signUp/RESET_SIGN_UP'
+export const CREATE_COMPANY   = 'auth/signUp/CREATE_COMPANY'
+export const SET_USER_INFO    = 'auth/signUp/SET_USER_INFO'
+export const VERIFY_EMAIL     = 'auth/signUp/VERIFY_EMAIL'
+export const CONFIRM_EMAIL    = 'auth/signUp/CONFIRM_EMAIL'
+export const ACCOUNT_CREATED  = 'auth/signUp/CREATE_ACCOUNT_SUCCESS'
+export const INVITE_EMPLOYEE  = 'auth/signUp/EMPLOYEE'
+export const RESET_SIGN_UP    = 'auth/signUp/RESET_SIGN_UP'
+export const SKIP_INVITE      = 'auth/signUp/SKIP_INVITE_EMPLOYEE'
 
 /**
  * Actions creators
  */
-// export const createCompany = createFormAction<CompanyFormFields>(CREATE_COMPANY)
-// export const verifyEmail = createFormAction<AccountFormFields>(VERIFY_EMAIL)
-// export const confirmEmail = createFormAction<EmailFormFields>(CONFIRM_EMAIL)
-// export const inviteEmployee = createSagaAction<string[]>(INVITE_EMPLOYEE)
+export const createCompany  = createSubmitAction<CompanyFields, Company>(CREATE_COMPANY)
+export const setUserInfo    = createAction<Employee>(SET_USER_INFO)
+export const verifyEmail    = createSubmitAction<AccountFields, void>(VERIFY_EMAIL)
+export const confirmEmail   = createSubmitAction<ConfirmFields, void>(CONFIRM_EMAIL)
+export const accountCreated = createAction<void>(ACCOUNT_CREATED)
+export const inviteEmployee = createAsyncAction<void, void>(INVITE_EMPLOYEE)
+export const skipInvite     = createAction<void>(SKIP_INVITE)
+
 
 /**
  * Reducer
@@ -65,5 +82,30 @@ const initialState: State = from<StateMap>({
 })
 
 export default createReducer<State>({
+  [createCompany.SUCCESS]: (state: State, { payload }: Action<Company>): State => (
+    state.merge({
+      company: payload,
+      step: 'account',
+      stepIndex: 2
+    })
+  ),
 
+  [SET_USER_INFO]: (state: State, { payload }: Action<Employee>): State => (
+    state.merge({
+      employee: payload
+    })
+  ),
+
+  [verifyEmail.SUCCESS]: (state: State): State => (
+    state.merge({
+      step: 'email'
+    })
+  ),
+
+  [ACCOUNT_CREATED]: (state: State): State => (
+    state.merge({
+      step: 'employee',
+      stepIndex: 3
+    })
+  )
 }, initialState)

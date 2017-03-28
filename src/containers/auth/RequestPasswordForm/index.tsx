@@ -8,18 +8,18 @@ import Button from '../../../components/common/Button'
 import RenderInput from '../../../components/form/RenderInput'
 
 
-export type PasswordFormFields = {
+export type FormFields = {
   email: string
 }
 
 export type ComponentProps = {
-  onSubmit: SubmitHandler<PasswordFormFields, ComponentProps, any>
+  onSubmit: SubmitHandler<FormFields, ComponentProps, any>
 }
 
-export type RequestPasswordProps = ComponentProps & FormProps<PasswordFormFields, ComponentProps, any>
+export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>
 
 
-class RequestPasswordForm extends Component<RequestPasswordProps, {}> {
+class RequestPasswordForm extends Component<Props, {}> {
   public render(): JSX.Element {
     const { invalid } = this.props
 
@@ -27,7 +27,7 @@ class RequestPasswordForm extends Component<RequestPasswordProps, {}> {
       <Form
         styleName="request-password-form"
         title="Восстановление пароля"
-        hint="Введите email, указанный при регистрации, на который<br/>придет ссылка и код для сброса пароля.">
+        hint="Введите email, указанный при регистрации, на который придет ссылка и код для сброса пароля.">
 
         <Field
           component={RenderInput}
@@ -44,6 +44,6 @@ class RequestPasswordForm extends Component<RequestPasswordProps, {}> {
 
 const StyledComponent = CSSModules(RequestPasswordForm, require('./styles.css'))
 
-export default reduxForm<PasswordFormFields, RequestPasswordProps>({
+export default reduxForm<FormFields, ComponentProps>({
   form: 'requestPassword'
 })(StyledComponent)
