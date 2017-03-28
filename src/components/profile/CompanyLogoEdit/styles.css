@@ -1,0 +1,31 @@
+@use postcss-inline-svg;
+@use postcss-short;
+
+.company-logo {
+  size: 165px;
+  border-radius: 4px;
+  background-color: #ef3124;
+}
+
+.company-logo-edit {
+  position: relative;
+  size: 165px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.company-logo-overlay {
+  position: absolute 0 0 0 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.camera {
+  cursor: pointer;
+  position: absolute 0 0 0 0;
+  background: transparent svg-load('svg/camera.svg') center no-repeat;
+  transition: transform linear 0.2s;
+}
+
+.camera:hover {
+  transform: scale(1.2, 1.2);
+}

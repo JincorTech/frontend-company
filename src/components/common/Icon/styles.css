@@ -1,0 +1,96 @@
+@use postcss-inline-svg;
+@use postcss-short;
+
+.icon {
+  display: inline-block;
+}
+
+.arrow-down {
+  composes: icon;
+  size: size('svg/arrow-down.svg');
+  background: svg-load('svg/arrow-down.svg');
+}
+
+.arrow-right {
+  composes: icon;
+  size: size('svg/arrow-right.svg');
+  background: svg-load('svg/arrow-right.svg');
+}
+
+.arrow-down-red {
+  composes: icon;
+  size: size('svg/arrow-down.svg');
+  background: svg-load('svg/arrow-down.svg', fill=#D0011B);
+}
+
+.close {
+  composes: icon;
+  size: size('svg/close.svg');
+  background: svg-load('svg/close.svg');
+}
+
+.eye {
+  composes: icon;
+  size: size('svg/eye.svg');
+  background: svg-load('svg/eye.svg');
+}
+
+.eye-active {
+  composes: icon;
+  size: size('svg/eye-active.svg');
+  background: svg-load('svg/eye-active.svg');
+}
+
+.star {
+  composes: icon;
+  size: size('svg/star.svg');
+  background: svg-load('svg/star.svg');
+}
+
+.flip {
+  composes: icon;
+  size: size('svg/flip.svg');
+  background: svg-load('svg/flip.svg');
+}
+
+.camera {
+  composes: icon;
+  size: size('svg/camera.svg');
+  background: svg-load('svg/camera.svg');
+}
+
+.close-popup {
+  composes: icon;
+  size: size('svg/close-popup.svg');
+  background: svg-load('svg/close-popup.svg');
+}
+
+.sort-down {
+  composes: icon;
+  size: size('svg/sort-down.svg');
+  background: svg-load('svg/sort-down.svg');
+}
+
+.plus {
+  composes: icon;
+  size: size('svg/plus.svg');
+  background: svg-load('svg/plus.svg');
+}
+
+.email {
+  composes: icon;
+  size: size('svg/email.svg');
+  background: svg-load('svg/email.svg');
+}
+
+.phone {
+  composes: icon;
+  size: size('svg/phone.svg');
+  background: svg-load('svg/phone.svg');
+}
+
+.activity {
+  composes: icon;
+  size: size('svg/activity.svg');
+  background: svg-load('svg/activity.svg');
+}

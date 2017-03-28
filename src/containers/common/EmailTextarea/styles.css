@@ -1,0 +1,66 @@
+@use postcss-short;
+
+.input {
+  display: inline-block;
+  font: normal 16px/22px 'Open Sans';
+  color: #222;
+  padding: 0px;
+  height: 31px;
+  border: 0px;
+  outline: 0px;
+  margin-bottom: 7px;
+  letter-spacing: -0.4px;
+}
+
+.input-hidden {
+  composes: input;
+  position: absolute;
+  width: auto;
+  left: 0;
+  top: -46px;
+}
+
+.textarea {
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  padding-top: 6px;
+  padding-bottom: 1px;
+}
+
+.email-item {
+  display: inline-block;
+  font: normal 16px/22px 'Open Sans';
+  letter-spacing: -0.2px;
+  color: #222;
+  margin-right: 7px;
+  margin-bottom: 7px;
+  padding: 3px 7px 5px;
+  border-radius: 4px;
+  background-color: #f3f5f8;
+  cursor: pointer;
+}
+
+.email-item-hidden {
+  composes: email-item;
+  position: absolute;
+  left: 0;
+  bottom: -46px;
+}
+
+.selected {
+  composes: email-item;
+  border: solid 1px #0070e0;
+  padding: 2px 6px 4px;
+}
+
+.textarea-wrap {
+  cursor: text;
+  border: solid 1px #dbdfe4;
+  font: normal 19px/1 'SF UI Text';
+  background: #ffffff;
+  border-radius: 4px;
+  padding-left: 7px;
+  margin-bottom: 15px;
+  transition: border-color linear 0.2s;
+}

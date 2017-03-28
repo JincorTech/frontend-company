@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>001C613D-F30D-4EBA-88B7-4E46B9351EFA</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <polygon id="path-1" points="11 15.4582983 14.069731 18.5442152 19 13.5977603 18.3945808 13 14.069731 17.3379783 11.6054192 14.860538"></polygon>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-0.5" y="-0.5" width="9" height="6.54421518">
+            <rect x="10.5" y="12.5" width="9" height="6.54421518" fill="white"></rect>
+            <use xlink:href="#path-1" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Done" transform="translate(-10.000000, -12.000000)">
+            <g id="Back-arrow">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <use stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="1" stroke-linejoin="round" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

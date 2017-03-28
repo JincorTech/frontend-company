@@ -1,0 +1,35 @@
+@use postcss-short;
+@use postcss-inline-svg;
+
+.progress-bar {
+  text-align: center;
+  margin: 45px *;
+}
+
+.progress-seporator {
+  display: inline-block;
+  size: 15px 1px;
+  background: #dbdfe4;
+  margin: 9px 5px;
+}
+
+.step {
+  display: inline-block;
+  size: 20px;
+  border-radius: 50%;
+}
+
+.active {
+  composes: step;
+  border: 1px solid #0070e0;
+}
+
+.uncompleted {
+  composes: step;
+  border: 1px solid #dbdfe4
+}
+
+.completed {
+  composes: step;
+  background: #0070e0 svg-load('svg/ok.svg') center no-repeat;
+}

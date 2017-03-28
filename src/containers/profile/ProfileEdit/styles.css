@@ -1,0 +1,40 @@
+@use postcss-short;
+@use postcss-clearfix;
+
+.company-profile-edit {
+  position: relative;
+  padding: 60px * 20px;
+  clear: fix;
+}  
+
+.company-logo {
+  float: left;
+}
+
+.company-info {
+  float: left;
+  padding-left: 30px;
+  width: 555px;
+}
+
+.company-controls {
+  position: absolute 60px 0px * *;
+  text-align: center;
+  width: 165px;
+}
+
+.submit-btn {
+  color: #fff;
+  width: 165px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #cdcecf;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  margin-bottom: 13px;
+}
+
+.cancel-btn {
+  font-size: 16px/26px;
+}

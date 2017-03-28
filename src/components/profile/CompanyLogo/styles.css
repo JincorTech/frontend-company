@@ -1,0 +1,11 @@
+@use postcss-short;
+
+.company-logo {
+  size: 165px;
+  border-radius: 4px;
+  background-color: #ef3124;
+
+  & img {
+    size: 100%;
+  }
+}

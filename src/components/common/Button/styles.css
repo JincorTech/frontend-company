@@ -1,0 +1,25 @@
+@use postcss-short;
+
+.button {
+  font: 600 16px/22px 'Open Sans';
+  color: #fff;
+  size: 100% 40px;
+  border-radius: 4px;
+  background: #0070e0;
+  text-align: center;
+  cursor: pointer;
+  transition: background linear 0.1s;
+
+  &:disabled {
+    background: #cdcecf !important;
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    background: color(#0070e0 shade(10%))
+  }
+
+  &:active {
+    background: color(#0070e0 shade(20%))
+  }
+}

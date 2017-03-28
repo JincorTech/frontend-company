@@ -1,0 +1,22 @@
+.form {
+  width: 360px;
+  margin: 0 auto;
+}
+
+.form-wrap {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.form-title {
+  font: normal 36px/36px 'Open Sans';
+  letter-spacing: -1px;
+  margin-bottom: 15px;
+}
+
+.form-hint {
+  font: normal 17px/24px 'Open Sans';
+  color: #9da0a4;
+  letter-spacing: -0.4px;
+  margin-bottom: 40px;
+}

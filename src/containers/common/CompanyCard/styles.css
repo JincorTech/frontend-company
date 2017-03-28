@@ -1,0 +1,131 @@
+@use postcss-short;
+
+/*Card*/
+.company-card {
+  text-align: center;
+}
+
+.open {
+  composes: company-card;
+  display: block;
+}
+
+.close {
+  composes: company-card;
+  display: none;
+}
+
+.popup {
+  perspective: 1000px;
+  position: relative;
+  background: transparent;
+}
+
+.front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flipper, .front, .back {
+  position: absolute 0 0 0 0;
+}
+
+.front, .back {
+  backface-visibility: hidden;
+  background: #fff;
+}
+
+.flipper-flipped {
+  composes: flipper;
+  transform: rotateY(180deg);
+}
+
+/*Front*/
+.company-card-front {
+  padding-top: 50px;
+}
+
+.logo {
+  size: 130px;
+  margin: 0 auto 30px;
+}
+
+.name {
+  font-size: 30px;
+  margin-bottom: 0px;
+  line-height: 1.4;
+}
+
+.region {
+  font-size: 13px;
+  line-height: 1.85;
+  letter-spacing: -0.4px;
+  color: #9da0a4;
+  margin-bottom: 20px;
+}
+
+.write-button {
+  margin-bottom: 40px;
+}
+
+.links {
+  position: absolute  * 0 40px 0;
+}
+
+.favorite {
+  left: 39px;
+}
+
+.flip {
+  right: 39px;
+}
+
+.favorite, .flip {
+  position: absolute;
+  cursor: pointer;
+  bottom: 49px;
+}
+
+/*Back*/
+.company-card-back {
+  text-align: left;
+  padding: 40px 30px;
+}
+
+.title {
+  font-size: 30px/41px;
+  font-weight: 400;
+  color: #222222;
+  margin: 0px;
+}
+
+.social-links {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 40px;
+}
+
+.contacts {
+  text-align: left;
+  padding-left: 30px;
+}
+
+.contact {
+  margin-bottom: 6px; 
+}
+
+.social-link {
+  display: inline-block;
+  margin: 0 8px 0;
+}

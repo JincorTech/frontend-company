@@ -1,0 +1,115 @@
+
+@use postcss-inline-svg;
+@use postcss-short;
+@use postcss-center;
+
+/*App*/
+.app {
+  position: relative;
+}
+
+.container {
+  width: 1128px;
+  margin: 0 auto;
+  clear: fix;
+}
+
+/*Header*/
+.header {
+  position: relative;
+  height: 60px;
+  padding: 12px 0;
+  border-bottom: solid 2px #f3f5f8;
+}
+
+.module-name {
+  font-size: 16px/22px;
+  color: #9da0a4;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+.pull-right {
+  float: right;
+}
+
+.menu-toggle {
+  position: absolute;
+  top: center;
+  left: 28px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.logo {
+  margin-right: 9px;
+}
+
+.logo, .module-name {
+  vertical-align: middle;
+}
+
+.stripe {
+  display: block;
+  margin-bottom: 5px;
+  width: 24px;
+  height: 2px;
+  background-color: #d8d8d8;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/*Sidebar*/
+.sidebar {
+  position: fixed;
+  padding: 112px 30px 30px;
+  top: 0;
+  bottom: 0;
+  z-index: 10000;
+  width: 240px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+  transition: left linear 0.2s;
+}
+
+.open {
+  composes: sidebar;
+  left: 0;
+}
+
+.close {
+  composes: sidebar;
+  left: -240px;
+}
+
+.sidebar-item {
+  display: block;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  color: #9da0a4 !important;
+
+  &:hover {
+    color: #0070e0 !important;
+    text-decoration: none;
+  }
+}
+
+.close-icon {
+  position: absolute 25px * 25px *;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/*User avatar*/
+.user-avatar {
+  display: inline-block;
+  size: 36px;
+  border-radius: 4px;
+  background-color: #d8d8d8;
+  overflow: hidden;
+  cursor: pointer;
+}
+

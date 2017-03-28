@@ -1,0 +1,22 @@
+@use postcss-short;
+
+.contact-item {
+  display: block;
+  list-style: none;
+  font-size: 16px;
+  letter-spacing: -0.2px;
+  color: #000000;
+  margin-bottom: 14px; 
+}
+
+.contact-value {
+  vertical-align: middle;
+}
+
+.contact-icon {
+  size: 36px;
+  margin-right: 15px; 
+  background-position: center;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
