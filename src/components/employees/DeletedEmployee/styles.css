@@ -1,0 +1,75 @@
+.employee {
+  position: relative;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: .5;
+  transition: .1s linear all;
+
+  &:hover {
+    background-color: #f8f8f8;
+    opacity: 1;
+
+    & .button {
+      opacity: 1;
+    }
+
+    & .slideEffect {
+      transform: translateY(-100%);
+    }
+  }
+}
+
+.avatar {
+  size: 50px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 10px 0 0;
+  background-color: #d8d8d8;
+  border-radius: 4px;
+
+  & > img {
+    display: block;
+    border-radius: 4px;
+    user-select: none;
+  }
+}
+
+.info {
+  display: inline-block;
+  line-height: 23px;
+}
+
+.fullName {
+  color: #000;
+  font-size: 16px;
+}
+
+.emailNPosition {
+  color: #9c9c9c;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.slideEffect {
+  position: relative;
+  width: 400px;
+  display: inline-block;
+  transition: .2s linear transform;
+
+  &:before {
+    position: absolute;
+    top: 100%;
+    content: attr(data-email);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.status {
+  float: right;
+  color: #d0021b;
+  font-size: 13px;
+  line-height: 50px;
+}

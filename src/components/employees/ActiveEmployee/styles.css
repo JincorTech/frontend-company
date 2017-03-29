@@ -1,0 +1,147 @@
+@use postcss-inline-svg;
+@use postcss-short;
+
+.employee {
+  position: relative;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: .1s linear background-color;
+
+  &:hover {
+    background-color: #f8f8f8;
+
+    & .button {
+      opacity: 1;
+    }
+
+    & .slideEffect {
+      transform: translateY(-100%);
+    }
+  }
+}
+
+.avatar {
+  size: 50px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 10px 0 0;
+  background-color: #d8d8d8;
+  border-radius: 4px;
+
+  & > img {
+    display: block;
+    border-radius: 4px;
+    user-select: none;
+  }
+}
+
+.info {
+  display: inline-block;
+  line-height: 23px;
+}
+
+.fullName {
+  color: #000;
+  font-size: 16px;
+}
+
+.label {
+  color: #fff;
+  background-color: #4094e8;
+  border-radius: 16px;
+  font-size: 13px;
+  padding: 1px 10px;
+  margin: 0 0 0 15px;
+}
+
+.emailNPosition {
+  color: #9c9c9c;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.slideEffect {
+  position: relative;
+  width: 400px;
+  display: inline-block;
+  transition: .2s linear transform;
+
+  &:before {
+    position: absolute;
+    top: 100%;
+    content: attr(data-email);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+
+/* menu styles */
+
+.settings {
+  position: relative;
+  float: right;
+  padding: 10px;
+}
+
+.button {
+  size: 30px;
+  opacity: 0;
+  background: svg-load('./svg/cog.svg') no-repeat 50%;
+  opacity: 0;
+  cursor: pointer;
+  outline: none;
+  transition: .1s linear opacity;
+
+  &:hover {
+    & .menu {
+      display: block;
+    }
+  }
+}
+
+
+.menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  background-color: #fff;
+  padding: 10px;
+  cursor: default;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, .15);
+}
+
+.menuOpen {
+  composes: menu;
+  display: block;
+}
+
+.menuWrapper {
+  outline: none;
+}
+
+.menuButton {
+  white-space: nowrap;
+  font-size: 13px;
+  color: #4094e8;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f8f8f8;
+  }
+}
+
+.menuButtonDanger {
+  composes: menuButton;
+  color: #d0011b;
+}
