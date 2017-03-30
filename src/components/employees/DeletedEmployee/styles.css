@@ -10,14 +10,6 @@
   &:hover {
     background-color: #f8f8f8;
     opacity: 1;
-
-    & .button {
-      opacity: 1;
-    }
-
-    & .slideEffect {
-      transform: translateY(-100%);
-    }
   }
 }
 
@@ -41,19 +33,19 @@
   line-height: 23px;
 }
 
-.fullName {
+.full-name {
   color: #000;
   font-size: 16px;
 }
 
-.emailNPosition {
+.email-n-position {
   color: #9c9c9c;
   font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.slideEffect {
+.slide-effect {
   position: relative;
   width: 400px;
   display: inline-block;

@@ -1,3 +1,5 @@
+@use postcss-short;
+
 .container {
   width: 600px;
   margin: 0 auto;
@@ -6,4 +8,32 @@
 
 .list {
   border-bottom: 1px solid #dbdfe4;
+}
+
+
+/* confirm delete popup styles */
+.confirm-delete-popup {
+  background-color: #fff;
+  width: 420px;
+  border-radius: 4px;
+  height: auto;
+  padding: 30px;
+}
+
+.popup-title {
+  margin: 0;
+  color: #000;
+  font-weight: normal;
+  font-size: 24px/33px;
+  letter-spacing: -.2px;
+}
+
+.popup-body {
+  margin: 44px 0 0 0;
+  text-align: right;
+}
+
+.popup-button {
+  display: inline-block;
+  width: 160px;
 }

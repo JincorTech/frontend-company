@@ -42,7 +42,7 @@
   line-height: 23px;
 }
 
-.fullName {
+.full-name {
   color: #000;
   font-size: 16px;
 }
@@ -56,14 +56,14 @@
   margin: 0 0 0 15px;
 }
 
-.emailNPosition {
+.email-n-position {
   color: #9c9c9c;
   font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.slideEffect {
+.slide-effect {
   position: relative;
   width: 400px;
   display: inline-block;
@@ -115,16 +115,16 @@
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, .15);
 }
 
-.menuOpen {
+.menu-open {
   composes: menu;
   display: block;
 }
 
-.menuWrapper {
+.menu-wrapper {
   outline: none;
 }
 
-.menuButton {
+.menu-button {
   white-space: nowrap;
   font-size: 13px;
   color: #4094e8;
@@ -141,7 +141,7 @@
   }
 }
 
-.menuButtonDanger {
-  composes: menuButton;
+.menu-button-danger {
+  composes: menu-button;
   color: #d0011b;
 }

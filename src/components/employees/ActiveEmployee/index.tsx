@@ -6,6 +6,7 @@ import EmployeeMenu from './components/EmployeeMenu'
 
 
 export type Props = {
+  id: string,
   admin: boolean,
   avatar: string,
   email: string,
@@ -13,41 +14,52 @@ export type Props = {
   position: string
 }
 
-const ActiveEmployee: SFC<Props> = ({ admin, avatar, email, fullName, position }) => (
-  <div styleName="employee">
-    <div styleName="avatar">
-      <img src={avatar}/>
-    </div>
+const ActiveEmployee: SFC<Props> = props => {
+  const {
+    id,
+    admin,
+    avatar,
+    email,
+    fullName,
+    position
+  } = props
 
-    <div styleName="info">
-      <div styleName="fullName">
-        {fullName} {admin && <span styleName="label">Администратор</span>}
+  return (
+    <div styleName="employee">
+      <div styleName="avatar">
+        <img src={avatar}/>
       </div>
-      <div styleName="emailNPosition">
-        <span styleName="slideEffect" data-email={email}>{position}</span>
+
+      <div styleName="info">
+        <div styleName="full-name">
+          {fullName} {admin && <span styleName="label">Администратор</span>}
+        </div>
+        <div styleName="email-n-position">
+          <span styleName="slide-effect" data-email={email}>{position}</span>
+        </div>
       </div>
+
+      <EmployeeMenu>
+        <button
+          type="button"
+          styleName="menu-button"
+          onClick={ () => { console.log(`${fullName} admin now! (no)`) }}>
+          Назначить администратором</button>
+
+        <button
+          type="button"
+          styleName="menu-button"
+          onClick={ () => { console.log(`${fullName} profile open`) }}>
+          Открыть профиль</button>
+
+        <button
+          type="button"
+          styleName="menu-button-danger"
+          onClick={ () => { console.log(`${fullName} has been deleted`) }}>
+          Удалить пользователя</button>
+      </EmployeeMenu>
     </div>
-
-    <EmployeeMenu>
-      <button
-        type="button"
-        styleName="menuButton"
-        onClick={ () => { console.log(`${fullName} admin now! (no)`) }}>
-        Назначить администратором</button>
-
-      <button
-        type="button"
-        styleName="menuButton"
-        onClick={ () => { console.log(`${fullName} profile open`) }}>
-        Открыть профиль</button>
-
-      <button
-        type="button"
-        styleName="menuButtonDanger"
-        onClick={ () => { console.log(`remove ${fullName} from employees list`) }}>
-        Удалить пользователя</button>
-    </EmployeeMenu>
-  </div>
-)
+  )
+}
 
 export default CSSModules(ActiveEmployee, require('./styles.css'))
