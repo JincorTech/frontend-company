@@ -6,6 +6,9 @@ import ActiveEmployee from '../../../components/employees/ActiveEmployee'
 import InvitedEmployee from '../../../components/employees/InvitedEmployee'
 import DeletedEmployee from '../../../components/employees/DeletedEmployee'
 
+import Popup from '../../../components/common/Popup'
+import Button from '../../../components/common/Button'
+
 
 // mock data
 const activeUsers = [
@@ -85,29 +88,41 @@ const deletedUsers = [
     deletedAt: '28.03.17'
   }
 ]
+// /mock data
 
 const Employees: SFC<{}> = () => (
   <div styleName="container">
     {activeUsers.length > 0 &&
       <div styleName="list">
-        {activeUsers.map(({ id, ...item }) =>
-          (<ActiveEmployee key={`active_${id}`} {...item}/>))}
+        {activeUsers.map((item, i) =>
+          (<ActiveEmployee key={`active-employee-${i}`} {...item}/>))}
       </div>
     }
 
     {invitedUsers.length > 0 &&
       <div styleName="list">
-        {invitedUsers.map(({ id, ...item }) =>
-          (<InvitedEmployee key={`invited_${id}`} {...item}/>))}
+        {invitedUsers.map((item, i) =>
+          (<InvitedEmployee key={`invited-employee-${i}`} {...item}/>))}
       </div>
     }
 
     {deletedUsers.length > 0 &&
       <div styleName="list">
-        {deletedUsers.map(({ id, ...item }) =>
-          (<DeletedEmployee key={`deleted_${id}`} {...item}/>))}
+        {deletedUsers.map((item, i) =>
+          (<DeletedEmployee key={`deleted-employee-${i}`} {...item}/>))}
       </div>
     }
+
+    <Popup
+      styleName="confirm-delete-popup"
+      open={false}>
+      <h4 styleName="popup-title">Вы уверены, что хотите удалить этого сотрудника?</h4>
+      <div styleName="popup-body">
+        <div styleName="popup-button">
+          <Button>Удалить</Button>
+        </div>
+      </div>
+    </Popup>
   </div>
 )
 

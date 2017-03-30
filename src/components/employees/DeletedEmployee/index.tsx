@@ -11,21 +11,31 @@ export type Props = {
   position: string
 }
 
-const DeletedEmployee: SFC<Props> = ({ avatar, email, fullName, deletedAt, position }) => (
-  <div styleName="employee">
-    <div styleName="avatar">
-      <img src={avatar}/>
-    </div>
+const DeletedEmployee: SFC<Props> = props => {
+  const {
+    avatar,
+    email,
+    fullName,
+    deletedAt,
+    position
+  } = props
 
-    <div styleName="info">
-      <div styleName="fullName">{fullName}</div>
-      <div styleName="emailNPosition">
-        <span styleName="slideEffect" data-email={email}>{position}</span>
+  return (
+    <div styleName="employee">
+      <div styleName="avatar">
+        <img src={avatar}/>
       </div>
-    </div>
 
-    <div styleName="status">Удален {deletedAt}</div>
-  </div>
-)
+      <div styleName="info">
+        <div styleName="full-name">{fullName}</div>
+        <div styleName="email-n-position">
+          <span styleName="slide-effect" data-email={email}>{position}</span>
+        </div>
+      </div>
+
+      <div styleName="status">Удален {deletedAt}</div>
+    </div>
+  )
+}
 
 export default CSSModules(DeletedEmployee, require('./styles.css'))

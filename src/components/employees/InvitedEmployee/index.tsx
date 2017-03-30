@@ -11,7 +11,7 @@ export type Props = {
 const InvitedEmployee: SFC<Props> = ({ email, invitedAt }) => (
   <div styleName="employee">
     <div styleName="avatar">
-      <div styleName="invitedImage"/>
+      <div styleName="invited-image"/>
     </div>
 
     <div styleName="info">
