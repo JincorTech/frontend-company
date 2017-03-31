@@ -1,4 +1,5 @@
 import { from, ImmutableObject } from 'seamless-immutable'
+
 import {
   createReducer,
   createSubmitAction,
@@ -17,6 +18,7 @@ import { FormFields as ConfirmFields } from '../../../containers/auth/ConfirmEma
 export type State = StateMap & ImmutableObject<StateMap>
 
 export type StateMap = {
+  spinner: boolean
   step: Step
   stepIndex: StepIndex
   company: Company
@@ -67,6 +69,7 @@ export const skipInvite     = createAction<void>(SKIP_INVITE)
  * Reducer
  */
 const initialState: State = from<StateMap>({
+  spinner: false,
   step: 'company',
   stepIndex: 1,
   company: {
@@ -82,12 +85,21 @@ const initialState: State = from<StateMap>({
 })
 
 export default createReducer<State>({
+  [createCompany.REQUEST]: (state: State): State => (
+    state.merge({ spinner: true })
+  ),
+
   [createCompany.SUCCESS]: (state: State, { payload }: Action<Company>): State => (
     state.merge({
       company: payload,
       step: 'account',
-      stepIndex: 2
+      stepIndex: 2,
+      spinner: false
     })
+  ),
+
+  [verifyEmail.REQUEST]: (state: State): State => (
+    state.merge({ spinner: true })
   ),
 
   [SET_USER_INFO]: (state: State, { payload }: Action<Employee>): State => (
@@ -98,14 +110,28 @@ export default createReducer<State>({
 
   [verifyEmail.SUCCESS]: (state: State): State => (
     state.merge({
-      step: 'email'
+      step: 'email',
+      spinner: false
     })
+  ),
+
+  [confirmEmail.REQUEST]: (state: State): State => (
+    state.merge({ spinner: true })
   ),
 
   [ACCOUNT_CREATED]: (state: State): State => (
     state.merge({
       step: 'employee',
-      stepIndex: 3
+      stepIndex: 3,
+      spinner: false
     })
-  )
+  ),
+
+  [inviteEmployee.REQUEST]: (state: State): State => (
+    state.merge({ spinner: true })
+  ),
+
+  [inviteEmployee.SUCCESS]: (state: State): State => (
+    state.merge({ spinner: false })
+  ),
 }, initialState)

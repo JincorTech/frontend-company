@@ -16,6 +16,7 @@ export type FormFields = {
 }
 
 export type ConfirmComponentProps = {
+  spinner: boolean
   verificationId: string,
   onSubmit: SubmitHandler<FormFields, ConfirmComponentProps, any>
 }
@@ -25,13 +26,13 @@ export type ConfirmFormProps = ConfirmComponentProps & FormProps<FormFields, Con
 
 class ConfirmEmailForm extends Component<ConfirmFormProps, {}> {
   public componentDidMount(): void {
-    const { change, verificationId } = this.props
+    const { change, verificationId, spinner } = this.props
 
     change('verificationId', verificationId)
   }
 
   public render(): JSX.Element {
-    const { invalid, handleSubmit } = this.props
+    const { invalid, handleSubmit, spinner } = this.props
 
     return (
       <Form
@@ -52,7 +53,7 @@ class ConfirmEmailForm extends Component<ConfirmFormProps, {}> {
           placeholder="Введите код"
         />
 
-        <Button type="submit" disabled={invalid}>Далее</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>Далее</Button>
       </Form>
     )
   }

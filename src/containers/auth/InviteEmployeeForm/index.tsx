@@ -13,7 +13,11 @@ import EmailTextarea from '../../../containers/common/EmailTextarea'
 /**
  * Types
  */
-export type Props = DispatchProps & StateProps
+export type Props = DispatchProps & StateProps & ComponentProps
+
+export type ComponentProps = {
+  spinner: boolean
+}
 
 export type DispatchProps = {
   inviteEmployee: () => void
@@ -28,7 +32,7 @@ export type StateProps = {
  */
 class InviteEmployeeForm extends Component<Props, {}> {
   public render() {
-    const { inviteEmployee, textareaValid } = this.props
+    const { inviteEmployee, textareaValid, spinner } = this.props
 
     return(
       <Form
@@ -41,6 +45,7 @@ class InviteEmployeeForm extends Component<Props, {}> {
 
         <Button
           type="button"
+          spinner={spinner}
           disabled={!textareaValid}
           onClick={inviteEmployee}>
           Пригласить
@@ -57,7 +62,7 @@ class InviteEmployeeForm extends Component<Props, {}> {
  */
 const StyledComponent = CSSModules(InviteEmployeeForm, require('./styles.css'))
 
-export default connect<StateProps, DispatchProps, {}>(
+export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => ({ textareaValid : state.common.emailTextarea.valid }),
   { inviteEmployee }
 )(StyledComponent)

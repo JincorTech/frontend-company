@@ -9,6 +9,10 @@
   text-align: center;
   cursor: pointer;
   transition: background linear 0.1s;
+}
+
+.default {
+  composes: button;
 
   &:disabled {
     background: #cdcecf !important;
@@ -22,4 +26,10 @@
   &:active {
     background: color(#0070e0 shade(20%))
   }
+}
+
+.loaded {
+  composes: button;
+  background: color(#0070e0 shade(20%));
+  cursor: default !important;
 }

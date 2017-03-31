@@ -15,7 +15,7 @@ const SignUp: SFC<SignInProps> = (props) => {
       case 'requestEmail':
         return <RequestPasswordForm onSubmit={null}/>
       case 'confirmEmail':
-        return <ConfirmPasswordForm onSubmit={null}/>
+        return <ConfirmPasswordForm spinner onSubmit={null}/>
       case 'companies':
         return <CompanyList companies={[]} onSelect={null}/>
       case 'newPassword':

@@ -23,6 +23,7 @@ export type FormFields = {
 }
 
 export type ComponentProps = {
+  spinner: boolean
   verificationId: string,
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>
 }
@@ -40,7 +41,7 @@ class CreateAccountForm extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { invalid, handleSubmit } = this.props
+    const { invalid, handleSubmit, spinner } = this.props
 
     return (
       <Form
@@ -81,11 +82,9 @@ class CreateAccountForm extends Component<Props, {}> {
         <Field
           component={RenderPassword}
           name="password"
-          visible={false}
-          onChangeVisibility={() => console.log('sdsas')}
           placeholder="Пароль"/>
 
-        <Button type="submit" disabled={invalid}>Далее</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>Далее</Button>
       </Form>
     )
   }

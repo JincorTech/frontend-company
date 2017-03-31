@@ -34,7 +34,8 @@ export type DispatchProps = {
 export type ReduxFormProps = ComponentProps & FormProps<FormFields, ComponentProps, any>
 
 export type ComponentProps = {
-  onSubmit: SubmitHandler<FormFields, ComponentProps, any>
+  onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
+  spinner: boolean
 }
 
 export type FormFields = {
@@ -60,7 +61,13 @@ class CreateCompanyForm extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { countries, companyTypes, handleSubmit, invalid } = this.props
+    const {
+      spinner,
+      countries,
+      companyTypes,
+      handleSubmit,
+      invalid
+    } = this.props
 
     return (
       <Form
@@ -87,7 +94,7 @@ class CreateCompanyForm extends Component<Props, {}> {
           type="text"
           placeholder="Название компании"/>
 
-        <Button type="submit" disabled={invalid}>Добавить</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>Добавить</Button>
       </Form>
     )
   }

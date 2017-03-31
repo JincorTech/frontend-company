@@ -1,6 +1,6 @@
 {
   "name": "jincor-frontend",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "dependencies": {
     "@types/chai": {
       "version": "3.4.34",
@@ -5122,7 +5122,7 @@
     },
     "postcss-calc": {
       "version": "5.3.1",
-      "from": "postcss-calc@>=5.2.0 <6.0.0",
+      "from": "https://registry.npmjs.org/postcss-calc/-/postcss-calc-5.3.1.tgz",
       "resolved": "https://registry.npmjs.org/postcss-calc/-/postcss-calc-5.3.1.tgz",
       "dev": true
     },
@@ -5296,6 +5296,12 @@
       "version": "3.0.1",
       "from": "postcss-font-weights@>=3.0.1 <4.0.0",
       "resolved": "https://registry.npmjs.org/postcss-font-weights/-/postcss-font-weights-3.0.1.tgz",
+      "dev": true
+    },
+    "postcss-for": {
+      "version": "2.1.1",
+      "from": "postcss-for@latest",
+      "resolved": "https://registry.npmjs.org/postcss-for/-/postcss-for-2.1.1.tgz",
       "dev": true
     },
     "postcss-functions": {
@@ -5656,6 +5662,12 @@
       "version": "2.0.1",
       "from": "postcss-short-spacing@>=2.0.1 <3.0.0",
       "resolved": "https://registry.npmjs.org/postcss-short-spacing/-/postcss-short-spacing-2.0.1.tgz",
+      "dev": true
+    },
+    "postcss-simple-vars": {
+      "version": "2.0.0",
+      "from": "postcss-simple-vars@>=2.0.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/postcss-simple-vars/-/postcss-simple-vars-2.0.0.tgz",
       "dev": true
     },
     "postcss-svgo": {

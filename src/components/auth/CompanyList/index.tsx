@@ -16,7 +16,7 @@ export type Company = {
 
 export type Props = {
   companies: Company[],
-  onSelect: ActionCreator<string>
+  onSelect: (companyId: string) => void
 }
 
 
