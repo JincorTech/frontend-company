@@ -9,6 +9,8 @@ import DeletedEmployee from '../../../components/employees/DeletedEmployee'
 import Popup from '../../../components/common/Popup'
 import Button from '../../../components/common/Button'
 
+import EmployeeCard from '../../../components/employees/EmployeeCard'
+
 
 // mock data
 const activeUsers = [
@@ -123,6 +125,15 @@ const Employees: SFC<{}> = () => (
         </div>
       </div>
     </Popup>
+
+    <EmployeeCard
+      open={true}
+      id="11f43465-d042-4db0-8aa9-13bac482bb59"
+      companyName="Google"
+      companyLogo="https://pbs.twimg.com/profile_images/2227292956/twitter_logo_normal.png"
+      avatar="http://i.imgur.com/kJUdCE6.png"
+      fullName="Walter White"
+      position="Senior Angular Developer"/>
   </div>
 )
 
