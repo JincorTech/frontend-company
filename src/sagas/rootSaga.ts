@@ -2,11 +2,13 @@ import { SagaIterator } from 'redux-saga'
 import { fork } from 'redux-saga/effects'
 import { formActionSaga } from 'redux-form-saga'
 
-import activityTypeSaga from './profile/activityTypes'
+import emailTextareaSaga from './common/emailTextarea'
 import signUpSaga from './auth/signUp'
 import signInSaga from './auth/signIn'
+import restorePasswordSaga from './auth/restorePassword'
 import createCompanySaga from './auth/createCompany'
-import emailTextareaSaga from './common/emailTextarea'
+import activityTypeSaga from './profile/activityTypes'
+
 
 export default function* (): SagaIterator {
   yield [
@@ -14,6 +16,7 @@ export default function* (): SagaIterator {
     fork(activityTypeSaga),
     fork(signInSaga),
     fork(signUpSaga),
+    fork(restorePasswordSaga),
     fork(createCompanySaga),
     fork(emailTextareaSaga)
   ]

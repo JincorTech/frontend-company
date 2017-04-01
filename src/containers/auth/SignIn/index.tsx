@@ -17,7 +17,7 @@ import { FormFields, ComponentProps } from '../LoginForm'
 export type SignInProps = HTMLProps<HTMLDivElement> & StateProps & DispatchProps
 
 export type DispatchProps = {
-  selectCompany: (companyIs: string) => void
+  selectCompany: (companyId: string) => void
 }
 
 /**

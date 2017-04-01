@@ -54,7 +54,7 @@ class LogInForm extends Component<Props, {}> {
 
         <Button type="submit" spinner={spinner} disabled={invalid}>Войти</Button>
 
-        <Link styleName="restore-password" to="/auth/restore">Забыли пароль?</Link>
+        <Link styleName="restore-password" to="/auth/password">Забыли пароль?</Link>
       </Form>
     )
   }

@@ -8,6 +8,7 @@ import renderSelect from './modules/form/renderSelect'
 import renderFilterSelect from './modules/form/renderFilterSelect'
 import signUp from './modules/auth/signUp'
 import signIn from './modules/auth/signIn'
+import restorePassword from './modules/auth/restorePassword'
 import createCompany from './modules/auth/createCompany'
 import activityTypes from './modules/profile/activityTypes'
 import profileEdit from './modules/profile/profileEdit'
@@ -31,6 +32,7 @@ export default combineReducers({
   auth: combineReducers({
     signIn,
     signUp,
+    restorePassword,
     createCompany
   }),
 
