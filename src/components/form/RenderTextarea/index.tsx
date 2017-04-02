@@ -15,8 +15,8 @@ const RenderTextarea: SFC<Props> = (props) => {
   const hasError = touched && !active && invalid && dirty
 
   return (
-    <div>
-      {hasError && <Error msg={error}/>}
+    <div styleName="render-textarea">
+      {hasError && <Error styleName="error" msg={error}/>}
 
       <Textarea
         invalid={hasError}

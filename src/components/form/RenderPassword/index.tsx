@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { SFC, Component } from 'react'
 import { WrappedFieldProps } from 'redux-form'
+import * as CSSModules from 'react-css-modules'
 
 import Password from './components/Password'
 import Error from '../Error'
@@ -41,8 +42,8 @@ class RenderPassword extends Component<Props, State> {
     const hasError = invalid && touched && !active && dirty
 
     return (
-      <div>
-        {hasError && <Error msg={error}/>}
+      <div styleName="render-password">
+        {hasError && <Error styleName="error" msg={error}/>}
 
         <Password
           invalid={hasError}
@@ -55,4 +56,4 @@ class RenderPassword extends Component<Props, State> {
   }
 }
 
-export default RenderPassword
+export default CSSModules(RenderPassword, require('./styles.css'))

@@ -1,5 +1,22 @@
+@use postcss-short;
 @use postcss-center;
 
+/**
+* Render password
+*/
+.render-password {
+  position: relative
+}
+
+.error {
+  position: absolute 0px * * 100%;
+  width: 210px;
+  padding-left: 15px;
+}
+
+/**
+* Password
+*/
 .password-input-wrap {
   position: relative;
   margin-bottom: 15px;

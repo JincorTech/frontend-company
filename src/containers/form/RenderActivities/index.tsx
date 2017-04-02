@@ -33,8 +33,8 @@ export const RenderActivity: SFC<Props> = (props) => {
   const hasError = touched && !active && invalid && dirty
 
   return (
-    <div>
-      {hasError && <Error msg={error}/>}
+    <div styleName="render-activity">
+      {hasError && <Error styleName="error" msg={error}/>}
 
       <ActivityTypes
         open={open}

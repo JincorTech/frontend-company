@@ -53,8 +53,8 @@ const RenderFilterSelect: SFC<Props> = (props) => {
   const hasError = touched && !active && invalid && dirty
 
   return (
-    <div>
-      {hasError && <Error msg={error}/>}
+    <div styleName="render-filter-select">
+      {hasError && <Error styleName="error" msg={error}/>}
 
       <FilterSelect
         open={open}

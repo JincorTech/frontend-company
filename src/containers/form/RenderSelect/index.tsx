@@ -14,8 +14,8 @@ const RenderFilterSelect: SFC<RenderSelectProps> = (props) => {
   const { invalid, touched, active, dirty, error } = meta
   const hasError = touched && !active && invalid && dirty
 return (
-    <div>
-      {hasError && <Error msg={error}/>}
+    <div styleName="render-select">
+      {hasError && <Error styleName="error" msg={error}/>}
 
       <Select
         title={placeholder}

@@ -6,8 +6,8 @@ export type Props = HTMLProps<HTMLDivElement> & {
   msg: string
 }
 
-const Error: SFC<Props> = ({ msg }) => (
-  <div styleName="error">{msg}</div>
+const Error: SFC<Props> = ({ msg, ...divProps }) => (
+  <div styleName="error" {...divProps}>{msg}</div>
 )
 
 export default CSSModules(Error, require('./styles.css'))

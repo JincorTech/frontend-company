@@ -1,5 +1,21 @@
 @use postcss-short;
 
+/**
+* Render textarea
+*/
+.render-textarea {
+  position: relative
+}
+
+.error {
+  position: absolute 0px * * 100%;
+  width: 210px;
+  padding-left: 15px;
+}
+
+/**
+* Textarea
+*/
 :root {
   --color: #222222;
   --background: #ffffff;
