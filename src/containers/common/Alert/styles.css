@@ -1,0 +1,39 @@
+@use postcss-short;
+@use postcss-center;
+
+.alert {
+  position: absolute * * * center;
+  font: normal 16px/24px 'Open Sans';
+  padding: 8px 35px;
+  width: 670px;
+  max-width: 100%;
+  opacity: 0.75;
+  border-radius: 4px;
+  background-color: #d0021b;
+  text-align: center;
+  color: #ffffff;
+  transition: top ease-out 0.2s;
+}
+
+.open {
+  composes: alert;
+  top: 70px;
+  visibility: visible
+}
+
+.close {
+  composes: alert;
+  top: -100px;
+  visibility: hidden;
+}
+
+.close-icon { 
+  position: absolute 12px 12px * *;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity linear 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+}

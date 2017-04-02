@@ -4,10 +4,12 @@ import * as CSSModules from 'react-css-modules'
 
 import Link from '../../common/Link'
 import Logo from '../../common/Logo'
+import Alert from '../../../containers/common/Alert'
 
 const Header: SFC<{}> = ({ children }) => {
   return (
     <div>
+      <Alert />
       <header styleName="header">
         <div styleName="container">
           <Logo  to="/"/>

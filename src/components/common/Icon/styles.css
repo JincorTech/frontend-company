@@ -94,3 +94,9 @@
   size: size('svg/activity.svg');
   background: svg-load('svg/activity.svg');
 }
+
+.close-alert {
+  composes: icon;
+  size: size('svg/close-alert.svg');
+  background: svg-load('svg/close-alert.svg');
+}
