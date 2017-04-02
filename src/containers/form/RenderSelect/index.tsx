@@ -7,13 +7,14 @@ import Select, { Props as SelectProps } from './components/Select'
 import Error from '../../../components/form/Error'
 
 
-export type RenderSelectProps = SelectProps & WrappedFieldProps<any>
+export type Props = SelectProps & WrappedFieldProps<any>
 
-const RenderFilterSelect: SFC<RenderSelectProps> = (props) => {
+const RenderFilterSelect: SFC<Props> = (props) => {
   const { title, placeholder, input, meta, options } = props
   const { invalid, touched, active, dirty, error } = meta
   const hasError = touched && !active && invalid && dirty
-return (
+
+  return (
     <div styleName="render-select">
       {hasError && <Error styleName="error" msg={error}/>}
 

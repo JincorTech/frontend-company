@@ -2,7 +2,9 @@ import * as React from 'react'
 import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { connect } from 'react-redux'
+
 import { openCompanyCard } from '../../../redux/modules/common/companyCard'
+import { setEditable } from '../../../redux/modules/profile/profile'
 
 import Link from '../../../components/common/Link'
 import CompanyLogo from '../../../components/profile/CompanyLogo'
@@ -13,7 +15,9 @@ import Button from '../../../components/profile/Button'
 import Text from '../../../components/profile/Text'
 import CompanyCard from '../../../containers/common/CompanyCard'
 
-
+/**
+ * Types
+ */
 export type Props = DispatchProps & ComponentProps
 
 export type ComponentProps = {
@@ -34,9 +38,13 @@ export type ActivityType = {
 }
 
 export type DispatchProps = {
-  openCompanyCard: () => void
+  openCompanyCard: () => void,
+  setEditable: (value: boolean) => void
 }
 
+/**
+ * Component
+ */
 const CompanyProfile: SFC<Props> = (props) => {
   const {
     logo,
@@ -48,7 +56,8 @@ const CompanyProfile: SFC<Props> = (props) => {
     phone,
     activities,
     socialLinks,
-    openCompanyCard
+    openCompanyCard,
+    setEditable
   } = props
 
   return (
@@ -71,8 +80,6 @@ const CompanyProfile: SFC<Props> = (props) => {
         <InfoItem title="Описание компании">
           <Text
             styleName="company-desc"
-            collapsed
-            onCollapse={null}
             value={description}/>
         </InfoItem>
 
@@ -97,8 +104,16 @@ const CompanyProfile: SFC<Props> = (props) => {
       </div>
 
       <div styleName="controls-block">
-        <Button styleName="edit-button">Редактировать</Button>
-        <a onClick={() => openCompanyCard()} styleName="company-link">Посмотреть в виде карточки</a>
+        <Button
+          onClick={() => setEditable(true)}
+          styleName="edit-button"
+          children="Редактировать"/>
+
+        <a
+          onClick={() => openCompanyCard()}
+          styleName="company-link"
+          children="Посмотреть в виде карточки"/>
+
         <a href="#" styleName="company-link">Сотрудники (5)</a>
       </div>
 
@@ -107,9 +122,11 @@ const CompanyProfile: SFC<Props> = (props) => {
   )
 }
 
+/**
+ * Decorators
+ */
 const StyledComponent = CSSModules(CompanyProfile, require('./styles.css'))
-
 export default connect<{}, DispatchProps, ComponentProps>(
   () => ({}),
-  { openCompanyCard }
+  { openCompanyCard, setEditable }
 )(StyledComponent)

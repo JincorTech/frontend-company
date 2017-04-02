@@ -14,6 +14,7 @@ import signIn from './modules/auth/signIn'
 import restorePassword from './modules/auth/restorePassword'
 import createCompany from './modules/auth/createCompany'
 
+import profile from './modules/profile/profile'
 import activityTypes from './modules/profile/activityTypes'
 import profileEdit from './modules/profile/profileEdit'
 
@@ -43,6 +44,7 @@ export default combineReducers({
 
   profile: combineReducers({
     activityTypes,
-    profileEdit
+    profileEdit,
+    profile
   })
 })

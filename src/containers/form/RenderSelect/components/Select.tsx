@@ -34,7 +34,7 @@ export type DispatchProps = {
 /**
  * Component
  */
-const CountrySelect: SFC<Props> = (props) => {
+const Select: SFC<Props> = (props) => {
   const {
     open,
     optionValue,
@@ -87,7 +87,7 @@ const CountrySelect: SFC<Props> = (props) => {
 /**
  * Decorators
  */
-const StyledComponent = CSSModules(CountrySelect, require('../styles.css'))
+const StyledComponent = CSSModules(Select, require('../styles.css'))
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => state.formFields.renderSelect,

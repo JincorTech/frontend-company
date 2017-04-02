@@ -1,39 +1,73 @@
 import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
+import { Component, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 
 
-export type TextProps = HTMLProps<HTMLDivElement> & {
+export type Props = HTMLProps<HTMLDivElement> & {
   value: string
-  collapsed?: boolean
-  onCollapse: (collapsed: boolean) => void
 }
 
-const Text: SFC<TextProps> = (props) => {
-  const { collapsed, value, onCollapse, ...divProps } = props
-  const shouldCollapse = value.length > 200
+export type State = {
+  expand: boolean
+}
 
-  const cutText = (text: string): string => {
-    return shouldCollapse ? `${text.substr(0, 200)}... ` : text
+class Text extends Component<Props, State> {
+  public state: State = {
+    expand: false
   }
 
-  const handleCollapse = (): void => {
-    onCollapse(!collapsed)
+  constructor(props) {
+    super(props)
+
+    this.handleExpand = this.handleExpand.bind(this)
+    this.renderCollapsed = this.renderCollapsed.bind(this)
+    this.renderExpand = this.renderExpand.bind(this)
   }
 
-  return (
-    <div styleName="text" {...divProps}>
-      {collapsed ? cutText(value) : value}
-      {
-        shouldCollapse &&
-        <span
-          styleName="text-collapse"
-          onClick={handleCollapse}>
-          {collapsed ? 'развернуть' : 'cвернуть'}
-        </span>
-      }
-    </div>
-  )
+  private handleExpand(): void {
+    const { expand } = this.state
+
+    this.setState({ expand: !expand })
+  }
+
+  private renderExpand(): JSX.Element {
+    const { value, ...props } = this.props
+
+    return (
+      <div styleName="text" {...props}>
+        {value}
+        {value.length > 200 && <span
+          styleName="expand"
+          children="Свернуть"
+          onClick={this.handleExpand}/>
+        }
+      </div>
+    )
+  }
+
+  private renderCollapsed(): JSX.Element {
+    const { value, ...props } = this.props
+    const shouldCut = value.length > 200
+
+    return (
+      <div styleName="text" {...props}>
+        {shouldCut ? value.substr(0, 200) + '... ' : value}
+        {shouldCut && <span
+          styleName="expand"
+          children="Развернуть"
+          onClick={this.handleExpand}/>
+        }
+      </div>
+    )
+  }
+
+  public render(): JSX.Element {
+    const { expand } = this.state
+
+    return expand
+      ? this.renderExpand()
+      : this.renderCollapsed()
+  }
 }
 
 export default CSSModules(Text, require('./styles.css'))

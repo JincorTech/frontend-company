@@ -16,7 +16,7 @@ class SocialInput extends Component<SocialInputProps, {}> {
     return (
       <div styleName="social-input">
         <Input styleName="input" {...inputProps}/>
-        <a styleName="link" children="удалить" onClick={onRemove}/>
+        <a styleName="remove" children="удалить" onClick={onRemove}/>
       </div>
     )
   }

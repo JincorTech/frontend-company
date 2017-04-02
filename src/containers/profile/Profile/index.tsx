@@ -1,28 +1,49 @@
 import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
+import { Component, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
+import { connect } from 'react-redux'
+
+import { fetchCompany, StateMap as StateProps } from '../../../redux/modules/profile/profile'
 
 import ProfileView from '../ProfileView'
 import ProfileEdit from '../ProfileEdit'
 
 
-type ProfileProps = HTMLProps<HTMLDivElement>
+/**
+ * Types 
+ */
+export type Props = HTMLProps<HTMLDivElement> & StateProps & DispatchProps
 
-const Profile: SFC<ProfileProps> = (props) => {
-  return (
-    <div styleName="profile">
-      <ProfileEdit
-        logo={null}
-        name="Альфа-Банк"
-        type="Частная компания"
-        region="Россия, Москва"
-        description="Альфа-Банк, основанный в 1990 году, является универсальным банком, осуществляющим все основные виды банковских операций, представленных на рынке финансовых услуг, включая обслуживание частных, представленных на рынке финансовых услуг, включая обслуживание частных"
-        email="alfa@bank.ru"
-        phone="8-916-777-77-77"
-        activities={[{id: '1', name: 'Банковская сфера'}, {id: '0', name: 'Маркетинг'}]}
-        socialLinks={[{iconUrl: null, url: '', name: 'Facebook'}, {iconUrl: null,  url: '', name: 'Twitter'}]}/>
-    </div>
-  )
+export type DispatchProps = {
+  fetchCompany: (id: string) => void
 }
 
-export default CSSModules(Profile, require('./styles.css'))
+/**
+ * Component 
+ */
+class Profile extends Component<Props, {}> {
+  public componentDidMount(): void {
+    this.props.fetchCompany('sa')
+  }
+
+  public render(): JSX.Element {
+    const { editable, company } = this.props
+
+    return (
+      <div styleName="profile">
+        { !editable
+          ? <ProfileView {...company}/>
+          : <ProfileEdit {...company}/>}
+      </div>
+    )
+  }
+}
+
+/**
+ * Dispatch
+ */
+const StyledComponent = CSSModules(Profile, require('./styles.css'))
+export default connect<StateProps, DispatchProps, {}>(
+  (state) => state.profile.profile,
+  { fetchCompany }
+)(StyledComponent)

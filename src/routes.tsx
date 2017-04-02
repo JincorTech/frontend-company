@@ -15,7 +15,7 @@ import Employees from './containers/employees/Employees'
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: (state) => state.common.app,
-  predicate: (app) => app.isAuthorized,
+  predicate: (app) => app.authorized,
   redirectAction: push,
   failureRedirectPath: '/auth/singin',
   allowRedirectBack: false
@@ -31,7 +31,7 @@ export default (
       <Route path="password" component={RestorePassword}/>
     </Route>
 
-    <Route path="app" component={AppLayout}>
+    <Route path="app" component={UserIsAuthenticated(AppLayout)}>
       <Route path="profile" component={Profile}/>
       <Route path="employees" component={Employees}/>
     </Route>

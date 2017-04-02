@@ -6,6 +6,9 @@ import { Field, WrappedFieldArrayProps } from 'redux-form'
 import RenderLinkInput from './components/RenderLinkInput'
 import AddInput from './components/AddInput'
 
+/**
+ * Types
+ */
 export type Props = WrappedFieldArrayProps<string>
 
 const RenderLinkInputs: SFC<Props> = (props) => {
@@ -17,12 +20,16 @@ const RenderLinkInputs: SFC<Props> = (props) => {
         <Field
           key={i}
           name={field}
+          placeholder="URL"
           component={RenderLinkInput}
           onRemove={() => fields.remove(i)}/>
       ))}
-      <AddInput onClick={() => fields.push('')}/>
+      {fields.length < 4 && <AddInput onClick={() => fields.push('')}/>}
     </div>
   )
 }
 
+/**
+ * Decorators
+ */
 export default CSSModules(RenderLinkInputs, require('./styles.css'))

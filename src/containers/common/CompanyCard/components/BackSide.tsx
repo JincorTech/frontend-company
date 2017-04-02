@@ -31,10 +31,7 @@ const BackSide: SFC<Props> = (props) => {
   return (
     <div styleName="company-card-back" {...divProps}>
       <InfoItem title="Описание компании">
-        <Text
-          collapsed={collapsed}
-          onCollapse={onCollapse}
-          value={description}/>
+        <Text value={description}/>
       </InfoItem>
 
       <InfoItem title="Ссылки">

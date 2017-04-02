@@ -5,12 +5,13 @@ import { reduxForm, Field, FieldArray, FormProps } from 'redux-form'
 import { connect } from 'react-redux'
 
 import { requestActivities } from '../../../redux/modules/profile/activityTypes'
+import { setEditable } from '../../../redux/modules/profile/profile'
 
 import InfoItem from '../../../components/profile/InfoItem'
 import CompanyLogoEdit from '../../../components/profile/CompanyLogoEdit'
 import RenderInput from '../../../components/form/RenderInput'
 import RenderFilterSelect from '../../../containers/form/RenderFilterSelect'
-import RenderSelect from '../../../components/form/RenderSelect'
+import RenderSelect from '../../../containers/form/RenderSelect'
 import RenderTextarea from '../../../components/form/RenderTextarea'
 import RenderLinkInputs from '../../../components/profile/RenderLinkInputs'
 import RenderActivities from '../../form/RenderActivities'
@@ -57,6 +58,7 @@ export type Option = {
 
 export type DispatchProps = {
   requestActivities: () => void
+  setEditable: (value: boolean) => void
 }
 
 
@@ -69,6 +71,8 @@ class ProfileEdit extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
+    const { setEditable } = this.props
+
     return (
       <form styleName="company-profile-edit">
         <div styleName="company-logo">
@@ -78,41 +82,67 @@ class ProfileEdit extends Component<Props, {}> {
         <div styleName="company-info">
           <Field
             name="name"
+            styleName="company-name"
+            placeholder="Имя компании"
             component={RenderInput}/>
 
-          <Field
-            name="country"
-            selectOptions={[]}
-            component={RenderFilterSelect}/>
+          <div styleName="region">
+            <Field
+              name="country"
+              placeholder="Страна"
+              selectOptions={[]}
+              component={RenderFilterSelect}/>
 
-          <Field
-            name="city"
-            selectOptions={[]}
-            component={RenderFilterSelect}/>
+            <Field
+              name="city"
+              placeholder="Город"
+              selectOptions={[]}
+              component={RenderFilterSelect}/>
+          </div>
 
-          <InfoItem title="Описание компании">
+          <InfoItem styleName="section" title="Тип компании">
+            <Field
+              name="type"
+              placeholder="Тип компании"
+              options={[]}
+              component={RenderSelect}/>
+          </InfoItem>
+
+          <InfoItem styleName="section" title="Описание компании">
             <Field
               name="description"
               placeholder="Описание компании"
               component={RenderTextarea}/>
           </InfoItem>
 
-          <InfoItem title="Сферы деятельности">
+          <InfoItem styleName="section" title="Сферы деятельности">
             <FieldArray
               name="activityTypes"
               component={RenderActivities}/>
           </InfoItem>
 
-          <InfoItem title="Ссылки">
+          <InfoItem styleName="section" title="Ссылки">
             <FieldArray
               name="socialLinks"
               component={RenderLinkInputs}/>
+          </InfoItem>
+
+          <InfoItem styleName="section" title="Контакты">
+            <Field
+              name="email"
+              placeholder="Email"
+              component={RenderInput}/>
+
+            <Field
+              name="phone"
+              placeholder="Номер телефона"
+              component={RenderInput}/>
           </InfoItem>
         </div>
 
         <div styleName="company-controls">
           <input styleName="submit-btn" type="submit" value="Сохранить"/>
-          <a styleName="cancel-btn">отменить</a>
+          <a styleName="cancel-btn" onClick={() => setEditable(false)}>отменить</a>
         </div>
       </form>
     )
@@ -126,5 +156,5 @@ const StyledComponent = CSSModules(ProfileEdit, require('./styles.css'))
 const FormComponent = reduxForm<FormFields, ComponentProps>({ form: 'ProfileEdit' })(StyledComponent)
 export default connect<{}, DispatchProps, ReduxFormProps>(
   (state) => ({}),
-  { requestActivities }
+  { requestActivities, setEditable }
 )(FormComponent)
