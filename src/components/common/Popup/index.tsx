@@ -6,6 +6,7 @@ import Icon from '../Icon'
 
 export type PopupProps = HTMLProps<HTMLDivElement> & {
   open?: boolean,
+  hideClose?: boolean,
   onClose?: () => void
 }
 
@@ -21,11 +22,11 @@ class Popup extends Component<PopupProps, {}> {
   }
 
   public render(): JSX.Element {
-    const { open, onClose, ...divProps } = this.props
+    const { open, onClose, hideClose, ...divProps } = this.props
 
     return (
       open && <div styleName="popup-wrap" onClick={onClose}>
-        <Icon styleName="close" name="close-popup" />
+        {!hideClose && <Icon styleName="close" name="close-popup" />}
 
         <div
           styleName="popup"
