@@ -76,10 +76,6 @@ module.exports = {
 
   postcss: () => [
     stylelint(),
-    postcssNext(),
-    postcssAssets({
-      relative: true
-    }),
     use({
       modules: [
         'postcss-property-lookup',
@@ -90,12 +86,18 @@ module.exports = {
         'postcss-clearfix',
         'postcss-triangle',
         'postcss-autoreset',
-        'postcss-initial'
+        'postcss-initial',
+        'postcss-for',
+        'postcss-calc'
       ]
+    }),
+    postcssNext(),
+    postcssAssets({
+      relative: true
     }),
     doiuse({
       browsers: ['ie >= 10', '> 5%'],
-      ignore: ['css-transitions', 'css3-cursors', 'css-gradients', 'transforms3d']
+      ignore: ['css-transitions', 'calc', 'css3-cursors', 'css-gradients', 'transforms3d']
     }),
     reporter({
       clearAllMessages: true

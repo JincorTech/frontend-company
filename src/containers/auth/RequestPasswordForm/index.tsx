@@ -3,31 +3,40 @@ import { Component } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
 
+import { initialValues, validate } from '../../../helpers/auth/requestPassword'
+
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
 import RenderInput from '../../../components/form/RenderInput'
 
 
-export type PasswordFormFields = {
+/**
+ * Types
+ */
+export type FormFields = {
   email: string
 }
 
 export type ComponentProps = {
-  onSubmit: SubmitHandler<PasswordFormFields, ComponentProps, any>
+  onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
+  spinner: boolean
 }
 
-export type RequestPasswordProps = ComponentProps & FormProps<PasswordFormFields, ComponentProps, any>
+export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>
 
-
-class RequestPasswordForm extends Component<RequestPasswordProps, {}> {
+/**
+ * Component
+ */
+class RequestPasswordForm extends Component<Props, {}> {
   public render(): JSX.Element {
-    const { invalid } = this.props
+    const { spinner, invalid, handleSubmit } = this.props
 
     return (
       <Form
+        onSubmit={handleSubmit}
         styleName="request-password-form"
         title="Восстановление пароля"
-        hint="Введите email, указанный при регистрации, на который<br/>придет ссылка и код для сброса пароля.">
+        hint="Введите email, указанный при регистрации, на который придет ссылка и код для сброса пароля.">
 
         <Field
           component={RenderInput}
@@ -36,14 +45,18 @@ class RequestPasswordForm extends Component<RequestPasswordProps, {}> {
           placeholder="Email"
         />
 
-        <Button type="submit" disabled={invalid}>Отправить</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>Отправить</Button>
       </Form>
     )
   }
 }
 
+/**
+ * Decorators
+ */
 const StyledComponent = CSSModules(RequestPasswordForm, require('./styles.css'))
-
-export default reduxForm<PasswordFormFields, RequestPasswordProps>({
-  form: 'requestPassword'
+export default reduxForm<FormFields, ComponentProps>({
+  form: 'requestPassword',
+  initialValues,
+  validate
 })(StyledComponent)

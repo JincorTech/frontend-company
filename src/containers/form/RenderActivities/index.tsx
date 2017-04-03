@@ -13,6 +13,7 @@ import {
 
 import ActivityTypes from './components/ActivityTypes'
 import AddInput from './components/AddInput'
+import Error from '../../../components/form/Error'
 
 
 /**
@@ -27,18 +28,24 @@ export type Props = WrappedFieldProps<any> & {
 
 export const RenderActivity: SFC<Props> = (props) => {
   const { open, placeholder, openPopup, closePopup, input, meta } = props
-  const { invalid, touched, active, dirty } = meta
+  const { invalid, touched, active, dirty, error } = meta
   const { value, onChange } = input
   const hasError = touched && !active && invalid && dirty
 
-  return <ActivityTypes
-    open={open}
-    invalid={hasError}
-    value={value}
-    placeholder={placeholder}
-    onChange={onChange}
-    openPopup={openPopup}
-    closePopup={closePopup}/>
+  return (
+    <div styleName="render-activity">
+      {hasError && <Error styleName="error" msg={error}/>}
+
+      <ActivityTypes
+        open={open}
+        invalid={hasError}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        openPopup={openPopup}
+        closePopup={closePopup}/>
+    </div>
+  )
 }
 
 

@@ -96,11 +96,7 @@ module.exports = {
     postcssImport({ addDependencyTo: webpack }),
     postcssUrl(),
     stylelint(),
-    postcssNext(),
-    postcssAssets({
-      relative: true
-    }),
-    use({
+     use({
       modules: [
         'postcss-property-lookup',
         'postcss-will-change',
@@ -110,12 +106,17 @@ module.exports = {
         'postcss-clearfix',
         'postcss-triangle',
         'postcss-autoreset',
-        'postcss-initial'
+        'postcss-initial',
+        'postcss-for'
       ]
+    }),
+    postcssNext(),
+    postcssAssets({
+      relative: true
     }),
     doiuse({
       browsers: ['ie >= 9', '> 5%'],
-      ignore: ['css-transitions', 'css3-cursors', 'css-gradients']
+      ignore: ['css-transitions', 'css3-cursors', 'css-gradients', 'calc']
     }),
     reporter({
       clearAllMessages: true

@@ -3,33 +3,48 @@ import { Component } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
 
+import { initialValues, validate } from '../../../helpers/auth/confirmEmail'
+
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
 import RenderInput from '../../../components/form/RenderInput'
 
 
-export type EmailFormFields = {
+export type FormFields = {
   verificationCode: string
   verificationId: string
 }
 
 export type ConfirmComponentProps = {
+  spinner: boolean
   verificationId: string,
-  onSubmit: SubmitHandler<EmailFormFields, ConfirmComponentProps, any>
+  onSubmit: SubmitHandler<FormFields, ConfirmComponentProps, any>
 }
 
-export type ConfirmFormProps = ConfirmComponentProps & FormProps<EmailFormFields, ConfirmComponentProps, any>
+export type ConfirmFormProps = ConfirmComponentProps & FormProps<FormFields, ConfirmComponentProps, any>
 
 
 class ConfirmEmailForm extends Component<ConfirmFormProps, {}> {
+  public componentDidMount(): void {
+    const { change, verificationId, spinner } = this.props
+
+    change('verificationId', verificationId)
+  }
+
   public render(): JSX.Element {
-    const { invalid } = this.props
+    const { invalid, handleSubmit, spinner } = this.props
 
     return (
       <Form
+        onSubmit={handleSubmit}
         styleName="confirm-email-form"
         title="Подтверждение регистрации"
         hint="Чтобы успешно зарегистрироваться, подтвердите регистрацию с помощью кода, присланного на ваш email">
+
+        <Field
+          component="input"
+          name="verificationId"
+          type="hidden"/>
 
         <Field
           component={RenderInput}
@@ -38,7 +53,7 @@ class ConfirmEmailForm extends Component<ConfirmFormProps, {}> {
           placeholder="Введите код"
         />
 
-        <Button type="submit" disabled={invalid}>Далее</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>Далее</Button>
       </Form>
     )
   }
@@ -46,6 +61,8 @@ class ConfirmEmailForm extends Component<ConfirmFormProps, {}> {
 
 const StyledComponent = CSSModules(ConfirmEmailForm, require('./styles.css'))
 
-export default reduxForm<EmailFormFields, ConfirmComponentProps>({
-  form: 'confirmEmail'
+export default reduxForm<FormFields, ConfirmComponentProps>({
+  form: 'confirmEmail',
+  initialValues,
+  validate
 })(StyledComponent)

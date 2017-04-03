@@ -2,23 +2,37 @@ import * as React from 'react'
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import * as CSSModules from 'react-css-modules'
-import { ActionCreator } from '../../../utils/actions'
+
+import { inviteEmployee } from '../../../redux/modules/auth/signUp'
 
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
+import Link from '../../../components/common/Link'
 import EmailTextarea from '../../../containers/common/EmailTextarea'
 
+/**
+ * Types
+ */
+export type Props = DispatchProps & StateProps & ComponentProps
 
-export type Props = {
-  onSubmit: (value: string[]) => void
-  onChange: (value: string[]) => void
-  emails: string[]
+export type ComponentProps = {
+  spinner: boolean
 }
 
+export type DispatchProps = {
+  inviteEmployee: () => void
+}
 
+export type StateProps = {
+  textareaValid: boolean
+}
+
+/**
+ * Component
+ */
 class InviteEmployeeForm extends Component<Props, {}> {
   public render() {
-    const { emails, onChange, onSubmit } = this.props
+    const { inviteEmployee, textareaValid, spinner } = this.props
 
     return(
       <Form
@@ -30,13 +44,25 @@ class InviteEmployeeForm extends Component<Props, {}> {
           placeholder="Введите email"/>
 
         <Button
-          onClick={() => onSubmit(emails)}
-          disabled={emails.length === 0}>
+          type="button"
+          spinner={spinner}
+          disabled={!textareaValid}
+          onClick={inviteEmployee}>
           Пригласить
         </Button>
+
+        <Link styleName="skip" to="/app/profile">Пропустить</Link>
       </Form>
     )
   }
 }
 
-export default CSSModules(InviteEmployeeForm, require('./styles.css'))
+/**
+ * Decorators
+ */
+const StyledComponent = CSSModules(InviteEmployeeForm, require('./styles.css'))
+
+export default connect<StateProps, DispatchProps, ComponentProps>(
+  (state) => ({ textareaValid : state.common.emailTextarea.valid }),
+  { inviteEmployee }
+)(StyledComponent)

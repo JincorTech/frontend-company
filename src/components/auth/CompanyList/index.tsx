@@ -14,18 +14,18 @@ export type Company = {
   type: string
 }
 
-export type CompanyListProps = {
+export type Props = {
   companies: Company[],
-  onSelect: ActionCreator<string>
+  onSelect: (companyId: string) => void
 }
 
 
-const CompanyList: SFC<CompanyListProps> = ({ companies, onSelect }) => {
+const CompanyList: SFC<Props> = ({ companies, onSelect }) => {
   return (
-    <div styleName="list-wrap">
-      <h1 styleName="list-title">Выберите компанию</h1>
+    <div styleName="company-list-wrap">
+      <h1 styleName="company-list-title">Выберите компанию</h1>
 
-      <div styleName="list">
+      <div styleName="company-list">
         {
           companies.map(({legalName, type, country, id}, i) => (
             <CompanyItem

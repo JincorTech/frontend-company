@@ -8,6 +8,7 @@ import { fetchCountries, fetchCompanyTypes } from '../../../redux/modules/auth/c
 import { companyTypeOptionSelector, countryOptionSelector } from '../../../selectors/auth/createCompany'
 import { ActionCreator } from '../../../utils/actions'
 import { CompanyType, Country } from '../../../redux/modules/auth/createCompany'
+import { initialValues, validate } from '../../../helpers/auth/createCompany'
 
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
@@ -33,7 +34,8 @@ export type DispatchProps = {
 export type ReduxFormProps = ComponentProps & FormProps<FormFields, ComponentProps, any>
 
 export type ComponentProps = {
-  onSubmit: SubmitHandler<FormFields, ComponentProps, any>
+  onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
+  spinner: boolean
 }
 
 export type FormFields = {
@@ -59,10 +61,17 @@ class CreateCompanyForm extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { countries, companyTypes, handleSubmit, invalid } = this.props
+    const {
+      spinner,
+      countries,
+      companyTypes,
+      handleSubmit,
+      invalid
+    } = this.props
 
     return (
       <Form
+        onSubmit={handleSubmit}
         styleName="create-company"
         title="Регистрация компании"
         hint="Чтобы начать совместную работу со своими коллегами, нужно добавить свою компанию">
@@ -85,7 +94,7 @@ class CreateCompanyForm extends Component<Props, {}> {
           type="text"
           placeholder="Название компании"/>
 
-        <Button type="submit" disabled={invalid}>Добавить</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>Добавить</Button>
       </Form>
     )
   }
@@ -97,7 +106,9 @@ class CreateCompanyForm extends Component<Props, {}> {
 const StyledComponent = CSSModules(CreateCompanyForm, require('./styles.css'))
 
 const FormComponent = reduxForm<FormFields, ComponentProps>({
-  form: 'company'
+  form: 'company',
+  initialValues,
+  validate
 })(StyledComponent)
 
 export default connect<StateProps, DispatchProps, ReduxFormProps>(

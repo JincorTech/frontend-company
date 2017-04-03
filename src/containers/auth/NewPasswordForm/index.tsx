@@ -4,49 +4,58 @@ import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
 import { ActionCreator } from '../../../utils/actions'
 
+import { initialValues, validate } from '../../../helpers/auth/newPassword'
+
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
 import RenderPassword from '../../../components/form/RenderPassword'
 
 
+/**
+ * Types
+ */
 export type FormFields = {
   password: string
 }
 
 export type ComponentProps = {
-  passwordVisible: boolean
-  onChangePasswordVisibility: ActionCreator<boolean>
+  spinner: boolean
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>
 }
 
 export type NewPasswordProps = ComponentProps & FormProps<FormFields, ComponentProps, any>
 
-
+/**
+ * Component
+ */
 class NewPasswordForm extends Component<NewPasswordProps, {}> {
   public render(): JSX.Element {
-    const { invalid, passwordVisible, onChangePasswordVisibility } = this.props
+    const { invalid, spinner, handleSubmit } = this.props
 
     return (
       <Form
+        onSubmit={handleSubmit}
         styleName="new-password-form"
         title="Восстановление пароля"
-        hint="Введите код из письма или перейдите по ссылке, отправленного на ваш email, после чего вы сможете назначить себе новый пароль.">
+        hint="Введите email, указанный при регистрации, на который придет ссылка и код для сброса пароля.">
 
         <Field
           component={RenderPassword}
           name="password"
-          visible={passwordVisible}
-          onChangeVisibility={onChangePasswordVisibility}
           placeholder="Пароль"/>
 
-        <Button type="submit" disabled={invalid}>Отправить</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>Отправить</Button>
       </Form>
     )
   }
 }
 
+/**
+ * Decorators
+ */
 const StyledComponent = CSSModules(NewPasswordForm, require('./styles.css'))
-
 export default reduxForm<FormFields, ComponentProps>({
-  form: 'newPassword'
+  form: 'newPassword',
+  validate,
+  initialValues
 })(StyledComponent)

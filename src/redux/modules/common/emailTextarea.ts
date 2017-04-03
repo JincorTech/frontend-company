@@ -7,6 +7,7 @@ import { from, ImmutableObject } from 'seamless-immutable'
 export type State = StateMap & ImmutableObject<StateMap>
 
 export type StateMap = {
+  valid: boolean
   selectedEmail: number
   value: string
   emails: string[]
@@ -26,6 +27,7 @@ export const SELECT_EMAIL         = 'common/emailTextarea/SELECT_EMAIL'
 export const UNSELECT_EMAIL       = 'common/emailTextarea/UNSELECT_EMAIL'
 export const REMOVE_EMAIL         = 'common/emailTextarea/REMOVE_EMAIL'
 export const HANDLE_EMAIL_REMOVE  = 'common/emailTextarea/HANDLE_EMAIL_REMOVE'
+export const SET_VALIDATE_STATE   = 'common/emailTextarea/SET_VALIDATE_STATE'
 
 /**
  * Action Creators
@@ -40,11 +42,13 @@ export const selectEmail        = createAction<number>(SELECT_EMAIL)
 export const unselectEmail      = createAction<void>(UNSELECT_EMAIL)
 export const removeEmail        = createAction<number>(REMOVE_EMAIL)
 export const handleEmailRemove  = createAction<string>(HANDLE_EMAIL_REMOVE)
+export const setValidateState   = createAction<boolean>(SET_VALIDATE_STATE)
 
 /**
  * Reducer
  */
 const initialState: State = from<StateMap>({
+  valid: false,
   selectedEmail: null,
   value: '',
   emails: [],
@@ -87,5 +91,9 @@ export default createReducer<State>({
       ...state.emails.slice(0, index),
       ...state.emails.slice(index + 1)
     ] })
+  ),
+
+  [SET_VALIDATE_STATE]: (state: State, { payload }: Action<boolean>): State => (
+    state.merge({ valid: payload })
   )
 }, initialState)

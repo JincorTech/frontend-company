@@ -1,5 +1,18 @@
 @use postcss-short;
 
+/**
+* Render select
+*/
+.render-select {
+  position: relative
+}
+
+.error {
+  position: absolute 0px * * 100%;
+  width: 210px;
+  padding-left: 15px;
+}
+
 /* Option */
 .option {
   font: normal 16px/22px 'Open Sans';

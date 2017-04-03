@@ -1,19 +1,20 @@
 import config from '../../config'
+import { isAuth, getToken } from '../auth'
 
 const { apiPrefix, apiHost } = config
 
 
-type ErrorData = {
+export type ErrorData = {
   message: string
   status_code: number
   errors?: ErrorMessages
 }
 
-type ErrorMessages = {
+export type ErrorMessages = {
   [key: string]: string[]
 }
 
-class RequestError extends Error {
+export class RequestError extends Error {
   status: number
   errors: ErrorMessages
 
@@ -64,4 +65,10 @@ export function parseJSON(response: Response | ErrorData): Promise<any> {
   }
 
   throw new RequestError(response)
+}
+
+export function authHeader(): { Authorization?: string } {
+  return isAuth()
+    ? { 'Authorization': `Bearer ${getToken()}` }
+    : {}
 }

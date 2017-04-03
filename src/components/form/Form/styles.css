@@ -14,6 +14,11 @@
   margin-bottom: 15px;
 }
 
+.without-hint {
+  composes: form-title;
+  margin-bottom: 40px;
+}
+
 .form-hint {
   font: normal 17px/24px 'Open Sans';
   color: #9da0a4;

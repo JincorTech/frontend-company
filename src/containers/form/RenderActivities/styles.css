@@ -1,5 +1,21 @@
 @use postcss-short;
 
+/**
+* Render activity type
+*/
+.render-activity {
+  position: relative
+}
+
+.error {
+  position: absolute 0px * * 100%;
+  width: 210px;
+  padding-left: 15px;
+}
+
+/**
+* Activity types
+*/
 .activity-types {}
 
 .activity-node {}

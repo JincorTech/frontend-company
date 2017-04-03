@@ -3,12 +3,16 @@ import { Component } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
 
+import { initialValues, validate } from '../../../helpers/auth/createAccount'
+
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
 import RenderInput from '../../../components/form/RenderInput'
 import RenderPassword from '../../../components/form/RenderPassword'
 
-
+/**
+ * Types
+ */
 export type FormFields = {
   firstName: string
   lastName: string
@@ -19,22 +23,37 @@ export type FormFields = {
 }
 
 export type ComponentProps = {
+  spinner: boolean
   verificationId: string,
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>
 }
 
 export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>
 
-
+/**
+ * Component
+ */
 class CreateAccountForm extends Component<Props, {}> {
+  public componentDidMount(): void {
+    const { change, verificationId } = this.props
+
+    change('verificationId', verificationId)
+  }
+
   public render(): JSX.Element {
-    const { invalid } = this.props
+    const { invalid, handleSubmit, spinner } = this.props
 
     return (
       <Form
+        onSubmit={handleSubmit}
         styleName="create-account-form"
         title="Регистрация пользователя"
         hint="Чтобы начать совместную работу со своими коллегами, зарегистрируйте первого пользователя">
+
+        <Field
+          component="input"
+          name="verificationId"
+          type="hidden"/>
 
         <Field
           component={RenderInput}
@@ -63,18 +82,21 @@ class CreateAccountForm extends Component<Props, {}> {
         <Field
           component={RenderPassword}
           name="password"
-          visible={false}
-          onChangeVisibility={() => console.log('sdsas')}
           placeholder="Пароль"/>
 
-        <Button type="submit" disabled={invalid}>Далее</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>Далее</Button>
       </Form>
     )
   }
 }
 
+/**
+ * Decorators
+ */
 const StyledComponent = CSSModules(CreateAccountForm, require('./styles.css'))
 
 export default reduxForm<FormFields, ComponentProps>({
-  form: 'account'
+  form: 'account',
+  initialValues,
+  validate
 })(StyledComponent)

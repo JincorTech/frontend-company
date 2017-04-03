@@ -4,32 +4,40 @@ import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
 import { ActionCreator } from '../../../utils/actions'
 
+import { validate, initialValues } from '../../../helpers/auth/loginForm'
+
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
+import Link from '../../../components/common/Link'
 import RenderInput from '../../../components/form/RenderInput'
 import RenderPassword from '../../../components/form/RenderPassword'
 
 
-export type LogInFormFields = {
+/**
+ * Types
+ */
+export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>
+
+export type ComponentProps = {
+  onSubmit: SubmitHandler<FormFields, ComponentProps, any>
+  spinner: boolean
+}
+
+export type FormFields = {
   email: string
   password: string
 }
 
-export type LogInComponentProps = {
-  passwordVisible: boolean
-  onSubmit: SubmitHandler<LogInFormFields, LogInComponentProps, any>
-  onChangePasswordVibility: ActionCreator<boolean>
-}
-
-export type LogInFormProps = LogInComponentProps & FormProps<LogInFormFields, LogInComponentProps, any>
-
-
-class LogInForm extends Component<LogInFormProps, {}> {
+/**
+ * Component
+ */
+class LogInForm extends Component<Props, {}> {
   public render(): JSX.Element {
-    const { invalid, passwordVisible, onChangePasswordVibility } = this.props
+    const { invalid, handleSubmit, spinner } = this.props
 
     return (
       <Form
+        onSubmit={handleSubmit}
         styleName="login-form"
         title="Вход">
 
@@ -42,11 +50,11 @@ class LogInForm extends Component<LogInFormProps, {}> {
         <Field
           component={RenderPassword}
           name="password"
-          visible={passwordVisible}
-          onChangeVisibility={onChangePasswordVibility}
           placeholder="Пароль"/>
 
-        <Button type="submit" disabled={invalid}>Далее</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>Войти</Button>
+
+        <Link styleName="restore-password" to="/auth/password">Забыли пароль?</Link>
       </Form>
     )
   }
@@ -54,6 +62,8 @@ class LogInForm extends Component<LogInFormProps, {}> {
 
 const StyledComponent = CSSModules(LogInForm, require('./styles.css'))
 
-export default reduxForm<LogInFormFields, LogInComponentProps>({
-  form: 'account'
+export default reduxForm<FormFields, ComponentProps>({
+  form: 'account',
+  initialValues,
+  validate
 })(StyledComponent)
