@@ -6,7 +6,7 @@ import ActiveEmployee from '../../../components/employees/ActiveEmployee'
 import InvitedEmployee from '../../../components/employees/InvitedEmployee'
 import DeletedEmployee from '../../../components/employees/DeletedEmployee'
 
-import Popup from '../../../components/common/Popup'
+import ConfirmPopup from './components/ConfirmPopup'
 import Button from '../../../components/common/Button'
 
 import EmployeeCard from '../../../components/employees/EmployeeCard'
@@ -115,19 +115,18 @@ const Employees: SFC<{}> = () => (
       </div>
     }
 
-    <Popup
-      styleName="confirm-delete-popup"
-      open={false}>
-      <h4 styleName="popup-title">Вы уверены, что хотите удалить этого сотрудника?</h4>
-      <div styleName="popup-body">
-        <div styleName="popup-button">
-          <Button>Удалить</Button>
-        </div>
-      </div>
-    </Popup>
+    <ConfirmPopup open={false} title="Вы уверены, что хотите удалить этого сотрудника?">
+      <Button styleName="popup-cancel-button">Отменить</Button>
+      <Button>Подтвердить</Button>
+    </ConfirmPopup>
+
+    <ConfirmPopup open={false} title="Вы уверены, что хотите назначить этого сотрудника администратором?">
+      <Button styleName="popup-cancel-button">Отменить</Button>
+      <Button>Подтвердить</Button>
+    </ConfirmPopup>
 
     <EmployeeCard
-      open={true}
+      open={false}
       id="11f43465-d042-4db0-8aa9-13bac482bb59"
       companyName="Google"
       companyLogo="https://pbs.twimg.com/profile_images/2227292956/twitter_logo_normal.png"
