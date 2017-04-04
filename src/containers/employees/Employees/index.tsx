@@ -8,8 +8,7 @@ import ActiveEmployee from '../../../components/employees/ActiveEmployee'
 import InvitedEmployee from '../../../components/employees/InvitedEmployee'
 import DeletedEmployee from '../../../components/employees/DeletedEmployee'
 
-import ConfirmPopup from './components/ConfirmPopup'
-import Button from '../../../components/common/Button'
+import ConfirmPopup from '../../../components/common/ConfirmPopup'
 
 import EmployeeCard from '../../../components/employees/EmployeeCard'
 import ProfileCard from '../../../components/employees/ProfileCard'
@@ -120,15 +119,15 @@ const Employees: SFC<{}> = () => (
       }
     </Scrollbar>
 
-    <ConfirmPopup open={false} title="Вы уверены, что хотите удалить этого сотрудника?">
-      <Button styleName="popup-cancel-button">Отменить</Button>
-      <Button>Подтвердить</Button>
-    </ConfirmPopup>
+    <ConfirmPopup
+      modalId="remove-employess"
+      open={false}
+      title="Вы уверены, что хотите удалить этого сотрудника?"/>
 
-    <ConfirmPopup open={false} title="Вы уверены, что хотите назначить этого сотрудника администратором?">
-      <Button styleName="popup-cancel-button">Отменить</Button>
-      <Button>Подтвердить</Button>
-    </ConfirmPopup>
+    <ConfirmPopup
+      modalId="make-admin"
+      open={false}
+      title="Вы уверены, что хотите назначить этого сотрудника администратором?"/>
 
     <EmployeeCard
       open={false}
