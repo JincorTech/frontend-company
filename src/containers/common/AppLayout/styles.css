@@ -2,6 +2,7 @@
 @use postcss-inline-svg;
 @use postcss-short;
 @use postcss-center;
+@use postcss-clearfix;
 
 /*App*/
 .app {

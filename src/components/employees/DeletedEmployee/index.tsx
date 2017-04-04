@@ -29,7 +29,10 @@ const DeletedEmployee: SFC<Props> = props => {
       <div styleName="info">
         <div styleName="full-name">{fullName}</div>
         <div styleName="email-n-position">
-          <span styleName="slide-effect" data-email={email}>{position}</span>
+          <div styleName="email-slide">
+            <div>{email}</div>
+            <div>{position}</div>
+          </div>
         </div>
       </div>
 

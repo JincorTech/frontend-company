@@ -35,7 +35,10 @@ const ActiveEmployee: SFC<Props> = props => {
           {fullName} {admin && <span styleName="label">Администратор</span>}
         </div>
         <div styleName="email-n-position">
-          <span styleName="slide-effect" data-email={email}>{position}</span>
+          <div styleName="email-slide">
+            <div>{email}</div>
+            <div>{position}</div>
+          </div>
         </div>
       </div>
 

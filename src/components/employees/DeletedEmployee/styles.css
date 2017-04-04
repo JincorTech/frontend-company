@@ -10,6 +10,10 @@
   &:hover {
     background-color: #f8f8f8;
     opacity: 1;
+
+    & .email-slide {
+      top: -23px;
+    }
   }
 }
 
@@ -41,22 +45,15 @@
 .email-n-position {
   color: #9c9c9c;
   font-size: 14px;
+  height: 23px;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.slide-effect {
+.email-slide {
   position: relative;
-  width: 400px;
-  display: inline-block;
-  transition: .2s linear transform;
-
-  &:before {
-    position: absolute;
-    top: 100%;
-    content: attr(data-email);
-    transform: translate3d(0, 0, 0);
-  }
+  top: 0;
+  transition: .1s linear top;
 }
 
 .status {
