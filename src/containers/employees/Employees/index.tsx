@@ -2,6 +2,8 @@ import * as React from 'react'
 import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
 
+import Scrollbar from '../../../components/common/Scrollbar'
+
 import ActiveEmployee from '../../../components/employees/ActiveEmployee'
 import InvitedEmployee from '../../../components/employees/InvitedEmployee'
 import DeletedEmployee from '../../../components/employees/DeletedEmployee'
@@ -94,26 +96,28 @@ const deletedUsers = [
 
 const Employees: SFC<{}> = () => (
   <div styleName="container">
-    {activeUsers.length > 0 &&
-      <div styleName="list">
-        {activeUsers.map((item, i) =>
-          (<ActiveEmployee key={`active-employee-${i}`} {...item}/>))}
-      </div>
-    }
+    <Scrollbar height="calc(100vh - 140px)">
+      {activeUsers.length > 0 &&
+        <div styleName="list">
+          {activeUsers.map((item, i) =>
+            (<ActiveEmployee key={`active-employee-${i}`} {...item}/>))}
+        </div>
+      }
 
-    {invitedUsers.length > 0 &&
-      <div styleName="list">
-        {invitedUsers.map((item, i) =>
-          (<InvitedEmployee key={`invited-employee-${i}`} {...item}/>))}
-      </div>
-    }
+      {invitedUsers.length > 0 &&
+        <div styleName="list">
+          {invitedUsers.map((item, i) =>
+            (<InvitedEmployee key={`invited-employee-${i}`} {...item}/>))}
+        </div>
+      }
 
-    {deletedUsers.length > 0 &&
-      <div styleName="list">
-        {deletedUsers.map((item, i) =>
-          (<DeletedEmployee key={`deleted-employee-${i}`} {...item}/>))}
-      </div>
-    }
+      {deletedUsers.length > 0 &&
+        <div styleName="list">
+          {deletedUsers.map((item, i) =>
+            (<DeletedEmployee key={`deleted-employee-${i}`} {...item}/>))}
+        </div>
+      }
+    </Scrollbar>
 
     <ConfirmPopup open={false} title="Вы уверены, что хотите удалить этого сотрудника?">
       <Button styleName="popup-cancel-button">Отменить</Button>
