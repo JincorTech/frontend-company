@@ -100,3 +100,21 @@
   size: size('svg/close-alert.svg');
   background: svg-load('svg/close-alert.svg');
 }
+
+.logout {
+  composes: icon;
+  size: size('svg/logout.svg');
+  background: svg-load('svg/logout.svg');
+}
+
+.lock {
+  composes: icon;
+  size: size('svg/lock.svg');
+  background: svg-load('svg/lock.svg');
+}
+
+.pencil {
+  composes: icon;
+  size: size('svg/pencil.svg');
+  background: svg-load('svg/pencil.svg');
+}
