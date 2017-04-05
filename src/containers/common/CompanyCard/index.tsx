@@ -71,7 +71,7 @@ const CompanyCard: SFC<Props> = (props) => {
 
   return (
    <div styleName={open ? 'open' : 'close'}>
-      <Popup open={open} styleName="popup" onClose={closeCompanyCard}>
+      <Popup modalId="comapny-card" open={open} styleName="popup" onClose={closeCompanyCard}>
         <div styleName={flipped ? 'flipper-flipped' : 'flipper'}>
           <CompanyCardFront
             styleName="front"

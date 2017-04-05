@@ -75,7 +75,7 @@ class CountrySelect extends Component<Props, {}> {
           invalid={invalid}
           onClick={openPopup}/>
 
-        <Popup styleName="select-popup" open={open} onClose={closePopup}>
+        <Popup modalId="select-popup" styleName="select-popup" open={open} onClose={closePopup}>
           <h4 styleName="popup-title">Тип компании</h4>
 
           <div styleName="filter">

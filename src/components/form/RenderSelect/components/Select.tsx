@@ -69,7 +69,7 @@ class CountrySelect extends Component<Props, State> {
           invalid={invalid}
           onClick={this.handleOpen}/>
 
-        <Popup styleName="select-popup" open={open} onClose={this.handleClose}>
+        <Popup modalId="reder-select" styleName="select-popup" open={open} onClose={this.handleClose}>
           <h4 styleName="popup-title">Тип компании</h4>
 
           <div styleName="select-options">

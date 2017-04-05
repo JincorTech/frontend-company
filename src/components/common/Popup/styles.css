@@ -1,6 +1,6 @@
 @use postcss-short;
 
-.popup-wrap {
+.overlay {
   position: fixed 0 0 0 0;
   z-index: 10000;
   overflow-y: scroll;

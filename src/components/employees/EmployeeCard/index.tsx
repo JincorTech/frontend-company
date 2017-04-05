@@ -31,7 +31,7 @@ const EmployeeCard: SFC<Props> = props => {
   const { color, initials } = colorFunction(fullName, id)
 
   return (
-    <Popup open={open} styleName="employee-card">
+    <Popup modalId="employee-card" open={open} styleName="employee-card">
       {
         avatar
           ? <img styleName="avatar" src={avatar}/>

@@ -62,7 +62,7 @@ const CountrySelect: SFC<Props> = (props) => {
         invalid={invalid}
         onClick={openPopup}/>
 
-      <Popup styleName="select-popup" open={open} onClose={closePopup}>
+      <Popup modalId="select-popup" styleName="select-popup" open={open} onClose={closePopup}>
         <h4 styleName="popup-title">{title}</h4>
 
         <div styleName="select-options">

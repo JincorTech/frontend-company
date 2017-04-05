@@ -55,7 +55,7 @@ const ActivityTypes: SFC<Props> = (props) => {
         placeholder={placeholder}
         onClick={openPopup}/>
 
-      <Popup styleName="activity-popup" open={open} onClose={closePopup}>
+      <Popup modalId="activity-popup" styleName="activity-popup" open={open} onClose={closePopup}>
         <h1 styleName="activity-title">Основная сфера деятельности</h1>
 
         <Scrollbars autoHide autoHeight autoHeightMax={537}>
