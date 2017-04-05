@@ -12,6 +12,7 @@ import ConfirmPopup from './components/ConfirmPopup'
 import Button from '../../../components/common/Button'
 
 import EmployeeCard from '../../../components/employees/EmployeeCard'
+import ProfileCard from '../../../components/employees/ProfileCard'
 
 
 // mock data
@@ -137,6 +138,15 @@ const Employees: SFC<{}> = () => (
       avatar="http://i.imgur.com/kJUdCE6.png"
       fullName="Walter White"
       position="Senior Angular Developer"/>
+
+    <ProfileCard
+      open={true}
+      id="11f43465-d042-4db0-8aa9-13bac482bb59"
+      companyName="CHVRCHES"
+      companyLogo="https://pbs.twimg.com/profile_images/2227292956/twitter_logo_normal.png"
+      avatar="http://imgur.com/QKHJ3Zs.png"
+      fullName="Lauren Mayberry"
+      position="Singer"/>
   </div>
 )
 

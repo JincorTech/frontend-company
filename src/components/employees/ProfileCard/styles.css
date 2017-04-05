@@ -1,0 +1,202 @@
+@use postcss-short;
+
+.profile-card {
+  size: 325px 570px;
+  position: relative;
+  background-color: transparent;
+  border-radius: 4px;
+
+  &:before,
+  &:after {
+    content: '';
+    z-index: -1;
+    position: absolute 0 * * 0;
+    size: 100%;
+    transition: .2s linear opacity;
+  }
+
+  &:before {
+    background-image: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.15) 32%,
+    rgba(0, 0, 0, 0.15) 66%,
+    rgba(0, 0, 0, 0.4));
+  }
+}
+
+.top {
+  size: 325px;
+  position: relative;
+}
+
+.avatar {
+  background-color: #fff;
+  position: absolute;
+  z-index: -2;
+  border-radius: 4px 0 0 4px;
+}
+
+.avatar-empty {
+  position: absolute 0 * * 0;
+  size: 100%;
+  z-index: -2;
+  font: bold 150px/350px 'Open Sans';
+  text-align: center;
+  border-radius: 4px 0 0 4px;
+  color: rgba(255, 255, 255, .25);
+}
+
+.change-avatar {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-color: transparent;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+
+.company {
+  height: 48px;
+  text-align: right;
+}
+
+.company-name {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 18px/48px;
+  margin: 0 10px 0 0;
+  color: #fff;
+  letter-spacing: -.2px;
+}
+
+.company-logo {
+  display: inline-block;
+  background-color: #c8c8c8;
+
+  & img {
+    size: 48px;
+    display: block;
+    border-radius: 0 4px 0 0;
+  }
+}
+
+.info {
+  padding: 15px;
+  position: absolute * * 0;
+  opacity: 1;
+  z-index: 1;
+  cursor: default;
+  transition: .2s linear all;
+}
+
+.full-name {
+  font: bold 30px/1.17 'Open Sans';
+  color: #fff;
+  letter-spacing: -.2px;
+  word-spacing: 325px;
+  margin: 0 0 5px;
+}
+
+.position {
+  font: normal 18px 'Open Sans';
+  color: #fff;
+  letter-spacing: -.2px;
+}
+
+
+.bottom {
+  size: 325px 245px;
+  position: relative;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.control-buttons {
+  padding: 30px 20px;
+  size: 100%;
+
+  & button {
+    background-color: transparent;
+    display: block;
+    width: 100%;
+    text-align: left;
+    border-radius: 4px;
+    margin: 0 0 5px;
+    font: normal 16px/30px 'Open Sans';
+    letter-spacing: -.3px;
+    cursor: pointer;
+    transition: .2s linear background-color;
+
+    & .icon {
+      size: 30px;
+      vertical-align: top;
+      margin: 0 6px 0 0;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, .03);
+    }
+  }
+}
+
+.edit-profile,
+.change-password {
+  padding: 15px 30px 30px;
+  size: 100%;
+  background-color: #fff;
+  position: absolute 0 * * -100%;
+  transition: .2s linear left;
+}
+
+.profile-bottom-form {
+  height: 100%;
+  position: relative;
+
+  & input {
+    height: 40px;
+    margin: 0 0 10px;
+  }
+}
+
+.form-buttons {
+  position: absolute;
+  bottom: 0;
+}
+
+.form-submit-button {
+    width: 160px;
+    display: inline-block;
+  }
+
+.form-cancel-button {
+  width: 100px;
+  margin: 0 5px 0 0;
+  display: inline-block;
+  font-weight: normal;
+  background-color: transparent;
+  color: #0070e0;
+
+  &:hover {
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+  &:active {
+    background-color: transparent;
+  }
+}
+
+
+.profile-card-error {
+  position: absolute 335px -270px * *;
+}
+
+.deleteme {
+  background-color: #bc3647;
+  padding: 10px;
+  border-radius: 4px;
+  width: 250px;
+  height: 160px;
+  color: #fff;
+}
