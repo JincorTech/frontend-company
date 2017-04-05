@@ -3,14 +3,19 @@ import { SFC, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { WrappedFieldProps } from 'redux-form'
 
-import Select, { Props as SelectProps } from './components/Select'
+import Select, { Props as SelectProps } from '../../common/Select'
 import Error from '../../../components/form/Error'
 
-
+/**
+ * Types
+ */
 export type Props = SelectProps & WrappedFieldProps<any>
 
-const RenderFilterSelect: SFC<Props> = (props) => {
-  const { title, placeholder, input, meta, options } = props
+/**
+ * Props
+ */
+const RenderSelect: SFC<Props> = (props) => {
+  const { title, placeholder, input, meta, options, modalId, filter } = props
   const { invalid, touched, active, dirty, error } = meta
   const hasError = touched && !active && invalid && dirty
 
@@ -19,6 +24,8 @@ const RenderFilterSelect: SFC<Props> = (props) => {
       {hasError && <Error styleName="error" msg={error}/>}
 
       <Select
+        modalId={modalId}
+        filter={filter}
         title={placeholder}
         options={options}
         optionValue={input.value}
@@ -30,4 +37,7 @@ const RenderFilterSelect: SFC<Props> = (props) => {
   )
 }
 
-export default CSSModules(RenderFilterSelect, require('./styles.css'))
+/**
+ * Decorators
+ */
+export default CSSModules(RenderSelect, require('./styles.css'))

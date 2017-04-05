@@ -13,7 +13,6 @@ import { initialValues, validate } from '../../../helpers/auth/createCompany'
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
 import RenderInput from '../../../components/form/RenderInput'
-import RenderFilterSelect from '../../../containers/form/RenderFilterSelect'
 import RenderSelect from '../../../containers/form/RenderSelect'
 
 /**
@@ -77,14 +76,17 @@ class CreateCompanyForm extends Component<Props, {}> {
         hint="Чтобы начать совместную работу со своими коллегами, нужно добавить свою компанию">
 
         <Field
-          component={RenderFilterSelect}
+          component={RenderSelect}
           name="countryId"
-          selectOptions={countries}
+          modalId="select-country"
+          filter
+          options={countries}
           placeholder="Страна"/>
 
         <Field
           component={RenderSelect}
           name="companyType"
+          modalId="select-company-type"
           options={companyTypes}
           placeholder="Тип компании"/>
 

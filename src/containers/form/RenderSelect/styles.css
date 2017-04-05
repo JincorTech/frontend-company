@@ -52,3 +52,12 @@
 }
 
 .select-options {}
+
+/* Filter options*/
+.filter {
+  padding: 0 30px;
+}
+
+.filter-input {
+  margin-bottom: 12px;
+}

@@ -5,12 +5,21 @@ import { SubmitHandler } from 'redux-form'
  * Types
  */
 export type Action<Payload> = {
-  type: string,
-  payload?: Payload,
+  type: string
+  payload?: Payload
+  error?: boolean
+}
+
+export type ActionMeta<Meta, Payload> = {
+  type: string
+  payload?: Payload
+  meta?: Meta
   error?: boolean
 }
 
 export type ActionCreator<Payload> = (payload?: Payload) => Action<Payload>
+
+export type ActionMetaCreator<Meta, Payload> = (meta: Meta, payload?: Payload) => ActionMeta<Meta, Payload>
 
 export type AsyncActionCreator<R, S> = ActionCreator<R> & {
   REQUEST: string
@@ -41,7 +50,18 @@ export type HandlersMap<State, Payload> = {
  * Create Action creator
  */
 export function createAction<Payload>(type: string): ActionCreator<Payload> {
-  return (payload: Payload): Action<Payload> => ({ type, payload })
+  return (payload: Payload): Action<Payload> => ({
+    type,
+    payload
+  })
+}
+
+export function createMetaAction<Meta, Payload>(type: string): ActionMetaCreator<Meta, Payload> {
+  return (meta: Meta, payload?: Payload): ActionMeta<Meta, Payload> => ({
+    type,
+    payload,
+    meta
+  })
 }
 
 /**

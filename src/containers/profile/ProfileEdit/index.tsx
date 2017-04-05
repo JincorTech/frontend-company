@@ -10,7 +10,6 @@ import { setEditable } from '../../../redux/modules/profile/profile'
 import InfoItem from '../../../components/profile/InfoItem'
 import CompanyLogoEdit from '../../../components/profile/CompanyLogoEdit'
 import RenderInput from '../../../components/form/RenderInput'
-import RenderFilterSelect from '../../../containers/form/RenderFilterSelect'
 import RenderSelect from '../../../containers/form/RenderSelect'
 import RenderTextarea from '../../../components/form/RenderTextarea'
 import RenderLinkInputs from '../../../components/profile/RenderLinkInputs'
@@ -89,15 +88,17 @@ class ProfileEdit extends Component<Props, {}> {
           <div styleName="region">
             <Field
               name="country"
-              placeholder="Страна"
+              modalId="select-country"
+              filter
               selectOptions={[]}
-              component={RenderFilterSelect}/>
+              component={RenderSelect}/>
 
             <Field
               name="city"
-              placeholder="Город"
+              modalId="select-city"
+              filter
               selectOptions={[]}
-              component={RenderFilterSelect}/>
+              component={RenderSelect}/>
           </div>
 
           <InfoItem styleName="section" title="Тип компании">

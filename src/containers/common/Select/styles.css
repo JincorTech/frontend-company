@@ -1,18 +1,5 @@
 @use postcss-short;
 
-/**
-* Render select
-*/
-.render-filter-select {
-  position: relative
-}
-
-.error {
-  position: absolute 0px * * 100%;
-  width: 210px;
-  padding-left: 15px;
-}
-
 /* Option */
 .option {
   font: normal 16px/22px 'Open Sans';
@@ -31,18 +18,6 @@
   padding: 13px 0;
   border-bottom: 1px solid #f3f5f8;
 }
-
-
-/* Filter options*/
-.filter {
-  padding: 0 30px;
-}
-
-.filter-input {
-  margin-bottom: 12px;
-}
-
-.options {}
 
 
 /*Select */
@@ -64,3 +39,12 @@
 }
 
 .select-options {}
+
+/* Filter options*/
+.filter {
+  padding: 0 30px;
+}
+
+.filter-input {
+  margin-bottom: 12px;
+}
