@@ -139,12 +139,12 @@ const Employees: SFC<{}> = () => (
       position="Senior Angular Developer"/>
 
     <ProfileCard
-      open={true}
-      id="11f43465-d042-4db0-8aa9-13bac482bb59"
+      open={false}
+      id="uuid4"
       companyName="CHVRCHES"
       companyLogo="https://pbs.twimg.com/profile_images/2227292956/twitter_logo_normal.png"
       avatar="http://imgur.com/QKHJ3Zs.png"
-      fullName="Lauren Mayberry"
+      fullName="Lauren"
       position="Singer"/>
   </div>
 )

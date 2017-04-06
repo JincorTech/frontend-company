@@ -35,7 +35,7 @@ const ProfileCard: SFC<Props> = props => {
   const { color, initials } = colorFunction(fullName, id)
 
   return (
-    <Popup open={open} styleName="profile-card">
+    <Popup modalId="profile-card" open={open} styleName="profile-card">
       <div styleName="top">
         {
           avatar
