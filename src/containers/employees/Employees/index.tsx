@@ -1,156 +1,186 @@
 import * as React from 'react'
-import { SFC } from 'react'
+import { Component } from 'react'
+import { connect } from 'react-redux'
 import * as CSSModules from 'react-css-modules'
 
 import InviteEmployeeForm from './components/InviteEmployeeForm'
-
 import Scrollbar from '../../../components/common/Scrollbar'
-
 import ActiveEmployee from '../../../components/employees/ActiveEmployee'
 import InvitedEmployee from '../../../components/employees/InvitedEmployee'
 import DeletedEmployee from '../../../components/employees/DeletedEmployee'
-
 import ConfirmPopup from '../../../components/common/ConfirmPopup'
-
 import EmployeeCard from '../../../components/employees/EmployeeCard'
 import ProfileCard from '../../../components/employees/ProfileCard'
 
+import {
+  openConfirmDeletePopup, closeConfirmDeletePopup,
+  openConfirmAdminPopup, closeConfirmAdminPopup,
+  openEmployeeCard, closeEmployeeCard
+} from '../../../redux/modules/employees/employees'
 
-// mock data
-const activeUsers = [
-  {
-    id: '1932810923',
-    type: 'active',
-    admin: false,
-    avatar: 'https://qph.ec.quoracdn.net/main-thumb-44455-50-ttxrsyoonynxuzdvgazckmlibwadpjzb.jpeg',
-    email: 'tj@apex.sh',
-    fullName: 'TJ Holowaychuk',
-    position: 'Founder of Apex'
-  },
-  {
-    id: '128390054',
-    type: 'active',
-    admin: true,
-    avatar: 'https://d2eip9sf3oo6c2.cloudfront.net/instructors/avatars/000/000/032/small/9VsY9i09.jpeg?1444932586',
-    email: 'dan.abramov@me.com',
-    fullName: 'Dan Abramov',
-    position: 'Co-authored Redux'
-  },
-  {
-    id: '12039402940294',
-    type: 'active',
-    admin: false,
-    avatar: 'https://pp.vk.me/c626724/v626724146/49305/0wJ4Sz7tkRY.jpg',
-    email: 'andrey@sitnik.ru',
-    fullName: 'Andrey Sitnik',
-    position: 'PostCSS author'
+import {
+  activeEmployeesSelector,
+  invitedEmployeesSelector,
+  deletedEmployeesSelector
+} from '../../../selectors/employees/employees'
+
+import {
+  ConfirmPopup as ConfirmPopupProps,
+  EmployeeCard as EmployeeCardProps
+} from '../../../redux/modules/employees/employees'
+
+import { ActiveEmployeeProps } from '../../../components/employees/ActiveEmployee'
+import { InvitedEmployeeProps } from '../../../components/employees/InvitedEmployee'
+import { DeletedEmployeeProps } from '../../../components/employees/DeletedEmployee'
+
+
+export type Props = DispatchProps & ComponentProps & StateProps
+
+export type ComponentProps = {
+  activeEmployees: ActiveEmployeeProps[],
+  invitedEmployees: InvitedEmployeeProps[],
+  deletedEmployees: DeletedEmployeeProps[],
+  confirmDelete: ConfirmPopupProps,
+  confirmAdmin: ConfirmPopupProps,
+  employeeCard: EmployeeCardProps
+}
+
+export type StateProps = {}
+
+export type DispatchProps = {
+  openConfirmDeletePopup: () => void,
+  closeConfirmDeletePopup: () => void,
+  openConfirmAdminPopup: () => void,
+  closeConfirmAdminPopup: () => void,
+  openEmployeeCard: (employee) => void,
+  closeEmployeeCard: () => void
+}
+
+
+class Employees extends Component<Props, StateProps> {
+  constructor(props) {
+    super(props)
+
+    this.onDeleteEmployee = this.onDeleteEmployee.bind(this)
+    this.onMakeAdmin = this.onMakeAdmin.bind(this)
+    this.onOpenProfile = this.onOpenProfile.bind(this)
   }
-]
 
-const invitedUsers = [
-  {
-    id: '94849893849843',
-    type: 'invited',
-    email: 'johnlennon@beatles.co.uk',
-    invitedAt: '28.03.17'
-  },
-  {
-    id: '129390904949493',
-    type: 'invited',
-    email: 'paulmccartney@beatles.co.uk',
-    invitedAt: '28.03.17'
-  },
-  {
-    id: '123390404090293',
-    type: 'invited',
-    email: 'georgeharrison@beatles.co.uk',
-    invitedAt: '27.03.17'
-  },
-  {
-    id: '02030309494904',
-    type: 'invited',
-    email: 'ringostarr@beatles.co.uk',
-    invitedAt: '26.03.17'
+  private onDeleteEmployee(e): void {
+    this.props.openConfirmDeletePopup()
+    e.stopPropagation()
   }
-]
 
-const deletedUsers = [
-  {
-    id: '192993904957',
-    type: 'deleted',
-    avatar: 'http://pn.ispirt.in/wp-content/uploads/userphoto/157.jpg',
-    email: 'man@example.com',
-    fullName: 'John Doe',
-    position: 'ex Office Manager',
-    deletedAt: '26.03.17'
-  },
-  {
-    id: '192934342337',
-    type: 'deleted',
-    avatar: 'http://carlook.net/data/users_photos/0/922/cl-user-922_th.jpeg?2055',
-    email: 'man2@example.com',
-    fullName: 'Jane Doe',
-    position: 'ex jQuery Developer',
-    deletedAt: '28.03.17'
+  private onMakeAdmin(e): void {
+    this.props.openConfirmAdminPopup()
+    e.stopPropagation()
   }
-]
-// /mock data
 
-const Employees: SFC<{}> = () => (
-  <div styleName="container">
-    <InviteEmployeeForm textareaValid={true} spinner={false} inviteEmployee={() => { console.log('invite employees submit') }}/>
+  private onOpenProfile(employee): void {
+    this.props.openEmployeeCard(employee)
+  }
 
-    <Scrollbar height="calc(100vh - 227px)">
-      {activeUsers.length > 0 &&
-        <div styleName="list">
-          {activeUsers.map((item, i) =>
-            (<ActiveEmployee key={`active-employee-${i}`} {...item}/>))}
-        </div>
-      }
+  public render(): JSX.Element {
+    const {
+      activeEmployees,
+      invitedEmployees,
+      deletedEmployees,
+      confirmDelete,
+      confirmAdmin,
+      employeeCard,
+      closeConfirmDeletePopup,
+      closeConfirmAdminPopup,
+      closeEmployeeCard
+    }: Props = this.props
 
-      {invitedUsers.length > 0 &&
-        <div styleName="list">
-          {invitedUsers.map((item, i) =>
-            (<InvitedEmployee key={`invited-employee-${i}`} {...item}/>))}
-        </div>
-      }
+    return (
+      <div styleName="container">
+        <InviteEmployeeForm
+          textareaValid={true}
+          spinner={false}
+          inviteEmployee={() => { console.log('invite employees submit') }}/>
 
-      {deletedUsers.length > 0 &&
-        <div styleName="list">
-          {deletedUsers.map((item, i) =>
-            (<DeletedEmployee key={`deleted-employee-${i}`} {...item}/>))}
-        </div>
-      }
-    </Scrollbar>
+        <Scrollbar height="calc(100vh - 227px)">
+          {activeEmployees.length > 0 &&
+            <div styleName="list">
+              {activeEmployees.map(employee => (
+                <ActiveEmployee
+                  key={`active-employee-${employee.id}`}
+                  onDelete={this.onDeleteEmployee}
+                  onMakeAdmin={this.onMakeAdmin}
+                  onOpenProfile={this.onOpenProfile}
+                  employee={employee}/>))}
+            </div>
+          }
 
-    <ConfirmPopup
-      modalId="remove-employess"
-      open={false}
-      title="Вы уверены, что хотите удалить этого сотрудника?"/>
+          {invitedEmployees.length > 0 &&
+            <div styleName="list">
+              {invitedEmployees.map(employee => (
+                <InvitedEmployee
+                  key={`invited-employee-${employee.id}`}
+                  employee={employee}/>))}
+            </div>
+          }
 
-    <ConfirmPopup
-      modalId="make-admin"
-      open={false}
-      title="Вы уверены, что хотите назначить этого сотрудника администратором?"/>
+          {deletedEmployees.length > 0 &&
+            <div styleName="list">
+              {deletedEmployees.map(employee => (
+                <DeletedEmployee
+                  key={`deleted-employee-${employee.id}`}
+                  employee={employee}/>))}
+            </div>
+          }
+        </Scrollbar>
 
-    <EmployeeCard
-      open={false}
-      id="11f43465-d042-4db0-8aa9-13bac482bb59"
-      companyName="Google"
-      companyLogo="https://pbs.twimg.com/profile_images/2227292956/twitter_logo_normal.png"
-      avatar="http://i.imgur.com/kJUdCE6.png"
-      fullName="Walter White"
-      position="Senior Angular Developer"/>
+        <ConfirmPopup
+          modalId="remove-employee"
+          open={confirmDelete.open}
+          onClose={closeConfirmDeletePopup}
+          title="Вы уверены, что хотите удалить этого сотрудника?"/>
 
-    <ProfileCard
-      open={false}
-      id="uuid4"
-      companyName="CHVRCHES"
-      companyLogo="https://pbs.twimg.com/profile_images/2227292956/twitter_logo_normal.png"
-      avatar="http://imgur.com/QKHJ3Zs.png"
-      fullName="Lauren"
-      position="Singer"/>
-  </div>
-)
+        <ConfirmPopup
+          modalId="make-admin"
+          open={confirmAdmin.open}
+          onClose={closeConfirmAdminPopup}
+          title="Вы уверены, что хотите назначить этого сотрудника администратором?"/>
 
-export default CSSModules(Employees, require('./styles.css'))
+        <EmployeeCard
+          modalId="employee-card"
+          open={employeeCard.open}
+          onClose={closeEmployeeCard}
+          id={employeeCard.id}
+          companyName={employeeCard.companyName}
+          companyLogo={employeeCard.companyLogo}
+          avatar={employeeCard.avatar}
+          fullName={employeeCard.fullName}
+          position={employeeCard.position}/>
+
+        <ProfileCard
+          // modalId="profile-card"
+          open={false}
+          id="uuid4"
+          companyName="CHVRCHES"
+          companyLogo="https://pbs.twimg.com/profile_images/2227292956/twitter_logo_normal.png"
+          avatar="http://imgur.com/QKHJ3Zs.png"
+          fullName="Lauren"
+          position="Singer"/>
+      </div>
+    )
+  }
+}
+
+const StyledComponent = CSSModules(Employees, require('./styles.css'))
+
+export default connect<StateProps, DispatchProps, ComponentProps>(
+  ({ employees: { employees }}) => ({
+    ...employees,
+    activeEmployees: activeEmployeesSelector(employees),
+    invitedEmployees: invitedEmployeesSelector(employees),
+    deletedEmployees: deletedEmployeesSelector(employees)
+  }),
+  {
+    openConfirmDeletePopup, closeConfirmDeletePopup,
+    openConfirmAdminPopup, closeConfirmAdminPopup,
+    openEmployeeCard, closeEmployeeCard
+  }
+)(StyledComponent)

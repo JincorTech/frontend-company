@@ -17,6 +17,8 @@ import profile from './modules/profile/profile'
 import activityTypes from './modules/profile/activityTypes'
 import profileEdit from './modules/profile/profileEdit'
 
+import employees from './modules/employees/employees'
+
 
 export default combineReducers({
   routing: routerReducer,
@@ -41,5 +43,9 @@ export default combineReducers({
     activityTypes,
     profileEdit,
     profile
+  }),
+
+  employees: combineReducers({
+    employees
   })
 })

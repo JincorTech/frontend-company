@@ -32,6 +32,7 @@
 
   & > img {
     display: block;
+    size: 50px;
     border-radius: 4px;
     user-select: none;
   }

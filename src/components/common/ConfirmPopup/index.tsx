@@ -10,13 +10,13 @@ export type Props = JSX.IntrinsicAttributes & JSX.IntrinsicClassAttributes<any> 
   title: string
 }
 
-const ConfirmPopup: SFC<Props> = ({ title, ...popupProps }) => (
-  <Popup styleName="confirm-popup" {...popupProps}>
+const ConfirmPopup: SFC<Props> = ({ title, onClose, ...popupProps }) => (
+  <Popup styleName="confirm-popup" onClose={onClose} {...popupProps}>
     <h4 styleName="popup-title">{title}</h4>
 
     <div styleName="popup-body">
       <div styleName="popup-buttons">
-        <Button styleName="popup-cancel-button">Отменить</Button>
+        <Button styleName="popup-cancel-button" onClick={() => onClose()}>Отменить</Button>
         <Button>Подтвердить</Button>
       </div>
     </div>
