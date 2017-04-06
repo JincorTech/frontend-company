@@ -3,7 +3,7 @@
 .container {
   width: 600px;
   margin: 0 auto;
-  padding: 40px 0;
+  padding: 50px 0;
 }
 
 .list {
@@ -12,4 +12,21 @@
   &:last-child {
     border-bottom: 0px solid transparent;
   }
+}
+
+.invite-employee-form {
+  width: 600px;
+  margin: 0 0 5px 0;
+}
+
+.invite-input {
+  width: 415px;
+  margin: 0 15px 0 0;
+  display: inline-block;
+}
+
+.invite-button {
+  size: 165px 45px;
+  display: inline-block;
+  vertical-align: top;
 }
