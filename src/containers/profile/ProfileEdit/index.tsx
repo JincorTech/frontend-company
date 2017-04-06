@@ -8,13 +8,14 @@ import { requestActivities } from '../../../redux/modules/profile/activityTypes'
 import { setEditable } from '../../../redux/modules/profile/profile'
 
 import InfoItem from '../../../components/profile/InfoItem'
-import CompanyLogoEdit from '../../../components/profile/CompanyLogoEdit'
 import RenderInput from '../../../components/form/RenderInput'
 import RenderSelect from '../../../containers/form/RenderSelect'
 import RenderTextarea from '../../../components/form/RenderTextarea'
+import RenderImageUpload from '../../../components/form/RenderImageUpload'
 import RenderLinkInputs from '../../../components/profile/RenderLinkInputs'
 import RenderActivities from '../../form/RenderActivities'
 import { SocialLinkProps } from '../../../components/profile/SocialLink'
+
 
 /**
  * Types
@@ -60,7 +61,6 @@ export type DispatchProps = {
   setEditable: (value: boolean) => void
 }
 
-
 /**
  * Component
  */
@@ -75,7 +75,11 @@ class ProfileEdit extends Component<Props, {}> {
     return (
       <form styleName="company-profile-edit">
         <div styleName="company-logo">
-          <CompanyLogoEdit />
+          <Field
+            name="upload"
+            component={RenderImageUpload}
+            width={165}
+            height={165}/>
         </div>
 
         <div styleName="company-info">
@@ -90,20 +94,21 @@ class ProfileEdit extends Component<Props, {}> {
               name="country"
               modalId="select-country"
               filter
-              selectOptions={[]}
+              options={[]}
               component={RenderSelect}/>
 
             <Field
               name="city"
               modalId="select-city"
               filter
-              selectOptions={[]}
+              options={[]}
               component={RenderSelect}/>
           </div>
 
           <InfoItem styleName="section" title="Тип компании">
             <Field
               name="type"
+              modalId="select-company-type"
               placeholder="Тип компании"
               options={[]}
               component={RenderSelect}/>
