@@ -2,6 +2,8 @@ import * as React from 'react'
 import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
 
+import InviteEmployeeForm from './components/InviteEmployeeForm'
+
 import Scrollbar from '../../../components/common/Scrollbar'
 
 import ActiveEmployee from '../../../components/employees/ActiveEmployee'
@@ -96,7 +98,9 @@ const deletedUsers = [
 
 const Employees: SFC<{}> = () => (
   <div styleName="container">
-    <Scrollbar height="calc(100vh - 140px)">
+    <InviteEmployeeForm textareaValid={true} spinner={false} inviteEmployee={() => { console.log('invite employees submit') }}/>
+
+    <Scrollbar height="calc(100vh - 227px)">
       {activeUsers.length > 0 &&
         <div styleName="list">
           {activeUsers.map((item, i) =>
