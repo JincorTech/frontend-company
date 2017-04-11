@@ -4,7 +4,7 @@ import { WrappedFieldProps } from 'redux-form'
 import * as CSSModules from 'react-css-modules'
 
 import Input from '../../common/Input'
-import Error from '../Error'
+import FieldError from '../../common/FieldError'
 
 export type InputProps = WrappedFieldProps<any> & {
   type: 'text' | 'email'
@@ -14,21 +14,16 @@ export type InputProps = WrappedFieldProps<any> & {
 
 const RenderInput: SFC<InputProps> = (props) => {
   const { type, placeholder, input, meta, ...inputProps } = props
-  const { invalid, touched, active, dirty, error } = meta
-  const hasError = touched && !active && invalid && dirty
 
   return (
-    <div styleName="render-input">
-      {hasError && <Error styleName="error" msg={error}/>}
-
+    <FieldError meta={meta}>
       <Input
         type={type}
         placeholder={placeholder}
-        invalid={hasError}
         {...input}
         {...inputProps}/>
-    </div>
+    </FieldError>
   )
 }
 
-export default CSSModules(RenderInput, require('./styles.css'))
+export default RenderInput

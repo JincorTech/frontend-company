@@ -4,7 +4,7 @@ import * as CSSModules from 'react-css-modules'
 import { WrappedFieldProps } from 'redux-form'
 import { connect } from 'react-redux'
 
-import Error from '../../../../components/form/Error'
+import FieldError from '../../../../components/common/FieldError'
 import ActivityTypes from './ActivityTypes'
 
 /**
@@ -35,16 +35,16 @@ export const RenderActivity: SFC<Props> = (props) => {
 
   return (
     <div styleName="render-activity">
-      {hasError && <Error styleName="error" msg={error}/>}
-
-      <ActivityTypes
-        open={open}
-        invalid={hasError}
-        value={value}
-        placeholder={placeholder}
-        onChange={onChange}
-        openPopup={openPopup}
-        closePopup={closePopup}/>
+      <FieldError meta={meta}>
+        <ActivityTypes
+          open={open}
+          invalid={hasError}
+          value={value}
+          placeholder={placeholder}
+          onChange={onChange}
+          openPopup={openPopup}
+          closePopup={closePopup}/>
+      </FieldError>
 
       <a styleName="activity-remove" onClick={handleRemove}>удалить</a>
     </div>

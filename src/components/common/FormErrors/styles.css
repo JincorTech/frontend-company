@@ -1,0 +1,34 @@
+@use postcss-short;
+
+.form-errors {
+  position: absolute 0px * * 100%;
+  margin-left: 20px;
+  text-align: left;
+  padding: 10px;
+  width: 250px;
+  border-radius: 4px;
+  background: #bc3647;
+
+  & ul {
+    padding-left: 14px;
+  }
+
+  & li {
+    position: relative;
+    font: normal 14px/1.43 'Open Sans';
+    color: #ffffff;
+    margin-bottom: 10px;
+
+    &:before {
+      content: '';
+      position: absolute 8px * * -13px;
+      size: 4px;
+      border-radius: 2px;
+      background: #ffffff;
+    }
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}
