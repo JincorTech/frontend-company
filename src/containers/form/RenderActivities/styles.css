@@ -3,8 +3,17 @@
 /**
 * Render activity type
 */
+.activity-list {}
+
 .render-activity {
   position: relative
+}
+
+.activity-remove {
+  position: absolute 10px -75px * *;
+  font: normal 16px/22px 'Open Sans';
+  color: #d0011b !important;
+  letter-spacing: -0.2px;
 }
 
 .error {

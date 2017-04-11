@@ -6,14 +6,14 @@ import companyCard from './modules/common/companyCard'
 import emailTextarea from './modules/common/emailTextarea'
 import alert from './modules/common/alert'
 
-import renderSelect from './modules/form/renderSelect'
-import renderFilterSelect from './modules/form/renderFilterSelect'
+import select from './modules/common/select'
 
 import signUp from './modules/auth/signUp'
 import signIn from './modules/auth/signIn'
 import restorePassword from './modules/auth/restorePassword'
 import createCompany from './modules/auth/createCompany'
 
+import profile from './modules/profile/profile'
 import activityTypes from './modules/profile/activityTypes'
 import profileEdit from './modules/profile/profileEdit'
 
@@ -22,16 +22,12 @@ export default combineReducers({
   routing: routerReducer,
   form: formReducer,
 
-  formFields: combineReducers({
-    renderSelect,
-    renderFilterSelect
-  }),
-
   common: combineReducers({
     app,
     companyCard,
     emailTextarea,
-    alert
+    alert,
+    select
   }),
 
   auth: combineReducers({
@@ -43,6 +39,7 @@ export default combineReducers({
 
   profile: combineReducers({
     activityTypes,
-    profileEdit
+    profileEdit,
+    profile
   })
 })

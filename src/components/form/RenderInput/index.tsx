@@ -13,7 +13,7 @@ export type InputProps = WrappedFieldProps<any> & {
 
 
 const RenderInput: SFC<InputProps> = (props) => {
-  const { type, placeholder, input, meta } = props
+  const { type, placeholder, input, meta, ...inputProps } = props
   const { invalid, touched, active, dirty, error } = meta
   const hasError = touched && !active && invalid && dirty
 
@@ -25,7 +25,8 @@ const RenderInput: SFC<InputProps> = (props) => {
         type={type}
         placeholder={placeholder}
         invalid={hasError}
-        {...input}/>
+        {...input}
+        {...inputProps}/>
     </div>
   )
 }

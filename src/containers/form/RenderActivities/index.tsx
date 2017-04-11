@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { SFC } from 'react'
+import * as CSSModules from 'react-css-modules'
 import { WrappedFieldProps, WrappedFieldArrayProps, Field } from 'redux-form'
 import { connect } from 'react-redux'
 
@@ -11,42 +12,8 @@ import {
   ActivityField
 } from '../../../redux/modules/profile/profileEdit'
 
-import ActivityTypes from './components/ActivityTypes'
 import AddInput from './components/AddInput'
-import Error from '../../../components/form/Error'
-
-
-/**
- * Render activity field
- */
-export type Props = WrappedFieldProps<any> & {
-  open: boolean
-  placeholder: string
-  openPopup: () => void
-  closePopup: () => void
-}
-
-export const RenderActivity: SFC<Props> = (props) => {
-  const { open, placeholder, openPopup, closePopup, input, meta } = props
-  const { invalid, touched, active, dirty, error } = meta
-  const { value, onChange } = input
-  const hasError = touched && !active && invalid && dirty
-
-  return (
-    <div styleName="render-activity">
-      {hasError && <Error styleName="error" msg={error}/>}
-
-      <ActivityTypes
-        open={open}
-        invalid={hasError}
-        value={value}
-        placeholder={placeholder}
-        onChange={onChange}
-        openPopup={openPopup}
-        closePopup={closePopup}/>
-    </div>
-  )
-}
+import RenderActivity from './components/RenderActivity'
 
 
 /**
@@ -93,20 +60,19 @@ const RenderActivities: SFC<ActivitiesProps> = (props) => {
   }
 
   return (
-    <div>
+    <div styleName="activity-list">
       {fields.map((field, i) => (
-        <div key={i}>
-          <Field
-            name={field}
-            open={activityFields[i].visible}
-            closePopup={closeActivityPopup}
-            openPopup={openActivityPopup}
-            component={RenderActivity}/>
-
-          <a onClick={() => handleRemove(i)}>Удалить</a>
-        </div>
+        <Field
+          key={i}
+          name={field}
+          open={activityFields[i].visible}
+          closePopup={closeActivityPopup}
+          openPopup={openActivityPopup}
+          component={RenderActivity}
+          placeholder={i > 0 ? 'Дополнительная сфера деятельности' : 'Oсновная сфера деятельности'}
+          handleRemove={() => handleRemove(i)}/>
       ))}
-      <AddInput onClick={handleAdd}/>
+      {fields.length < 3 && <AddInput onClick={handleAdd}/>}
     </div>
   )
 }
@@ -114,6 +80,7 @@ const RenderActivities: SFC<ActivitiesProps> = (props) => {
 /**
  * Decorator
  */
+const StyledComponent = CSSModules(RenderActivities, require('./styles.css'))
 export default connect<StateProps, DispatchProps, WrappedFieldArrayProps<Option>>(
   (state) => ({
     activityFields: state.profile.profileEdit.activityFields
@@ -124,4 +91,4 @@ export default connect<StateProps, DispatchProps, WrappedFieldArrayProps<Option>
     removeActivityField,
     addActivityField
   }
-)(RenderActivities)
+)(StyledComponent)

@@ -11,6 +11,12 @@
   float: left;
 }
 
+.company-name {
+  height: 80px;
+  font: normal 40px/48px 'Open Sans';
+  margin-bottom: 30px;
+}
+
 .company-info {
   float: left;
   padding-left: 30px;
@@ -37,4 +43,23 @@
 
 .cancel-btn {
   font-size: 16px/26px;
+}
+
+.region {
+  clear: fix;
+
+  & > div {
+    float: left;
+    width: 200px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+  }
+}
+
+.section {
+  margin-bottom: 35px;
+
+  & > h4 {
+    margin-bottom: 10px;
+  }
 }

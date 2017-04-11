@@ -9,6 +9,7 @@ export type State = StateMap & ImmutableObject<StateMap>
 export type StateMap = {
   authorized: boolean
   sidebarOpen: boolean
+  token: string
 }
 
 /**
@@ -30,7 +31,8 @@ export const closeSidebar = createAction<void>(CLOSE_SIDEBAR)
  */
 const initialState: State = from<StateMap>({
   authorized: isAuth(),
-  sidebarOpen: false
+  sidebarOpen: false,
+  token: ''
 })
 
 export default createReducer<State>({
