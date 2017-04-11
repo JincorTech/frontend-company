@@ -5,7 +5,13 @@ import * as CSSModules from 'react-css-modules'
 import EmployeeMenu from './components/EmployeeMenu'
 
 
-export type Props = {
+export type Props = ComponentProps & DispatchProps
+
+export type ComponentProps = {
+  employee: ActiveEmployeeProps
+}
+
+export type ActiveEmployeeProps = {
   id: string,
   admin: boolean,
   avatar: string,
@@ -14,7 +20,20 @@ export type Props = {
   position: string
 }
 
+export type DispatchProps = {
+  onDelete: (e) => void,
+  onMakeAdmin: (e) => void,
+  onOpenProfile: (employee: ActiveEmployeeProps) => void
+}
+
 const ActiveEmployee: SFC<Props> = props => {
+  const {
+    employee,
+    onDelete,
+    onMakeAdmin,
+    onOpenProfile
+  } = props
+
   const {
     id,
     admin,
@@ -22,10 +41,10 @@ const ActiveEmployee: SFC<Props> = props => {
     email,
     fullName,
     position
-  } = props
+  } = employee
 
   return (
-    <div styleName="employee">
+    <div styleName="employee" onClick={() => onOpenProfile(employee)}>
       <div styleName="avatar">
         <img src={avatar}/>
       </div>
@@ -46,19 +65,19 @@ const ActiveEmployee: SFC<Props> = props => {
         <button
           type="button"
           styleName="menu-button"
-          onClick={ () => { console.log(`${fullName} admin now! (no)`) }}>
+          onClick={e => onMakeAdmin(e)}>
           Назначить администратором</button>
 
         <button
           type="button"
           styleName="menu-button"
-          onClick={ () => { console.log(`${fullName} profile open`) }}>
+          onClick={() => onOpenProfile(employee)}>
           Открыть профиль</button>
 
         <button
           type="button"
           styleName="menu-button-danger"
-          onClick={ () => { console.log(`${fullName} has been deleted`) }}>
+          onClick={e => onDelete(e)}>
           Удалить пользователя</button>
       </EmployeeMenu>
     </div>

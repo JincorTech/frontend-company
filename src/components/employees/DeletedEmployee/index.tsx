@@ -3,7 +3,14 @@ import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
 
 
-export type Props = {
+export type Props = ComponentProps
+
+export type ComponentProps = {
+  employee: DeletedEmployeeProps
+}
+
+export type DeletedEmployeeProps = {
+  id: string,
   avatar?: string,
   email: string,
   fullName: string,
@@ -11,14 +18,14 @@ export type Props = {
   position: string
 }
 
-const DeletedEmployee: SFC<Props> = props => {
+const DeletedEmployee: SFC<Props> = ({ employee }) => {
   const {
     avatar,
     email,
     fullName,
     deletedAt,
     position
-  } = props
+  } = employee
 
   return (
     <div styleName="employee">

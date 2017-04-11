@@ -1,14 +1,13 @@
 import * as React from 'react'
-import { SFC } from 'react'
+import { SFC, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 
 import colorFunction from '../../../utils/colorFunction'
 
-import Popup from '../../common/Popup'
+import Popup, { Props as PopupProps } from '../../common/Popup'
 
 
-export type Props = {
-  open: boolean,
+export type Props = JSX.IntrinsicAttributes & JSX.IntrinsicClassAttributes<any> & PopupProps & {
   id: string,
   avatar?: string,
   fullName: string,
@@ -19,24 +18,30 @@ export type Props = {
 
 const EmployeeCard: SFC<Props> = props => {
   const {
-    open,
     id,
     avatar,
     fullName,
     position,
     companyName,
-    companyLogo
+    companyLogo,
+    ...popupProps
   } = props
 
-  const { color, initials } = colorFunction(fullName, id)
+  /**
+   * TODO
+   * BUG: При закрытии карточки профиля все валится.
+   */
+  // const { color, initials } = colorFunction(fullName, id)
 
   return (
-    <Popup modalId="employee-card" open={open} styleName="employee-card">
-      {
+    <Popup styleName="employee-card" {...popupProps}>
+      {/*{
         avatar
           ? <img styleName="avatar" src={avatar}/>
           : <div styleName="avatar-empty" style={{backgroundColor: color}}>{initials}</div>
-      }
+      }*/}
+
+      <img styleName="avatar" src={avatar}/>
 
       <div styleName="company">
         <div styleName="company-name">{companyName}</div>

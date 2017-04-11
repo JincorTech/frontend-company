@@ -1,6 +1,7 @@
 @use postcss-short;
 
 .employee-card {
+  composes: popup from '../../common/Popup/styles.css';
   size: 325px;
   position: relative;
   background-color: transparent;
