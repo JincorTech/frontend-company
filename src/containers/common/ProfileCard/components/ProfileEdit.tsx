@@ -1,18 +1,22 @@
 import * as React from 'react'
 import { Component } from 'react'
 import * as CSSModules from 'react-css-modules'
-import { connect } from 'react-redux'
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
 
-import Form from '../../../../components/form/Form'
+import { initialValues, validate } from '../../../../helpers/common/profileCardEditProfile'
+
 import Button from '../../../../components/common/Button'
 import RenderInput from '../../../../components/form/RenderInput'
+import RenderImageUpload from '../../../../components/form/RenderImageUpload'
+import FormErrors from '../../../../components/common/FormErrors'
 
 
 export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>
 
 export type ComponentProps = {
-  onSubmit: SubmitHandler<FormFields, ComponentProps, any>
+  onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
+  onCancel: () => void,
+  avatar: string
 }
 
 export type FormFields = {
@@ -23,22 +27,34 @@ export type FormFields = {
 
 class ProfileEdit extends Component<Props, {}> {
   public render(): JSX.Element {
-    const { invalid, handleSubmit } = this.props
+    const { invalid, error, handleSubmit, onCancel, avatar } = this.props
 
     return (
       <form
         onSubmit={handleSubmit}
         styleName="profile-bottom-form">
 
+        {error && <FormErrors errors={error}/>}
+
+        <div styleName="avatar-upload">
+          <Field
+            src={avatar}
+            component={RenderImageUpload}
+            name="upload"
+            camPosition="left-top"
+            width={325}
+            height={325}/>
+        </div>
+
         <Field
           component={RenderInput}
-          name="first-name"
+          name="firstName"
           type="text"
           placeholder="Имя"/>
 
         <Field
           component={RenderInput}
-          name="second-name"
+          name="lastName"
           type="text"
           placeholder="Фамилия"/>
 
@@ -49,7 +65,7 @@ class ProfileEdit extends Component<Props, {}> {
           placeholder="Должность"/>
 
         <div styleName="form-buttons">
-          <Button type="button" styleName="form-cancel-button">отменить</Button>
+          <Button type="button" styleName="form-cancel-button" onClick={onCancel}>отменить</Button>
           <Button type="submit" styleName="form-submit-button" disabled={invalid}>Сохранить</Button>
         </div>
       </form>
@@ -58,5 +74,8 @@ class ProfileEdit extends Component<Props, {}> {
 }
 
 const StyledComponent = CSSModules(ProfileEdit, require('../styles.css'))
-
-export default reduxForm<FormFields, ComponentProps>({ form: '' })(StyledComponent)
+export default reduxForm<FormFields, ComponentProps>({
+  form: 'ProfileCardEdit',
+  initialValues,
+  validate
+})(StyledComponent)

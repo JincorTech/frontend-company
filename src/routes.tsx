@@ -31,7 +31,8 @@ export default (
       <Route path="password" component={RestorePassword}/>
     </Route>
 
-    <Route path="app" component={UserIsAuthenticated(AppLayout)}>
+    {/*<Route path="app" component={UserIsAuthenticated(AppLayout)}>*/} // NOTE Disable auth wrapper
+    <Route path="app" component={AppLayout}>
       <Route path="profile" component={Profile}/>
       <Route path="employees" component={Employees}/>
     </Route>

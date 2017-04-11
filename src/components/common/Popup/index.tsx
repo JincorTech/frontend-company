@@ -6,6 +6,9 @@ const { popup, overlay, close } = require('./styles.css')
 
 import Icon from '../Icon'
 
+import { Provider } from 'react-redux'
+import store from '../../../redux/store'
+
 
 /**
  * Types
@@ -91,15 +94,17 @@ class Popup extends Component<Props, {}> {
     } = this.props
 
     render (
-      <div className="portal">
-        {open && <div className={overlay} onClick={onClose}>
-          {!hideClose && <Icon className={close} name="close-popup"/>}
+      <Provider store={store}>
+        <div className="portal">
+          {open && <div className={overlay} onClick={onClose}>
+            {!hideClose && <Icon className={close} name="close-popup"/>}
 
-          <div className={classnames(popup, className)} onClick={this.handleClick} {...divProps}>
-            {children}
-          </div>
-        </div>}
-      </div>,
+            <div className={classnames(popup, className)} onClick={this.handleClick} {...divProps}>
+              {children}
+            </div>
+          </div>}
+        </div>
+      </Provider>,
       document.getElementById(modalId)
     )
   }

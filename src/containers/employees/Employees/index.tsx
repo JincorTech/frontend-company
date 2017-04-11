@@ -10,7 +10,6 @@ import InvitedEmployee from '../../../components/employees/InvitedEmployee'
 import DeletedEmployee from '../../../components/employees/DeletedEmployee'
 import ConfirmPopup from '../../../components/common/ConfirmPopup'
 import EmployeeCard from '../../../components/employees/EmployeeCard'
-import ProfileCard from '../../../components/employees/ProfileCard'
 
 import {
   openConfirmDeletePopup, closeConfirmDeletePopup,
@@ -154,16 +153,6 @@ class Employees extends Component<Props, StateProps> {
           avatar={employeeCard.avatar}
           fullName={employeeCard.fullName}
           position={employeeCard.position}/>
-
-        <ProfileCard
-          // modalId="profile-card"
-          open={false}
-          id="uuid4"
-          companyName="CHVRCHES"
-          companyLogo="https://pbs.twimg.com/profile_images/2227292956/twitter_logo_normal.png"
-          avatar="http://imgur.com/QKHJ3Zs.png"
-          fullName="Lauren"
-          position="Singer"/>
       </div>
     )
   }
