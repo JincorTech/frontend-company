@@ -4,26 +4,21 @@ import * as CSSModules from 'react-css-modules'
 import { WrappedFieldProps } from 'redux-form'
 
 import Textarea, { Props as TextareaProps } from './components/Textarea'
-import Error from '../Error'
+import FieldError from '../../common/FieldError'
 
 
 export type Props = WrappedFieldProps<any> & TextareaProps
 
 const RenderTextarea: SFC<Props> = (props) => {
   const { placeholder, input, meta } = props
-  const { invalid, touched, active, dirty, error } = meta
-  const hasError = touched && !active && invalid && dirty
 
   return (
-    <div styleName="render-textarea">
-      {hasError && <Error styleName="error" msg={error}/>}
-
+    <FieldError meta={meta}>
       <Textarea
-        invalid={hasError}
         placeholder={placeholder}
         {...input}/>
-    </div>
-    )
+    </FieldError>
+  )
 }
 
 export default CSSModules(RenderTextarea, require('./styles.css'))

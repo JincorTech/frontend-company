@@ -4,7 +4,7 @@ import { WrappedFieldProps } from 'redux-form'
 import * as CSSModules from 'react-css-modules'
 
 import Password from './components/Password'
-import Error from '../Error'
+import FieldError from '../../common/FieldError'
 
 /**
  * Types
@@ -38,20 +38,15 @@ class RenderPassword extends Component<Props, State> {
   public render(): JSX.Element {
     const { visible } = this.state
     const { placeholder, input, meta } = this.props
-    const { invalid, touched, active, dirty, error } = meta
-    const hasError = invalid && touched && !active && dirty
 
     return (
-      <div styleName="render-password">
-        {hasError && <Error styleName="error" msg={error}/>}
-
+      <FieldError meta={meta}>
         <Password
-          invalid={hasError}
           visible={visible}
           placeholder={placeholder}
           onChangeVisibility={this.handleChangeVisibility}
           {...input}/>
-      </div>
+      </FieldError>
     )
   }
 }

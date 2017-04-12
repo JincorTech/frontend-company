@@ -7,7 +7,7 @@ import Icon from '../../../common/Icon'
 
 
 export type PasswordProps = HTMLProps<HTMLInputElement> & {
-  invalid: boolean
+  invalid?: boolean
   visible: boolean,
   onChangeVisibility: (visible: boolean) => void
 }
