@@ -1563,6 +1563,11 @@
       "resolved": "https://registry.npmjs.org/console-browserify/-/console-browserify-1.1.0.tgz",
       "dev": true
     },
+    "consolidated-events": {
+      "version": "1.0.1",
+      "from": "consolidated-events@>=1.0.1 <2.0.0",
+      "resolved": "https://registry.npmjs.org/consolidated-events/-/consolidated-events-1.0.1.tgz"
+    },
     "constants-browserify": {
       "version": "1.0.0",
       "from": "constants-browserify@>=1.0.0 <2.0.0",
@@ -2915,6 +2920,11 @@
       "resolved": "https://registry.npmjs.org/get-caller-file/-/get-caller-file-1.0.2.tgz",
       "dev": true
     },
+    "get-emoji": {
+      "version": "2.0.0",
+      "from": "get-emoji@latest",
+      "resolved": "https://registry.npmjs.org/get-emoji/-/get-emoji-2.0.0.tgz"
+    },
     "get-stdin": {
       "version": "4.0.1",
       "from": "get-stdin@>=4.0.1 <5.0.0",
@@ -3768,7 +3778,7 @@
     },
     "json-loader": {
       "version": "0.5.4",
-      "from": "json-loader@>=0.5.4 <0.6.0",
+      "from": "https://registry.npmjs.org/json-loader/-/json-loader-0.5.4.tgz",
       "resolved": "https://registry.npmjs.org/json-loader/-/json-loader-0.5.4.tgz",
       "dev": true
     },
@@ -5803,6 +5813,11 @@
       "resolved": "https://registry.npmjs.org/promise-each/-/promise-each-2.2.0.tgz",
       "dev": true
     },
+    "prop-types": {
+      "version": "15.5.8",
+      "from": "prop-types@latest",
+      "resolved": "https://registry.npmjs.org/prop-types/-/prop-types-15.5.8.tgz"
+    },
     "prr": {
       "version": "0.0.0",
       "from": "prr@>=0.0.0 <0.1.0",
@@ -5963,6 +5978,11 @@
       "version": "4.0.5",
       "from": "react-textarea-autosize@4.0.5",
       "resolved": "https://registry.npmjs.org/react-textarea-autosize/-/react-textarea-autosize-4.0.5.tgz"
+    },
+    "react-waypoint": {
+      "version": "6.0.0",
+      "from": "react-waypoint@6.0.0",
+      "resolved": "https://registry.npmjs.org/react-waypoint/-/react-waypoint-6.0.0.tgz"
     },
     "read-all-stream": {
       "version": "3.1.0",

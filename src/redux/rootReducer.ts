@@ -22,6 +22,8 @@ import profileEdit from './modules/profile/profileEdit'
 
 import employees from './modules/employees/employees'
 
+import emojiSelect from './modules/messenger/emojiSelect'
+
 
 export default combineReducers({
   routing: routerReducer,
@@ -57,5 +59,9 @@ export default combineReducers({
 
   employees: combineReducers({
     employees
+  }),
+
+  messenger: combineReducers({
+    emojiSelect
   })
 })

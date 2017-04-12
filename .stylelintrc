@@ -5,7 +5,7 @@
     "declaration-colon-space-after": "always",
     "indentation": 2,
     "max-empty-lines": 2,
-    "unit-whitelist": ["px", em", "rem", "%", "s", "deg"]
+    "unit-whitelist": ["px", "em", "rem", "%", "s", "deg", "vh"]
   },
   "ignoreFiles": ["node_modules/*", "src/vendor/*"],
   "defaultSeverity": "error"
