@@ -3,14 +3,22 @@ import { SFC, HTMLProps } from 'react'
 import { connect } from 'react-redux'
 import * as CSSModules from 'react-css-modules'
 
-import colorFunction from '../../../utils/colorFunction'
+import { getBackgroundColor, getInitials } from '../../../utils/colorFunction'
 
 import Popup, { Props as PopupProps } from '../../../components/common/Popup'
 import Icon from '../../../components/common/Icon'
 
 import ProfileEdit from './components/ProfileEdit'
 import ChangePassword from './components/ChangePassword'
-import { changeView, closeProfileCard, openProfileCard } from '../../../redux/modules/common/profileCard'
+import {
+  changeView,
+  closeProfileCard,
+  openProfileCard,
+  changePassword,
+  updateProfile
+} from '../../../redux/modules/common/profileCard'
+import { User as UserProps } from '../../../redux/modules/common/app'
+import { BottomView as BottomViewProps } from '../../../redux/modules/common/profileCard'
 
 
 type Props = JSX.IntrinsicAttributes
@@ -21,53 +29,40 @@ type Props = JSX.IntrinsicAttributes
   & StateProps
 
 export type ComponentProps = {
-  profile: ProfileInfo
-}
-
-export type ProfileInfo = {
-  id: string,
-  avatar?: string,
-  fullName: string,
-  position: string,
-  companyName: string,
-  companyLogo?: string
+  user: UserProps
 }
 
 export type StateProps = {
   open: boolean,
-  bottomView: number
+  bottomView: BottomViewProps
 }
 
 export type DispatchProps = {
   openProfileCard: () => void,
   closeProfileCard: () => void,
-  changeView: (view: number) => void
+  changeView: (view: BottomViewProps) => void
 }
 
 const ProfileCard: SFC<Props> = props => {
-  const { profile, open, bottomView, changeView, closeProfileCard } = props
-  const { id, avatar, fullName, position, companyName, companyLogo } = profile
+  const { user, open, bottomView, changeView, closeProfileCard } = props
+  const { id, profile, company } = user
+  const backgroundColor = getBackgroundColor(id)
+  const initials = getInitials(profile.name)
 
-  /**
-   * TODO
-   * BUG: При закрытии карточки профиля все валится.
-   */
-  // const { color, initials } = colorFunction(fullName, id)
-
-  const renderView = (view: number) => {
+  const renderView = (view: BottomViewProps) => {
     switch (view) {
-      case 0:
+      case 'buttons':
         return (
           <div styleName="control-buttons">
             <button
               type="button"
-              onClick={() => changeView(1)}>
+              onClick={() => changeView('profile-form')}>
               <Icon name="pencil" styleName="icon"/> Редактировать профиль
             </button>
 
             <button
               type="button"
-              onClick={() => changeView(2)}>
+              onClick={() => changeView('password-form')}>
               <Icon name="lock" styleName="icon"/> Изменить пароль
             </button>
 
@@ -77,22 +72,22 @@ const ProfileCard: SFC<Props> = props => {
           </div>
         )
 
-      case 1:
+      case 'profile-form':
         return (
           <div styleName="edit-profile">
             <ProfileEdit
-              avatar={avatar}
-              onSubmit={() => console.log('fired!')}
-              onCancel={() => changeView(0)}/>
+              avatar={profile.avatar}
+              onSubmit={updateProfile}
+              onCancel={() => changeView('buttons')}/>
           </div>
         )
 
-      case 2:
+      case 'password-form':
         return (
           <div styleName="change-password">
             <ChangePassword
-              onSubmit={() => console.log('fired!')}
-              onCancel={() => changeView(0)}/>
+              onSubmit={changePassword}
+              onCancel={() => changeView('buttons')}/>
           </div>
         )
     }
@@ -100,29 +95,27 @@ const ProfileCard: SFC<Props> = props => {
 
   return (
     <Popup
-      styleName="profile-card"
+      styleName={ profile.avatar ? 'profile-card' : 'profile-card-avatar-empty' }
       modalId="profile-card-popup"
       open={open}
       onClose={closeProfileCard}>
       <div styleName="top">
-        {/*{*/}
-          {/*avatar*/}
-            {/*? <img styleName="avatar" src={avatar}/>*/}
-            {/*: <div styleName="avatar-empty" style={{backgroundColor: color}}>{initials}</div>*/}
-        {/*}*/}
-
-        <img styleName="avatar" src={avatar}/>
+        {
+          profile.avatar
+            ? <img styleName="avatar" src={profile.avatar}/>
+            : <div styleName="avatar-empty" style={backgroundColor}>{initials}</div>
+        }
 
         <div styleName="company">
-          <div styleName="company-name">{companyName}</div>
-          <div styleName="company-logo">
-            <img src={companyLogo}/>
+          <div styleName="company-name">{company.legalName}</div>
+          <div styleName={ company.picture ? 'company-logo' : 'company-logo-empty' }>
+            <img src={company.picture}/>
           </div>
         </div>
 
         <div styleName="info">
-          <div styleName="full-name">{fullName}</div>
-          <div styleName="position">{position}</div>
+          <div styleName="full-name">{profile.name}</div>
+          <div styleName="position">{profile.position}</div>
         </div>
       </div>
 

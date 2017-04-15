@@ -20,6 +20,15 @@
   }
 }
 
+.profile-card-avatar-empty {
+  composes: profile-card;
+
+  &:before {
+    background-image: none;
+    background-color: rgba(0, 0, 0, .2);
+  }
+}
+
 .top {
   size: 325px;
   position: relative;
@@ -53,7 +62,7 @@
   display: inline-block;
   vertical-align: top;
   font-size: 18px/48px;
-  margin: 0 10px 0 0;
+  margin: 0 15px 0 0;
   color: #fff;
   letter-spacing: -.2px;
 }
@@ -61,12 +70,18 @@
 .company-logo {
   display: inline-block;
   background-color: #c8c8c8;
+  margin-left: -5px;
 
   & img {
     size: 48px;
     display: block;
     border-radius: 0 4px 0 0;
   }
+}
+
+.company-logo-empty {
+  composes: company-logo;
+  display: none;
 }
 
 .info {
@@ -110,6 +125,7 @@
     width: 100%;
     text-align: left;
     border-radius: 4px;
+    padding: 1px 10px;
     margin: 0 0 5px;
     font: normal 16px/30px 'Open Sans';
     letter-spacing: -.3px;
@@ -147,7 +163,7 @@
 
   & input {
     height: 40px;
-    margin: 0 0 10px;
+    margin: 0;
   }
 }
 

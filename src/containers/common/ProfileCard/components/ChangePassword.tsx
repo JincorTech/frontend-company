@@ -18,7 +18,7 @@ export type ComponentProps = {
 
 export type FormFields = {
   oldPassword: string,
-  newPassword: string
+  password: string
 }
 
 class ChangePassword extends Component<Props, {}> {
@@ -38,7 +38,7 @@ class ChangePassword extends Component<Props, {}> {
 
         <Field
           component={RenderPassword}
-          name="newPassword"
+          name="password"
           type="password"
           placeholder="Новый пароль"/>
 

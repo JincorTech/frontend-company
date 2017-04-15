@@ -9,9 +9,10 @@ export type ErrorMessages = {
 
 
 export const initialValues: FormFields = {
-  firstName: 'Lauren',
-  lastName: 'Mayberry',
-  position: 'Lead Singer'
+  avatar: '',
+  firstName: '',
+  lastName: '',
+  position: ''
 }
 
 

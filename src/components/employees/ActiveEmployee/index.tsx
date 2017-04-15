@@ -2,22 +2,17 @@ import * as React from 'react'
 import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
 
+import { getBackgroundColor, getInitials } from '../../../utils/colorFunction'
+
 import EmployeeMenu from './components/EmployeeMenu'
+
+import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/employees/employees'
 
 
 export type Props = ComponentProps & DispatchProps
 
 export type ComponentProps = {
   employee: ActiveEmployeeProps
-}
-
-export type ActiveEmployeeProps = {
-  id: string,
-  admin: boolean,
-  avatar: string,
-  email: string,
-  fullName: string,
-  position: string
 }
 
 export type DispatchProps = {
@@ -27,36 +22,27 @@ export type DispatchProps = {
 }
 
 const ActiveEmployee: SFC<Props> = props => {
-  const {
-    employee,
-    onDelete,
-    onMakeAdmin,
-    onOpenProfile
-  } = props
-
-  const {
-    id,
-    admin,
-    avatar,
-    email,
-    fullName,
-    position
-  } = employee
+  const { employee, onDelete, onMakeAdmin, onOpenProfile } = props
+  const { id, contacts, profile } = employee
+  const backgroundColor = getBackgroundColor(id)
+  const initials = getInitials(profile.name)
 
   return (
     <div styleName="employee" onClick={() => onOpenProfile(employee)}>
-      <div styleName="avatar">
-        <img src={avatar}/>
-      </div>
+      {
+        profile.avatar
+          ? <img styleName="avatar" src={profile.avatar}/>
+          : <div styleName="avatar-empty" style={backgroundColor}>{initials}</div>
+      }
 
       <div styleName="info">
         <div styleName="full-name">
-          {fullName} {admin && <span styleName="label">Администратор</span>}
+          {profile.name} {/*admin && <span styleName="label">Администратор</span>*/}
         </div>
         <div styleName="email-n-position">
           <div styleName="email-slide">
-            <div>{email}</div>
-            <div>{position}</div>
+            <div>{contacts.email}</div>
+            <div>{profile.position}</div>
           </div>
         </div>
       </div>

@@ -9,21 +9,24 @@ export type State = StateMap & ImmutableObject<StateMap>
 
 export type StateMap = {
   open: boolean,
-  bottomView: number,
+  bottomView: BottomView,
   spinner: false,
   editProfileForm: ProfileFields,
   changePasswordForm: PasswordFields
 }
 
+export type BottomView = 'buttons' | 'password-form' | 'profile-form'
+
 export type ProfileFields = {
   firstName: string,
   lastName: string,
-  position: string
+  position: string,
+  avatar: string
 }
 
 export type PasswordFields = {
   oldPassword: string,
-  newPassword: string
+  password: string
 }
 
 
@@ -44,7 +47,7 @@ export const CHANGE_PASSWORD = 'common/profileCard/CHANGE_PASSWORD'
 
 export const openProfileCard = createAction<void>(OPEN_PROFILE_CARD)
 export const closeProfileCard = createAction<void>(CLOSE_PROFILE_CARD)
-export const changeView = createAction<number>(CHANGE_VIEW)
+export const changeView = createAction<BottomView>(CHANGE_VIEW)
 export const updateProfile = createSubmitAction<ProfileFields, void>(UPDATE_PROFILE)
 export const changePassword = createSubmitAction<PasswordFields, void>(CHANGE_PASSWORD)
 
@@ -55,16 +58,17 @@ export const changePassword = createSubmitAction<PasswordFields, void>(CHANGE_PA
 
 const initialState: State = from<StateMap>({
   open: false,
-  bottomView: 0,
+  bottomView: 'buttons',
   spinner: false,
   editProfileForm: {
     firstName: '',
     lastName: '',
-    position: ''
+    position: '',
+    avatar: ''
   },
   changePasswordForm: {
     oldPassword: '',
-    newPassword: ''
+    password: ''
   }
 })
 
@@ -74,10 +78,10 @@ export default createReducer<State>({
   ),
 
   [CLOSE_PROFILE_CARD]: (state: State): State => (
-    state.merge({ open: false })
+    state.merge({ open: false, bottomView: 'buttons' })
   ),
 
-  [CHANGE_VIEW]: (state: State, { payload }: Action<number>): State => (
+  [CHANGE_VIEW]: (state: State, { payload }: Action<BottomView>): State => (
     state.merge({ bottomView: payload })
   ),
 

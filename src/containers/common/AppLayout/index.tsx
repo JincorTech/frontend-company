@@ -1,10 +1,11 @@
 import * as React from 'react'
-import { SFC } from 'react'
+import { Component } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { connect } from 'react-redux'
 
 import {
-  openSidebar, closeSidebar, StateMap as StateProps
+  openSidebar, closeSidebar, StateMap as StateProps,
+  fetchUser
 } from '../../../redux/modules/common/app'
 import { openProfileCard } from '../../../redux/modules/common/profileCard'
 
@@ -18,14 +19,17 @@ import ProfileCard from '../ProfileCard'
 /**
  * Types
  */
-export type Props = StateProps & DispatchProps
+export type Props = ComponentProps & StateProps & DispatchProps
+
+export type ComponentProps = {}
 
 export type DispatchProps = {
   openSidebar: () => void
   closeSidebar: () => void,
   openProfileCard: () => void,
   closeProfileCard: () => void,
-  changeView: () => void
+  changeView: () => void,
+  fetchUser: () => void
 }
 
 /**
@@ -43,39 +47,45 @@ const profileMock = {
 /**
  * Component
  */
-const AppLayout: SFC<Props> = (props) => {
-  const {
-    sidebarOpen,
-    children,
-    openSidebar,
-    closeSidebar,
-    openProfileCard
-  } = props
+class AppLayout extends Component<Props, StateProps> {
+  public componentDidMount(): void {
+    this.props.fetchUser()
+  }
 
-  return (
-    <div styleName="app">
-      <Sidebar open={sidebarOpen} onClose={closeSidebar}/>
+  render() {
+    const { sidebarOpen, children, openSidebar, closeSidebar, openProfileCard, user } = this.props
+    const { id, profile, contacts, company } = user
+    return (
+      <div styleName="app">
+        <Sidebar open={sidebarOpen} onClose={closeSidebar}/>
 
-      <header styleName="header">
-        <Toggle onClick={openSidebar}/>
+        <header styleName="header">
+          <Toggle onClick={openSidebar}/>
 
-        <div styleName="container">
-          <Logo styleName="logo"  to="/"/>
-          <span styleName="module-name">Profile</span>
+          <div styleName="container">
+            <Logo styleName="logo"  to="/"/>
+            <span styleName="module-name">Profile</span>
 
-          <UserAvatar styleName="pull-right" onClick={openProfileCard}/>
-        </div>
-      </header>
+            <UserAvatar
+              styleName="pull-right"
+              onClick={openProfileCard}
+              src={profile.avatar}
+              alt={profile.name}
+              id={id}
+              name={profile.name}/>
+          </div>
+        </header>
 
-      <section>
-        <div styleName="container">
-          {children}
-        </div>
-      </section>
+        <section>
+          <div styleName="container">
+            {children}
+          </div>
+        </section>
 
-      <ProfileCard profile={profileMock}/>
-    </div>
-  )
+        <ProfileCard user={user}/>
+      </div>
+    )
+  }
 }
 
 /**
@@ -85,5 +95,5 @@ const StyledComponent = CSSModules(AppLayout, require('./styles.css'))
 
 export default connect<StateProps, DispatchProps, {}>(
   state => state.common.app,
-  { openSidebar, closeSidebar, openProfileCard }
+  { openSidebar, closeSidebar, openProfileCard, fetchUser }
 )(StyledComponent)

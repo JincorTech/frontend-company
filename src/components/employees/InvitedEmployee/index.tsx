@@ -2,6 +2,8 @@ import * as React from 'react'
 import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
 
+import { InvitedEmployee as InvitedEmployeeProps } from '../../../redux/modules/employees/employees'
+
 
 export type Props = ComponentProps
 
@@ -9,14 +11,8 @@ export type ComponentProps = {
   employee: InvitedEmployeeProps
 }
 
-export type InvitedEmployeeProps = {
-  id: string,
-  email: string,
-  invitedAt: string
-}
-
 const InvitedEmployee: SFC<Props> = ({ employee }) => {
-  const { email, invitedAt } = employee
+  const { contacts, meta } = employee
 
   return (
     <div styleName="employee">
@@ -25,10 +21,10 @@ const InvitedEmployee: SFC<Props> = ({ employee }) => {
       </div>
 
       <div styleName="info">
-        <div styleName="email">{email}</div>
+        <div styleName="email">{contacts.email}</div>
       </div>
 
-      <div styleName="status">Приглашен {invitedAt}</div>
+      <div styleName="status">Приглашен {meta.invited_at}</div>
     </div>
   )
 }

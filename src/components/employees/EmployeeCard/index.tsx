@@ -2,57 +2,54 @@ import * as React from 'react'
 import { SFC, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 
-import colorFunction from '../../../utils/colorFunction'
+import { getInitials, getBackgroundColor } from '../../../utils/colorFunction'
 
 import Popup, { Props as PopupProps } from '../../common/Popup'
 
+import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/employees/employees'
+import { UserCompany as UserCompanyProps } from '../../../redux/modules/common/app'
 
-export type Props = JSX.IntrinsicAttributes & JSX.IntrinsicClassAttributes<any> & PopupProps & {
-  id: string,
-  avatar?: string,
-  fullName: string,
-  position: string,
-  companyName: string,
-  companyLogo?: string
+
+export type Props =
+  JSX.IntrinsicAttributes &
+  JSX.IntrinsicClassAttributes<any> &
+  PopupProps &
+  EmployeeCardProps &
+  EmployeeCardState
+
+export type EmployeeCardState = {
+  open: boolean,
+  employee: ActiveEmployeeProps
 }
 
-const EmployeeCard: SFC<Props> = props => {
-  const {
-    id,
-    avatar,
-    fullName,
-    position,
-    companyName,
-    companyLogo,
-    ...popupProps
-  } = props
+export type EmployeeCardProps = {
+  company: UserCompanyProps
+}
 
-  /**
-   * TODO
-   * BUG: При закрытии карточки профиля все валится.
-   */
-  // const { color, initials } = colorFunction(fullName, id)
+const EmployeeCard: SFC<Props> = ({ employee, company, ...popupProps }) => {
+  const { id, profile } = employee
+  const { legalName, picture } = company
+  const backgroundColor = getBackgroundColor(id)
+  const initials = getInitials(profile.name)
 
   return (
-    <Popup styleName="employee-card" {...popupProps}>
-      {/*{
-        avatar
-          ? <img styleName="avatar" src={avatar}/>
-          : <div styleName="avatar-empty" style={{backgroundColor: color}}>{initials}</div>
-      }*/}
-
-      <img styleName="avatar" src={avatar}/>
+    <Popup styleName={profile.avatar ? 'employee-card' : 'employee-card-empty-avatar'} {...popupProps}>
+      {
+        profile.avatar
+          ? <img styleName="avatar" src={profile.avatar}/>
+          : <div styleName="avatar-empty" style={backgroundColor}>{initials}</div>
+      }
 
       <div styleName="company">
-        <div styleName="company-name">{companyName}</div>
-        <div styleName="company-logo">
-          <img src={companyLogo}/>
+        <div styleName="company-name">{legalName}</div>
+        <div styleName={picture ? 'company-logo' : 'company-logo-empty'}>
+          <img src={picture}/>
         </div>
       </div>
 
       <div styleName="info">
-        <div styleName="full-name">{fullName}</div>
-        <div styleName="position">{position}</div>
+        <div styleName="full-name">{profile.name}</div>
+        <div styleName="position">{profile.position}</div>
       </div>
 
       <div styleName="buttons">

@@ -6,6 +6,7 @@ const { popup, overlay, close } = require('./styles.css')
 
 import Icon from '../Icon'
 
+// TODO don't forget about dat
 import { Provider } from 'react-redux'
 import store from '../../../redux/store'
 

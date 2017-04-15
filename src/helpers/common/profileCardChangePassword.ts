@@ -3,22 +3,22 @@ import { required, password as passwordValidator } from '../../utils/validators'
 
 export type ErrorMessages = {
   oldPassword?: string,
-  newPassword?: string
+  password?: string
 }
 
 
 export const initialValues: FormFields = {
-  oldPassword: '123',
-  newPassword: '123'
+  oldPassword: '',
+  password: ''
 }
 
 
 export const validate = (values: FormFields): ErrorMessages => {
-  const { oldPassword, newPassword } = values
+  const { oldPassword, password } = values
 
   const errors: ErrorMessages = {
     oldPassword: passwordValidator(oldPassword),
-    newPassword: passwordValidator(newPassword)
+    password: passwordValidator(password)
   }
 
   return errors
