@@ -20,6 +20,7 @@ export type ComponentProps = {
   modalId: string
   open?: boolean
   hideClose?: boolean
+  closeColor?: 'white' | 'black'
   onClose?: () => void
 }
 
@@ -88,17 +89,20 @@ class Popup extends Component<Props, {}> {
       open,
       onClose,
       hideClose,
+      closeColor = 'white',
       children,
       modalId,
       className,
       ...divProps
     } = this.props
 
+    const closeName = closeColor === 'black' ? 'close-popup-black' : 'close-popup'
+
     render (
       <Provider store={store}>
         <div className="portal">
           {open && <div className={overlay} onClick={onClose}>
-            {!hideClose && <Icon className={close} name="close-popup"/>}
+            {!hideClose && <Icon className={close} name={closeName}/>}
 
             <div className={classnames(popup, className)} onClick={this.handleClick} {...divProps}>
               {children}
