@@ -15,6 +15,7 @@ export type StateObj = {
   },
   confirmDelete: ConfirmPopup,
   confirmAdmin: ConfirmPopup,
+  confirmRmAdmin: ConfirmPopup,
   employeeCard: EmployeeCardState
 }
 
@@ -32,6 +33,7 @@ export type ActiveEmployee = {
   },
   profile: {
     avatar?: string,
+    role: string,
     name: string,
     position: string
   }
@@ -71,10 +73,14 @@ export const OPEN_CONFIRM_DELETE_POPUP = 'employees/employees/OPEN_CONFIRM_DELET
 export const CLOSE_CONFIRM_DELETE_POPUP = 'employees/confirmDeletePopup/CLOSE_CONFIRM_DELETE_POPUP'
 export const OPEN_CONFIRM_ADMIN_POPUP = 'employees/employees/OPEN_CONFIRM_ADMIN_POPUP'
 export const CLOSE_CONFIRM_ADMIN_POPUP = 'employees/employees/CLOSE_CONFIRM_ADMIN_POPUP'
+export const OPEN_CONFIRM_RM_ADMIN_POPUP = 'employees/employees/OPEN_CONFIRM_RM_ADMIN_POPUP'
+export const CLOSE_CONFIRM_RM_ADMIN_POPUP = 'employees/employees/CLOSE_CONFIRM_RM_ADMIN_POPUP'
 export const OPEN_EMPLOYEE_CARD = 'employees/employees/OPEN_EMPLOYEE_CARD'
 export const CLOSE_EMPLOYEE_CARD = 'employees/employees/CLOSE_EMPLOYEE_CARD'
 export const FETCH_EMPLOYEES = 'employees/employees/FETCH_EMPLOYEES'
 export const INVITE_EMPLOYEES = 'employees/employees/INVITE_EMPLOYEES'
+export const MAKE_ADMIN = 'employees/employees/MAKE_ADMIN'
+export const UNMAKE_ADMIN = 'employees/employees/UNMAKE_ADMIN'
 
 /**
  * Action creators
@@ -83,10 +89,14 @@ export const openConfirmDeletePopup = createAction<void>(OPEN_CONFIRM_DELETE_POP
 export const closeConfirmDeletePopup = createAction<void>(CLOSE_CONFIRM_DELETE_POPUP)
 export const openConfirmAdminPopup = createAction<void>(OPEN_CONFIRM_ADMIN_POPUP)
 export const closeConfirmAdminPopup = createAction<void>(CLOSE_CONFIRM_ADMIN_POPUP)
+export const openConfirmRmAdminPopup = createAction<void>(OPEN_CONFIRM_RM_ADMIN_POPUP)
+export const closeConfirmRmAdminPopup = createAction<void>(CLOSE_CONFIRM_RM_ADMIN_POPUP)
 export const openEmployeeCard = createAction<ActiveEmployee>(OPEN_EMPLOYEE_CARD)
 export const closeEmployeeCard = createAction<void>(CLOSE_EMPLOYEE_CARD)
 export const fetchEmployees = createAsyncAction<void, Employee[]>(FETCH_EMPLOYEES)
 export const inviteEmployees = createAsyncAction<void, void>(INVITE_EMPLOYEES)
+export const makeAdmin = createAsyncAction<void, void>(MAKE_ADMIN)
+export const unmakeAdmin = createAsyncAction<void, void>(UNMAKE_ADMIN)
 
 /**
  * Reducer
@@ -104,6 +114,10 @@ const initialState: State = from<StateObj>({
     open: false,
     userId: ''
   },
+  confirmRmAdmin: {
+    open: false,
+    userId: ''
+  },
   employeeCard: {
     open: false,
     employee: {
@@ -117,6 +131,7 @@ const initialState: State = from<StateObj>({
         status: ''
       },
       profile: {
+        role: '',
         avatar: '',
         name: '',
         position: ''
@@ -134,12 +149,20 @@ export default createReducer<State>({
     state.merge({ confirmDelete: { open: false } })
   ),
 
-  [OPEN_CONFIRM_ADMIN_POPUP]: (state: State): State => (
-    state.merge({ confirmAdmin: { open: true } })
+  [OPEN_CONFIRM_ADMIN_POPUP]: (state: State, { payload }: Action<string>): State => (
+    state.merge({ confirmAdmin: { open: true, userId: payload } })
   ),
 
   [CLOSE_CONFIRM_ADMIN_POPUP]: (state: State): State => (
-    state.merge({ confirmAdmin: { open: false } })
+    state.merge({ confirmAdmin: { open: false, userId: '' } })
+  ),
+
+  [OPEN_CONFIRM_RM_ADMIN_POPUP]: (state: State, { payload }: Action<string>): State => (
+    state.merge({ confirmRmAdmin: { open: true, userId: payload } })
+  ),
+
+  [CLOSE_CONFIRM_RM_ADMIN_POPUP]: (state: State): State => (
+    state.merge({ confirmRmAdmin: { open: false, userId: '' } })
   ),
 
   [OPEN_EMPLOYEE_CARD]: (state: State, { payload }: Action<ActiveEmployee>): State => (

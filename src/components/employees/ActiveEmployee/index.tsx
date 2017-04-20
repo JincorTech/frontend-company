@@ -17,15 +17,17 @@ export type ComponentProps = {
 
 export type DispatchProps = {
   onDelete: (e) => void,
-  onMakeAdmin: (e) => void,
+  onMakeAdmin: (e, id: string) => void,
+  onUnmakeAdmin: (e, id: string) => void,
   onOpenProfile: (employee: ActiveEmployeeProps) => void
 }
 
 const ActiveEmployee: SFC<Props> = props => {
-  const { employee, onDelete, onMakeAdmin, onOpenProfile } = props
+  const { employee, onDelete, onMakeAdmin, onUnmakeAdmin, onOpenProfile } = props
   const { id, contacts, profile } = employee
   const backgroundColor = getBackgroundColor(id)
   const initials = getInitials(profile.name)
+  console.log(employee)
 
   return (
     <div styleName="employee" onClick={() => onOpenProfile(employee)}>
@@ -37,7 +39,7 @@ const ActiveEmployee: SFC<Props> = props => {
 
       <div styleName="info">
         <div styleName="full-name">
-          {profile.name} {/*admin && <span styleName="label">Администратор</span>*/}
+          {profile.name} {profile.role === 'company-admin' && <span styleName="label">Администратор</span>}
         </div>
         <div styleName="email-n-position">
           <div styleName="email-slide">
@@ -48,11 +50,17 @@ const ActiveEmployee: SFC<Props> = props => {
       </div>
 
       <EmployeeMenu>
-        <button
-          type="button"
-          styleName="menu-button"
-          onClick={e => onMakeAdmin(e)}>
-          Назначить администратором</button>
+        {profile.role === 'company-admin'
+          ? <button
+            type="button"
+            styleName="menu-button"
+            onClick={e => onUnmakeAdmin(e, employee.id)}>
+            Лишить прав администратора</button>
+          : <button
+            type="button"
+            styleName="menu-button"
+            onClick={e => onMakeAdmin(e, employee.id)}>
+            Назначить администратором</button>}
 
         <button
           type="button"

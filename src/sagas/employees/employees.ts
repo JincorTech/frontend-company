@@ -1,11 +1,15 @@
 import { SagaIterator } from 'redux-saga'
 import { takeLatest, call, put, fork, select } from 'redux-saga/effects'
 import { Action } from '../../utils/actions'
-import { get, post } from '../../utils/api'
+import { get, post, put as putFunc } from '../../utils/api'
 
 import { isEmail } from '../../helpers/common/emailTextarea'
 
-import { fetchEmployees, inviteEmployees } from '../../redux/modules/employees/employees'
+import {
+  fetchEmployees, inviteEmployees,
+  makeAdmin, unmakeAdmin,
+  closeConfirmAdminPopup, closeConfirmRmAdminPopup
+} from '../../redux/modules/employees/employees'
 import { resetTextarea } from '../../redux/modules/common/emailTextarea'
 
 
@@ -24,6 +28,7 @@ function* fetchEmployeesSaga(): SagaIterator {
     fetchEmployeesIterator
   )
 }
+
 
 const getTextareaState = state => state.common.emailTextarea
 
@@ -48,9 +53,54 @@ export function* inviteEmployeesSaga(): SagaIterator {
   )
 }
 
+
+function* makeAdminIterator({ payload }: Action<string>): SagaIterator {
+  const body = { id: payload, value: true }
+
+  try {
+    yield call(putFunc, '/employee/admin', body)
+    yield put(makeAdmin.success())
+    yield put(closeConfirmAdminPopup())
+    yield put(fetchEmployees())
+  } catch (e) {
+    yield put(makeAdmin.failure())
+  }
+}
+
+function* makeAdminSaga(): SagaIterator {
+  yield takeLatest(
+    makeAdmin.REQUEST,
+    makeAdminIterator
+  )
+}
+
+
+function* unmakeAdminIterator({ payload }: Action<string>): SagaIterator {
+  const body = { id: payload, value: false }
+
+  try {
+    yield call(putFunc, '/employee/admin', body)
+    yield put(unmakeAdmin.success())
+    yield put(closeConfirmRmAdminPopup())
+    yield put(fetchEmployees())
+  } catch (e) {
+    yield put(unmakeAdmin.failure())
+  }
+}
+
+function* unmakeAdminSaga(): SagaIterator {
+  yield takeLatest(
+    unmakeAdmin.REQUEST,
+    unmakeAdminIterator
+  )
+}
+
+
 export default function* (): SagaIterator {
   yield [
     fork(fetchEmployeesSaga),
-    fork(inviteEmployeesSaga)
+    fork(inviteEmployeesSaga),
+    fork(makeAdminSaga),
+    fork(unmakeAdminSaga)
   ]
 }
