@@ -63,3 +63,49 @@
     margin-bottom: 10px;
   }
 }
+
+
+/**
+* Render activity type
+*/
+.activity-list {}
+
+.render-activity {
+  position: relative
+}
+
+.activity-remove {
+  position: absolute 10px -75px * *;
+  font: normal 16px/22px 'Open Sans';
+  color: #d0011b !important;
+  letter-spacing: -0.2px;
+}
+
+.error {
+  position: absolute 0px * * 100%;
+  width: 210px;
+  padding-left: 15px;
+}
+
+
+/*Add link*/
+.add-input {
+  display: inline-block;
+  font-size: 16px/26px;
+  letter-spacing: -0.2px;
+  color: #0070e0;
+  cursor: pointer;
+
+  &:hover .link {
+    text-decoration: underline;
+  }
+}
+
+.add-icon {
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.add-link {
+  vertical-align: middle;
+}

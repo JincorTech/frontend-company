@@ -5,13 +5,14 @@ import { WrappedFieldProps } from 'redux-form'
 import { connect } from 'react-redux'
 
 import FieldError from '../../../../components/common/FieldError'
-import ActivityTypes from './ActivityTypes'
+import ActivityTypes from '../../../common/ActivityTypes'
 
 /**
  * Render activity field
  */
 export type Props = WrappedFieldProps<any> & {
   open: boolean
+  index: number
   placeholder: string
   openPopup: () => void
   closePopup: () => void
@@ -20,12 +21,10 @@ export type Props = WrappedFieldProps<any> & {
 
 export const RenderActivity: SFC<Props> = (props) => {
   const {
-    open,
     placeholder,
-    openPopup,
-    closePopup,
     input,
     meta,
+    index,
     handleRemove
   } = props
 
@@ -37,13 +36,10 @@ export const RenderActivity: SFC<Props> = (props) => {
     <div styleName="render-activity">
       <FieldError meta={meta}>
         <ActivityTypes
-          open={open}
-          invalid={hasError}
-          value={value}
-          placeholder={placeholder}
-          onChange={onChange}
-          openPopup={openPopup}
-          closePopup={closePopup}/>
+          title=""
+          modalId={`profile-edit-at-${index}`}
+          activityValue={value}
+          placeholder={placeholder}/>
       </FieldError>
 
       <a styleName="activity-remove" onClick={handleRemove}>удалить</a>

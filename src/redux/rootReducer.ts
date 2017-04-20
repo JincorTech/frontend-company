@@ -8,6 +8,7 @@ import emailTextarea from './modules/common/emailTextarea'
 import alert from './modules/common/alert'
 
 import select from './modules/common/select'
+import activityTypes from './modules/common/activityTypes'
 
 import signUp from './modules/auth/signUp'
 import signIn from './modules/auth/signIn'
@@ -15,7 +16,6 @@ import restorePassword from './modules/auth/restorePassword'
 import createCompany from './modules/auth/createCompany'
 
 import profile from './modules/profile/profile'
-import activityTypes from './modules/profile/activityTypes'
 import profileEdit from './modules/profile/profileEdit'
 
 import employees from './modules/employees/employees'
@@ -31,7 +31,8 @@ export default combineReducers({
     profileCard,
     emailTextarea,
     alert,
-    select
+    select,
+    activityTypes
   }),
 
   auth: combineReducers({
@@ -42,7 +43,7 @@ export default combineReducers({
   }),
 
   profile: combineReducers({
-    activityTypes,
+    // activityTypes,
     profileEdit,
     profile
   }),

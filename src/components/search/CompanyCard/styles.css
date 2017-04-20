@@ -1,0 +1,110 @@
+@use postcss-short;
+
+.card {
+  size: 258px 400px;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  border: 1px solid #dbdfe4;
+  border-radius: 4px;
+  margin: 20px 15px;
+  padding: 40px 20px 30px;
+  transition: .1s linear box-shadow;
+
+  &:hover {
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+
+    & .bookmark {
+      opacity: 1;
+    }
+  }
+}
+
+.bookmark {
+  opacity: 0;
+  transition: .1s linear opacity;
+  background: transparent;
+  position: absolute 10px 10px * *;
+  padding: 0;
+  cursor: pointer;
+
+  & .bookmark-icon {
+    size: 29px 30px;
+    background-size: contain;
+  }
+}
+
+.logo {
+  size: 75px;
+  margin: 0 auto;
+  border-radius: 4px;
+
+  & > img {
+    width: 100%;
+    border-radius: 4px;
+  }
+}
+
+.name {
+  font: normal 22px 'Open Sans';
+  letter-spacing: -.4px;
+  color: #222;
+  text-align: center;
+  margin: 12px 0 0 0;
+}
+
+.address {
+  font: normal 13px 'Open Sans';
+  letter-spacing: -.4px;
+  color: #9da0a4;
+  text-align: center;
+  margin: 4px 0 0 0;
+}
+
+.button {
+  text-align: center;
+  margin: 13px 0 0 0;
+
+  & > .btn {
+    font: normal 13px 'Open Sans';
+    size: 120px 32px;
+    padding: 1px 0 4px;
+  }
+}
+
+.activity {
+  font: normal 14px 'Open Sans';
+  letter-spacing: -.2px;
+  color: #000;
+  line-height: 20px;
+  text-align: center;
+  position: absolute * * 102px -14px;
+  width: 100%;
+
+  & > .icon {
+    margin: 0 8px 0 0;
+    position: relative;
+    top: 5px;
+  }
+}
+
+.socials {
+  text-align: center;
+  position: absolute * * 25px 0;
+  width: 100%;
+
+  & a {
+    display: inline-block;
+    margin: 0 7px;
+  }
+
+  & .soc-icon {
+    size: 28px;
+    background-size: contain;
+    transition: .1s linear transform;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}

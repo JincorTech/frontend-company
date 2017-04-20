@@ -98,7 +98,7 @@ class FullscreenPopup extends Component<Props, {}> {
       <Provider store={store}>
         <div className="portal">
           {open && <div className={overlay} onClick={onClose}>
-            {!hideClose && <Icon className={close} name='close-popup-black'/>}
+            {!hideClose && <Icon className={close} name="close-popup-black"/>}
 
             <div className={classnames(popup, className)} onClick={this.handleClick} {...divProps}>
               {children}

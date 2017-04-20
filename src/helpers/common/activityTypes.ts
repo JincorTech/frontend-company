@@ -1,13 +1,18 @@
 /**
  * Types
  */
-import { StateObj, ActivityMap, ActivityNode } from '../../redux/modules/profile/activityTypes'
+import { ActivityMap, ActivityNode } from '../../redux/modules/common/activityTypes'
 
 export type ActivityType = {
   id: string
   name: string
   code: string
   children?: ActivityType[]
+}
+
+export type StateObj = {
+  rootNodes: string[]
+  activityMap: ActivityMap
 }
 
 /**
@@ -74,8 +79,8 @@ export function addLeaf(activity: ActivityType, parentId: string, hash: Activity
 /**
  * Close activity node and show siblings
  */
-export function closeNodeSelector(activityId: string, state: StateObj): ActivityMap {
-  const { activityMap, rootNodes } = state
+export function closeNodeSelector(atId: string, activityId: string, state: StateObj): ActivityMap {
+  const { activityMap, rootNodes } = state[atId]
   const { parentId } = activityMap[activityId]
 
   const childrenIds = parentId
@@ -96,8 +101,8 @@ export function closeNodeSelector(activityId: string, state: StateObj): Activity
 /**
  * Open activity node and hide siblings
  */
-export function openNodeSelector(activityId: string, state: StateObj): ActivityMap {
-  const { activityMap, rootNodes } = state
+export function openNodeSelector(atId: string, activityId: string, state: StateObj): ActivityMap {
+  const { activityMap, rootNodes } = state[atId]
   const { parentId } = activityMap[activityId]
 
   const childrenIds = parentId

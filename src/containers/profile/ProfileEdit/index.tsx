@@ -4,7 +4,6 @@ import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FieldArray, FormProps } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { requestActivities } from '../../../redux/modules/profile/activityTypes'
 import { setEditable } from '../../../redux/modules/profile/profile'
 
 import InfoItem from '../../../components/profile/InfoItem'
@@ -13,7 +12,7 @@ import RenderSelect from '../../../containers/form/RenderSelect'
 import RenderTextarea from '../../../components/form/RenderTextarea'
 import RenderImageUpload from '../../../components/form/RenderImageUpload'
 import RenderLinkInputs from '../../../components/profile/RenderLinkInputs'
-import RenderActivities from '../../form/RenderActivities'
+import RenderActivities from './components/RenderActivities'
 import { SocialLinkProps } from '../../../components/profile/SocialLink'
 
 
@@ -57,7 +56,6 @@ export type Option = {
 }
 
 export type DispatchProps = {
-  requestActivities: () => void
   setEditable: (value: boolean) => void
 }
 
@@ -65,10 +63,6 @@ export type DispatchProps = {
  * Component
  */
 class ProfileEdit extends Component<Props, {}> {
-  public componentDidMount(): void {
-    this.props.requestActivities()
-  }
-
   public render(): JSX.Element {
     const { setEditable } = this.props
 
@@ -162,5 +156,5 @@ const StyledComponent = CSSModules(ProfileEdit, require('./styles.css'))
 const FormComponent = reduxForm<FormFields, ComponentProps>({ form: 'ProfileEdit' })(StyledComponent)
 export default connect<{}, DispatchProps, ReduxFormProps>(
   (state) => ({}),
-  { requestActivities, setEditable }
+  { setEditable }
 )(FormComponent)

@@ -1,0 +1,9 @@
+.search {
+  font: normal 48px 'Open Sans';
+  color: #222;
+  height: 65px;
+  border: none;
+  border-bottom: 2px solid #c6c6c6;
+  border-radius: 0;
+  padding: 2px 30px;
+}
