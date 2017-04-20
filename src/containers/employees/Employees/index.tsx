@@ -10,12 +10,12 @@ import InvitedEmployee from '../../../components/employees/InvitedEmployee'
 import DeletedEmployee from '../../../components/employees/DeletedEmployee'
 import ConfirmPopup from '../../../components/common/ConfirmPopup'
 import EmployeeCard from '../../../components/employees/EmployeeCard'
-import ProfileCard from '../../../components/employees/ProfileCard'
 
 import {
   openConfirmDeletePopup, closeConfirmDeletePopup,
   openConfirmAdminPopup, closeConfirmAdminPopup,
-  openEmployeeCard, closeEmployeeCard
+  openEmployeeCard, closeEmployeeCard,
+  fetchEmployees
 } from '../../../redux/modules/employees/employees'
 
 import {
@@ -24,19 +24,21 @@ import {
   deletedEmployeesSelector
 } from '../../../selectors/employees/employees'
 
-import {
-  ConfirmPopup as ConfirmPopupProps,
-  EmployeeCard as EmployeeCardProps
-} from '../../../redux/modules/employees/employees'
-
-import { ActiveEmployeeProps } from '../../../components/employees/ActiveEmployee'
-import { InvitedEmployeeProps } from '../../../components/employees/InvitedEmployee'
+import { ConfirmPopup as ConfirmPopupProps } from '../../../redux/modules/employees/employees'
+import { Props as EmployeeCardProps } from '../../../components/employees/EmployeeCard'
+import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/employees/employees'
+import { InvitedEmployee as InvitedEmployeeProps } from '../../../redux/modules/employees/employees'
 import { DeletedEmployeeProps } from '../../../components/employees/DeletedEmployee'
+import { UserCompany as UserCompanyProps } from '../../../redux/modules/common/app'
 
 
 export type Props = DispatchProps & ComponentProps & StateProps
 
 export type ComponentProps = {
+  employees: {
+    spinner: boolean
+  },
+  company: UserCompanyProps,
   activeEmployees: ActiveEmployeeProps[],
   invitedEmployees: InvitedEmployeeProps[],
   deletedEmployees: DeletedEmployeeProps[],
@@ -53,7 +55,9 @@ export type DispatchProps = {
   openConfirmAdminPopup: () => void,
   closeConfirmAdminPopup: () => void,
   openEmployeeCard: (employee) => void,
-  closeEmployeeCard: () => void
+  closeEmployeeCard: () => void,
+  fetchEmployees: () => void,
+  inviteEmployees: () => void
 }
 
 
@@ -64,6 +68,10 @@ class Employees extends Component<Props, StateProps> {
     this.onDeleteEmployee = this.onDeleteEmployee.bind(this)
     this.onMakeAdmin = this.onMakeAdmin.bind(this)
     this.onOpenProfile = this.onOpenProfile.bind(this)
+  }
+
+  public componentDidMount(): void {
+    this.props.fetchEmployees()
   }
 
   private onDeleteEmployee(e): void {
@@ -82,9 +90,11 @@ class Employees extends Component<Props, StateProps> {
 
   public render(): JSX.Element {
     const {
+      employees,
       activeEmployees,
       invitedEmployees,
       deletedEmployees,
+      company,
       confirmDelete,
       confirmAdmin,
       employeeCard,
@@ -95,10 +105,7 @@ class Employees extends Component<Props, StateProps> {
 
     return (
       <div styleName="container">
-        <InviteEmployeeForm
-          textareaValid={true}
-          spinner={false}
-          inviteEmployee={() => { console.log('invite employees submit') }}/>
+        <InviteEmployeeForm spinner={employees.spinner}/>
 
         <Scrollbar height="calc(100vh - 227px)">
           {activeEmployees.length > 0 &&
@@ -115,9 +122,9 @@ class Employees extends Component<Props, StateProps> {
 
           {invitedEmployees.length > 0 &&
             <div styleName="list">
-              {invitedEmployees.map(employee => (
+              {invitedEmployees.map((employee, i) => (
                 <InvitedEmployee
-                  key={`invited-employee-${employee.id}`}
+                  key={`invited-employee-${i}`}
                   employee={employee}/>))}
             </div>
           }
@@ -148,22 +155,8 @@ class Employees extends Component<Props, StateProps> {
           modalId="employee-card"
           open={employeeCard.open}
           onClose={closeEmployeeCard}
-          id={employeeCard.id}
-          companyName={employeeCard.companyName}
-          companyLogo={employeeCard.companyLogo}
-          avatar={employeeCard.avatar}
-          fullName={employeeCard.fullName}
-          position={employeeCard.position}/>
-
-        <ProfileCard
-          // modalId="profile-card"
-          open={false}
-          id="uuid4"
-          companyName="CHVRCHES"
-          companyLogo="https://pbs.twimg.com/profile_images/2227292956/twitter_logo_normal.png"
-          avatar="http://imgur.com/QKHJ3Zs.png"
-          fullName="Lauren"
-          position="Singer"/>
+          company={company}
+          employee={employeeCard.employee}/>
       </div>
     )
   }
@@ -172,15 +165,17 @@ class Employees extends Component<Props, StateProps> {
 const StyledComponent = CSSModules(Employees, require('./styles.css'))
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
-  ({ employees: { employees }}) => ({
-    ...employees,
-    activeEmployees: activeEmployeesSelector(employees),
-    invitedEmployees: invitedEmployeesSelector(employees),
-    deletedEmployees: deletedEmployeesSelector(employees)
+  state => ({
+    ...state.employees.employees,
+    company: state.common.app.user.company,
+    activeEmployees: activeEmployeesSelector(state.employees.employees),
+    invitedEmployees: invitedEmployeesSelector(state.employees.employees),
+    deletedEmployees: deletedEmployeesSelector(state.employees.employees)
   }),
   {
     openConfirmDeletePopup, closeConfirmDeletePopup,
     openConfirmAdminPopup, closeConfirmAdminPopup,
-    openEmployeeCard, closeEmployeeCard
+    openEmployeeCard, closeEmployeeCard,
+    fetchEmployees
   }
 )(StyledComponent)

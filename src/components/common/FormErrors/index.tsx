@@ -16,7 +16,7 @@ export type Props = HTMLProps<HTMLDivElement> & {
 const FormErrors: SFC<Props> = ({ errors }) => (
   <div styleName="form-errors">
     <ul>
-      {Object.keys(errors).map((fieldName) => (
+      {errors && Object.keys(errors).map((fieldName) => (
         <li key={fieldName}>{errors[fieldName]}</li>
       ))}
     </ul>

@@ -10,6 +10,8 @@ export type Props = HTMLProps<HTMLDivElement> & {
   alt?: string
   width: number
   height: number
+  camPosition?: string
+  overlay: JSX.Element
   onImgSelect?: (value: string) => void
 }
 
@@ -92,18 +94,23 @@ class ImageUpload extends Component<Props, {}> {
    * Render component
    */
   public render(): JSX.Element {
-    const { src, alt, ...divProps } = this.props
+    const { src, alt, width, height, overlay, camPosition = 'center', ...divProps } = this.props
 
     return (
-      <div styleName="image-upload" {...divProps}>
-        <div styleName="logo">
+      <div styleName="image-upload" style={{ width, height }} {...divProps}>
+        <div styleName="logo" style={{ width, height }}>
           <img
             src={src}
             alt={alt}/>
         </div>
 
         <div styleName="overlay" onClick={this.handleClick}>
-          <div styleName="camera"/>
+          {
+            overlay ||
+            <div styleName="blackout">
+              <div styleName="camera"/>
+            </div>
+          }
         </div>
 
         <input

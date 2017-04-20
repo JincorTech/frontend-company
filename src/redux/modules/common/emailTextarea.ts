@@ -28,6 +28,7 @@ export const UNSELECT_EMAIL       = 'common/emailTextarea/UNSELECT_EMAIL'
 export const REMOVE_EMAIL         = 'common/emailTextarea/REMOVE_EMAIL'
 export const HANDLE_EMAIL_REMOVE  = 'common/emailTextarea/HANDLE_EMAIL_REMOVE'
 export const SET_VALIDATE_STATE   = 'common/emailTextarea/SET_VALIDATE_STATE'
+export const RESET_TEXTAREA       = 'common/emailTextarea/RESET_TEXTAREA'
 
 /**
  * Action Creators
@@ -43,6 +44,7 @@ export const unselectEmail      = createAction<void>(UNSELECT_EMAIL)
 export const removeEmail        = createAction<number>(REMOVE_EMAIL)
 export const handleEmailRemove  = createAction<string>(HANDLE_EMAIL_REMOVE)
 export const setValidateState   = createAction<boolean>(SET_VALIDATE_STATE)
+export const resetTextarea      = createAction<void>(RESET_TEXTAREA)
 
 /**
  * Reducer
@@ -95,5 +97,9 @@ export default createReducer<State>({
 
   [SET_VALIDATE_STATE]: (state: State, { payload }: Action<boolean>): State => (
     state.merge({ valid: payload })
+  ),
+
+  [RESET_TEXTAREA]: (state: State): State => (
+    state.merge({ ...initialState })
   )
 }, initialState)

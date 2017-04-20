@@ -20,10 +20,20 @@
   }
 }
 
+.profile-card-avatar-empty {
+  composes: profile-card;
+
+  &:before {
+    background-image: none;
+    background-color: rgba(0, 0, 0, .2);
+  }
+}
+
 .top {
   size: 325px;
   position: relative;
   border-radius: 4px 4px 0 0;
+  overflow: hidden;
 }
 
 .avatar {
@@ -43,16 +53,6 @@
   color: rgba(255, 255, 255, .25);
 }
 
-.change-avatar {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  background-color: transparent;
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
-}
-
 .company {
   height: 48px;
   text-align: right;
@@ -62,7 +62,7 @@
   display: inline-block;
   vertical-align: top;
   font-size: 18px/48px;
-  margin: 0 10px 0 0;
+  margin: 0 15px 0 0;
   color: #fff;
   letter-spacing: -.2px;
 }
@@ -70,12 +70,18 @@
 .company-logo {
   display: inline-block;
   background-color: #c8c8c8;
+  margin-left: -5px;
 
   & img {
     size: 48px;
     display: block;
     border-radius: 0 4px 0 0;
   }
+}
+
+.company-logo-empty {
+  composes: company-logo;
+  display: none;
 }
 
 .info {
@@ -106,7 +112,6 @@
   size: 325px 245px;
   position: relative;
   background-color: #fff;
-  overflow: hidden;
   border-radius: 0 0 4px 4px;
 }
 
@@ -120,6 +125,7 @@
     width: 100%;
     text-align: left;
     border-radius: 4px;
+    padding: 1px 10px;
     margin: 0 0 5px;
     font: normal 16px/30px 'Open Sans';
     letter-spacing: -.3px;
@@ -138,13 +144,17 @@
   }
 }
 
-.edit-profile,
-.change-password {
+.bottom-view {
   padding: 15px 30px 30px;
   size: 100%;
   background-color: #fff;
-  position: absolute 0 * * -100%;
-  transition: .2s linear left;
+  position: absolute 0 * * 0;
+  transition: .2s linear opacity;
+}
+
+.edit-profile,
+.change-password {
+  composes: bottom-view;
 }
 
 .profile-bottom-form {
@@ -153,8 +163,16 @@
 
   & input {
     height: 40px;
-    margin: 0 0 10px;
+    margin: 0;
   }
+}
+
+.avatar-upload {
+  size: 325px;
+  position: absolute;
+  top: -340px;
+  left: -30px;
+  z-index: 1;
 }
 
 .form-buttons {

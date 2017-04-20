@@ -1,60 +1,99 @@
 import * as React from 'react'
-import { SFC } from 'react'
+import { Component } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { connect } from 'react-redux'
 
-import { openSidebar, closeSidebar, StateMap as StateProps } from '../../../redux/modules/common/app'
+import {
+  openSidebar, closeSidebar, StateMap as StateProps,
+  fetchUser
+} from '../../../redux/modules/common/app'
+import { openProfileCard } from '../../../redux/modules/common/profileCard'
 
 import Logo from '../../../components/common/Logo'
 import Toggle from './components/Toggle'
 import UserAvatar from './components/UserAvatar'
 import Sidebar from './components/Sidebar'
+import ProfileCard from '../ProfileCard'
 
 
 /**
  * Types
  */
-export type Props = StateProps & DispatchProps
+export type Props = ComponentProps & StateProps & DispatchProps
+
+export type ComponentProps = {}
 
 export type DispatchProps = {
   openSidebar: () => void
-  closeSidebar: () => void
+  closeSidebar: () => void,
+  openProfileCard: () => void,
+  closeProfileCard: () => void,
+  changeView: () => void,
+  fetchUser: () => void
+}
+
+/**
+ * Data mock
+ */
+const profileMock = {
+  id: 'uuid4',
+  avatar: 'http://imgur.com/QKHJ3Zs.png',
+  fullName: 'Lauren Mayberry',
+  position: 'Singer',
+  companyName: 'CHVRCHES',
+  companyLogo: 'https://pbs.twimg.com/profile_images/2227292956/twitter_logo_normal.png'
 }
 
 /**
  * Component
  */
-const AppLayout: SFC<Props> = (props) => {
-  const { sidebarOpen, children, openSidebar, closeSidebar } = props
-  return (
-    <div styleName="app">
-      <Sidebar open={sidebarOpen} onClose={closeSidebar}/>
+class AppLayout extends Component<Props, StateProps> {
+  public componentDidMount(): void {
+    this.props.fetchUser()
+  }
 
-      <header styleName="header">
-        <Toggle onClick={openSidebar}/>
+  render() {
+    const { sidebarOpen, children, openSidebar, closeSidebar, openProfileCard, user } = this.props
+    const { id, profile, contacts, company } = user
+    return (
+      <div styleName="app">
+        <Sidebar open={sidebarOpen} onClose={closeSidebar}/>
 
-        <div styleName="container">
-          <Logo styleName="logo"  to="/"/>
-          <span styleName="module-name">Profile</span>
+        <header styleName="header">
+          <Toggle onClick={openSidebar}/>
 
-          <UserAvatar styleName="pull-right"/>
-        </div>
-      </header>
+          <div styleName="container">
+            <Logo styleName="logo"  to="/"/>
+            <span styleName="module-name">Profile</span>
 
-      <section>
-        <div styleName="container">
-          {children}
-        </div>
-      </section>
-    </div>
-  )
+            <UserAvatar
+              styleName="pull-right"
+              onClick={openProfileCard}
+              src={profile.avatar}
+              alt={profile.name}
+              id={id}
+              name={profile.name}/>
+          </div>
+        </header>
+
+        <section>
+          <div styleName="container">
+            {children}
+          </div>
+        </section>
+
+        <ProfileCard user={user}/>
+      </div>
+    )
+  }
 }
 
 /**
  * Decorators
  */
 const StyledComponent = CSSModules(AppLayout, require('./styles.css'))
+
 export default connect<StateProps, DispatchProps, {}>(
-  (state) => state.common.app,
-  { openSidebar, closeSidebar }
+  state => state.common.app,
+  { openSidebar, closeSidebar, openProfileCard, fetchUser }
 )(StyledComponent)

@@ -1,19 +1,22 @@
 import * as React from 'react'
 import { Component } from 'react'
+import { connect } from 'react-redux'
 import * as CSSModules from 'react-css-modules'
+
+import { inviteEmployees } from '../../../../redux/modules/employees/employees'
 
 import Button from '../../../../components/common/Button'
 import EmailTextarea from '../../../common/EmailTextarea'
 
 
-export type Props = ComponentProps & DispatchProps & StateProps
+export type Props = DispatchProps & StateProps & ComponentProps
 
 export type ComponentProps = {
   spinner: boolean
 }
 
 export type DispatchProps = {
-  inviteEmployee: () => void
+  inviteEmployees: () => void
 }
 
 export type StateProps = {
@@ -22,10 +25,10 @@ export type StateProps = {
 
 class InviteEmployeeForm extends Component<Props, {}> {
   public render() {
-    const { inviteEmployee, textareaValid, spinner } = this.props
+    const { inviteEmployees, textareaValid, spinner } = this.props
 
     return (
-      <form styleName="invite-employee-form">
+      <div styleName="invite-employee-form">
         <div styleName="invite-input">
           <EmailTextarea placeholder="Email через запятую"/>
         </div>
@@ -35,12 +38,17 @@ class InviteEmployeeForm extends Component<Props, {}> {
           type="button"
           spinner={spinner}
           disabled={!textareaValid}
-          onClick={inviteEmployee}>
+          onClick={inviteEmployees}>
           Пригласить
         </Button>
-      </form>
+      </div>
     )
   }
 }
 
-export default CSSModules(InviteEmployeeForm, require('../styles.css'))
+const StyledComponent = CSSModules(InviteEmployeeForm, require('../styles.css'))
+
+export default connect<StateProps, DispatchProps, ComponentProps>(
+  (state) => ({ textareaValid : state.common.emailTextarea.valid }),
+  { inviteEmployees }
+)(StyledComponent)

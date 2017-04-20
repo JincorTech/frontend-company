@@ -65,6 +65,12 @@
   background: svg-load('svg/close-popup.svg');
 }
 
+.close-popup-black {
+  composes: icon;
+  size: size('svg/close-popup-black.svg');
+  background: svg-load('svg/close-popup-black.svg');
+}
+
 .sort-down {
   composes: icon;
   size: size('svg/sort-down.svg');
@@ -117,4 +123,91 @@
   composes: icon;
   size: size('svg/pencil.svg');
   background: svg-load('svg/pencil.svg');
+}
+
+.bookmark {
+  composes: icon;
+  size: size('svg/bookmark.svg');
+  background: svg-load('svg/bookmark.svg');
+
+  &:hover {
+    background: svg-load('svg/bookmark-border.svg');
+  }
+}
+
+.bookmark-filled {
+  composes: icon;
+  size: size('svg/bookmark-filled.svg');
+  background: svg-load('svg/bookmark-filled.svg');
+
+  &:hover {
+    background: svg-load('svg/bookmark-border.svg');
+  }
+}
+
+.company-type {
+  composes: icon;
+  size: size('svg/company-type.svg');
+  background: svg-load('svg/company-type.svg');
+}
+
+/* social icons */
+.social-facebook {
+  composes: icon;
+  size: size('svg/social-facebook.svg');
+  background: svg-load('svg/social-facebook.svg');
+}
+
+.social-googleplus {
+  composes: icon;
+  size: size('svg/social-googleplus.svg');
+  background: svg-load('svg/social-googleplus.svg');
+}
+
+.social-instagram {
+  composes: icon;
+  size: size('svg/social-instagram.svg');
+  background: svg-load('svg/social-instagram.svg');
+}
+
+.social-linkedin {
+  composes: icon;
+  size: size('svg/social-linkedin.svg');
+  background: svg-load('svg/social-linkedin.svg');
+}
+
+.social-pinterest {
+  composes: icon;
+  size: size('svg/social-pinterest.svg');
+  background: svg-load('svg/social-pinterest.svg');
+}
+
+.social-tumblr {
+  composes: icon;
+  size: size('svg/social-tumblr.svg');
+  background: svg-load('svg/social-tumblr.svg');
+}
+
+.social-twitter {
+  composes: icon;
+  size: size('svg/social-twitter.svg');
+  background: svg-load('svg/social-twitter.svg');
+}
+
+.social-url {
+  composes: icon;
+  size: size('svg/social-url.svg');
+  background: svg-load('svg/social-url.svg');
+}
+
+.social-vk {
+  composes: icon;
+  size: size('svg/social-vk.svg');
+  background: svg-load('svg/social-vk.svg');
+}
+
+.social-youtube {
+  composes: icon;
+  size: size('svg/social-youtube.svg');
+  background: svg-load('svg/social-youtube.svg');
 }
