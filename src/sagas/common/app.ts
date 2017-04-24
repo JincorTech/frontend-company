@@ -4,7 +4,7 @@ import { get } from '../../utils/api'
 import { removeToken } from '../../utils/auth'
 import { push } from 'react-router-redux'
 
-import { fetchUser, logout, LOGOUT } from '../../redux/modules/common/app'
+import { fetchUser, logout, LOGOUT } from '../../redux/modules/app/app'
 
 
 function* fetchUserIterator(): SagaIterator {

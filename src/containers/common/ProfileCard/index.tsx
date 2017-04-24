@@ -17,8 +17,8 @@ import {
   changePassword,
   updateProfile
 } from '../../../redux/modules/common/profileCard'
-import { logout } from '../../../redux/modules/common/app'
-import { User as UserProps } from '../../../redux/modules/common/app'
+import { logout } from '../../../redux/modules/app/app'
+import { User as UserProps } from '../../../redux/modules/app/app'
 import { BottomView as BottomViewProps } from '../../../redux/modules/common/profileCard'
 
 

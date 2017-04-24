@@ -1,14 +1,15 @@
 import { SagaIterator } from 'redux-saga'
 import { takeLatest, call, put, fork, select } from 'redux-saga/effects'
 import { Action } from '../../utils/actions'
-import { get, post, put as putFunc } from '../../utils/api'
+import { get, post, put as putFunc, del } from '../../utils/api'
 
 import { isEmail } from '../../helpers/common/emailTextarea'
 
 import {
   fetchEmployees, inviteEmployees,
   makeAdmin, unmakeAdmin,
-  closeConfirmAdminPopup, closeConfirmRmAdminPopup
+  deleteEmployee,
+  closeConfirmAdminPopup, closeConfirmRmAdminPopup, closeConfirmDeletePopup
 } from '../../redux/modules/employees/employees'
 import { resetTextarea } from '../../redux/modules/common/emailTextarea'
 
@@ -63,7 +64,7 @@ function* makeAdminIterator({ payload }: Action<string>): SagaIterator {
     yield put(closeConfirmAdminPopup())
     yield put(fetchEmployees())
   } catch (e) {
-    yield put(makeAdmin.failure())
+    yield put(makeAdmin.failure(e))
   }
 }
 
@@ -96,11 +97,31 @@ function* unmakeAdminSaga(): SagaIterator {
 }
 
 
+function* deleteEmployeeIterator({ payload }: Action<string>): SagaIterator {
+  try {
+    yield call(del, `/employee/${payload}`)
+    yield put(deleteEmployee.success())
+    yield put(closeConfirmDeletePopup())
+    yield put(fetchEmployees())
+  } catch (e) {
+    yield put(deleteEmployee.failure(e))
+  }
+}
+
+function* deleteEmployeeSaga(): SagaIterator {
+  yield takeLatest(
+    deleteEmployee.REQUEST,
+    deleteEmployeeIterator
+  )
+}
+
+
 export default function* (): SagaIterator {
   yield [
     fork(fetchEmployeesSaga),
     fork(inviteEmployeesSaga),
     fork(makeAdminSaga),
-    fork(unmakeAdminSaga)
+    fork(unmakeAdminSaga),
+    fork(deleteEmployeeSaga)
   ]
 }

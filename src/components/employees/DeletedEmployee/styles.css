@@ -1,3 +1,5 @@
+@use postcss-short;
+
 .employee {
   position: relative;
   margin: 5px 0;
@@ -22,14 +24,8 @@
   display: inline-block;
   vertical-align: top;
   margin: 0 10px 0 0;
-  background-color: #d8d8d8;
   border-radius: 4px;
-
-  & > img {
-    display: block;
-    border-radius: 4px;
-    user-select: none;
-  }
+  user-select: none;
 }
 
 .info {

@@ -5,7 +5,7 @@ import * as CSSModules from 'react-css-modules'
 import { openCompanyCard, closeCompanyCard, flipCompanyCard } from '../../../redux/modules/common/companyCard'
 
 import { SocialLinkProps } from '../../../components/profile/SocialLink'
-import Popup from '../../../components/common/Popup'
+import Popup from '../../../components/common/FullscreenPopup'
 import Button from '../../../components/common/Button'
 import Icon from '../../../components/common/Icon'
 
@@ -48,7 +48,6 @@ const CompanyCard: SFC<Props> = props => {
     <Popup
       styleName="company-card"
       modalId="comapny-card"
-      closeColor="black"
       open={open}
       onClose={closeCompanyCard}>
 

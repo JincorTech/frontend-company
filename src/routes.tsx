@@ -8,7 +8,7 @@ import SignUp from './containers/auth/SignUp'
 import SignIn from './containers/auth/SignIn'
 import RestorePassword from './containers/auth/RestorePassword'
 
-import AppLayout from './containers/common/AppLayout'
+import AppLayout from './containers/app/AppLayout'
 import Profile from './containers/profile/Profile'
 import Employees from './containers/employees/Employees'
 

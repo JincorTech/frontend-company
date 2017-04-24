@@ -28,7 +28,7 @@ export type ActiveEmployee = {
     phone?: string
   },
   meta: {
-    registered_at: string,
+    registeredAt: string,
     status: 'active' | ''
   },
   profile: {
@@ -52,11 +52,17 @@ export type InvitedEmployee = {
 
 export type DeletedEmployee = {
   id: string,
+  profile: {
+    name: string,
+    position: string,
+    role: string,
+    avatar?: string
+  },
   contacts: {
     email: string
   },
   meta: {
-    deleted_at: string
+    deletedAt: string
     status: 'deleted'
   }
 }
@@ -81,6 +87,7 @@ export const FETCH_EMPLOYEES = 'employees/employees/FETCH_EMPLOYEES'
 export const INVITE_EMPLOYEES = 'employees/employees/INVITE_EMPLOYEES'
 export const MAKE_ADMIN = 'employees/employees/MAKE_ADMIN'
 export const UNMAKE_ADMIN = 'employees/employees/UNMAKE_ADMIN'
+export const DELETE_EMPLOYEE = 'employees/employees/DELETE_EMPLOYEE'
 
 /**
  * Action creators
@@ -97,6 +104,7 @@ export const fetchEmployees = createAsyncAction<void, Employee[]>(FETCH_EMPLOYEE
 export const inviteEmployees = createAsyncAction<void, void>(INVITE_EMPLOYEES)
 export const makeAdmin = createAsyncAction<void, void>(MAKE_ADMIN)
 export const unmakeAdmin = createAsyncAction<void, void>(UNMAKE_ADMIN)
+export const deleteEmployee = createAsyncAction<void, void>(DELETE_EMPLOYEE)
 
 /**
  * Reducer
@@ -127,7 +135,7 @@ const initialState: State = from<StateObj>({
         phone: ''
       },
       meta: {
-        registered_at: '',
+        registeredAt: '',
         status: ''
       },
       profile: {
@@ -141,8 +149,8 @@ const initialState: State = from<StateObj>({
 })
 
 export default createReducer<State>({
-  [OPEN_CONFIRM_DELETE_POPUP]: (state: State): State => (
-    state.merge({ confirmDelete: { open: true } })
+  [OPEN_CONFIRM_DELETE_POPUP]: (state: State, { payload }: Action<string>): State => (
+    state.merge({ confirmDelete: { open: true, userId: payload } })
   ),
 
   [CLOSE_CONFIRM_DELETE_POPUP]: (state: State): State => (

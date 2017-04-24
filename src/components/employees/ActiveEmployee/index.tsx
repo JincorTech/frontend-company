@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { SFC } from 'react'
+import { SFC, MouseEvent } from 'react'
 import * as CSSModules from 'react-css-modules'
 
 import { getBackgroundColor, getInitials } from '../../../utils/colorFunction'
@@ -16,9 +16,9 @@ export type ComponentProps = {
 }
 
 export type DispatchProps = {
-  onDelete: (e) => void,
-  onMakeAdmin: (e, id: string) => void,
-  onUnmakeAdmin: (e, id: string) => void,
+  onDelete: (e: MouseEvent<HTMLButtonElement>, id: string) => void,
+  onMakeAdmin: (e: MouseEvent<HTMLButtonElement>, id: string) => void,
+  onUnmakeAdmin: (e: MouseEvent<HTMLButtonElement>, id: string) => void,
   onOpenProfile: (employee: ActiveEmployeeProps) => void
 }
 
@@ -27,7 +27,6 @@ const ActiveEmployee: SFC<Props> = props => {
   const { id, contacts, profile } = employee
   const backgroundColor = getBackgroundColor(id)
   const initials = getInitials(profile.name)
-  console.log(employee)
 
   return (
     <div styleName="employee" onClick={() => onOpenProfile(employee)}>
@@ -71,7 +70,7 @@ const ActiveEmployee: SFC<Props> = props => {
         <button
           type="button"
           styleName="menu-button-danger"
-          onClick={e => onDelete(e)}>
+          onClick={e => onDelete(e, employee.id)}>
           Удалить пользователя</button>
       </EmployeeMenu>
     </div>

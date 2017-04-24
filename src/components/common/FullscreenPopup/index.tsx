@@ -26,7 +26,7 @@ export type ComponentProps = {
 /**
  * Component
  */
-class Popup extends Component<Props, {}> {
+class FullscreenPopup extends Component<Props, {}> {
   private portal: HTMLDivElement
 
   /**
@@ -98,7 +98,7 @@ class Popup extends Component<Props, {}> {
       <Provider store={store}>
         <div className="portal">
           {open && <div className={overlay} onClick={onClose}>
-            {!hideClose && <Icon className={close} name='close-popup'/>}
+            {!hideClose && <Icon className={close} name='close-popup-black'/>}
 
             <div className={classnames(popup, className)} onClick={this.handleClick} {...divProps}>
               {children}
@@ -118,4 +118,4 @@ class Popup extends Component<Props, {}> {
   }
 }
 
-export default Popup 
+export default FullscreenPopup

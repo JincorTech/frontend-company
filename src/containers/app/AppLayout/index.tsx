@@ -6,14 +6,14 @@ import { connect } from 'react-redux'
 import {
   openSidebar, closeSidebar, StateMap as StateProps,
   fetchUser
-} from '../../../redux/modules/common/app'
+} from '../../../redux/modules/app/app'
 import { openProfileCard } from '../../../redux/modules/common/profileCard'
 
 import Logo from '../../../components/common/Logo'
 import Toggle from './components/Toggle'
 import UserAvatar from './components/UserAvatar'
 import Sidebar from './components/Sidebar'
-import ProfileCard from '../ProfileCard'
+import ProfileCard from '../../common/ProfileCard'
 
 
 /**
