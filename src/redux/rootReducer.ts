@@ -1,7 +1,7 @@
 import { combineReducers, routerReducer } from 'redux-seamless-immutable'
 import { reducer as formReducer } from 'redux-form'
 
-import app from './modules/common/app'
+import app from './modules/app/app'
 import companyCard from './modules/common/companyCard'
 import profileCard from './modules/common/profileCard'
 import emailTextarea from './modules/common/emailTextarea'

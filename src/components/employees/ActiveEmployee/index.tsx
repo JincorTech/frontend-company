@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { SFC } from 'react'
+import { SFC, MouseEvent } from 'react'
 import * as CSSModules from 'react-css-modules'
 
 import { getBackgroundColor, getInitials } from '../../../utils/colorFunction'
@@ -16,13 +16,14 @@ export type ComponentProps = {
 }
 
 export type DispatchProps = {
-  onDelete: (e) => void,
-  onMakeAdmin: (e) => void,
+  onDelete: (e: MouseEvent<HTMLButtonElement>, id: string) => void,
+  onMakeAdmin: (e: MouseEvent<HTMLButtonElement>, id: string) => void,
+  onUnmakeAdmin: (e: MouseEvent<HTMLButtonElement>, id: string) => void,
   onOpenProfile: (employee: ActiveEmployeeProps) => void
 }
 
 const ActiveEmployee: SFC<Props> = props => {
-  const { employee, onDelete, onMakeAdmin, onOpenProfile } = props
+  const { employee, onDelete, onMakeAdmin, onUnmakeAdmin, onOpenProfile } = props
   const { id, contacts, profile } = employee
   const backgroundColor = getBackgroundColor(id)
   const initials = getInitials(profile.name)
@@ -37,7 +38,7 @@ const ActiveEmployee: SFC<Props> = props => {
 
       <div styleName="info">
         <div styleName="full-name">
-          {profile.name} {/*admin && <span styleName="label">Администратор</span>*/}
+          {profile.name} {profile.role === 'company-admin' && <span styleName="label">Администратор</span>}
         </div>
         <div styleName="email-n-position">
           <div styleName="email-slide">
@@ -48,11 +49,17 @@ const ActiveEmployee: SFC<Props> = props => {
       </div>
 
       <EmployeeMenu>
-        <button
-          type="button"
-          styleName="menu-button"
-          onClick={e => onMakeAdmin(e)}>
-          Назначить администратором</button>
+        {profile.role === 'company-admin'
+          ? <button
+            type="button"
+            styleName="menu-button"
+            onClick={e => onUnmakeAdmin(e, employee.id)}>
+            Лишить прав администратора</button>
+          : <button
+            type="button"
+            styleName="menu-button"
+            onClick={e => onMakeAdmin(e, employee.id)}>
+            Назначить администратором</button>}
 
         <button
           type="button"
@@ -63,7 +70,7 @@ const ActiveEmployee: SFC<Props> = props => {
         <button
           type="button"
           styleName="menu-button-danger"
-          onClick={e => onDelete(e)}>
+          onClick={e => onDelete(e, employee.id)}>
           Удалить пользователя</button>
       </EmployeeMenu>
     </div>

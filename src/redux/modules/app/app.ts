@@ -55,6 +55,7 @@ export const SET_AUTH_STATE = 'common/app/SET_AUTH_STATE'
 export const OPEN_SIDEBAR   = 'common/app/OPEN_SIDEBAR'
 export const CLOSE_SIDEBAR  = 'common/app/CLOSE_SIDEBAR'
 export const FETCH_USER     = 'common/app/FETCH_USER'
+export const LOGOUT         = 'common/app/LOGOUT'
 
 
 /**
@@ -65,6 +66,7 @@ export const setAuthState = createAction<boolean>(SET_AUTH_STATE)
 export const openSidebar  = createAction<void>(OPEN_SIDEBAR)
 export const closeSidebar = createAction<void>(CLOSE_SIDEBAR)
 export const fetchUser    = createAsyncAction<void, User>(FETCH_USER)
+export const logout       = createAction<void>(LOGOUT)
 
 
 /**

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Component } from 'react'
+import { Component, MouseEvent } from 'react'
 import { connect } from 'react-redux'
 import * as CSSModules from 'react-css-modules'
 
@@ -14,8 +14,9 @@ import EmployeeCard from '../../../components/employees/EmployeeCard'
 import {
   openConfirmDeletePopup, closeConfirmDeletePopup,
   openConfirmAdminPopup, closeConfirmAdminPopup,
+  openConfirmRmAdminPopup, closeConfirmRmAdminPopup,
   openEmployeeCard, closeEmployeeCard,
-  fetchEmployees
+  fetchEmployees, makeAdmin, unmakeAdmin, deleteEmployee
 } from '../../../redux/modules/employees/employees'
 
 import {
@@ -26,10 +27,12 @@ import {
 
 import { ConfirmPopup as ConfirmPopupProps } from '../../../redux/modules/employees/employees'
 import { Props as EmployeeCardProps } from '../../../components/employees/EmployeeCard'
-import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/employees/employees'
-import { InvitedEmployee as InvitedEmployeeProps } from '../../../redux/modules/employees/employees'
-import { DeletedEmployeeProps } from '../../../components/employees/DeletedEmployee'
-import { UserCompany as UserCompanyProps } from '../../../redux/modules/common/app'
+import {
+  ActiveEmployee as ActiveEmployeeProps,
+  InvitedEmployee as InvitedEmployeeProps,
+  DeletedEmployee as DeletedEmployeeProps
+} from '../../../redux/modules/employees/employees'
+import { UserCompany as UserCompanyProps } from '../../../redux/modules/app/app'
 
 
 export type Props = DispatchProps & ComponentProps & StateProps
@@ -44,20 +47,26 @@ export type ComponentProps = {
   deletedEmployees: DeletedEmployeeProps[],
   confirmDelete: ConfirmPopupProps,
   confirmAdmin: ConfirmPopupProps,
+  confirmRmAdmin: ConfirmPopupProps,
   employeeCard: EmployeeCardProps
 }
 
 export type StateProps = {}
 
 export type DispatchProps = {
-  openConfirmDeletePopup: () => void,
+  openConfirmDeletePopup: (id: string) => void,
   closeConfirmDeletePopup: () => void,
-  openConfirmAdminPopup: () => void,
+  openConfirmAdminPopup: (id: string) => void,
   closeConfirmAdminPopup: () => void,
-  openEmployeeCard: (employee) => void,
+  openConfirmRmAdminPopup: (id: string) => void,
+  closeConfirmRmAdminPopup: () => void,
+  openEmployeeCard: (employee: ActiveEmployeeProps) => void,
   closeEmployeeCard: () => void,
   fetchEmployees: () => void,
-  inviteEmployees: () => void
+  inviteEmployees: () => void,
+  makeAdmin: () => void,
+  unmakeAdmin: () => void,
+  deleteEmployee: () => void
 }
 
 
@@ -67,6 +76,7 @@ class Employees extends Component<Props, StateProps> {
 
     this.onDeleteEmployee = this.onDeleteEmployee.bind(this)
     this.onMakeAdmin = this.onMakeAdmin.bind(this)
+    this.onUnmakeAdmin = this.onUnmakeAdmin.bind(this)
     this.onOpenProfile = this.onOpenProfile.bind(this)
   }
 
@@ -74,17 +84,22 @@ class Employees extends Component<Props, StateProps> {
     this.props.fetchEmployees()
   }
 
-  private onDeleteEmployee(e): void {
-    this.props.openConfirmDeletePopup()
+  private onDeleteEmployee(e: MouseEvent<HTMLButtonElement>, id: string): void {
+    this.props.openConfirmDeletePopup(id)
     e.stopPropagation()
   }
 
-  private onMakeAdmin(e): void {
-    this.props.openConfirmAdminPopup()
+  private onMakeAdmin(e: MouseEvent<HTMLButtonElement>, id: string): void {
+    this.props.openConfirmAdminPopup(id)
     e.stopPropagation()
   }
 
-  private onOpenProfile(employee): void {
+  private onUnmakeAdmin(e: MouseEvent<HTMLButtonElement>, id: string): void {
+    this.props.openConfirmRmAdminPopup(id)
+    e.stopPropagation()
+  }
+
+  private onOpenProfile(employee: ActiveEmployeeProps): void {
     this.props.openEmployeeCard(employee)
   }
 
@@ -97,11 +112,16 @@ class Employees extends Component<Props, StateProps> {
       company,
       confirmDelete,
       confirmAdmin,
+      confirmRmAdmin,
       employeeCard,
       closeConfirmDeletePopup,
       closeConfirmAdminPopup,
-      closeEmployeeCard
-    }: Props = this.props
+      closeConfirmRmAdminPopup,
+      closeEmployeeCard,
+      makeAdmin,
+      unmakeAdmin,
+      deleteEmployee
+    } = this.props
 
     return (
       <div styleName="container">
@@ -115,6 +135,7 @@ class Employees extends Component<Props, StateProps> {
                   key={`active-employee-${employee.id}`}
                   onDelete={this.onDeleteEmployee}
                   onMakeAdmin={this.onMakeAdmin}
+                  onUnmakeAdmin={this.onUnmakeAdmin}
                   onOpenProfile={this.onOpenProfile}
                   employee={employee}/>))}
             </div>
@@ -122,9 +143,9 @@ class Employees extends Component<Props, StateProps> {
 
           {invitedEmployees.length > 0 &&
             <div styleName="list">
-              {invitedEmployees.map((employee, i) => (
+              {invitedEmployees.map(employee => (
                 <InvitedEmployee
-                  key={`invited-employee-${i}`}
+                  key={`invited-employee-${employee.id}`}
                   employee={employee}/>))}
             </div>
           }
@@ -141,15 +162,27 @@ class Employees extends Component<Props, StateProps> {
 
         <ConfirmPopup
           modalId="remove-employee"
+          userId={confirmDelete.userId}
           open={confirmDelete.open}
           onClose={closeConfirmDeletePopup}
+          onConfirm={deleteEmployee}
           title="Вы уверены, что хотите удалить этого сотрудника?"/>
 
         <ConfirmPopup
           modalId="make-admin"
+          userId={confirmAdmin.userId}
           open={confirmAdmin.open}
           onClose={closeConfirmAdminPopup}
+          onConfirm={makeAdmin}
           title="Вы уверены, что хотите назначить этого сотрудника администратором?"/>
+
+        <ConfirmPopup
+          modalId="unmake-admin"
+          userId={confirmRmAdmin.userId}
+          open={confirmRmAdmin.open}
+          onClose={closeConfirmRmAdminPopup}
+          onConfirm={unmakeAdmin}
+          title="Вы уверены, что хотите лишить данного пользователя прав администратора?"/>
 
         <EmployeeCard
           modalId="employee-card"
@@ -175,7 +208,8 @@ export default connect<StateProps, DispatchProps, ComponentProps>(
   {
     openConfirmDeletePopup, closeConfirmDeletePopup,
     openConfirmAdminPopup, closeConfirmAdminPopup,
+    openConfirmRmAdminPopup, closeConfirmRmAdminPopup,
     openEmployeeCard, closeEmployeeCard,
-    fetchEmployees
+    fetchEmployees, makeAdmin, unmakeAdmin, deleteEmployee
   }
 )(StyledComponent)

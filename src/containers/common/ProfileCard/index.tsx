@@ -17,7 +17,8 @@ import {
   changePassword,
   updateProfile
 } from '../../../redux/modules/common/profileCard'
-import { User as UserProps } from '../../../redux/modules/common/app'
+import { logout } from '../../../redux/modules/app/app'
+import { User as UserProps } from '../../../redux/modules/app/app'
 import { BottomView as BottomViewProps } from '../../../redux/modules/common/profileCard'
 
 
@@ -40,11 +41,12 @@ export type StateProps = {
 export type DispatchProps = {
   openProfileCard: () => void,
   closeProfileCard: () => void,
-  changeView: (view: BottomViewProps) => void
+  changeView: (view: BottomViewProps) => void,
+  logout: () => void
 }
 
 const ProfileCard: SFC<Props> = props => {
-  const { user, open, bottomView, changeView, closeProfileCard } = props
+  const { user, open, bottomView, changeView, closeProfileCard, logout } = props
   const { id, profile, company } = user
   const backgroundColor = getBackgroundColor(id)
   const initials = getInitials(profile.name)
@@ -66,7 +68,9 @@ const ProfileCard: SFC<Props> = props => {
               <Icon name="lock" styleName="icon"/> Изменить пароль
             </button>
 
-            <button type="button">
+            <button
+              type="button"
+              onClick={() => logout()}>
               <Icon name="logout" styleName="icon"/> Выйти
             </button>
           </div>
@@ -134,5 +138,5 @@ const StyledComponent = CSSModules(ProfileCard, require('./styles.css'))
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   state => state.common.profileCard,
-  { openProfileCard, closeProfileCard, changeView }
+  { openProfileCard, closeProfileCard, changeView, logout }
 )(StyledComponent)
