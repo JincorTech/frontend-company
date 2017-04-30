@@ -7,14 +7,15 @@ import Spinner from '../Spinner'
 
 type ButtonProps = HTMLProps<HTMLButtonElement> & {
   spinner?: boolean
+  bStyle?: 'default' | 'outline'
 }
 
 const Button: SFC<ButtonProps> = (props) => {
-  const {spinner, disabled, children, ...btnProps} = props
+  const {spinner, disabled, children, bStyle = 'default', ...btnProps} = props
 
   return (
     <button
-      styleName={spinner ? 'loaded' : 'default'}
+      styleName={spinner ? `${bStyle}-loaded` : bStyle}
       disabled={spinner || disabled}
       {...btnProps}>
       {spinner ? <Spinner /> : children}

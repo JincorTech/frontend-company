@@ -2,18 +2,20 @@ import * as React from 'react'
 import { SFC } from 'react'
 import { connect } from 'react-redux'
 
-import { openNode, closeNode, selectValue, ActivityMap } from '../../../../redux/modules/profile/activityTypes'
+import { ActivityMap } from '../../../../redux/modules/common/activityTypes'
 
 import ActivityLeaf from './ActivityLeaf'
 import ActivityNode from './ActivityNode'
 
-/**
- * Types
- */
+
 export type Props = ComponentProps & StateProps & DispatchProps
 
 export type ComponentProps = {
   activityId: string
+  modalId: string
+  openNode: (activityId: string) => void
+  closeNode: (activityId: string) => void
+  selectValue: (activityId: string) => void
 }
 
 export type StateProps = {
@@ -21,15 +23,10 @@ export type StateProps = {
 }
 
 export type DispatchProps = {
-  openNode: (activityId: string) => void
-  closeNode: (activityId: string) => void
-  selectValue: (activityId: string) => void
   onSelect: (option: { value: string, name: string }) => void
 }
 
-/**
- * Component
- */
+
 const ActivityType: SFC<Props> = (props) => {
   const {
     activityId,
@@ -37,27 +34,28 @@ const ActivityType: SFC<Props> = (props) => {
     selectValue,
     onSelect,
     openNode,
-    closeNode
+    closeNode,
+    modalId
   } = props
   const activity = activityMap[activityId]
 
   return activity.type === 'node'
     ? <ActivityNode
-        openNode={openNode}
-        closeNode={closeNode}
-        {...activity}/>
+      openNode={openNode}
+      closeNode={closeNode}
+      selectValue={selectValue}
+      modalId={modalId}
+      {...activity}/>
     : <ActivityLeaf
-        selectValue={selectValue}
-        onSelect={onSelect}
-        {...activity}/>
+      selectValue={selectValue}
+      onSelect={onSelect}
+      modalId={modalId}
+      {...activity}/>
 }
 
-/**
- * Decorators
- */
+
 export default connect<StateProps, DispatchProps, ComponentProps>(
-  (state) => ({
-    activityMap: state.profile.activityTypes.activityMap
-  }),
-  { openNode, closeNode, selectValue }
+  ({ common: { activityTypes }}, { modalId }) => ({
+    activityMap: activityTypes[modalId].activityMap
+  })
 )(ActivityType)

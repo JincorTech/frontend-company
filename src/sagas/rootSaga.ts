@@ -8,18 +8,18 @@ import signUpSaga from './auth/signUp'
 import signInSaga from './auth/signIn'
 import restorePasswordSaga from './auth/restorePassword'
 import createCompanySaga from './auth/createCompany'
-import activityTypeSaga from './profile/activityTypes'
 import profileSaga from './profile/profile'
 import selectSaga from './common/select'
 import employeesSaga from './employees/employees'
 import profileCardSaga from './common/profileCard'
+import activityTypesSaga from './common/activityTypes'
 
 
 export default function* (): SagaIterator {
   yield [
     fork(appSaga),
     fork(formActionSaga),
-    fork(activityTypeSaga),
+    fork(activityTypesSaga),
     fork(signInSaga),
     fork(signUpSaga),
     fork(restorePasswordSaga),

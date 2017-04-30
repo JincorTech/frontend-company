@@ -1,0 +1,21 @@
+.search {
+  width: 965px;
+  margin: 40px auto 50px;
+}
+
+.filters {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.filter {
+  display: inline-block;
+}
+
+.select {
+  color: red;
+}
+
+.result {
+  margin: -20px -16px;
+}

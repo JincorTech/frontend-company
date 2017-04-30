@@ -10,10 +10,10 @@ import {
   openActivityPopup,
   closeActivityPopup,
   ActivityField
-} from '../../../redux/modules/profile/profileEdit'
+} from '../../../../redux/modules/profile/profileEdit'
 
-import AddInput from './components/AddInput'
-import RenderActivity from './components/RenderActivity'
+import AddInput from './AddInput'
+import RenderActivity from './RenderActivity'
 
 
 /**
@@ -40,11 +40,8 @@ export type DispatchProps = {
 const RenderActivities: SFC<ActivitiesProps> = (props) => {
   const {
     fields,
-    activityFields,
     addActivityField,
     removeActivityField,
-    openActivityPopup,
-    closeActivityPopup
   } = props
 
   const handleAdd = (): void => {
@@ -64,10 +61,8 @@ const RenderActivities: SFC<ActivitiesProps> = (props) => {
       {fields.map((field, i) => (
         <Field
           key={i}
+          index={i}
           name={field}
-          open={activityFields[i].visible}
-          closePopup={closeActivityPopup}
-          openPopup={openActivityPopup}
           component={RenderActivity}
           placeholder={i > 0 ? 'Дополнительная сфера деятельности' : 'Oсновная сфера деятельности'}
           handleRemove={() => handleRemove(i)}/>
@@ -80,7 +75,7 @@ const RenderActivities: SFC<ActivitiesProps> = (props) => {
 /**
  * Decorator
  */
-const StyledComponent = CSSModules(RenderActivities, require('./styles.css'))
+const StyledComponent = CSSModules(RenderActivities, require('../styles.css'))
 export default connect<StateProps, DispatchProps, WrappedFieldArrayProps<Option>>(
   (state) => ({
     activityFields: state.profile.profileEdit.activityFields

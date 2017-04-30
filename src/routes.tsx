@@ -11,6 +11,7 @@ import RestorePassword from './containers/auth/RestorePassword'
 import AppLayout from './containers/app/AppLayout'
 import Profile from './containers/profile/Profile'
 import Employees from './containers/employees/Employees'
+import Search from './containers/search/Search'
 
 
 const UserIsAuthenticated = UserAuthWrapper({
@@ -35,6 +36,7 @@ export default (
     <Route path="app" component={AppLayout}>
       <Route path="profile" component={Profile}/>
       <Route path="employees" component={Employees}/>
+      <Route path="search" component={Search}/>
     </Route>
 
     <Redirect from="*" to="/auth/signin" />

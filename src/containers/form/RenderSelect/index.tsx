@@ -15,7 +15,7 @@ export type Props = SelectProps & WrappedFieldProps<any>
  * Props
  */
 const RenderSelect: SFC<Props> = (props) => {
-  const { title, placeholder, input, meta, options, modalId, filter } = props
+  const { title, placeholder, input, meta, options, modalId, filter, Button } = props
 
   return (
     <FieldError meta={meta}>
@@ -24,6 +24,7 @@ const RenderSelect: SFC<Props> = (props) => {
         filter={filter}
         title={placeholder}
         options={options}
+        Button={Button}
         optionValue={input.value}
         onChange={input.onChange}
         onBlur={input.onBlur}

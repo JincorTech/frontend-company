@@ -98,7 +98,7 @@ class Popup extends Component<Props, {}> {
       <Provider store={store}>
         <div className="portal">
           {open && <div className={overlay} onClick={onClose}>
-            {!hideClose && <Icon className={close} name='close-popup'/>}
+            {!hideClose && <Icon className={close} name="close-popup"/>}
 
             <div className={classnames(popup, className)} onClick={this.handleClick} {...divProps}>
               {children}
