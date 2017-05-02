@@ -6,7 +6,7 @@ import { getInitials, getBackgroundColor } from '../../../utils/colorFunction'
 
 import Popup, { Props as PopupProps } from '../../common/Popup'
 
-import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/employees/employees'
+import { EmployeeCard as EmployeeCardState } from '../../../redux/modules/employees/employees'
 import { UserCompany as UserCompanyProps } from '../../../redux/modules/app/appLayout'
 
 
@@ -16,11 +16,6 @@ export type Props =
   PopupProps &
   EmployeeCardProps &
   EmployeeCardState
-
-export type EmployeeCardState = {
-  open: boolean,
-  employee: ActiveEmployeeProps
-}
 
 export type EmployeeCardProps = {
   company: UserCompanyProps

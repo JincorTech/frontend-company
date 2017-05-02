@@ -1,4 +1,4 @@
-import { FormFields } from '../../containers/common/ProfileCard/components/ChangePassword'
+import { FormFields } from '../../containers/app/ProfileCard/components/ChangePassword'
 import createValidatation from '../../utils/validate'
 import { required, password } from '../../utils/validators'
 

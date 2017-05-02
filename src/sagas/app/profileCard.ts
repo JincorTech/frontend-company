@@ -1,25 +1,31 @@
 import { SagaIterator } from 'redux-saga'
-import { takeLatest, call, put, select, fork } from 'redux-saga/effects'
+import { takeLatest, takeEvery, call, put, select, fork } from 'redux-saga/effects'
 import { Action } from '../../utils/actions'
 
 import { put as putFunc } from '../../utils/api'
-import { changePassword, updateProfile, changeView } from '../../redux/modules/common/profileCard'
+import {
+  changePassword, updateProfile,
+  changeView, closeProfileCard,
+  LOGOUT
+} from '../../redux/modules/app/profileCard'
 import { fetchUser } from '../../redux/modules/app/appLayout'
+import { logout } from '../../redux/modules/app/app'
 
-import { PasswordFields, ProfileFields } from '../../redux/modules/common/profileCard'
+import { PasswordFields, ProfileFields } from '../../redux/modules/app/profileCard'
 
 
-const getCompanyState = state => state.common.app.user.company
+const getCompanyState = state => state.app.appLayout.user.company
 
 function* changePasswordIterator({ payload }: Action<PasswordFields>): SagaIterator {
   const { id } = yield select(getCompanyState)
   const body = { companyId: id, ...payload }
 
   try {
-    const { data } = yield call(putFunc, '/employee/changePassword', body)
-    yield call(console.log, 'psswrd changed! YAY!')
+    yield call(putFunc, '/employee/changePassword', body)
+    yield put(changePassword.success())
+    yield put(changeView('buttons'))
   } catch (e) {
-    yield call(console.log, 'pssword change FAIL!')
+    yield put(changePassword.failure())
   }
 }
 
@@ -35,11 +41,11 @@ function* updateProfileIterator({ payload }: Action<ProfileFields>): SagaIterato
   const body = { profile: { ...payload } }
 
   try {
-    const { data } = yield call(putFunc, '/employee/me', body)
+    yield call(putFunc, '/employee/me', body)
     yield put(fetchUser())
     yield put(changeView('buttons'))
   } catch (e) {
-    yield call(console.log, 'profile update FAIL!')
+    yield put(fetchUser.failure(e))
   }
 }
 
@@ -51,9 +57,23 @@ function* updateProfileSaga(): SagaIterator {
 }
 
 
+function* logoutIterator(): SagaIterator {
+  yield put(logout())
+  yield put(closeProfileCard())
+}
+
+function* logoutSaga(): SagaIterator {
+  yield takeEvery(
+    LOGOUT,
+    logoutIterator
+  )
+}
+
+
 export default function* (): SagaIterator {
   yield [
     fork(changePasswordSaga),
-    fork(updateProfileSaga)
+    fork(updateProfileSaga),
+    fork(logoutSaga)
   ]
 }

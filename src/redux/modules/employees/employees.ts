@@ -1,49 +1,49 @@
 import { createReducer, createAction, Action, createAsyncAction } from '../../../utils/actions'
 import { from, ImmutableObject } from 'seamless-immutable'
 
-import { EmployeeCardState } from '../../../components/employees/EmployeeCard'
-
 /**
  * Types
  */
 export type State = StateObj & ImmutableObject<StateObj>
 
 export type StateObj = {
-  employees: {
-    spinner: boolean,
-    list: Employee[]
-  },
-  confirmDelete: ConfirmPopup,
-  confirmAdmin: ConfirmPopup,
-  confirmRmAdmin: ConfirmPopup,
-  employeeCard: EmployeeCardState
+  employees: Employees
+  confirmDelete: ConfirmPopup
+  confirmAdmin: ConfirmPopup
+  confirmRmAdmin: ConfirmPopup
+  employeeCard: EmployeeCard
+}
+
+export type Employees = {
+  spinner: boolean
+  list: Employee[]
 }
 
 export type Employee = ActiveEmployee | InvitedEmployee | DeletedEmployee
 
 export type ActiveEmployee = {
-  id: string,
+  id: string
   contacts: {
-    email: string,
+    email: string
     phone?: string
-  },
+  }
   meta: {
-    registeredAt: string,
+    registeredAt: string
     status: 'active' | ''
-  },
+  }
   profile: {
-    avatar?: string,
-    role: string,
-    name: string,
+    avatar?: string
+    role: string
+    name: string
     position: string
   }
 }
 
 export type InvitedEmployee = {
-  id: string,
+  id: string
   contacts: {
     email: string
-  },
+  }
   meta: {
     invited_at: string
     status: 'invited'
@@ -51,16 +51,16 @@ export type InvitedEmployee = {
 }
 
 export type DeletedEmployee = {
-  id: string,
+  id: string
   profile: {
-    name: string,
-    position: string,
-    role: string,
+    name: string
+    position: string
+    role: string
     avatar?: string
-  },
+  }
   contacts: {
     email: string
-  },
+  }
   meta: {
     deletedAt: string
     status: 'deleted'
@@ -68,9 +68,15 @@ export type DeletedEmployee = {
 }
 
 export type ConfirmPopup = {
-  open: boolean,
+  open: boolean
   userId: string
 }
+
+export type EmployeeCard = {
+  open: boolean
+  employee: ActiveEmployee
+}
+
 
 /**
  * Action types

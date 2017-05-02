@@ -3,9 +3,9 @@ import { reducer as formReducer } from 'redux-form'
 
 import app from './modules/app/app'
 import appLayout from './modules/app/appLayout'
+import profileCard from './modules/app/profileCard'
 
 import companyCard from './modules/common/companyCard'
-import profileCard from './modules/common/profileCard'
 import emailTextarea from './modules/common/emailTextarea'
 import alert from './modules/common/alert'
 
@@ -29,12 +29,12 @@ export default combineReducers({
 
   app: combineReducers({
     app,
-    appLayout
+    appLayout,
+    profileCard
   }),
 
   common: combineReducers({
     companyCard,
-    profileCard,
     emailTextarea,
     alert,
     select,

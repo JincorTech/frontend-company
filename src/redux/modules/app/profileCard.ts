@@ -5,9 +5,9 @@ import { from, ImmutableObject } from 'seamless-immutable'
  * Types
  */
 
-export type State = StateMap & ImmutableObject<StateMap>
+export type State = StateObj & ImmutableObject<StateObj>
 
-export type StateMap = {
+export type StateObj = {
   open: boolean,
   bottomView: BottomView,
   spinner: false,
@@ -34,11 +34,12 @@ export type PasswordFields = {
  * Constants
  */
 
-export const OPEN_PROFILE_CARD = 'common/profileCard/OPEN_PROFILE_CARD'
-export const CLOSE_PROFILE_CARD = 'common/profileCard/CLOSE_PROFILE_CARD'
-export const CHANGE_VIEW = 'common/profileCard/CHANGE_VIEW'
-export const UPDATE_PROFILE = 'common/profileCard/UPDATE_PROFILE'
-export const CHANGE_PASSWORD = 'common/profileCard/CHANGE_PASSWORD'
+export const OPEN_PROFILE_CARD = 'app/profileCard/OPEN_PROFILE_CARD'
+export const CLOSE_PROFILE_CARD = 'app/profileCard/CLOSE_PROFILE_CARD'
+export const CHANGE_VIEW = 'app/profileCard/CHANGE_VIEW'
+export const UPDATE_PROFILE = 'app/profileCard/UPDATE_PROFILE'
+export const CHANGE_PASSWORD = 'app/profileCard/CHANGE_PASSWORD'
+export const LOGOUT = 'app/profileCard/LOGOUT'
 
 
 /**
@@ -50,13 +51,14 @@ export const closeProfileCard = createAction<void>(CLOSE_PROFILE_CARD)
 export const changeView = createAction<BottomView>(CHANGE_VIEW)
 export const updateProfile = createSubmitAction<ProfileFields, void>(UPDATE_PROFILE)
 export const changePassword = createSubmitAction<PasswordFields, void>(CHANGE_PASSWORD)
+export const logout = createAction<void>(LOGOUT)
 
 
 /**
  * Reducer
  */
 
-const initialState: State = from<StateMap>({
+const initialState: State = from<StateObj>({
   open: false,
   bottomView: 'buttons',
   spinner: false,

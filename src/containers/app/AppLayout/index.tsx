@@ -10,13 +10,13 @@ import {
   StateMap as StateProps
 } from '../../../redux/modules/app/appLayout'
 
-import { openProfileCard } from '../../../redux/modules/common/profileCard'
+import { openProfileCard } from '../../../redux/modules/app/profileCard'
 
 import Logo from '../../../components/common/Logo'
 import Toggle from './components/Toggle'
 import UserAvatar from './components/UserAvatar'
 import Sidebar from './components/Sidebar'
-import ProfileCard from '../../common/ProfileCard'
+import ProfileCard from '../ProfileCard'
 
 
 /**
@@ -35,17 +35,6 @@ export type DispatchProps = {
   fetchUser: () => void
 }
 
-/**
- * Data mock
- */
-const profileMock = {
-  id: 'uuid4',
-  avatar: 'http://imgur.com/QKHJ3Zs.png',
-  fullName: 'Lauren Mayberry',
-  position: 'Singer',
-  companyName: 'CHVRCHES',
-  companyLogo: 'https://pbs.twimg.com/profile_images/2227292956/twitter_logo_normal.png'
-}
 
 /**
  * Component

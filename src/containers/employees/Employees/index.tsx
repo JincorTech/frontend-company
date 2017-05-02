@@ -200,7 +200,7 @@ const StyledComponent = CSSModules(Employees, require('./styles.css'))
 export default connect<StateProps, DispatchProps, ComponentProps>(
   state => ({
     ...state.employees.employees,
-    company: state.common.app.user.company,
+    company: state.app.appLayout.user.company, // TODO SAGA RACE?
     activeEmployees: activeEmployeesSelector(state.employees.employees),
     invitedEmployees: invitedEmployeesSelector(state.employees.employees),
     deletedEmployees: deletedEmployeesSelector(state.employees.employees)
