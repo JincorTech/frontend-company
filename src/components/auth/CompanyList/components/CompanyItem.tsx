@@ -18,7 +18,7 @@ const CompanyItem: SFC<CompanyProps> = (props) => {
   return (
     <div styleName="company-item" {...divProps}>
       <div styleName="company-logo">
-        {src && <img src={src} alt=""/>}
+        {src ? <img src={src} alt=""/> : <span styleName="default"/>}
       </div>
 
       <div styleName="company-info">

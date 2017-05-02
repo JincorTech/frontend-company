@@ -9,11 +9,14 @@ import { setToken } from '../../utils/auth'
 
 import {
   fetchCompanies,
-  login,
+  fetchLogin,
   showCompanyList,
+  resetState,
   SELECT_COMPANY,
-  RESET_SIGN_IN
+  FETCH_LOGIN
 } from '../../redux/modules/auth/signIn'
+
+import { login } from '../../redux/modules/app/app'
 
 import { FormFields as LoginFields } from '../../containers/auth/LoginForm'
 import { LoginData } from '../../redux/modules/auth/signIn'
@@ -39,7 +42,7 @@ function* employeeCompaniesIterator(action: Action<LoginFields>): SagaIterator {
 
     if (companyCount === 1) {
       const companyId = companies[0].id
-      yield put(login({ email, password, companyId }))
+      yield put(fetchLogin({ email, password, companyId }))
     }
 
     if (companyCount > 1) {
@@ -62,19 +65,18 @@ export function* employeeCompaniesSaga(): SagaIterator {
  */
 function* loginSagaIterator(action: Action<LoginData>): SagaIterator {
   try {
-    const { data } = yield call(post, '/employee/login', action.payload)
+    const { data: { token }} = yield call(post, '/employee/login', action.payload)
 
-    yield put(login.success(data))
-    yield call(setToken, data)
+    yield put(login(token))
     yield put(push('/app/profile'))
   } catch (e) {
-    yield put(login.failure(new SubmissionError(e)))
+    // yield put(fetchLogin.failure(new SubmissionError(e)))
   }
 }
 
 export function* loginSaga(): SagaIterator {
   yield takeLatest(
-    login.REQUEST,
+    FETCH_LOGIN,
     loginSagaIterator
   )
 }
@@ -87,7 +89,7 @@ const getSignInState = (state) => state.auth.signIn
 function* loginCompanyIterator(action: Action<string>): SagaIterator {
   const { payload: companyId } = action
   const { employee } = yield select(getSignInState)
-  yield put(login({ ...employee, companyId }))
+  yield put(fetchLogin({ ...employee, companyId }))
 }
 
 export function* loginCompanySaga(): SagaIterator {
@@ -104,7 +106,7 @@ function* resetSignInIterator(action: Action<any>) {
   const { pathname } = action.payload
 
   if (pathname === '/auth/signin') {
-    yield put({ type: RESET_SIGN_IN })
+    yield put(resetState())
   }
 }
 

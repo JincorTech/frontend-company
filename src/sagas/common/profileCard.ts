@@ -4,7 +4,7 @@ import { Action } from '../../utils/actions'
 
 import { put as putFunc } from '../../utils/api'
 import { changePassword, updateProfile, changeView } from '../../redux/modules/common/profileCard'
-import { fetchUser } from '../../redux/modules/app/app'
+import { fetchUser } from '../../redux/modules/app/appLayout'
 
 import { PasswordFields, ProfileFields } from '../../redux/modules/common/profileCard'
 

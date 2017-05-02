@@ -25,9 +25,27 @@ export type StateMap = {
 export type Company = {
   id: string
   legalName: string
-  country: string
-  formattedAddress: string
-  type: string
+  companyType: {
+    id: string
+    code: string
+    name: string
+  }
+  economicalActivityTypes: any[]
+  profile: {
+    brandName: string
+    email: string
+    formattedAddress: {
+      city: string
+      country: {
+        id: string
+        name: string
+      }
+      formattedAddress: string
+    }
+    links: any[]
+    phone: string
+    picture: string
+  }
 }
 
 export type Employee = {
@@ -44,19 +62,20 @@ export type LoginData = {
 /**
  * Constans
  */
-export const SHOW_COMPANY_LIST  = 'auth/signIn/SHOW_COMPANY_LIST'
 export const FETCH_COMPANIES    = 'auth/signIn/FETCH_COMPANIES'
-export const LOGIN              = 'auth/signIn/LOGIN'
+export const SHOW_COMPANY_LIST  = 'auth/signIn/SHOW_COMPANY_LIST'
+export const FETCH_LOGIN        = 'auth/signIn/FETCH_LOGIN'
 export const SELECT_COMPANY     = 'auth/signIn/SELECT_COMPANY'
-export const RESET_SIGN_IN      = 'auth/signIn/RESET_SIGN_IN'
+export const RESET_STATE        = 'auth/signIn/RESET_SIGN_IN'
 
 /**
 * Action Creators
 */
 export const fetchCompanies   = createSubmitAction<LoginFields, void>(FETCH_COMPANIES)
-export const login            = createAsyncAction<LoginData, string>(LOGIN)
 export const showCompanyList  = createAction<void>(SHOW_COMPANY_LIST)
+export const fetchLogin       = createAction<LoginData>(FETCH_LOGIN)
 export const selectCompany    = createAction<string>(SELECT_COMPANY)
+export const resetState       = createAction<void>(RESET_STATE)
 
 /**
  * Reducer
@@ -90,5 +109,5 @@ export default createReducer<State>({
     state.merge({ step: 'companies' })
   ),
 
-  [RESET_SIGN_IN]: (state: State): State => state.merge(initialState)
+  [RESET_STATE]: (state: State): State => state.merge(initialState)
 }, initialState)

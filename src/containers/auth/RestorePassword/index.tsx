@@ -8,14 +8,14 @@ import {
   confirmEmail,
   setNewPassword,
   selectCompany,
-  StateMap as StateProps,
   Step
 } from '../../../redux/modules/auth/restorePassword'
+import { companySelector } from '../../../selectors/auth/signIn'
 
 import RequestPasswordForm from '../RequestPasswordForm'
 import ConfirmPasswordForm from '../ConfirmPasswordForm'
 import NewPasswordForm from '../NewPasswordForm'
-import CompanyList from '../../../components/auth/CompanyList'
+import CompanyList, { Company } from '../../../components/auth/CompanyList'
 
 /**
  * Types
@@ -23,6 +23,14 @@ import CompanyList from '../../../components/auth/CompanyList'
 export type Props = ComponentProps & StateProps & DispatchProps
 
 export type ComponentProps = HTMLProps<HTMLDivElement>
+
+export type StateProps = {
+  step: Step
+  spinner: boolean
+  verificationId: string
+  companyId: string
+  companies: Company[]
+}
 
 export type DispatchProps = {
   selectCompany: (companyId: string) => void
@@ -59,6 +67,9 @@ const RestorePassword: SFC<Props> = (props) => {
  */
 const StyledComponent = CSSModules(RestorePassword, require('./styles.css'))
 export default connect<StateProps, DispatchProps, ComponentProps>(
-  (state) => state.auth.restorePassword,
+  ({ auth: { restorePassword }}) => ({
+    ...restorePassword,
+    companies: companySelector(restorePassword)
+  }),
   { selectCompany }
 )(StyledComponent)

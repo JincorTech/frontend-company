@@ -1,12 +1,14 @@
 import { SagaIterator } from 'redux-saga'
 import { takeLatest, call, put, fork } from 'redux-saga/effects'
+
 import { get } from '../../utils/api'
-import { removeToken } from '../../utils/auth'
-import { push } from 'react-router-redux'
 
-import { fetchUser, logout, LOGOUT } from '../../redux/modules/app/app'
+import { fetchUser } from '../../redux/modules/app/appLayout'
 
 
+/**
+ * Fetch user saga
+ */
 function* fetchUserIterator(): SagaIterator {
   try {
     const { data } = yield call(get, '/employee/me')
@@ -23,23 +25,11 @@ function* fetchUserSaga(): SagaIterator {
   )
 }
 
-
-function* logoutIterator(): SagaIterator {
-  yield call(removeToken)
-  yield put(push('/auth/signin'))
-}
-
-function* logoutSaga(): SagaIterator {
-  yield takeLatest(
-    LOGOUT,
-    logoutIterator
-  )
-}
-
-
+/**
+ * App Layout saga
+ */
 export default function* (): SagaIterator {
   yield [
-    fork(fetchUserSaga),
-    fork(logoutSaga)
+    fork(fetchUserSaga)
   ]
 }

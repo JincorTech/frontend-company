@@ -3,6 +3,8 @@ import { IndexRoute, Route, IndexRedirect, Redirect } from 'react-router'
 import { push } from 'react-router-redux'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 
+import App from './containers/app/App'
+
 import AuthLayout from './components/auth/AuthLayout'
 import SignUp from './containers/auth/SignUp'
 import SignIn from './containers/auth/SignIn'
@@ -15,7 +17,7 @@ import Search from './containers/search/Search'
 
 
 const UserIsAuthenticated = UserAuthWrapper({
-  authSelector: (state) => state.common.app,
+  authSelector: (state) => state.app.app,
   predicate: (app) => app.authorized,
   redirectAction: push,
   failureRedirectPath: '/auth/singin',
@@ -23,7 +25,7 @@ const UserIsAuthenticated = UserAuthWrapper({
 })
 
 export default (
-  <Route path="/">
+  <Route path="/" component={App}>
     <IndexRedirect to="/auth/signin"/>
 
     <Route path="auth" component={AuthLayout}>
@@ -32,8 +34,7 @@ export default (
       <Route path="password" component={RestorePassword}/>
     </Route>
 
-    {/*<Route path="app" component={UserIsAuthenticated(AppLayout)}>*/} // NOTE Disable auth wrapper
-    <Route path="app" component={AppLayout}>
+    <Route path="app" component={UserIsAuthenticated(AppLayout)}>
       <Route path="profile" component={Profile}/>
       <Route path="employees" component={Employees}/>
       <Route path="search" component={Search}/>

@@ -7,7 +7,7 @@ import { getInitials, getBackgroundColor } from '../../../utils/colorFunction'
 import Popup, { Props as PopupProps } from '../../common/Popup'
 
 import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/employees/employees'
-import { UserCompany as UserCompanyProps } from '../../../redux/modules/app/app'
+import { UserCompany as UserCompanyProps } from '../../../redux/modules/app/appLayout'
 
 
 export type Props =

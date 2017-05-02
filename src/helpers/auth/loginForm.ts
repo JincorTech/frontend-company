@@ -1,5 +1,6 @@
 import { FormFields } from '../../containers/auth/LoginForm'
-import { email as emailValidator, password as passwordValidator } from '../../utils/validators'
+import createValidation from '../../utils/validate'
+import { email, password } from '../../utils/validators'
 
 export type ErrorMessages = {
   email?: string
@@ -10,21 +11,14 @@ export type ErrorMessages = {
  * Form initialValues
  */
 export const initialValues: FormFields = {
-    email: '',
-    password: ''
+  email: '',
+  password: ''
 }
 
 /**
  * Redux form sync validation
- * @param values - form fields
  */
-export function validate(values: FormFields): ErrorMessages {
-    const { email, password } = values
-
-    const errors: ErrorMessages = {
-        email: emailValidator(email),
-        password: passwordValidator(password)
-    }
-
-    return errors
-}
+export const validate = createValidation({
+  email:    email(),
+  password: password()
+})

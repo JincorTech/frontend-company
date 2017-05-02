@@ -4,9 +4,12 @@ import * as CSSModules from 'react-css-modules'
 import { connect } from 'react-redux'
 
 import {
-  openSidebar, closeSidebar, StateMap as StateProps,
-  fetchUser
-} from '../../../redux/modules/app/app'
+  openSidebar,
+  closeSidebar,
+  fetchUser,
+  StateMap as StateProps
+} from '../../../redux/modules/app/appLayout'
+
 import { openProfileCard } from '../../../redux/modules/common/profileCard'
 
 import Logo from '../../../components/common/Logo'
@@ -25,10 +28,10 @@ export type ComponentProps = {}
 
 export type DispatchProps = {
   openSidebar: () => void
-  closeSidebar: () => void,
-  openProfileCard: () => void,
-  closeProfileCard: () => void,
-  changeView: () => void,
+  closeSidebar: () => void
+  openProfileCard: () => void
+  closeProfileCard: () => void
+  changeView: () => void
   fetchUser: () => void
 }
 
@@ -56,7 +59,7 @@ class AppLayout extends Component<Props, StateProps> {
     const { sidebarOpen, children, openSidebar, closeSidebar, openProfileCard, user } = this.props
     const { id, profile, contacts, company } = user
     return (
-      <div styleName="app">
+      <div styleName="app-layout">
         <Sidebar open={sidebarOpen} onClose={closeSidebar}/>
 
         <header styleName="header">
@@ -94,6 +97,11 @@ class AppLayout extends Component<Props, StateProps> {
 const StyledComponent = CSSModules(AppLayout, require('./styles.css'))
 
 export default connect<StateProps, DispatchProps, {}>(
-  state => state.common.app,
-  { openSidebar, closeSidebar, openProfileCard, fetchUser }
+  state => state.app.appLayout,
+  {
+    openSidebar,
+    closeSidebar,
+    openProfileCard,
+    fetchUser
+  }
 )(StyledComponent)

@@ -50,8 +50,7 @@ export const VERIFY_EMAIL     = 'auth/signUp/VERIFY_EMAIL'
 export const CONFIRM_EMAIL    = 'auth/signUp/CONFIRM_EMAIL'
 export const ACCOUNT_CREATED  = 'auth/signUp/CREATE_ACCOUNT_SUCCESS'
 export const INVITE_EMPLOYEE  = 'auth/signUp/EMPLOYEE'
-export const RESET_SIGN_UP    = 'auth/signUp/RESET_SIGN_UP'
-export const SKIP_INVITE      = 'auth/signUp/SKIP_INVITE_EMPLOYEE'
+export const RESET_STATE      = 'auth/signUp/RESET_STATE'
 
 /**
  * Actions creators
@@ -62,7 +61,7 @@ export const verifyEmail    = createSubmitAction<AccountFields, void>(VERIFY_EMA
 export const confirmEmail   = createSubmitAction<ConfirmFields, void>(CONFIRM_EMAIL)
 export const accountCreated = createAction<void>(ACCOUNT_CREATED)
 export const inviteEmployee = createAsyncAction<void, void>(INVITE_EMPLOYEE)
-export const skipInvite     = createAction<void>(SKIP_INVITE)
+export const resetState     = createAction<void>(RESET_STATE)
 
 
 /**
@@ -134,4 +133,8 @@ export default createReducer<State>({
   [inviteEmployee.SUCCESS]: (state: State): State => (
     state.merge({ spinner: false })
   ),
+
+  [RESET_STATE]: (state: State): State => (
+    state.merge(initialState)
+  )
 }, initialState)
