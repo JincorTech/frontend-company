@@ -17,7 +17,7 @@ import signIn from './modules/auth/signIn'
 import restorePassword from './modules/auth/restorePassword'
 import createCompany from './modules/auth/createCompany'
 
-import profile from './modules/profile/profile'
+import profileView from './modules/profile/profileView'
 import profileEdit from './modules/profile/profileEdit'
 
 import employees from './modules/employees/employees'
@@ -51,7 +51,7 @@ export default combineReducers({
   profile: combineReducers({
     // activityTypes,
     profileEdit,
-    profile
+    profileView
   }),
 
   employees: combineReducers({

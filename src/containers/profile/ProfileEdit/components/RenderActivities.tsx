@@ -12,7 +12,7 @@ import {
   ActivityField
 } from '../../../../redux/modules/profile/profileEdit'
 
-import AddInput from './AddInput'
+import AddInput from '../../../../components/profile/AddButton'
 import RenderActivity from './RenderActivity'
 
 

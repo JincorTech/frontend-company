@@ -13,7 +13,7 @@ import signUpSaga from './auth/signUp'
 import signInSaga from './auth/signIn'
 import restorePasswordSaga from './auth/restorePassword'
 import createCompanySaga from './auth/createCompany'
-import profileSaga from './profile/profile'
+import profileSaga from './profile/profileView'
 import employeesSaga from './employees/employees'
 
 

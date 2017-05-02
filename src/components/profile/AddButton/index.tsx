@@ -2,12 +2,11 @@ import * as React from 'react'
 import { SFC, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 
-import Icon from '../../../../components/common/Icon'
-
+import Icon from '../../common/Icon'
 
 export type Props = HTMLProps<HTMLDivElement>
 
-const AddInput: SFC<Props> = (props) => {
+const AddButton: SFC<Props> = (props) => {
   return (
     <div styleName="add-input" {...props}>
       <Icon styleName="add-icon"  name="plus"/>
@@ -16,4 +15,4 @@ const AddInput: SFC<Props> = (props) => {
   )
 }
 
-export default CSSModules(AddInput, require('../styles.css'))
+export default CSSModules(AddButton, require('./styles.css'))

@@ -4,8 +4,6 @@ import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FieldArray, FormProps } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { setEditable } from '../../../redux/modules/profile/profile'
-
 import InfoItem from '../../../components/profile/InfoItem'
 import RenderInput from '../../../components/form/RenderInput'
 import RenderSelect from '../../../containers/form/RenderSelect'
@@ -13,13 +11,13 @@ import RenderTextarea from '../../../components/form/RenderTextarea'
 import RenderImageUpload from '../../../components/form/RenderImageUpload'
 import RenderLinkInputs from '../../../components/profile/RenderLinkInputs'
 import RenderActivities from './components/RenderActivities'
-import { SocialLinkProps } from '../../../components/profile/SocialLink'
+import { LinkProps } from '../../../components/profile/SocialLink'
 
 
 /**
  * Types
  */
-export type Props = ReduxFormProps & DispatchProps
+export type Props = ReduxFormProps
 
 export type ReduxFormProps = FormProps<FormFields, ComponentProps, any> & ComponentProps
 
@@ -32,7 +30,7 @@ export type ComponentProps = {
   email: string
   phone: string
   activities: ActivityType[]
-  socialLinks: SocialLinkProps[]
+  socialLinks: LinkProps[]
 }
 
 export type ActivityType = {
@@ -55,17 +53,12 @@ export type Option = {
   name: string
 }
 
-export type DispatchProps = {
-  setEditable: (value: boolean) => void
-}
 
 /**
  * Component
  */
 class ProfileEdit extends Component<Props, {}> {
   public render(): JSX.Element {
-    const { setEditable } = this.props
-
     return (
       <form styleName="company-profile-edit">
         <div styleName="company-logo">
@@ -142,7 +135,7 @@ class ProfileEdit extends Component<Props, {}> {
 
         <div styleName="company-controls">
           <input styleName="submit-btn" type="submit" value="Сохранить"/>
-          <a styleName="cancel-btn" onClick={() => setEditable(false)}>отменить</a>
+          <a styleName="cancel-btn">отменить</a>
         </div>
       </form>
     )
@@ -154,7 +147,6 @@ class ProfileEdit extends Component<Props, {}> {
  */
 const StyledComponent = CSSModules(ProfileEdit, require('./styles.css'))
 const FormComponent = reduxForm<FormFields, ComponentProps>({ form: 'ProfileEdit' })(StyledComponent)
-export default connect<{}, DispatchProps, ReduxFormProps>(
-  (state) => ({}),
-  { setEditable }
+export default connect<{}, {}, ReduxFormProps>(
+  (state) => ({})
 )(FormComponent)
