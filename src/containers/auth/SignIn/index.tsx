@@ -5,16 +5,21 @@ import { connect } from 'react-redux'
 import { SubmitHandler } from 'redux-form'
 
 import LogInForm from '../LoginForm'
-import CompanyList from '../../../components/auth/CompanyList'
+import CompanyList, { Company } from '../../../components/auth/CompanyList'
 
-import { StateMap as StateProps } from '../../../redux/modules/auth/signIn'
-import { fetchCompanies, selectCompany } from '../../../redux/modules/auth/signIn'
-import { FormFields, ComponentProps } from '../LoginForm'
+import { fetchCompanies, selectCompany, Employee } from '../../../redux/modules/auth/signIn'
+import { companySelector } from '../../../selectors/auth/signIn'
 
 /**
  * Types
  */
-export type SignInProps = HTMLProps<HTMLDivElement> & StateProps & DispatchProps
+export type Props = HTMLProps<HTMLDivElement> & StateProps & DispatchProps
+
+export type StateProps = {
+  spinner: boolean
+  step: 'login' | 'companies'
+  companies: Company[]
+}
 
 export type DispatchProps = {
   selectCompany: (companyId: string) => void
@@ -23,8 +28,8 @@ export type DispatchProps = {
 /**
  * Component
  */
-const SignUp: SFC<SignInProps> = (props) => {
-  const { selectCompany, companies, spinner } = props
+const SignUp: SFC<Props> = (props) => {
+  const { selectCompany, companies, spinner, step } = props
 
   const renderStep = (step: string) => {
     switch (step) {
@@ -37,7 +42,7 @@ const SignUp: SFC<SignInProps> = (props) => {
 
   return (
     <div styleName="signin">
-      {renderStep('login')}
+      {renderStep(step)}
     </div>
   )
 }
@@ -48,6 +53,10 @@ const SignUp: SFC<SignInProps> = (props) => {
 const StyledComponents = CSSModules(SignUp, require('./styles.css'))
 
 export default connect<StateProps, DispatchProps, {}>(
-  (state) => state.auth.signIn,
+  ({ auth: { signIn }}) => ({
+    step: signIn.step,
+    spinner: signIn.spinner,
+    companies: companySelector(signIn)
+  }),
   { selectCompany }
 )(StyledComponents)

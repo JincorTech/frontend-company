@@ -2,6 +2,8 @@ import { combineReducers, routerReducer } from 'redux-seamless-immutable'
 import { reducer as formReducer } from 'redux-form'
 
 import app from './modules/app/app'
+import appLayout from './modules/app/appLayout'
+
 import companyCard from './modules/common/companyCard'
 import profileCard from './modules/common/profileCard'
 import emailTextarea from './modules/common/emailTextarea'
@@ -25,8 +27,12 @@ export default combineReducers({
   routing: routerReducer,
   form: formReducer,
 
-  common: combineReducers({
+  app: combineReducers({
     app,
+    appLayout
+  }),
+
+  common: combineReducers({
     companyCard,
     profileCard,
     emailTextarea,

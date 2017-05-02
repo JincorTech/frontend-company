@@ -12,7 +12,6 @@ import { initialValues, validate } from '../../../helpers/auth/createCompany'
 
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
-import FormErrors from '../../../components/common/FormErrors'
 import RenderInput from '../../../components/form/RenderInput'
 import RenderSelect from '../../../containers/form/RenderSelect'
 
@@ -39,8 +38,8 @@ export type ComponentProps = {
 }
 
 export type FormFields = {
-  countryId: Option
-  companyType: Option
+  countryId: string
+  companyType: string
   legalName: string
 }
 
@@ -76,8 +75,6 @@ class CreateCompanyForm extends Component<Props, {}> {
         styleName="create-company"
         title="Регистрация компании"
         hint="Чтобы начать совместную работу со своими коллегами, нужно добавить свою компанию">
-
-        <FormErrors errors={error}/>
 
         <Field
           component={RenderSelect}

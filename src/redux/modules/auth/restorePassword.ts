@@ -1,7 +1,6 @@
 import { createReducer, createAction, createSubmitAction, Action } from '../../../utils/actions'
 import { from, ImmutableObject } from 'seamless-immutable'
 
-import { Company } from '../../../components/auth/CompanyList'
 import { FormFields as RestoreFields } from '../../../containers/auth/RequestPasswordForm'
 import { FormFields as ConfirmFields } from '../../../containers/auth/ConfirmPasswordForm'
 import { FormFields as NewPasswordFields } from '../../../containers/auth/NewPasswordForm'
@@ -17,6 +16,32 @@ export type StateMap = {
   verificationId: string
   companyId: string
   companies: Company[]
+}
+
+export type Company = {
+  id: string
+  legalName: string
+  companyType: {
+    id: string
+    code: string
+    name: string
+  }
+  economicalActivityTypes: any[]
+  profile: {
+    brandName: string
+    email: string
+    formattedAddress: {
+      city: string
+      country: {
+        id: string
+        name: string
+      }
+      formattedAddress: string
+    }
+    links: any[]
+    phone: string
+    picture: string
+  }
 }
 
 export type Step = 'email' | 'confirm' | 'companies' | 'new'

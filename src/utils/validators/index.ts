@@ -1,44 +1,49 @@
+export type Validator = (value: string) => string
 
-
-export function required(value: string, msg?: string): string {
-    return !!value
-        ? ''
-        : msg || 'required'
+export function required(msg?: string): Validator {
+  return (value: string): string => !!value
+    ? ''
+    : msg || 'required'
 }
 
-export function minLength(value: string, limit: number, msg?: string): string {
-    return limit && value && value.length >= limit
-        ? ''
-        : msg || `minLength ${limit}`
+export function minLength(limit: number, msg?: string): Validator {
+  return (value: string): string => limit && value && value.length >= limit
+    ? ''
+    : msg || `minLength ${limit}`
 }
 
-export function maxLength(value: string, limit: number, msg?: string): string {
-    return limit && value && value.length <= limit
-        ? ''
-        : msg || `minLength ${limit}`
+export function maxLength(limit: number, msg?: string): Validator {
+  return (value: string): string => limit && value && value.length <= limit
+    ? ''
+    : msg || `minLength ${limit}`
 }
 
-export function length(value: string, prop: number, msg?: string): string {
-    return value && prop && value.length === prop
-        ? ''
-        : msg || `length ${prop}`
-
+export function length(prop: number, msg?: string): Validator {
+  return (value: string): string => value && prop && value.length === prop
+    ? ''
+    : msg || `length ${prop}`
 }
 
-export function email(value: string, msg?: string): string {
-    return value && /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(value)
+const EMAIL_REGEXP = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+
+export function email(msg?: string): Validator {
+  return (value: string): string => value && EMAIL_REGEXP.test(value)
     ? ''
     : msg || 'invalid email'
 }
 
-export function password(value: string, msg?: string): string {
-    return value && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/.test(value)
+const PASSWORD_REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/
+
+export function password(msg?: string): Validator {
+  return (value: string): string => value && PASSWORD_REGEXP.test(value)
     ? ''
     : msg || 'incorrect password'
 }
 
-export function number(value: string): string {
-  return value && /^\d+$/.test(value)
+const NUMBER_REGEXP = /^\d+$/
+
+export function number(msg?: string): Validator {
+  return (value: string): string => value && NUMBER_REGEXP.test(value)
     ? ''
-    : 'not number'
+    : msg || 'not number'
 }

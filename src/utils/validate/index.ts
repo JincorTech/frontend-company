@@ -1,3 +1,6 @@
+/**
+ * Types
+ */
 export type FormErrors = {
   _error: FieldErrors
 }
@@ -14,8 +17,12 @@ export type ValidatorMap = {
   [fieldName: string]: Function | Function[]
 }
 
-export default function createValidation(validators: any) {
-  return function validate(values: FormValues): FormErrors | FieldErrors {
+/**
+ * Create redux-form Sync validate function
+ * @param validators 
+ */
+export default function createValidation(validators: ValidatorMap) {
+  return function validate(values: any, props: any): any {
     const errors: FieldErrors = {}
 
     Object.keys(validators).map((fieldName) => {
@@ -42,6 +49,6 @@ export default function createValidation(validators: any) {
     })
 
 
-    return Object.keys(errors).length > 1 ? { _error: errors } : errors
+    return errors
   }
 }

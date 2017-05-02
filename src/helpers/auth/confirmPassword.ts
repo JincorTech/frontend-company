@@ -1,4 +1,5 @@
 import { FormFields } from '../../containers/auth/ConfirmPasswordForm'
+import createValidation from '../../utils/validate'
 import { length, number } from '../../utils/validators'
 
 export type ErrorMassages = {
@@ -9,19 +10,13 @@ export type ErrorMassages = {
  * Form initialValues
  */
 export const initialValues: FormFields = {
-    verificationCode: ''
+  verificationCode: ''
 }
 
 /**
  * Redux form sync validation
  * @param values - form fields
  */
-export function validate(values: FormFields): ErrorMassages {
-    const { verificationCode } = values
-
-    const errors: ErrorMassages = {
-        verificationCode: number(verificationCode) || length(verificationCode, 6)
-    }
-
-    return errors
-}
+export const validate = createValidation({
+  verificationCode: [number(), length(6)]
+})

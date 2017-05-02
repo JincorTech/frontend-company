@@ -17,7 +17,8 @@ import {
   setUserInfo,
   confirmEmail,
   inviteEmployee,
-  accountCreated
+  accountCreated,
+  resetState
 } from '../../redux/modules/auth/signUp'
 
 import { setToken } from '../../utils/auth'
@@ -27,8 +28,8 @@ import { setToken } from '../../utils/auth'
  */
 function* createCompanyIterator({ payload }: Action<CompanyFields>): SagaIterator {
   const {
-    countryId: { value: countryId },
-    companyType: { value: companyType },
+    countryId,
+    companyType,
     legalName
   } = payload
 
@@ -120,6 +121,7 @@ function* inviteEmployeeIterator(action: Action<string[]>): SagaIterator {
   try {
     const { data } = yield call(post, 'company/invite', { emails })
     yield put(inviteEmployee.success())
+    yield put(resetState())
     yield put(push('/app/profile'))
   } catch (e) {
     yield put(inviteEmployee.failure(e))

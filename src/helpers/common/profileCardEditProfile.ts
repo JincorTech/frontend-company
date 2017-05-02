@@ -1,12 +1,13 @@
 import { FormFields } from '../../containers/common/ProfileCard/components/ProfileEdit'
+import createValidatation from '../../utils/validate'
 import { required } from '../../utils/validators'
+
 
 export type ErrorMessages = {
   firstName?: string,
   lastName?: string,
   position?: string
 }
-
 
 export const initialValues: FormFields = {
   avatar: '',
@@ -15,15 +16,8 @@ export const initialValues: FormFields = {
   position: ''
 }
 
-
-export const validate = (values: FormFields): ErrorMessages => {
-  const { firstName, lastName, position } = values
-
-  const errors: ErrorMessages = {
-    firstName: required(firstName),
-    lastName: required(lastName),
-    position: required(position)
-  }
-
-  return errors
-}
+export const validate = createValidatation({
+  firstName: required(),
+  lastName: required(),
+  position: required()
+})

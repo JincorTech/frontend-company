@@ -3,7 +3,7 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import * as CSSModules from 'react-css-modules'
 
-import { inviteEmployee } from '../../../redux/modules/auth/signUp'
+import { inviteEmployee, resetState } from '../../../redux/modules/auth/signUp'
 
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
@@ -21,6 +21,7 @@ export type ComponentProps = {
 
 export type DispatchProps = {
   inviteEmployee: () => void
+  resetState: () => void
 }
 
 export type StateProps = {
@@ -32,7 +33,7 @@ export type StateProps = {
  */
 class InviteEmployeeForm extends Component<Props, {}> {
   public render() {
-    const { inviteEmployee, textareaValid, spinner } = this.props
+    const { inviteEmployee, resetState, textareaValid, spinner } = this.props
 
     return(
       <Form
@@ -51,7 +52,11 @@ class InviteEmployeeForm extends Component<Props, {}> {
           Пригласить
         </Button>
 
-        <Link styleName="skip" to="/app/profile">Пропустить</Link>
+        <Link
+          styleName="skip"
+          to="/app/profile"
+          onClick={resetState}
+          children="Пропустить"/>
       </Form>
     )
   }
@@ -64,5 +69,5 @@ const StyledComponent = CSSModules(InviteEmployeeForm, require('./styles.css'))
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => ({ textareaValid : state.common.emailTextarea.valid }),
-  { inviteEmployee }
+  { inviteEmployee, resetState }
 )(StyledComponent)
