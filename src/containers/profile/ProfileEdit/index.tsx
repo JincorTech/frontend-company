@@ -5,6 +5,8 @@ import { reduxForm, Field, FieldArray, FormProps } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
+import { fetchActivities } from '../../../redux/modules/common/activityTypes'
+
 import InfoItem from '../../../components/profile/InfoItem'
 import CompanyLogo from '../../../components/profile/CompanyLogo'
 import RenderInput from '../../../components/form/RenderInput'
@@ -19,7 +21,7 @@ import { LinkProps } from '../../../components/profile/SocialLink'
 /**
  * Types
  */
-export type Props = ReduxFormProps
+export type Props = ReduxFormProps & DispatchProps
 
 export type ReduxFormProps = FormProps<FormFields, ComponentProps, any> & ComponentProps
 
@@ -55,6 +57,10 @@ export type Option = {
   name: string
 }
 
+export type DispatchProps = {
+  fetchActivities: () => void
+}
+
 
 /**
  * Component
@@ -64,6 +70,10 @@ class ProfileEdit extends Component<Props, {}> {
     super(props)
 
     this.deleteLogo = this.deleteLogo.bind(this)
+  }
+
+  public componentWillMount(): void {
+    this.props.fetchActivities()
   }
 
   private deleteLogo(): void {
@@ -167,6 +177,7 @@ class ProfileEdit extends Component<Props, {}> {
  */
 const StyledComponent = CSSModules(ProfileEdit, require('./styles.css'))
 const FormComponent = reduxForm<FormFields, ComponentProps>({ form: 'ProfileEdit' })(StyledComponent)
-export default connect<{}, {}, ReduxFormProps>(
-  (state) => ({})
+export default connect<{}, DispatchProps, ReduxFormProps>(
+  (state) => ({}),
+  { fetchActivities }
 )(FormComponent)

@@ -1,41 +1,66 @@
 import { SagaIterator } from 'redux-saga'
 import { takeLatest, takeEvery, put, call, select, fork } from 'redux-saga/effects'
-import { ActionMeta } from '../../utils/actions'
+import { Action, ActionMeta } from '../../utils/actions'
 import { get } from '../../utils/api'
-import { openNodeSelector, closeNodeSelector, normalizeActivities } from '../../helpers/common/activityTypes'
 
 import {
-  OPEN_NODE, CLOSE_NODE,
-  SET_NODES, SELECT_VALUE,
-  setNormalized,
+  OPEN_NODE,
+  CLOSE_NODE,
+  SELECT_VALUE,
+  UNREGISTER_SELECT
+} from '../../redux/modules/common/activityTypes'
+
+import {
+  openNodeSelector,
+  closeNodeSelector,
+  normalizeActivities,
+  closeAllNodes
+} from '../../helpers/common/activityTypes'
+
+import {
+  setNodes,
   fetchActivities,
-  closeNode, closeAT
+  closeNode,
+  disableLeaf,
+  activateLeaf,
+  setSelectValue,
+  closeSelect,
+  removeSelect,
+  Meta
 } from '../../redux/modules/common/activityTypes'
 
 
-function* setActivitiesIterator({ meta }: ActionMeta<string, any[]>): SagaIterator {
+const getState = state => state.common.activityTypes
+
+/**
+ * Fetch Activities Saga
+ */
+function* fetchActivitiesIterator(): SagaIterator {
   try {
-    const { data } = yield call(get, '/company/activityTypes')
-    yield put(setNormalized(meta, normalizeActivities(data)))
+    const { data: activities } = yield call(get, '/company/activityTypes')
+
+    const normalized = yield call(normalizeActivities, activities)
+    yield put(fetchActivities.success(normalized))
   } catch (e) {
     yield put(fetchActivities.failure(e))
   }
 }
 
-function* setActivitiesSaga(): SagaIterator {
+function* fetchActivitiesSaga(): SagaIterator {
   yield takeLatest(
-    SET_NODES,
-    setActivitiesIterator
+    fetchActivities.REQUEST,
+    fetchActivitiesIterator
   )
 }
 
-
-const getState = state => state.common.activityTypes
-
-function* openNodeIterator({ payload: nodeId, meta }: ActionMeta<string, string>): SagaIterator {
+/**
+ * Open Node Saga
+ */
+function* openNodeIterator({ payload: nodeId }: Action<string>): SagaIterator {
   const state = yield select(getState)
-  const activityMap = openNodeSelector(meta, nodeId, state)
-  yield put(setNormalized(meta, { activityMap }))
+  const activityMap = yield call(openNodeSelector, nodeId, state)
+
+  yield put(setNodes(activityMap))
 }
 
 function* openNodeSaga(): SagaIterator {
@@ -45,11 +70,14 @@ function* openNodeSaga(): SagaIterator {
   )
 }
 
-
-function* closeNodeIterator({ payload: nodeId, meta }: ActionMeta<string, string>): SagaIterator {
+/**
+ * Close Node Saga
+ */
+function* closeNodeIterator({ payload: nodeId }: Action<string>): SagaIterator {
   const state = yield select(getState)
-  const activityMap = closeNodeSelector(meta, nodeId, state)
-  yield put(setNormalized(meta, { activityMap }))
+  const activityMap = yield call(closeNodeSelector, nodeId, state)
+
+  yield put(setNodes(activityMap))
 }
 
 function* closeNodeSaga(): SagaIterator {
@@ -59,10 +87,17 @@ function* closeNodeSaga(): SagaIterator {
   )
 }
 
+/**
+ * Select Value Saga
+ */
+function* selectValueIterator({ payload: leafId, meta }: ActionMeta<Meta, string>): SagaIterator {
+  const state = yield select(getState)
+  const nodes = yield call(closeAllNodes, state)
 
-function* selectValueIterator({ payload: nodeId, meta }: ActionMeta<string, string>): SagaIterator {
-  // yield put(closeNode(meta, nodeId))
-  // yield put(closeAT(meta))
+  yield put(setNodes(nodes))
+  yield put(disableLeaf(leafId))
+  yield put(setSelectValue(meta, leafId))
+  yield put(closeSelect(meta))
 }
 
 function* selectValueSaga(): SagaIterator {
@@ -72,12 +107,33 @@ function* selectValueSaga(): SagaIterator {
   )
 }
 
+/**
+ * Unregister Select Saga
+ */
+function* unregisterSelectIterator({ payload: selectId }: Action<string>): SagaIterator {
+  const { selectMap } = yield select(getState)
+  const { selectedActivity: leafId } = selectMap[selectId]
 
+  yield put(activateLeaf(leafId))
+  yield put(removeSelect(selectId))
+}
+
+function* unregisterSelectSaga(): SagaIterator {
+  yield takeEvery(
+    UNREGISTER_SELECT,
+    unregisterSelectIterator
+  )
+}
+
+/**
+ * Activity Types Saga
+ */
 export default function* (): SagaIterator {
   yield [
-    fork(setActivitiesSaga),
+    fork(fetchActivitiesSaga),
     fork(openNodeSaga),
     fork(closeNodeSaga),
-    fork(selectValueSaga)
+    fork(selectValueSaga),
+    fork(unregisterSelectSaga)
   ]
 }

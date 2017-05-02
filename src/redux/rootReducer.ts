@@ -8,7 +8,6 @@ import profileCard from './modules/app/profileCard'
 import companyCard from './modules/common/companyCard'
 import emailTextarea from './modules/common/emailTextarea'
 import alert from './modules/common/alert'
-
 import select from './modules/common/select'
 import activityTypes from './modules/common/activityTypes'
 
