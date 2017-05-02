@@ -13,7 +13,7 @@ const CompanyLogo: SFC<CompanyLogoProps> = (props) => {
 
   return (
     <div styleName="company-logo" {...divProps}>
-      <img src={require('./logo.png')} alt={alt}/>
+      {src ? <img src={src} alt={alt}/> : <div styleName="empty"/>}
     </div>
   )
 }

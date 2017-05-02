@@ -10,7 +10,7 @@ const companyStateSelector = (state: State): Company => state.company
 
 export const companySelector = createSelector<State, ComponentProps, Company>(
   companyStateSelector,
-  ({ id, profile, economicalActivityTypes, companyType }) => {
+  ({ id, profile, legalName: name, economicalActivityTypes, companyType }) => {
     const { picture: logo, email, phone, description, links, formattedAddress } = profile
     const { name: type } = companyType
     const { country: { name: country }, city } = formattedAddress
@@ -20,7 +20,8 @@ export const companySelector = createSelector<State, ComponentProps, Company>(
       logo,
       name,
       type,
-      region: `${country}, ${city}`,
+      country,
+      city,
       description,
       email,
       phone,

@@ -1,11 +1,21 @@
 @use postcss-short;
+@use postcss-inline-svg;
+@use postcss-center;
 
 .company-logo {
-  size: 165px;
+  position: relative;
+  size: 100%;
   border-radius: 4px;
-  background-color: #ef3124;
+  background-color: rgba(219, 223, 228, 0.5);
 
   & img {
     size: 100%;
   }
+}
+
+.empty {
+  background-image: svg-load('./logo.svg');
+  size: size('./logo.svg');
+  top: center;
+  left: center;
 }

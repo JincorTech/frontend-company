@@ -2,9 +2,10 @@ import * as React from 'react'
 import { SFC, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 
-import Link from '../../../../components/common/Link'
+import { Link } from 'react-router'
 import Icon from '../../../../components/common/Icon'
 
+const { link, active } = require('../styles.css')
 
 export type SidebarProps = HTMLProps<HTMLDivElement> & {
   open?: boolean
@@ -13,14 +14,14 @@ export type SidebarProps = HTMLProps<HTMLDivElement> & {
 
 const Sidebar: SFC<SidebarProps> = ({open, onClose, ...divProps}) => {
   return (
-    <aside styleName={open ? 'open' : 'close'} {...divProps}>
+    <aside styleName={open ? 'sidebar-open' : 'sidebar-close'} {...divProps}>
       <Icon styleName="close-icon" name="close" onClick={onClose}/>
 
       <nav>
-        <Link styleName="sidebar-item" to="/">Мессенджер</Link>
-        <Link styleName="sidebar-item" to="/">Моя компания</Link>
-        <Link styleName="sidebar-item" to="/">Избранное</Link>
-        <Link styleName="sidebar-item" to="/">Поиск</Link>
+        <Link className={link} activeClassName={active} to="/app/messenger">Мессенджер</Link>
+        <Link className={link} activeClassName={active} to="/app/profile">Моя компания</Link>
+        <Link className={link} activeClassName={active} to="/app/favorites">Избранное</Link>
+        <Link className={link} activeClassName={active} to="/app/search">Поиск</Link>
       </nav>
     </aside>
   )
