@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import * as CSSModules from 'react-css-modules'
 import { openCompanyCard, closeCompanyCard, flipCompanyCard } from '../../../redux/modules/common/companyCard'
 
-import { SocialLinkProps } from '../../../components/profile/SocialLink'
+import { LinkProps } from '../../../components/profile/SocialLink'
 import Popup from '../../../components/common/FullscreenPopup'
 import Button from '../../../components/common/Button'
 import Icon from '../../../components/common/Icon'
@@ -24,7 +24,7 @@ export type CompanyInfo = {
   email: string,
   phone: string,
   activities: any,
-  socialLinks: SocialLinkProps[],
+  socialLinks: LinkProps[],
   description: string
 }
 

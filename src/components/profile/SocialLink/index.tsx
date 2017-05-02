@@ -3,17 +3,17 @@ import { SFC, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 
 
-export type Props = HTMLProps<HTMLLIElement> & SocialLinkProps
+export type Props = HTMLProps<HTMLLIElement> & LinkProps
 
-export type SocialLinkProps = {
+export type LinkProps = {
+  name: string
+  value: string
   iconUrl?: string
-  name?: string
-  hideName?: boolean
-  url: string
+  displayName?: boolean
 }
 
 const SocialLink: SFC<Props> = (props) => {
-  const { name, iconUrl, url, hideName, ...liProps } = props
+  const { name, iconUrl, value: url, displayName, ...liProps } = props
 
   return (
     <li styleName="social-link" {...liProps}>
@@ -22,13 +22,13 @@ const SocialLink: SFC<Props> = (props) => {
           ? <img src={iconUrl}/>
           : <img src={require('./svg/default.svg')}/>}
       </a>
-      {!hideName && <span styleName="link-name">{name}</span>}
+      {displayName && <span styleName="link-name">{name}</span>}
     </li>
   )
 }
 
 SocialLink.defaultProps = {
-  hideName: false
+  displayName: true
 }
 
 export default CSSModules(SocialLink, require('./styles.css'))

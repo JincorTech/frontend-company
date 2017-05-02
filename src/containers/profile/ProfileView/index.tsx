@@ -4,12 +4,12 @@ import * as CSSModules from 'react-css-modules'
 import { connect } from 'react-redux'
 
 import { openCompanyCard } from '../../../redux/modules/common/companyCard'
-import { setEditable } from '../../../redux/modules/profile/profile'
+import { companySelector } from '../../../selectors/profile/profileView'
 
 import Link from '../../../components/common/Link'
 import CompanyLogo from '../../../components/profile/CompanyLogo'
 import InfoItem from '../../../components/profile/InfoItem'
-import SocialLink, { SocialLinkProps } from '../../../components/profile/SocialLink'
+import SocialLink, { LinkProps } from '../../../components/profile/SocialLink'
 import ContactItem from '../../../components/profile/ContactItem'
 import Button from '../../../components/profile/Button'
 import Text from '../../../components/profile/Text'
@@ -18,9 +18,10 @@ import CompanyCard from '../../../containers/common/CompanyCard'
 /**
  * Types
  */
-export type Props = DispatchProps & ComponentProps
+export type Props = DispatchProps & StateProps
 
-export type ComponentProps = {
+export type StateProps = {
+  id: string
   logo: string
   name: string
   type: string
@@ -29,17 +30,17 @@ export type ComponentProps = {
   email: string
   phone: string
   activities: ActivityType[]
-  socialLinks: SocialLinkProps[]
+  socialLinks: LinkProps[]
 }
 
 export type ActivityType = {
   id: string
   name: string
+  code: string
 }
 
 export type DispatchProps = {
-  openCompanyCard: () => void,
-  setEditable: (value: boolean) => void
+  openCompanyCard: () => void
 }
 
 /**
@@ -56,8 +57,7 @@ const CompanyProfile: SFC<Props> = (props) => {
     phone,
     activities,
     socialLinks,
-    openCompanyCard,
-    setEditable
+    openCompanyCard
   } = props
 
   return (
@@ -105,7 +105,6 @@ const CompanyProfile: SFC<Props> = (props) => {
 
       <div styleName="controls-block">
         <Button
-          onClick={() => setEditable(true)}
           styleName="edit-button"
           children="Редактировать"/>
 
@@ -126,7 +125,7 @@ const CompanyProfile: SFC<Props> = (props) => {
  * Decorators
  */
 const StyledComponent = CSSModules(CompanyProfile, require('./styles.css'))
-export default connect<{}, DispatchProps, ComponentProps>(
-  () => ({}),
-  { openCompanyCard, setEditable }
+export default connect<StateProps, DispatchProps, {}>(
+  ({ profile: { profileView }}) => companySelector(profileView),
+  { openCompanyCard }
 )(StyledComponent)

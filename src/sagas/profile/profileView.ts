@@ -2,7 +2,7 @@ import { SagaIterator } from 'redux-saga'
 import { takeLatest, call, put, fork } from 'redux-saga/effects'
 import { get } from '../../utils/api'
 
-import { fetchCompany } from '../../redux/modules/profile/profile'
+import { fetchCompany } from '../../redux/modules/profile/profileView'
 
 
 /**

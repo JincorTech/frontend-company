@@ -11,7 +11,8 @@ import SignIn from './containers/auth/SignIn'
 import RestorePassword from './containers/auth/RestorePassword'
 
 import AppLayout from './containers/app/AppLayout'
-import Profile from './containers/profile/Profile'
+import ProfileEdit from './containers/profile/ProfileEdit'
+import ProfileView from './containers/profile/ProfileView'
 import Employees from './containers/employees/Employees'
 import Search from './containers/search/Search'
 
@@ -35,7 +36,8 @@ export default (
     </Route>
 
     <Route path="app" component={UserIsAuthenticated(AppLayout)}>
-      <Route path="profile" component={Profile}/>
+      <Route path="profile" component={ProfileView}/>
+      <Route path="profile/edit" component={ProfileEdit}/>
       <Route path="employees" component={Employees}/>
       <Route path="search" component={Search}/>
     </Route>
