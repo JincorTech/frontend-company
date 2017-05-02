@@ -1,4 +1,4 @@
-import { FormFields } from '../../containers/common/ProfileCard/components/ProfileEdit'
+import { FormFields } from '../../containers/app/ProfileCard/components/ProfileEdit'
 import createValidatation from '../../utils/validate'
 import { required } from '../../utils/validators'
 

@@ -6,9 +6,9 @@ import { get, post, put as putFunc, del } from '../../utils/api'
 import { isEmail } from '../../helpers/common/emailTextarea'
 
 import {
-  fetchEmployees, inviteEmployees,
-  makeAdmin, unmakeAdmin,
-  deleteEmployee,
+  fetchEmployees,
+  inviteEmployees,
+  makeAdmin, unmakeAdmin, deleteEmployee,
   closeConfirmAdminPopup, closeConfirmRmAdminPopup, closeConfirmDeletePopup
 } from '../../redux/modules/employees/employees'
 import { resetTextarea } from '../../redux/modules/common/emailTextarea'
@@ -33,12 +33,12 @@ function* fetchEmployeesSaga(): SagaIterator {
 
 const getTextareaState = state => state.common.emailTextarea
 
-function* inviteEmployeesIterator(action: Action<string[]>): SagaIterator {
+function* inviteEmployeesIterator(): SagaIterator {
   const { value, emails: selectedEmails } = yield select(getTextareaState)
   const emails = isEmail(value) ? [...selectedEmails, value] : selectedEmails
 
   try {
-    const { data } = yield call(post, 'company/invite', { emails })
+    yield call(post, 'company/invite', { emails })
     yield put(inviteEmployees.success())
     yield put(resetTextarea())
     yield put(fetchEmployees())

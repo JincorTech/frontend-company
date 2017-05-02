@@ -15,11 +15,11 @@ import {
   closeProfileCard,
   openProfileCard,
   changePassword,
-  updateProfile
-} from '../../../redux/modules/common/profileCard'
-import { logout } from '../../../redux/modules/app/app'
+  updateProfile,
+  logout
+} from '../../../redux/modules/app/profileCard'
 import { User as UserProps } from '../../../redux/modules/app/appLayout'
-import { BottomView as BottomViewProps } from '../../../redux/modules/common/profileCard'
+import { BottomView as BottomViewProps } from '../../../redux/modules/app/profileCard'
 
 
 type Props = JSX.IntrinsicAttributes
@@ -126,10 +126,6 @@ const ProfileCard: SFC<Props> = props => {
       <div styleName="bottom">
         {renderView(bottomView)}
       </div>
-
-      {/*<div styleName="profile-card-error">*/}
-        {/*<div styleName="deleteme">temporary mock</div>*/}
-      {/*</div>*/}
     </Popup>
   )
 }
@@ -137,6 +133,6 @@ const ProfileCard: SFC<Props> = props => {
 const StyledComponent = CSSModules(ProfileCard, require('./styles.css'))
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
-  state => state.common.profileCard,
+  state => state.app.profileCard,
   { openProfileCard, closeProfileCard, changeView, logout }
 )(StyledComponent)
