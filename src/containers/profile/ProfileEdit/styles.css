@@ -11,16 +11,33 @@
   float: left;
 }
 
+.delete-logo {
+  font-size: 16px;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  color: #d0011b;
+  cursor: pointer;
+  display: block;
+  margin: 15px auto 0;
+  opacity: .75;
+  transition: .1s linear opacity;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
 .company-name {
   height: 80px;
   font: normal 40px/48px 'Open Sans';
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .company-info {
   float: left;
   padding-left: 30px;
-  width: 555px;
+  width: 585px;
 }
 
 .company-controls {
@@ -47,6 +64,7 @@
 
 .region {
   clear: fix;
+  margin-bottom: 2px;
 
   & > div {
     float: left;
@@ -57,13 +75,26 @@
 }
 
 .section {
-  margin-bottom: 35px;
+  margin-bottom: 32px;
 
   & > h4 {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    letter-spacing: .1px;
   }
 }
 
+.section-small {
+  composes: section;
+  width: 420px;
+}
+
+.select-input {
+  height: 40px;
+}
+
+.text-input {
+  height: 40px;
+}
 
 /**
 * Render activity type
@@ -71,11 +102,12 @@
 .activity-list {}
 
 .render-activity {
-  position: relative
+  position: relative;
+  margin-bottom: 15px;
 }
 
 .activity-remove {
-  position: absolute 10px -75px * *;
+  position: absolute 6px -75px * *;
   font: normal 16px/22px 'Open Sans';
   color: #d0011b !important;
   letter-spacing: -0.2px;
@@ -85,4 +117,8 @@
   position: absolute 0px * * 100%;
   width: 210px;
   padding-left: 15px;
+}
+
+.activity-field {
+  height: 40px;
 }

@@ -10,7 +10,10 @@
 
 .logo {
   border-radius: 4px;
-  background-color: #ef3124;
+}
+
+.img-bg {
+  background-color: #cdcecf;
 }
 
 .overlay {
@@ -34,15 +37,6 @@
   &:hover {
     transform: scale(1.2);
   }
-}
-
-.camera-center {
-  composes: camera;
-}
-
-.camera-left-top {
-  composes: camera;
-  position: absolute 20px auto auto 20px;
 }
 
 .overlay:hover {

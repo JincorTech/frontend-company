@@ -73,7 +73,7 @@ class ActivityTypes extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { modalId, actions, activityTypes, Button, title, placeholder } = this.props
+    const { modalId, actions, activityTypes, Button, title, placeholder, invalid, activityValue, ...inputProps } = this.props
     const { open, rootNodes } = activityTypes
     const { openAT, closeAT, openNode, closeNode, selectValue } = actions
 
@@ -81,8 +81,8 @@ class ActivityTypes extends Component<Props, {}> {
       <div>
         {
           Button
-            ? <Button value={title} placeholder={placeholder} onClick={openAT}/>
-            : <SelectInput value={title} placeholder={placeholder} onClick={openAT}/>
+            ? <Button value={title} placeholder={placeholder} onClick={openAT} {...inputProps}/>
+            : <SelectInput value={title} placeholder={placeholder} onClick={openAT} {...inputProps}/>
         }
 
         <Popup styleName="activity-popup" modalId={modalId} open={open} onClose={closeAT}>

@@ -3,8 +3,10 @@ import { Component, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FieldArray, FormProps } from 'redux-form'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
 import InfoItem from '../../../components/profile/InfoItem'
+import CompanyLogo from '../../../components/profile/CompanyLogo'
 import RenderInput from '../../../components/form/RenderInput'
 import RenderSelect from '../../../containers/form/RenderSelect'
 import RenderTextarea from '../../../components/form/RenderTextarea'
@@ -58,6 +60,16 @@ export type Option = {
  * Component
  */
 class ProfileEdit extends Component<Props, {}> {
+  constructor(props) {
+    super(props)
+
+    this.deleteLogo = this.deleteLogo.bind(this)
+  }
+
+  private deleteLogo(): void {
+    this.props.change('upload', '')
+  }
+
   public render(): JSX.Element {
     return (
       <form styleName="company-profile-edit">
@@ -65,8 +77,11 @@ class ProfileEdit extends Component<Props, {}> {
           <Field
             name="upload"
             component={RenderImageUpload}
+            defaultElement={<CompanyLogo/>}
             width={165}
             height={165}/>
+
+          <button type="button" onClick={() => this.deleteLogo()} styleName="delete-logo">удалить</button>
         </div>
 
         <div styleName="company-info">
@@ -82,23 +97,26 @@ class ProfileEdit extends Component<Props, {}> {
               modalId="select-country"
               filter
               options={[]}
-              component={RenderSelect}/>
+              component={RenderSelect}
+              styleName="select-input"/>
 
             <Field
               name="city"
               modalId="select-city"
               filter
               options={[]}
-              component={RenderSelect}/>
+              component={RenderSelect}
+              styleName="select-input"/>
           </div>
 
-          <InfoItem styleName="section" title="Тип компании">
+          <InfoItem styleName="section-small" title="Тип компании">
             <Field
               name="type"
               modalId="select-company-type"
               placeholder="Тип компании"
               options={[]}
-              component={RenderSelect}/>
+              component={RenderSelect}
+              styleName="select-input"/>
           </InfoItem>
 
           <InfoItem styleName="section" title="Описание компании">
@@ -124,18 +142,20 @@ class ProfileEdit extends Component<Props, {}> {
             <Field
               name="email"
               placeholder="Email"
-              component={RenderInput}/>
+              component={RenderInput}
+              styleName="text-input"/>
 
             <Field
               name="phone"
               placeholder="Номер телефона"
-              component={RenderInput}/>
+              component={RenderInput}
+              styleName="text-input"/>
           </InfoItem>
         </div>
 
         <div styleName="company-controls">
           <input styleName="submit-btn" type="submit" value="Сохранить"/>
-          <a styleName="cancel-btn">отменить</a>
+          <Link to="/app/profile" styleName="cancel-btn">отменить</Link>
         </div>
       </form>
     )

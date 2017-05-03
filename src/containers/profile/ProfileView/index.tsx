@@ -12,7 +12,6 @@ import CompanyLogo from '../../../components/profile/CompanyLogo'
 import InfoItem from '../../../components/profile/InfoItem'
 import SocialLink, { LinkProps } from '../../../components/profile/SocialLink'
 import ContactItem from '../../../components/profile/ContactItem'
-import Button from '../../../components/profile/Button'
 import Text from '../../../components/profile/Text'
 import CompanyCard from '../../../containers/common/CompanyCard'
 
@@ -106,9 +105,7 @@ class CompanyProfile extends Component<Props, StateProps> {
         </div>
 
         <div styleName="controls-block">
-          <Button
-            styleName="edit-button"
-            children="Редактировать"/>
+          <Link to="/app/profile/edit" styleName="edit-button">Редактировать</Link>
 
           <a
             onClick={() => openCompanyCard()}

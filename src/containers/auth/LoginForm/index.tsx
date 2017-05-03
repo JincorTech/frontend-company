@@ -8,7 +8,7 @@ import { validate, initialValues } from '../../../helpers/auth/loginForm'
 
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
-import Link from '../../../components/common/Link'
+import { Link } from 'react-router'
 import RenderInput from '../../../components/form/RenderInput'
 import RenderPassword from '../../../components/form/RenderPassword'
 

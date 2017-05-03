@@ -13,15 +13,15 @@ import RenderImageUpload from '../../../../components/form/RenderImageUpload'
 export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>
 
 export type ComponentProps = {
-  onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
-  onCancel: () => void,
+  onSubmit: SubmitHandler<FormFields, ComponentProps, any>
+  onCancel: () => void
   avatar: string
 }
 
 export type FormFields = {
-  avatar: string,
-  firstName: string,
-  lastName: string,
+  avatar: string
+  firstName: string
+  lastName: string
   position: string
 }
 
@@ -47,7 +47,6 @@ class ProfileEdit extends Component<Props, {}> {
             component={RenderImageUpload}
             overlay={blackout}
             name="avatar"
-            camPosition="left-top"
             width={325}
             height={325}/>
         </div>

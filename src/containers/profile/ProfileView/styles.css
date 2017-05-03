@@ -65,10 +65,24 @@
 
 .company-link {
   display: block;
+  font-size: 16px;
 }
 
 .company-link, .edit-button {
-  margin-bottom: 12px;
+  margin-bottom: 18px;
+}
+
+.edit-button {
+  display: inline-block;
+  font-size: 15px;
+  color: #0070e0;
+  padding: 8px 22px;
+  border: 1px solid #dbdfe4;
+  border-radius: 4px;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .controls-block {
