@@ -32,9 +32,10 @@
 
 .placeholder-default {
   color: #9da0a4;
+  top: center;
 }
 
 .icon {
   top: center;
-  right: 19px;
+  right: 5px;
 }

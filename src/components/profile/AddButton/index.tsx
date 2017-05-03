@@ -10,7 +10,7 @@ const AddButton: SFC<Props> = (props) => {
   return (
     <div styleName="add-input" {...props}>
       <Icon styleName="add-icon"  name="plus"/>
-      <span styleName="add-link">добавить ссылку</span>
+      <span styleName="add-link">добавить отрасль</span>
     </div>
   )
 }

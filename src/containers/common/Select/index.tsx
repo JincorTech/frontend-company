@@ -133,16 +133,16 @@ class Select extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { filter, modalId, Button, select, title, placeholder, invalid, actions } = this.props
-    const { open, selectedOption, optionsMap, options, filterValue } = select
+    const { filter, modalId, Button, select, title, placeholder, invalid, actions, options, optionValue, ...divProps } = this.props
+    const { open, selectedOption, optionsMap, filterValue } = select
     const option = optionsMap[selectedOption] || { name: '', value: '' }
 
     return (
       <div styleName="select">
         {
           Button
-          ? <Button value={option.name} placeholder={placeholder} invalid={invalid} onClick={actions.openSelect}/>
-          : <SelectInput value={option.name} placeholder={placeholder} invalid={invalid} onClick={actions.openSelect}/>
+          ? <Button value={option.name} placeholder={placeholder} invalid={invalid} onClick={actions.openSelect} {...divProps}/>
+          : <SelectInput value={option.name} placeholder={placeholder} invalid={invalid} onClick={actions.openSelect} {...divProps}/>
         }
 
         <Popup modalId={modalId} styleName="select-popup" open={open} onClose={actions.closeSelect}>

@@ -33,6 +33,7 @@
 }
 
 .icon {
-  top: center;
-  right: 19px;
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
 }

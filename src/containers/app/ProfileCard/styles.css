@@ -58,6 +58,11 @@
   text-align: right;
 }
 
+.company-hidden {
+  composes: company;
+  display: none;
+}
+
 .company-name {
   display: inline-block;
   vertical-align: top;
@@ -91,6 +96,11 @@
   z-index: 1;
   cursor: default;
   transition: .2s linear all;
+}
+
+.info-hidden {
+  composes: info;
+  display: none;
 }
 
 .full-name {

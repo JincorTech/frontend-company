@@ -64,6 +64,7 @@ const RenderActivities: SFC<ActivitiesProps> = (props) => {
           index={i}
           name={field}
           component={RenderActivity}
+          styleName="activity-field"
           placeholder={i > 0 ? 'Дополнительная сфера деятельности' : 'Oсновная сфера деятельности'}
           handleRemove={() => handleRemove(i)}/>
       ))}

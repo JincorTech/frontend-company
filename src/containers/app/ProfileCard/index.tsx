@@ -110,14 +110,14 @@ const ProfileCard: SFC<Props> = props => {
             : <div styleName="avatar-empty" style={backgroundColor}>{initials}</div>
         }
 
-        <div styleName="company">
+        <div styleName={bottomView !== 'profile-form' ? 'company' : 'company-hidden'}>
           <div styleName="company-name">{company.legalName}</div>
           <div styleName={ company.picture ? 'company-logo' : 'company-logo-empty' }>
             <img src={company.picture}/>
           </div>
         </div>
 
-        <div styleName="info">
+        <div styleName={bottomView !== 'profile-form' ? 'info' : 'info-hidden'}>
           <div styleName="full-name">{profile.name}</div>
           <div styleName="position">{profile.position}</div>
         </div>

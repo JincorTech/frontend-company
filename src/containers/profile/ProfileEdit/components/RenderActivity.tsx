@@ -25,7 +25,8 @@ export const RenderActivity: SFC<Props> = (props) => {
     input,
     meta,
     index,
-    handleRemove
+    handleRemove,
+    ...inputProps
   } = props
 
   const { invalid, touched, active, dirty, error } = meta
@@ -39,7 +40,8 @@ export const RenderActivity: SFC<Props> = (props) => {
           title=""
           modalId={`profile-edit-at-${index}`}
           activityValue={value}
-          placeholder={placeholder}/>
+          placeholder={placeholder}
+          {...inputProps}/>
       </FieldError>
 
       <a styleName="activity-remove" onClick={handleRemove}>удалить</a>
