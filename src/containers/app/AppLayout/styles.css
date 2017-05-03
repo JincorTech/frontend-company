@@ -75,17 +75,17 @@
   transition: left linear 0.2s;
 }
 
-.open {
+.sidebar-open {
   composes: sidebar;
   left: 0;
 }
 
-.close {
+.sidebar-close {
   composes: sidebar;
   left: -240px;
 }
 
-.sidebar-item {
+.link {
   display: block;
   font-size: 16px;
   cursor: pointer;
@@ -94,6 +94,20 @@
 
   &:hover {
     color: #0070e0 !important;
+    text-decoration: none;
+  }
+}
+
+.active {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+  color: #0070e0 !important;
+  pointer-events: none;
+
+  &:hover {
     text-decoration: none;
   }
 }

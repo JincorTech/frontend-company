@@ -8,6 +8,8 @@ import { LinkProps } from '../../../components/profile/SocialLink'
 import Popup from '../../../components/common/FullscreenPopup'
 import Button from '../../../components/common/Button'
 import Icon from '../../../components/common/Icon'
+import SocialLink from '../../../components/profile/SocialLink'
+import CompanyLogo from '../../../components/profile/CompanyLogo'
 
 
 export type Props = ComponentProps & StateProps & DispatchProps
@@ -17,14 +19,15 @@ export type ComponentProps = HTMLProps<HTMLDivElement> & {
 }
 
 export type CompanyInfo = {
-  logo: string,
-  name: string,
-  type: string,
-  region: string,
-  email: string,
-  phone: string,
-  activities: any,
-  socialLinks: LinkProps[],
+  logo: string
+  name: string
+  type: string
+  city: string
+  country: string
+  email: string
+  phone: string
+  activities: any
+  socialLinks: LinkProps[]
   description: string
 }
 
@@ -42,23 +45,23 @@ export type DispatchProps = {
  */
 const CompanyCard: SFC<Props> = props => {
   const { open, company, closeCompanyCard } = props
-  const { logo, name, region, description, email, phone, activities, socialLinks } = company
+  const { logo, type, name, city, country, description, email, phone, activities, socialLinks } = company
 
   return (
     <Popup
       styleName="company-card"
-      modalId="comapny-card"
+      modalId="company-card"
       open={open}
       onClose={closeCompanyCard}>
 
       <div styleName="top">
         <div styleName="logo">
-          <img src="http://www.designbolts.com/wp-content/uploads/2016/09/fresh-creative-logo-design-2017-4.jpg"/>
+          <CompanyLogo src={logo}/>
         </div>
         <div styleName="title">
           <div styleName="inner">
-            <div styleName="name">Sumitomo Mitsui Finance and Leasing </div>
-            <span styleName="address">Moscow, Russian Federation</span>
+            <div styleName="name">{name}</div>
+            <span styleName="address">{city ? `${country}, ${city}` : country}</span>
             <div styleName="buttons">
               <Button styleName="transparent-button">Написать</Button>
               <button styleName="bookmark" type="button"><Icon styleName="icon" name="bookmark"/></button>
@@ -67,26 +70,35 @@ const CompanyCard: SFC<Props> = props => {
         </div>
       </div>
 
-      <div styleName="bottom">
+      <div styleName={description ? 'bottom' : 'bottom-small'}>
+        {description &&
         <div styleName="about">
-          <p>АО «Тинькофф Банк» — российский моноофисный банк, подконтрольный бизнесмену Олегу Тинькову. Ключевые сегменты, в которых работает данное финансовое учреждение, — кредитные карты и вклады частных лиц. С недавних пор Тинькофф банк обслуживает также и юридических лиц. Основная особенность банка на рынке банкинга — дистанционная работа со всеми клиентами с использованием современных каналов связи и через представителей.</p>
-        </div>
+          <p>{description}</p>
+        </div>}
 
         <div styleName="info">
-          <ul styleName="list">
-            <li><Icon styleName="icon" name="company-type"/>Публичная компания</li>
-            <li><Icon styleName="icon" name="activity"/>Банковские услуги</li>
-            <li><Icon styleName="icon" name="activity"/>Страхование</li>
-            <li><Icon styleName="icon" name="activity"/>Инвестиции</li>
-            <li><Icon styleName="icon" name="phone"/>+7 495 002 93 90</li>
-            <li><Icon styleName="icon" name="email"/>contact@alfa-bank.ru</li>
+          <ul>
+            <li styleName="item"><Icon styleName="icon" name="company-type"/>{type}</li>
+
+            {activities.length
+              ? activities.map((activity, i) =>
+                <li styleName="item" key={i}><Icon styleName="icon" name="activity"/>{activity.name}</li>)
+              : <li styleName="item-empty"><Icon styleName="icon" name="activity"/>Отрасли не указаны</li>}
+
+            {phone
+              ? <li styleName="item"><Icon styleName="icon" name="phone"/>{phone}</li>
+              : <li styleName="item-empty"><Icon styleName="icon" name="phone"/>Телефон не указан</li>}
+
+            {email
+              ? <li styleName="item"><Icon styleName="icon" name="email"/>{email}</li>
+              : <li styleName="item-empty"><Icon styleName="icon" name="email"/>Email не указан</li>}
           </ul>
 
           <div styleName="socials">
-            <a href="javascript:void(0)"><Icon name="social-url"/></a>
-            <a href="javascript:void(0)"><Icon name="social-instagram"/></a>
-            <a href="javascript:void(0)"><Icon name="social-facebook"/></a>
-            <a href="javascript:void(0)"><Icon name="social-twitter"/></a>
+            {Boolean(socialLinks.length) &&
+            <ul styleName="social-links">
+              {socialLinks.map((social, i) => <SocialLink {...social} key={i}/>)}
+            </ul>}
           </div>
         </div>
       </div>

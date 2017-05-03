@@ -11,15 +11,22 @@ import { fetchCompany } from '../../redux/modules/profile/profileView'
 function* fetchCompanyIterator(): SagaIterator {
   try {
     const { data } = yield call(get, '/company/my')
-    yield call(console.log, data)
+    yield put(fetchCompany.success(data))
   } catch (e) {
     yield put(fetchCompany.failure(e))
   }
 }
 
-export default function* fetchCompanySaga(): SagaIterator {
+function* fetchCompanySaga(): SagaIterator {
   yield takeLatest(
     fetchCompany.REQUEST,
     fetchCompanyIterator
   )
+}
+
+
+export default function* (): SagaIterator {
+  yield [
+    fork(fetchCompanySaga)
+  ]
 }
