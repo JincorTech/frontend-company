@@ -23,5 +23,5 @@ export const initialValues: FormFields = {
 export const validate = createValidation({
   countryId:   required(),
   companyType: required(),
-  legalName:    minLength(3),
+  legalName:   minLength(3),
 })

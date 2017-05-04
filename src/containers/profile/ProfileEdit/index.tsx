@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
 import { fetchActivities } from '../../../redux/modules/common/activityTypes'
+import { required, minLength } from '../../../utils/validators'
 
 import InfoItem from '../../../components/profile/InfoItem'
 import CompanyLogo from '../../../components/profile/CompanyLogo'
@@ -13,8 +14,8 @@ import RenderInput from '../../../components/form/RenderInput'
 import RenderSelect from '../../../containers/form/RenderSelect'
 import RenderTextarea from '../../../components/form/RenderTextarea'
 import RenderImageUpload from '../../../components/form/RenderImageUpload'
-import RenderLinkInputs from '../../../components/profile/RenderLinkInputs'
-import RenderActivities from './components/RenderActivities'
+import RenderLinkInputs from '../../../components/form/RenderLinkInputs'
+import RenderActivities from '../../../components/form/RenderActivities'
 import { LinkProps } from '../../../components/profile/SocialLink'
 
 
@@ -88,6 +89,7 @@ class ProfileEdit extends Component<Props, {}> {
             name="upload"
             component={RenderImageUpload}
             defaultElement={<CompanyLogo/>}
+            validate={required()}
             width={165}
             height={165}/>
 
@@ -99,6 +101,7 @@ class ProfileEdit extends Component<Props, {}> {
             name="name"
             styleName="company-name"
             placeholder="Имя компании"
+            validate={minLength(3)}
             component={RenderInput}/>
 
           <div styleName="region">
@@ -106,6 +109,7 @@ class ProfileEdit extends Component<Props, {}> {
               name="country"
               modalId="select-country"
               filter
+              validate={required()}
               options={[]}
               component={RenderSelect}
               styleName="select-input"/>
@@ -122,6 +126,7 @@ class ProfileEdit extends Component<Props, {}> {
           <InfoItem styleName="section-small" title="Тип компании">
             <Field
               name="type"
+              validate={required()}
               modalId="select-company-type"
               placeholder="Тип компании"
               options={[]}
@@ -176,7 +181,11 @@ class ProfileEdit extends Component<Props, {}> {
  * Decorators
  */
 const StyledComponent = CSSModules(ProfileEdit, require('./styles.css'))
-const FormComponent = reduxForm<FormFields, ComponentProps>({ form: 'ProfileEdit' })(StyledComponent)
+
+const FormComponent = reduxForm<FormFields, ComponentProps>({
+  form: 'ProfileEdit'
+})(StyledComponent)
+
 export default connect<{}, DispatchProps, ReduxFormProps>(
   (state) => ({}),
   { fetchActivities }

@@ -3,8 +3,10 @@ import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { Field, WrappedFieldArrayProps } from 'redux-form'
 
-import RenderLinkInput from './components/RenderLinkInput'
-import AddInput from './components/AddInput'
+import { required } from '../../../utils/validators'
+
+import RenderLinkInput from '../RenderLinkInput'
+import AddButton from '../../profile/AddButton'
 
 /**
  * Types
@@ -21,10 +23,11 @@ const RenderLinkInputs: SFC<Props> = (props) => {
           key={i}
           name={field}
           placeholder="URL"
+          validate={required()}
           component={RenderLinkInput}
           onRemove={() => fields.remove(i)}/>
       ))}
-      {fields.length < 4 && <AddInput onClick={() => fields.push('')}/>}
+      {fields.length < 4 && <AddButton children="добавить ссылку" onClick={() => fields.push('')}/>}
     </div>
   )
 }

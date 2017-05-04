@@ -6,11 +6,11 @@ import Icon from '../../common/Icon'
 
 export type Props = HTMLProps<HTMLDivElement>
 
-const AddButton: SFC<Props> = (props) => {
+const AddButton: SFC<Props> = ({children, ...props}) => {
   return (
     <div styleName="add-input" {...props}>
       <Icon styleName="add-icon"  name="plus"/>
-      <span styleName="add-link">добавить отрасль</span>
+      <span styleName="add-link">{children}</span>
     </div>
   )
 }
