@@ -9,7 +9,7 @@ import CompanyCard from '../../../components/search/CompanyCard'
 import RenderSearch from '../../form/RenderSearch'
 import RenderSelect from '../../form/RenderSelect'
 // import ActivityTypes from '../../form/RenderActivities/components/ActivityTypes'
-import RenderActivityTypes from '../../form/RenderActivityTypes'
+// import RenderActivityTypes from '../../form/RenderActivityTypes'
 import SelectDropdown from '../../../components/common/SelectDropdown'
 
 
@@ -48,12 +48,12 @@ class Search extends Component<Props, StateProps> {
                 placeholder="Все страны"/>
             </div>
             <div styleName="filter">
-              <Field
-                component={RenderActivityTypes}
-                Button={SelectDropdown}
-                modalId="filter2"
-                name="filter2"
-                placeholder="Все отрасли"/>
+              {/*<Field*/}
+                {/*component={RenderActivityTypes}*/}
+                {/*Button={SelectDropdown}*/}
+                {/*modalId="filter2"*/}
+                {/*name="filter2"*/}
+                {/*placeholder="Все отрасли"/>*/}
             </div>
           </div>
         </div>

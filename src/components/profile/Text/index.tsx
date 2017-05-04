@@ -36,7 +36,7 @@ class Text extends Component<Props, State> {
     return (
       <div styleName="text" {...props}>
         {value}
-        {value.length > 200 && <span
+        {value.length > 250 && <span
           styleName="expand"
           children="Свернуть"
           onClick={this.handleExpand}/>
@@ -47,11 +47,11 @@ class Text extends Component<Props, State> {
 
   private renderCollapsed(): JSX.Element {
     const { value, ...props } = this.props
-    const shouldCut = value.length > 200
+    const shouldCut = value.length > 250
 
     return (
       <div styleName="text" {...props}>
-        {shouldCut ? value.substr(0, 200) + '... ' : value}
+        {shouldCut ? value.substr(0, 250) + '... ' : value}
         {shouldCut && <span
           styleName="expand"
           children="Развернуть"

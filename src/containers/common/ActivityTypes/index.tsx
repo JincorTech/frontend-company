@@ -40,6 +40,7 @@ export type ComponentProps = {
   button?: JSX.Element
   placeholder?: string
   invalid?: string
+  onActivitySelect: (activityId: string) => void
 }
 
 export type DispatchProps = {
@@ -121,12 +122,12 @@ class ActivityTypes extends Component<Props, {}> {
 
   private renderActivityLeaf(activity: ActivityLeaf): JSX.Element {
     const { id, name, visible } = activity
-    const { actions: { selectValue }} = this.props
+    const { actions: { selectValue }, onActivitySelect } = this.props
 
     return visible && <div
       key={id}
       styleName="activity-leaf"
-      onClick={() => selectValue(id)}>
+      onClick={() => { selectValue(id); onActivitySelect(id) }}>
       <div styleName="activity-name">{name}</div>
     </div>
   }

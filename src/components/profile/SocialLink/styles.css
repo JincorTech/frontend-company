@@ -8,7 +8,9 @@
 .link-icon {
   display: inline-block;
   background: #f2f2f2;
-  size: 36px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50%;
   border-radius: 50%;
   vertical-align: middle;
   opacity: 0.6;
@@ -16,6 +18,10 @@
 
   &:hover {
     opacity: 1;
+  }
+
+  & img {
+    width: 100%;
   }
 }
 

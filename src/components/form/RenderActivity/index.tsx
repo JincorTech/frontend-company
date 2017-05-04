@@ -19,6 +19,7 @@ export type Props = WrappedFieldProps<any> & InjectedCSSModuleProps & {
   openPopup: () => void
   closePopup: () => void
   handleRemove: () => void
+  onActivitySelect: (activityId: string) => void
 }
 
 export const RenderActivity: SFC<Props> = (props) => {
@@ -44,6 +45,7 @@ export const RenderActivity: SFC<Props> = (props) => {
           button={button}
           title="Основная сфера деятельности"
           name={`profile-edit-at-${index}`}
+          onActivitySelect={(id: any) => onChange(id)}
           activityValue={value}
           placeholder={placeholder}
           {...inputProps}/>

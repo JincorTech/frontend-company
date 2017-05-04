@@ -1,5 +1,6 @@
 @use postcss-short;
 @use postcss-clearfix;
+@use postcss-inline-svg;
 
 .company-card {
   background-color: #fff;
@@ -73,14 +74,14 @@
   cursor: pointer;
   position: relative 3px * * 3px;
 
-  & > .icon:hover {
+  & > .bookmark-icon:hover {
     fill: #0070e0
   }
 }
 
 
 .bottom {
-  width: 800px;
+  width: 850px;
   margin: 26px auto 0;
   clear: fix;
 }
@@ -92,25 +93,31 @@
 
 .about {
   width: 500px;
-  margin-right: 42px;
+  margin-right: 47px;
   float: left;
 
   & > p {
-    font: normal 18px/27px 'Open Sans';
+    font: normal 15px/20px 'Open Sans';
     margin: 0 0 .5em 0;
   }
 }
 
 .info {
-  width: 250px;
+  width: 300px;
   float: left;
 }
 
+.activities {
+  margin: -10px 0;
+}
+
 .item {
-  font: normal 18px 'Open Sans';
+  font: normal 15px/20px 'Open Sans';
   letter-spacing: -.2px;
   color: #222;
-  margin-bottom: -3px;
+  position: relative;
+  padding-left: 30px;
+  margin: 10px 0;
 }
 
 .item-empty {
@@ -119,19 +126,43 @@
 }
 
 .icon {
-  size: 36px;
+  size: 30px;
   background-position: center;
   background-repeat: no-repeat;
+  background-size: contain;
   vertical-align: middle;
   margin-right: 9px;
+  position: absolute;
+  left: -5px;
+}
+
+.company-icon {
+  composes: icon;
+  background-image: svg-load('./svg/company.svg');
+}
+
+.activity-icon {
+  composes: icon;
+  background-image: svg-load('./svg/activity.svg');
+}
+
+.phone-icon {
+  composes: icon;
+  background-image: svg-load('./svg/phone.svg');
+}
+
+.email-icon {
+  composes: icon;
+  background-image: svg-load('./svg/email.svg');
 }
 
 .socials {
-  margin: 15px -7px 0;
+  margin: 34px -11px 0;
+}
 
-  & a {
-    margin: 0 12px;
-  }
+.social {
+  display: inline-block;
+  margin: 0 12px;
 }
 
 .empty-value {

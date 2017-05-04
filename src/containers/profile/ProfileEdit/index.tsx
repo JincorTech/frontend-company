@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Component, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
-import { reduxForm, Field, FieldArray, FormProps } from 'redux-form'
+import {reduxForm, Field, FieldArray, FormProps, SubmitHandler} from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
@@ -17,6 +17,8 @@ import RenderImageUpload from '../../../components/form/RenderImageUpload'
 import RenderLinkInputs from '../../../components/form/RenderLinkInputs'
 import RenderActivities from '../../../components/form/RenderActivities'
 import { LinkProps } from '../../../components/profile/SocialLink'
+
+import { updateProfile } from '../../../redux/modules/profile/profileEdit'
 
 
 /**
@@ -36,6 +38,7 @@ export type ComponentProps = {
   phone: string
   activities: ActivityType[]
   socialLinks: LinkProps[]
+  updateProfile: SubmitHandler<FormFields, ComponentProps, any>
 }
 
 export type ActivityType = {
@@ -78,12 +81,14 @@ class ProfileEdit extends Component<Props, {}> {
   }
 
   private deleteLogo(): void {
-    this.props.change('upload', '')
+    this.props.change('upload', null)
   }
 
   public render(): JSX.Element {
+    const { handleSubmit } = this.props
+
     return (
-      <form styleName="company-profile-edit">
+      <form styleName="company-profile-edit" onSubmit={handleSubmit(updateProfile)}>
         <div styleName="company-logo">
           <Field
             name="upload"
@@ -171,6 +176,7 @@ class ProfileEdit extends Component<Props, {}> {
         <div styleName="company-controls">
           <input styleName="submit-btn" type="submit" value="Сохранить"/>
           <Link to="/app/profile" styleName="cancel-btn">отменить</Link>
+          {/*<button type="button" onClick={() => updateProfile()}>Cделать грязь</button>*/}
         </div>
       </form>
     )

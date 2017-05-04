@@ -10,14 +10,15 @@ export type LinkProps = {
   value: string
   iconUrl?: string
   displayName?: boolean
+  size?: number
 }
 
 const SocialLink: SFC<Props> = (props) => {
-  const { name, iconUrl, value: url, displayName, ...liProps } = props
+  const { name, iconUrl, value: url, displayName, size = 36, ...liProps } = props
 
   return (
     <li styleName="social-link" {...liProps}>
-      <a styleName="link-icon" href={url}>
+      <a styleName="link-icon" href={url} style={{ width: size, height: size }}>
         {iconUrl
           ? <img src={iconUrl}/>
           : <img src={require('./svg/default.svg')}/>}
