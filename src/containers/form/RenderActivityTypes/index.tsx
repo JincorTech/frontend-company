@@ -15,13 +15,13 @@ export type Props = ActivityTypesProps & WrappedFieldProps<any>
  * Props
  */
 const RenderActivityTypes: SFC<any> = (props) => {
-  const { title, placeholder, input, meta, modalId, Button } = props
+  const { title, placeholder, input, meta, modalId, button } = props
 
   return (
     <FieldError meta={meta}>
       <ActivityTypes
-        modalId={modalId}
-        Button={Button}
+        name={modalId}
+        button={button}
         title={placeholder}
         activityValue={input.value}
         placeholder={placeholder}/>

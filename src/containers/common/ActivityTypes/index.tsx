@@ -1,103 +1,170 @@
 import * as React from 'react'
-import { Component, SFC } from 'react'
+import { Component, cloneElement } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Scrollbars from 'react-custom-scrollbars'
 
 import {
-  registerAT, removeAT,
-  openAT, closeAT,
-  setNodes, selectValue,
-  ActivityTypeState,
-  openNode, closeNode
+  registerSelect,
+  removeSelect,
+  unregisterSelect,
+  openSelect,
+  closeSelect,
+  selectValue,
+  openNode,
+  closeNode
 } from '../../../redux/modules/common/activityTypes'
 
+import {
+  ActivityMap,
+  SelectState,
+  ActivityLeaf,
+  ActivityNode,
+  selectInitialState
+} from '../../../redux/modules/common/activityTypes'
+
+import Icon from '../../../components/common/Icon'
 import Popup from '../../../components/common/Popup'
-import ActivityType from './components/ActivityType'
 import SelectInput from '../../../components/common/SelectInput'
-import { SelectInputProps } from '../../../components/common/SelectDropdown'
 
-
+/**
+ * Types
+ */
 export type Props = ComponentProps & DispatchProps & StateProps
 
 export type ComponentProps = {
-  modalId: string
-  Button?: SFC<SelectInputProps>
+  name: string
   activityValue: string
   title: string
+  button?: JSX.Element
   placeholder?: string
   invalid?: string
 }
 
 export type DispatchProps = {
   actions: {
-    registerAT: () => void
-    removeAT: () => void
-    openAT: () => void
-    closeAT: () => void
-    setNodes: () => void
-    openNode: () => void
-    closeNode: () => void
-    selectValue: () => void
+    registerSelect: (name: string) => void
+    unregisterSelect: (name: string) => void
+    removeSelect: (name: string) => void
+    openSelect: () => void
+    closeSelect: () => void
+    selectValue: (activityId: string) => void
+    openNode: (activityId: string) => void
+    closeNode: (activityIs: string) => void
   }
 }
 
 export type StateProps = {
-  activityTypes: ActivityTypeState
+  rootNodes: string[]
+  activityMap: ActivityMap
+  select: SelectState
 }
 
-
+/**
+ * Component
+ */
 class ActivityTypes extends Component<Props, {}> {
-  public static defaultProps: any = {
-    activityTypes: {
-      name: '',
-      open: false,
-      selectedActivity: null,
-      activities: [],
-      activitiesMap: {}
-    }
+  constructor(props) {
+    super(props)
+
+    this.renderActivityType = this.renderActivityType.bind(this)
+    this.renderActivityLeaf = this.renderActivityLeaf.bind(this)
+    this.renderActivityNode = this.renderActivityNode.bind(this)
   }
 
   public componentWillMount(): void {
-    const { modalId, actions } = this.props
+    const { name, actions } = this.props
 
-    if (!modalId) throw new Error('modalId required')
-
-    actions.registerAT()
-    actions.setNodes()
+    if (name) {
+      actions.registerSelect(name)
+    } else {
+      throw new Error('name required')
+    }
   }
 
   public componentWillUnmount(): void {
-    this.props.actions.removeAT()
+    const { name, actions } = this.props
+
+    actions.unregisterSelect(name)
+  }
+
+  private renderActivityType(activityId: string): JSX.Element {
+    const { activityMap } = this.props
+    const activity = activityMap[activityId]
+
+    return activity.type === 'node'
+      ? this.renderActivityNode(activity)
+      : this.renderActivityLeaf(activity)
+  }
+
+  private renderActivityNode(activity: ActivityNode): JSX.Element {
+    const { id, name, visible, childrenIds, open } = activity
+    const { activityMap, actions: { openNode, closeNode }} = this.props
+
+    return visible && <div key={id} styleName="activity-node">
+      <div
+        styleName="activity-leaf"
+        title={name}
+        onClick={() => open ? closeNode(id) : openNode(id) }>
+        <div styleName="activity-name">
+          {name}
+          {open && <Icon styleName="caret" name="sort-down"/>}
+        </div>
+      </div>
+
+      {open && <div styleName="children">
+        {childrenIds.map((activityId) => this.renderActivityType(activityId))}
+      </div>}
+    </div>
+  }
+
+  private renderActivityLeaf(activity: ActivityLeaf): JSX.Element {
+    const { id, name, visible } = activity
+    const { actions: { selectValue }} = this.props
+
+    return visible && <div
+      key={id}
+      styleName="activity-leaf"
+      onClick={() => selectValue(id)}>
+      <div styleName="activity-name">{name}</div>
+    </div>
   }
 
   public render(): JSX.Element {
-    const { modalId, actions, activityTypes, Button, title, placeholder, invalid, activityValue, ...inputProps } = this.props
-    const { open, rootNodes } = activityTypes
-    const { openAT, closeAT, openNode, closeNode, selectValue } = actions
+    const { name, actions, activityMap, select, button, title, placeholder, rootNodes } = this.props
+    const { openSelect, closeSelect } = actions
+    const { open, selectedActivity } = select
+    const nameValue = activityMap[selectedActivity]
+      ? activityMap[selectedActivity].name
+      : ''
 
     return (
       <div>
         {
-          Button
-            ? <Button value={title} placeholder={placeholder} onClick={openAT} {...inputProps}/>
-            : <SelectInput value={title} placeholder={placeholder} onClick={openAT} {...inputProps}/>
+          button
+            ? cloneElement(button, {
+                value: nameValue,
+                placeholder,
+                onClick: openSelect
+              })
+            : <SelectInput
+                value={nameValue}
+                placeholder={placeholder}
+                onClick={openSelect}/>
         }
 
-        <Popup styleName="activity-popup" modalId={modalId} open={open} onClose={closeAT}>
-          <h1 styleName="activity-title">Основная сфера деятельности</h1>
+        <Popup
+          styleName="activity-popup"
+          open={open}
+          modalId={`${name}-activity-type`}
+          onClose={closeSelect}>
+
+          <h1 styleName="activity-title">{title}</h1>
 
           <Scrollbars autoHide autoHeight autoHeightMax={537}>
             <div styleName="activity-types">
-              {rootNodes.map((id, i) =>
-                <ActivityType
-                  key={i}
-                  activityId={id}
-                  modalId={modalId}
-                  openNode={openNode}
-                  closeNode={closeNode}
-                  selectValue={selectValue}/>)}
+              {rootNodes.map((id) => this.renderActivityType(id))}
             </div>
           </Scrollbars>
         </Popup>
@@ -109,32 +176,23 @@ class ActivityTypes extends Component<Props, {}> {
 
 const StyledComponent = CSSModules(ActivityTypes, require('./styles.css'))
 
-const defaultActivityTypes = {
-  name: '',
-  open: false,
-  selectedActivityId: null,
-  rootNodes: [],
-  activityMap: {}
+const mapStateToProps = (state, { name }: Props): StateProps => {
+  const { activityMap, selectMap, rootNodes } = state.common.activityTypes
+  const select = selectMap[name] || selectInitialState
+
+  return { activityMap, select, rootNodes }
 }
 
-const mapStateToProps = ({ common: { activityTypes }}, { modalId }: Props): StateProps => {
-  const activityTypesState = activityTypes[modalId] || defaultActivityTypes
-  const activities = activityTypesState.activities
-  return {
-    activityTypes: {...activityTypesState, activities}
-  }
-}
-
-const mapDispatchToProps = (dispatch, { modalId }: Props): DispatchProps => ({
+const mapDispatchToProps = (dispatch, { name }: Props): DispatchProps => ({
   actions: bindActionCreators({
-    registerAT: registerAT.bind(null, modalId),
-    removeAT: removeAT.bind(null, modalId),
-    openAT: openAT.bind(null, modalId),
-    closeAT: closeAT.bind(null, modalId),
-    setNodes: setNodes.bind(null, modalId),
-    openNode: openNode.bind(null, modalId),
-    closeNode: closeNode.bind(null, modalId),
-    selectValue: selectValue.bind(null, modalId)
+    registerSelect,
+    unregisterSelect,
+    removeSelect,
+    openSelect: openSelect.bind(null, { name }),
+    closeSelect: closeSelect.bind(null, { name }),
+    selectValue: selectValue.bind(null, { name }),
+    openNode,
+    closeNode
   }, dispatch)
 })
 

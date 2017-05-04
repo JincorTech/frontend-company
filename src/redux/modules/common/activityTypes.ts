@@ -1,21 +1,26 @@
-import { createReducer, createAction, createMetaAction, createAsyncAction, Action, ActionMeta } from '../../../utils/actions'
+import {
+  createReducer,
+  createMetaAction,
+  createAction,
+  createAsyncAction,
+  Action,
+  ActionMeta
+} from '../../../utils/actions'
+
 import { from, ImmutableObject } from 'seamless-immutable'
 
-
+/**
+ * Types
+ */
 export type State = StateMap & ImmutableObject<StateMap>
 
 export type StateMap = {
-  [activityTypeName: string]: ActivityTypeState
-}
-
-export type ActivityTypeState = {
-  name: string
-  open: boolean
-  selectedActivityId: string
   rootNodes: string[]
   activityMap: ActivityMap
+  selectMap: SelectMap
 }
 
+// ActivityMap
 export type ActivityMap = {
   [activityId: string]: ActivityNode | ActivityLeaf
 }
@@ -39,75 +44,142 @@ export type ActivityLeaf = {
   parentId: string
 }
 
+// SelectMap
+export type SelectMap = {
+  [selectId: string]: SelectState
+}
+
+export type SelectState = {
+  open: boolean
+  selectedActivity: string
+}
+
+export type Meta = {
+  name: string
+}
+
 export type NormalizedActivities = {
-  activities: string[]
-  activitiesMap: ActivityMap
+  rootNodes: string[]
+  activityMap: ActivityMap
+}
+
+/**
+ * Actions
+ */
+export const FETCH_ACTIVITIES = 'common/activityTypes/FETCH_ACTIVITIES'
+export const SET_NODES        = 'common/activityTypes/SET_NODES'
+export const OPEN_NODE        = 'common/activityTypes/OPEN_NODE'
+export const CLOSE_NODE       = 'common/activityTypes/CLOSE_NODE'
+export const DISABLE_LEAF     = 'common/activityTypes/DISABLE_LEAF'
+export const ACTIVATE_LEAF    = 'common/activityTypes/ACTIVATE_LEAF'
+
+export const REGISTER_SELECT      = 'common/activityTypes/REGISTER_ACTIVTY_SELECT'
+export const UNREGISTER_SELECT    = 'common/activityTypes/UNREGISTER_SELECT'
+export const REMOVE_SELECT        = 'common/activityTypes/REMOVE_ACTIVITY_SELECT'
+export const SELECT_VALUE         = 'common/activityTypes/SELECT_VALUE'
+export const OPEN_SELECT          = 'common/activityTypes/OPEN_ACTIVITY_SELECT'
+export const CLOSE_SELECT         = 'common/activityTypes/CLOSE_ACTIVITY_SELECT'
+export const SET_SELECT_VALUE     = 'common/activityTypes/SET_SELECT_VALUE'
+
+/**
+ * Action creators
+ */
+export const fetchActivities = createAsyncAction<void, NormalizedActivities>(FETCH_ACTIVITIES)
+export const setNodes        = createAction<NormalizedActivities>(SET_NODES)
+export const openNode        = createAction<string>(OPEN_NODE)
+export const closeNode       = createAction<string>(CLOSE_NODE)
+export const disableLeaf     = createAction<string>(DISABLE_LEAF)
+export const activateLeaf    = createAction<string>(ACTIVATE_LEAF)
+
+export const registerSelect   = createAction<string>(REGISTER_SELECT)
+export const unregisterSelect = createAction<string>(UNREGISTER_SELECT)
+export const removeSelect     = createAction<string>(REMOVE_SELECT)
+export const selectValue      = createMetaAction<Meta, string>(SELECT_VALUE)
+export const openSelect       = createMetaAction<Meta, void>(OPEN_SELECT)
+export const closeSelect      = createMetaAction<Meta, void>(CLOSE_SELECT)
+export const setSelectValue   = createMetaAction<Meta, string>(SET_SELECT_VALUE)
+
+/**
+ * Reducer
+ */
+const initialState: State = from<StateMap>({
+  rootNodes: [],
+  activityMap: {},
+  selectMap: {}
+})
+
+export const selectInitialState: SelectState = {
+  open: false,
+  selectedActivity: ''
 }
 
 
-export const REGISTER_AT =      'common/activityTypes/REGISTER_AT'
-export const REMOVE_AT =        'common/activityTypes/REMOVE_SELECT'
-export const OPEN_AT =          'common/activityTypes/OPEN_AT'
-export const CLOSE_AT =         'common/activityTypes/CLOSE_AT'
-export const FETCH_ACTIVITIES = 'common/activityTypes/FETCH_ACTIVITIES'
-export const SET_NODES =        'common/activityTypes/SET_NODES'
-export const SET_NORMALIZED =   'common/activityTypes/SET_NORMALIZED'
-export const OPEN_NODE =        'common/activityTypes/OPEN_NODE'
-export const CLOSE_NODE =       'common/activityTypes/CLOSE_NODE'
-export const SELECT_VALUE =     'common/activityTypes/SELECT_VALUE'
-
-export const registerAT =       createAction<string>(REGISTER_AT)
-export const removeAT =         createAction<string>(REMOVE_AT)
-export const openAT =           createMetaAction<string, string>(OPEN_AT)
-export const closeAT =          createMetaAction<string, string>(CLOSE_AT)
-export const fetchActivities =  createAsyncAction<void, any>(FETCH_ACTIVITIES)
-export const setNodes =         createMetaAction<string, any>(SET_NODES)
-export const setNormalized =    createMetaAction<string, any>(SET_NORMALIZED)
-export const openNode =         createMetaAction<string, void>(OPEN_NODE)
-export const closeNode =        createMetaAction<string, string>(CLOSE_NODE)
-export const selectValue =      createMetaAction<string, void>(SELECT_VALUE)
-
-
-const initialState: State = from<StateMap>({})
-
 export default createReducer<State>({
-  [REGISTER_AT]: (state: State, { payload }: Action<string>): State => (
+  [fetchActivities.SUCCESS]: (state: State, { payload }: Action<NormalizedActivities>): State => (
+    state.merge(payload, { deep: true })
+  ),
+
+  [SET_NODES]: (state: State, { payload: activityMap }: Action<ActivityMap>): State => (
+    state.merge({ activityMap }, { deep: true })
+  ),
+
+  [DISABLE_LEAF]: (state: State, { payload: leafId }: Action<string>): State => (
     state.merge({
-      [payload]: {
-        name: payload,
-        open: false,
-        selectedActivityId: null,
-        rootNodes: [],
-        activityMap: {}
+      activityMap: {
+        [leafId]: {
+          visible: false,
+          selected: true
+        }
       }
+    }, { deep: true })
+  ),
+
+  [ACTIVATE_LEAF]: (state: State, { payload: leafId }: Action<string>): State => (
+    state.merge({
+      activityMap: {
+        [leafId]: {
+          visible: true,
+          selected: false
+        }
+      }
+    }, { deep: true })
+  ),
+
+  [REGISTER_SELECT]: (state: State, { payload: selectId }: Action<string>): State => (
+    state.merge({
+      selectMap: {
+        [selectId]: selectInitialState
+      }
+    }, { deep: true })
+  ),
+
+  [REMOVE_SELECT]: (state: State, { payload: selectId }: Action<string>): State => (
+    state.merge({
+      selectMap: (state.selectMap as any).without(selectId)
     })
   ),
 
-  [REMOVE_AT]: (state: State, { payload }: Action<string>): State => (
-    state.without(payload) as State
-  ),
-
-  [OPEN_AT]: (state: State, { meta }: ActionMeta<string, string>): State => (
+  [OPEN_SELECT]: (state: State, { meta: { name: selectId }}: ActionMeta<Meta, void>): State => (
     state.merge({
-      [meta]: { open: true }
+      selectMap: {
+        [selectId]: { open: true }
+      }
     }, { deep: true })
   ),
 
-  [CLOSE_AT]: (state: State, { meta }: ActionMeta<string, string>): State => (
+  [CLOSE_SELECT]: (state: State, { meta: { name: selectId }}: ActionMeta<Meta, void>): State => (
     state.merge({
-      [meta]: { open: false }
+      selectMap: {
+        [selectId]: { open: false }
+      }
     }, { deep: true })
   ),
 
-  [SET_NORMALIZED]: (state: State, { payload, meta }: ActionMeta<string, NormalizedActivities>): State => (
+  [SET_SELECT_VALUE]: (state: State, { meta: { name: selectId }, payload: selectedActivity}: ActionMeta<Meta, string>): State => (
     state.merge({
-      [meta]: payload
-    }, { deep: true })
-  ),
-
-  [SELECT_VALUE]: (state: State, { payload, meta }: ActionMeta<string, string>): State => (
-    state.merge({
-      [meta]: { selectedActivityId: payload }
+      selectMap: {
+        [selectId]: { selectedActivity }
+      }
     }, { deep: true })
   )
 }, initialState)

@@ -1,7 +1,7 @@
 /**
  * Types
  */
-import { ActivityMap, ActivityNode } from '../../redux/modules/common/activityTypes'
+import { ActivityMap, ActivityNode, StateMap, NormalizedActivities } from '../../redux/modules/common/activityTypes'
 
 export type ActivityType = {
   id: string
@@ -10,15 +10,10 @@ export type ActivityType = {
   children?: ActivityType[]
 }
 
-export type StateObj = {
-  rootNodes: string[]
-  activityMap: ActivityMap
-}
-
 /**
  * Normalize activities types
  */
-export function normalizeActivities(activities: ActivityType[]): StateObj {
+export function normalizeActivities(activities: ActivityType[]): NormalizedActivities {
   return {
     rootNodes: activities.map((activity) => activity.id),
     activityMap: traverseNodes(activities, null, {})
@@ -79,8 +74,8 @@ export function addLeaf(activity: ActivityType, parentId: string, hash: Activity
 /**
  * Close activity node and show siblings
  */
-export function closeNodeSelector(atId: string, activityId: string, state: StateObj): ActivityMap {
-  const { activityMap, rootNodes } = state[atId]
+export function closeNodeSelector(activityId: string, state: StateMap): ActivityMap {
+  const { activityMap, rootNodes } = state
   const { parentId } = activityMap[activityId]
 
   const childrenIds = parentId
@@ -98,11 +93,27 @@ export function closeNodeSelector(atId: string, activityId: string, state: State
   }, {})
 }
 
+export function closeAllNodes({ activityMap }: StateMap): ActivityMap {
+  return Object.keys(activityMap).reduce((acc, activityId) => {
+    const activityType = activityMap[activityId]
+
+    if (activityType.type === 'node') {
+      acc[activityId] = {
+        ...activityType,
+        open: false,
+        visible: true
+      }
+    }
+
+    return acc
+  }, {})
+}
+
 /**
  * Open activity node and hide siblings
  */
-export function openNodeSelector(atId: string, activityId: string, state: StateObj): ActivityMap {
-  const { activityMap, rootNodes } = state[atId]
+export function openNodeSelector(activityId: string, state: StateMap): ActivityMap {
+  const { activityMap, rootNodes } = state
   const { parentId } = activityMap[activityId]
 
   const childrenIds = parentId
