@@ -1,0 +1,20 @@
+@use postcss-short;
+
+.social-input {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.input {
+  margin-bottom: 0px;
+  padding-right: 80px;
+  height: 40px;
+}
+
+.remove {
+  position: absolute 6px -75px * *;
+  font: normal 16px/22px 'Open Sans';
+  color: #d0011b !important;
+  letter-spacing: -0.2px;
+  user-select: none;
+}

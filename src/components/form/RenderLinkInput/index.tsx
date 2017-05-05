@@ -3,7 +3,8 @@ import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { WrappedFieldProps } from 'redux-form'
 
-import LinkInput from './LinkInput'
+import FieldError from '../../common/FieldError'
+import Input from '../../../components/common/Input'
 
 
 export type InputProps = WrappedFieldProps<any> & {
@@ -16,11 +17,16 @@ const RenderLinkInput: SFC<InputProps> = (props) => {
   const { invalid, touched, active, dirty } = meta
   const hasError = touched && !active && invalid && dirty
 
-  return <LinkInput
-    invalid={hasError}
-    placeholder={placeholder}
-    onRemove={onRemove}
-    {...input}/>
+  return <div styleName="social-input">
+      <FieldError meta={meta}>
+        <Input styleName="input"
+          invalid={hasError}
+          placeholder={placeholder}
+          {...input}/>
+      </FieldError>
+
+      <a styleName="remove" children="удалить" onClick={onRemove}/>
+    </div>
 }
 
-export default CSSModules(RenderLinkInput, require('../styles.css'))
+export default CSSModules(RenderLinkInput, require('./styles.css'))

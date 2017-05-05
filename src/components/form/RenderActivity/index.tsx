@@ -5,9 +5,9 @@ import { InjectedCSSModuleProps } from 'react-css-modules'
 import { WrappedFieldProps } from 'redux-form'
 import { connect } from 'react-redux'
 
-import FieldError from '../../../../components/common/FieldError'
-import ActivityTypes from '../../../common/ActivityTypes'
-import SelectInput from '../../../../components/common/SelectInput'
+import FieldError from '../../common/FieldError'
+import ActivityTypes from '../../../containers/common/ActivityTypes'
+import SelectInput from '../../common/SelectInput'
 
 /**
  * Render activity field
@@ -54,4 +54,4 @@ export const RenderActivity: SFC<Props> = (props) => {
   )
 }
 
-export default CSSModules(RenderActivity, require('../styles.css'))
+export default CSSModules(RenderActivity, require('./styles.css'))
