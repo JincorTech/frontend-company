@@ -64,7 +64,7 @@ const CompanyCard: SFC<Props> = props => {
             <span styleName="address">{city ? `${country}, ${city}` : country}</span>
             <div styleName="buttons">
               <Button styleName="transparent-button">Написать</Button>
-              <button styleName="bookmark" type="button"><Icon styleName="icon" name="bookmark"/></button>
+              <button styleName="bookmark" type="button"><Icon styleName="bookmark-icon" name="bookmark"/></button>
             </div>
           </div>
         </div>
@@ -77,27 +77,27 @@ const CompanyCard: SFC<Props> = props => {
         </div>}
 
         <div styleName="info">
-          <ul>
-            <li styleName="item"><Icon styleName="icon" name="company-type"/>{type}</li>
+          <ul styleName="activities">
+            <li styleName="item"><div styleName="company-icon"/>{type}</li>
 
             {activities.length
               ? activities.map((activity, i) =>
-                <li styleName="item" key={i}><Icon styleName="icon" name="activity"/>{activity.name}</li>)
-              : <li styleName="item-empty"><Icon styleName="icon" name="activity"/>Отрасли не указаны</li>}
+                <li styleName="item" key={i}><div styleName="activity-icon"/>{activity.name}</li>)
+              : <li styleName="item-empty"><div styleName="activity-icon"/>Отрасли не указаны</li>}
 
             {phone
-              ? <li styleName="item"><Icon styleName="icon" name="phone"/>{phone}</li>
-              : <li styleName="item-empty"><Icon styleName="icon" name="phone"/>Телефон не указан</li>}
+              ? <li styleName="item"><div styleName="phone-icon"/>{phone}</li>
+              : <li styleName="item-empty"><div styleName="phone-icon"/>Телефон не указан</li>}
 
             {email
-              ? <li styleName="item"><Icon styleName="icon" name="email"/>{email}</li>
-              : <li styleName="item-empty"><Icon styleName="icon" name="email"/>Email не указан</li>}
+              ? <li styleName="item"><div styleName="email-icon"/>{email}</li>
+              : <li styleName="item-empty"><div styleName="email-icon"/>Email не указан</li>}
           </ul>
 
           <div styleName="socials">
             {Boolean(socialLinks.length) &&
-            <ul styleName="social-links">
-              {socialLinks.map((social, i) => <SocialLink {...social} key={i}/>)}
+            <ul>
+              {socialLinks.map((social, i) => <SocialLink styleName="social" displayName={false} size={40} {...social} key={i}/>)}
             </ul>}
           </div>
         </div>

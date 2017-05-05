@@ -14,6 +14,7 @@ import signInSaga from './auth/signIn'
 import restorePasswordSaga from './auth/restorePassword'
 import createCompanySaga from './auth/createCompany'
 import profileSaga from './profile/profileView'
+import profileEditSaga from './profile/profileEdit'
 import employeesSaga from './employees/employees'
 
 
@@ -29,6 +30,7 @@ export default function* (): SagaIterator {
     fork(createCompanySaga),
     fork(emailTextareaSaga),
     fork(profileSaga),
+    fork(profileEditSaga),
     fork(selectSaga),
     fork(employeesSaga),
     fork(profileCardSaga)

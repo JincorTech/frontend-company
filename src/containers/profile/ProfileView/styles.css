@@ -15,6 +15,7 @@
 .company-info {
   float: left;
   padding-left: 30px;
+  width: 750px;
 }
 
 .company-name {
@@ -31,7 +32,7 @@
 }
 
 .value {
-  font-size: 24px/33px;
+  font-size: 16px/26px;
   letter-spacing: -0.2px;
   color: #000;
   margin: 0;
