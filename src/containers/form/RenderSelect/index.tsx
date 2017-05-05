@@ -9,13 +9,20 @@ import FieldError from '../../../components/common/FieldError'
 /**
  * Types
  */
-export type Props = SelectProps & WrappedFieldProps<any>
+export type Props = SelectProps & WrappedFieldProps<any> & {
+  onOptionSelect: (value: string) => void
+}
 
 /**
  * Props
  */
 const RenderSelect: SFC<Props> = (props) => {
-  const { title, placeholder, input, meta, options, modalId, filter, Button, ...divProps } = props
+  const { title, onOptionSelect, placeholder, input, meta, options, modalId, filter, Button, ...divProps } = props
+
+  const handleChange = (value: any) => {
+    input.onChange(value)
+    onOptionSelect(value)
+  }
 
   return (
     <FieldError meta={meta}>
@@ -26,7 +33,7 @@ const RenderSelect: SFC<Props> = (props) => {
         options={options}
         Button={Button}
         optionValue={input.value}
-        onChange={input.onChange}
+        onChange={handleChange}
         onBlur={input.onBlur}
         placeholder={placeholder}
         {...divProps}/>

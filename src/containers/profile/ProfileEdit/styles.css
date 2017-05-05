@@ -90,6 +90,7 @@
 
 .select-input {
   height: 40px;
+  line-height: 18px;
 }
 
 .text-input {
@@ -99,26 +100,8 @@
 /**
 * Render activity type
 */
-.activity-list {}
-
-.render-activity {
-  position: relative;
-  margin-bottom: 15px;
-}
-
-.activity-remove {
-  position: absolute 6px -75px * *;
-  font: normal 16px/22px 'Open Sans';
-  color: #d0011b !important;
-  letter-spacing: -0.2px;
-}
-
 .error {
   position: absolute 0px * * 100%;
   width: 210px;
   padding-left: 15px;
-}
-
-.activity-field {
-  height: 40px;
 }

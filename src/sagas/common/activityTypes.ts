@@ -93,7 +93,11 @@ function* closeNodeSaga(): SagaIterator {
 function* selectValueIterator({ payload: leafId, meta }: ActionMeta<Meta, string>): SagaIterator {
   const state = yield select(getState)
   const nodes = yield call(closeAllNodes, state)
+  const { selectedActivity } = state.selectMap[meta.name]
 
+  if (selectedActivity) {
+    yield put(activateLeaf(selectedActivity))
+  }
   yield put(setNodes(nodes))
   yield put(disableLeaf(leafId))
   yield put(setSelectValue(meta, leafId))

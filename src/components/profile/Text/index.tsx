@@ -11,6 +11,8 @@ export type State = {
   expand: boolean
 }
 
+const TEXT_MAX_LENGTH = 250
+
 class Text extends Component<Props, State> {
   public state: State = {
     expand: false
@@ -36,7 +38,7 @@ class Text extends Component<Props, State> {
     return (
       <div styleName="text" {...props}>
         {value}
-        {value.length > 250 && <span
+        {value.length > TEXT_MAX_LENGTH && <span
           styleName="expand"
           children="Свернуть"
           onClick={this.handleExpand}/>
@@ -47,11 +49,11 @@ class Text extends Component<Props, State> {
 
   private renderCollapsed(): JSX.Element {
     const { value, ...props } = this.props
-    const shouldCut = value.length > 250
+    const shouldCut = value.length > TEXT_MAX_LENGTH
 
     return (
       <div styleName="text" {...props}>
-        {shouldCut ? value.substr(0, 250) + '... ' : value}
+        {shouldCut ? value.substr(0, TEXT_MAX_LENGTH) + '... ' : value}
         {shouldCut && <span
           styleName="expand"
           children="Развернуть"

@@ -7,3 +7,7 @@ export function normalizeOptions(options: Option[]): NormalizedOptions {
     return acc
   }, { options: [], optionsMap: {} })
 }
+
+export function optionTransformer(data: any[], transformer: (item: any) => Option): Option[] {
+  return data.map(transformer)
+}

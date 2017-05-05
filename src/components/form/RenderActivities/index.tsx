@@ -4,13 +4,6 @@ import * as CSSModules from 'react-css-modules'
 import { WrappedFieldProps, WrappedFieldArrayProps, Field } from 'redux-form'
 import { connect } from 'react-redux'
 
-import {
-  addActivityField,
-  removeActivityField,
-  openActivityPopup,
-  closeActivityPopup,
-  ActivityField
-} from '../../../redux/modules/profile/profileEdit'
 import { required } from '../../../utils/validators'
 
 import AddInput from '../../profile/AddButton'

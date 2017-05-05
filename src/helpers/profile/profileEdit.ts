@@ -1,4 +1,4 @@
-const body = {
+/**const body = {
   legalName: "Jincor",
   profile: {
     brandName: {
@@ -30,7 +30,9 @@ const body = {
     companyType: "cc5f7c5f-60c7-4afc-afa6-bb3b6206d21d",
     picture: null
   }
-}
+}*/
+import { Company } from '../../redux/modules/profile/profileView'
+import { FormFields } from '../../containers/profile/ProfileEdit'
 
 
 export function req(payload) {
@@ -47,5 +49,27 @@ export function req(payload) {
       links,
       economicalActivityTypes
     }
+  }
+}
+
+
+export function profileFormFields(company: Company): FormFields {
+  const { legalName: name, profile, economicalActivityTypes, companyType: { id: type } } = company
+  const { picture: upload, email, phone, description, links, formattedAddress } = profile
+  const { country: { id: country }, city } = formattedAddress
+  const activityTypes = economicalActivityTypes.map(({ id }) => id)
+  const socialLinks = links.map(({ value }) => value)
+
+  return {
+    upload,
+    name,
+    country,
+    city,
+    type,
+    description,
+    activityTypes,
+    socialLinks,
+    email,
+    phone
   }
 }

@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { Component, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
-import {reduxForm, Field, FieldArray, FormProps, SubmitHandler} from 'redux-form'
+import { reduxForm, Field, FieldArray, FormProps, SubmitHandler } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
 import { fetchActivities } from '../../../redux/modules/common/activityTypes'
+import { updateProfile, fetchProfile, updateCities } from '../../../redux/modules/profile/profileEdit'
 import { required, minLength } from '../../../utils/validators'
 
 import InfoItem from '../../../components/profile/InfoItem'
@@ -16,9 +17,6 @@ import RenderTextarea from '../../../components/form/RenderTextarea'
 import RenderImageUpload from '../../../components/form/RenderImageUpload'
 import RenderLinkInputs from '../../../components/form/RenderLinkInputs'
 import RenderActivities from '../../../components/form/RenderActivities'
-import { LinkProps } from '../../../components/profile/SocialLink'
-
-import { updateProfile } from '../../../redux/modules/profile/profileEdit'
 
 
 /**
@@ -29,40 +27,26 @@ export type Props = ReduxFormProps & DispatchProps
 export type ReduxFormProps = FormProps<FormFields, ComponentProps, any> & ComponentProps
 
 export type ComponentProps = {
-  logo: string
-  name: string
-  type: string
-  region: string
-  description: string
-  email: string
-  phone: string
-  activities: ActivityType[]
-  socialLinks: LinkProps[]
-  updateProfile: SubmitHandler<FormFields, ComponentProps, any>
-}
-
-export type ActivityType = {
-  id: string
-  name: string
+  spinner: boolean
 }
 
 export type FormFields = {
+  upload: string
   name: string
-  country: Option
-  city: Option
-  type: Option
+  country: string
+  city: string
+  type: string
   description: string
-  activityTypes: Option[]
-  socialLinks: Option[]
-}
-
-export type Option = {
-  value: string
-  name: string
+  activityTypes: string[]
+  socialLinks: string[]
+  email: string
+  phone: string
 }
 
 export type DispatchProps = {
   fetchActivities: () => void
+  fetchProfile: () => void
+  updateCities: (countryId: string) => void
 }
 
 
@@ -77,15 +61,20 @@ class ProfileEdit extends Component<Props, {}> {
   }
 
   public componentWillMount(): void {
-    this.props.fetchActivities()
+    const { fetchActivities, fetchProfile } = this.props
+
+    fetchActivities()
+    fetchProfile()
   }
 
   private deleteLogo(): void {
-    this.props.change('upload', null)
+    const { change } = this.props
+
+    change('upload', null)
   }
 
   public render(): JSX.Element {
-    const { handleSubmit } = this.props
+    const { handleSubmit, updateCities } = this.props
 
     return (
       <form styleName="company-profile-edit" onSubmit={handleSubmit(updateProfile)}>
@@ -94,7 +83,6 @@ class ProfileEdit extends Component<Props, {}> {
             name="upload"
             component={RenderImageUpload}
             defaultElement={<CompanyLogo/>}
-            validate={required()}
             width={165}
             height={165}/>
 
@@ -116,6 +104,7 @@ class ProfileEdit extends Component<Props, {}> {
               filter
               validate={required()}
               options={[]}
+              onOptionSelect={(value) => updateCities(value)}
               component={RenderSelect}
               styleName="select-input"/>
 
@@ -189,10 +178,10 @@ class ProfileEdit extends Component<Props, {}> {
 const StyledComponent = CSSModules(ProfileEdit, require('./styles.css'))
 
 const FormComponent = reduxForm<FormFields, ComponentProps>({
-  form: 'ProfileEdit'
+  form: 'profileEdit'
 })(StyledComponent)
 
 export default connect<{}, DispatchProps, ReduxFormProps>(
   (state) => ({}),
-  { fetchActivities }
+  { fetchActivities, fetchProfile, updateCities }
 )(FormComponent)

@@ -75,12 +75,16 @@ class ActivityTypes extends Component<Props, {}> {
   }
 
   public componentWillMount(): void {
-    const { name, actions } = this.props
+    const { name, activityValue, actions } = this.props
 
     if (name) {
       actions.registerSelect(name)
     } else {
       throw new Error('name required')
+    }
+
+    if (activityValue) {
+      actions.selectValue(activityValue)
     }
   }
 
@@ -88,6 +92,14 @@ class ActivityTypes extends Component<Props, {}> {
     const { name, actions } = this.props
 
     actions.unregisterSelect(name)
+  }
+
+  public componentWillReceiveProps({ activityValue: nextActivityValue }: Props): void {
+    const { activityValue, actions } = this.props
+
+    if (nextActivityValue !== activityValue) {
+      actions.selectValue(nextActivityValue)
+    }
   }
 
   private renderActivityType(activityId: string): JSX.Element {
@@ -127,7 +139,10 @@ class ActivityTypes extends Component<Props, {}> {
     return visible && <div
       key={id}
       styleName="activity-leaf"
-      onClick={() => { selectValue(id); onActivitySelect(id) }}>
+      onClick={() => {
+        selectValue(id)
+        onActivitySelect(id)
+      }}>
       <div styleName="activity-name">{name}</div>
     </div>
   }
@@ -186,12 +201,12 @@ const mapStateToProps = (state, { name }: Props): StateProps => {
 
 const mapDispatchToProps = (dispatch, { name }: Props): DispatchProps => ({
   actions: bindActionCreators({
-    registerSelect,
-    unregisterSelect,
-    removeSelect,
     openSelect: openSelect.bind(null, { name }),
     closeSelect: closeSelect.bind(null, { name }),
     selectValue: selectValue.bind(null, { name }),
+    registerSelect,
+    unregisterSelect,
+    removeSelect,
     openNode,
     closeNode
   }, dispatch)
