@@ -12,9 +12,6 @@ var stylelint = require('stylelint')
 var doiuse = require('doiuse')
 var reporter = require('postcss-reporter')
 var use = require('postcss-use')
-var autoprefixer = require('autoprefixer');
-var postcssImport = require('postcss-import');
-var postcssUrl = require('postcss-url');
 
 
 module.exports = {
@@ -42,7 +39,7 @@ module.exports = {
         __DEV__: false
       }
     }),
-    new ExtractTextPlugin('[name].[contenthash].css'),
+    new ExtractTextPlugin('[name].[contenthash].css', { allChunks: true }),
     new HtmlWebpackPlugin({
       template: 'src/assets/index.html',
       minify: {
@@ -75,8 +72,8 @@ module.exports = {
     ],
     loaders: [
       {test: /\.tsx?$/, exclude: /node_modules/, loader: 'awesome-typescript'},
-      {test: /\.css$/, include: /src\/modules/, loader: ExtractTextPlugin.extract('style-loader', ['css-loader?importLoader=1&modules&localIdentName=[local]___[hash:base64:5]', 'postcss-loader'])},
-      {test: /\.css$/, exclude: /src\/modules/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader')},
+      {test: /\.css$/, include: /src\/(containers|components)/, loader: ExtractTextPlugin.extract('style-loader', ['css-loader?importLoaders=1&modules&localIdentName=[local]___[hash:base64:5]', 'postcss-loader'])},
+      {test: /\.css$/, exclude: /src\/(containers|components)/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader')},
       {test: /\.html$/, exclude: /node_modules/, loader: 'html'},
       {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file'},
       {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
@@ -93,10 +90,8 @@ module.exports = {
   },
 
   postcss: () => [
-    postcssImport({ addDependencyTo: webpack }),
-    postcssUrl(),
     stylelint(),
-     use({
+    use({
       modules: [
         'postcss-property-lookup',
         'postcss-will-change',
@@ -107,7 +102,8 @@ module.exports = {
         'postcss-triangle',
         'postcss-autoreset',
         'postcss-initial',
-        'postcss-for'
+        'postcss-for',
+        'postcss-calc'
       ]
     }),
     postcssNext(),
@@ -115,8 +111,8 @@ module.exports = {
       relative: true
     }),
     doiuse({
-      browsers: ['ie >= 9', '> 5%'],
-      ignore: ['css-transitions', 'css3-cursors', 'css-gradients', 'calc']
+      browsers: ['ie >= 10', '> 5%'],
+      ignore: ['css-transitions', 'calc', 'css3-cursors', 'css-gradients', 'transforms3d']
     }),
     reporter({
       clearAllMessages: true
