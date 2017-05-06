@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
 import { fetchActivities } from '../../../redux/modules/common/activityTypes'
-import { updateProfile, fetchProfile, updateCities } from '../../../redux/modules/profile/profileEdit'
+import { updateProfile, fetchProfile, updateCities, StateMap as StateProps } from '../../../redux/modules/profile/profileEdit'
 import { required, minLength } from '../../../utils/validators'
 
 import InfoItem from '../../../components/profile/InfoItem'
@@ -17,18 +17,15 @@ import RenderTextarea from '../../../components/form/RenderTextarea'
 import RenderImageUpload from '../../../components/form/RenderImageUpload'
 import RenderLinkInputs from '../../../components/form/RenderLinkInputs'
 import RenderActivities from '../../../components/form/RenderActivities'
+import Button from '../../../components/common/Button'
 
 
 /**
  * Types
  */
-export type Props = ReduxFormProps & DispatchProps
+export type Props = ReduxFormProps & DispatchProps & StateProps
 
-export type ReduxFormProps = FormProps<FormFields, ComponentProps, any> & ComponentProps
-
-export type ComponentProps = {
-  spinner: boolean
-}
+export type ReduxFormProps = FormProps<FormFields, {}, any>
 
 export type FormFields = {
   upload: string
@@ -74,7 +71,7 @@ class ProfileEdit extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { handleSubmit, updateCities } = this.props
+    const { handleSubmit, updateCities, spinner, src, invalid } = this.props
 
     return (
       <form styleName="company-profile-edit" onSubmit={handleSubmit(updateProfile)}>
@@ -83,6 +80,7 @@ class ProfileEdit extends Component<Props, {}> {
             name="upload"
             component={RenderImageUpload}
             defaultElement={<CompanyLogo/>}
+            src={src}
             width={165}
             height={165}/>
 
@@ -163,9 +161,8 @@ class ProfileEdit extends Component<Props, {}> {
         </div>
 
         <div styleName="company-controls">
-          <input styleName="submit-btn" type="submit" value="Сохранить"/>
+          <Button styleName="submit-btn" type="submit" spinner={spinner} disabled={invalid}>Сохранить</Button>
           <Link to="/app/profile" styleName="cancel-btn">отменить</Link>
-          {/*<button type="button" onClick={() => updateProfile()}>Cделать грязь</button>*/}
         </div>
       </form>
     )
@@ -177,11 +174,11 @@ class ProfileEdit extends Component<Props, {}> {
  */
 const StyledComponent = CSSModules(ProfileEdit, require('./styles.css'))
 
-const FormComponent = reduxForm<FormFields, ComponentProps>({
+const FormComponent = reduxForm<FormFields, {}>({
   form: 'profileEdit'
 })(StyledComponent)
 
-export default connect<{}, DispatchProps, ReduxFormProps>(
-  (state) => ({}),
+export default connect<StateProps, DispatchProps, ReduxFormProps>(
+  (state) => state.profile.profileEdit,
   { fetchActivities, fetchProfile, updateCities }
 )(FormComponent)
