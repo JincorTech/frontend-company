@@ -19,7 +19,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.json', '.ts', '.tsx']
   },
   debug: true,
-  devtool: 'inline-source-map',
+  devtool: 'cheap-source-map',
   noInfo: true,
   entry: ['babel-polyfill', path.resolve('./src/index')],
   target: 'web',
