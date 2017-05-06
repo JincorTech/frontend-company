@@ -51,11 +51,17 @@
   width: 165px;
   height: 40px;
   border-radius: 4px;
-  background-color: #cdcecf;
+  background-color: #0070e0;
   outline: 0;
   border: 0;
   cursor: pointer;
   margin-bottom: 13px;
+
+  :disabled {
+    background-color: #cdcecf;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 }
 
 .cancel-btn {
