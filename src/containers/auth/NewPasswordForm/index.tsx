@@ -36,15 +36,14 @@ class NewPasswordForm extends Component<NewPasswordProps, {}> {
       <Form
         onSubmit={handleSubmit}
         styleName="new-password-form"
-        title="Восстановление пароля"
-        hint="Введите email, указанный при регистрации, на который придет ссылка и код для сброса пароля.">
+        title="Новый пароль"  >
 
         <Field
           component={RenderPassword}
           name="password"
           placeholder="Пароль"/>
 
-        <Button type="submit" spinner={spinner} disabled={invalid}>Отправить</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>Сохранить и войти</Button>
       </Form>
     )
   }

@@ -45,7 +45,7 @@ class ConfirmPasswordForm extends Component<ConfirmFormProps, {}> {
           placeholder="Введите код"
         />
 
-        <Button type="submit" spinner={spinner} disabled={invalid}>Отправить</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>Сбросить</Button>
       </Form>
     )
   }

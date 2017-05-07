@@ -137,6 +137,24 @@ export function* inviteEmployeeSaga(): SagaIterator {
 }
 
 /**
+ * Reset Form
+ */
+function* resetSignInIterator(action: Action<any>) {
+  const { pathname } = action.payload
+
+  if (pathname === '/auth/signup') {
+    yield put(resetState())
+  }
+}
+
+export function* resetSignInSaga() {
+  yield takeLatest(
+    '@@router/LOCATION_CHANGE',
+    resetSignInIterator
+  )
+}
+
+/**
  * SignUp Saga
  */
 export default function* (): SagaIterator {
@@ -144,6 +162,7 @@ export default function* (): SagaIterator {
     fork(createCompanySaga),
     fork(verifyEmailSaga),
     fork(confirmEmailSaga),
-    fork(inviteEmployeeSaga)
+    fork(inviteEmployeeSaga),
+    fork(resetSignInSaga)
   ]
 }
