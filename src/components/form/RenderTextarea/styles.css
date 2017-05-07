@@ -32,6 +32,7 @@
     letter-spacing: -0.2px;
     color: #222;
     padding: 0 10px;
+    overflow-y: hidden;
 
     &::placeholder {
       transition: color linear 0.2s;
