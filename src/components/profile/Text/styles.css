@@ -5,6 +5,7 @@
   letter-spacing: -0.2px;
   color: #000000;
   max-width: 750px;
+  white-space: pre-line;
 }
 
 .expand {
