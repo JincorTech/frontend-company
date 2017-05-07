@@ -1,23 +1,6 @@
-import { FormFields } from '../../containers/app/ProfileCard/components/ProfileEdit'
-import createValidatation from '../../utils/validate'
-import { required } from '../../utils/validators'
+import { ProfileFields } from '../../redux/modules/app/profileCard'
 
 
-export type ErrorMessages = {
-  firstName?: string,
-  lastName?: string,
-  position?: string
+export function profileCardFormFields(profile): ProfileFields {
+  return { ...profile, avatar: '' }
 }
-
-export const initialValues: FormFields = {
-  avatar: '',
-  firstName: '',
-  lastName: '',
-  position: ''
-}
-
-export const validate = createValidatation({
-  firstName: required(),
-  lastName: required(),
-  position: required()
-})

@@ -5,27 +5,28 @@ import { from, ImmutableObject } from 'seamless-immutable'
  * Types
  */
 
-export type State = StateObj & ImmutableObject<StateObj>
+export type State = StateMap & ImmutableObject<StateMap>
 
-export type StateObj = {
-  open: boolean,
-  bottomView: BottomView,
-  spinner: false,
-  editProfileForm: ProfileFields,
+export type StateMap = {
+  open: boolean
+  bottomView: BottomView
+  spinner: false
+  src: string
+  editProfileForm: ProfileFields
   changePasswordForm: PasswordFields
 }
 
 export type BottomView = 'buttons' | 'password-form' | 'profile-form'
 
 export type ProfileFields = {
-  firstName: string,
-  lastName: string,
-  position: string,
+  firstName: string
+  lastName: string
+  position: string
   avatar: string
 }
 
 export type PasswordFields = {
-  oldPassword: string,
+  oldPassword: string
   password: string
 }
 
@@ -37,6 +38,8 @@ export type PasswordFields = {
 export const OPEN_PROFILE_CARD = 'app/profileCard/OPEN_PROFILE_CARD'
 export const CLOSE_PROFILE_CARD = 'app/profileCard/CLOSE_PROFILE_CARD'
 export const CHANGE_VIEW = 'app/profileCard/CHANGE_VIEW'
+export const FETCH_PROFILE = 'app/profileCard/FETCH_PROFILE'
+export const SET_AVATAR = 'app/profileCard/SET_AVATAR'
 export const UPDATE_PROFILE = 'app/profileCard/UPDATE_PROFILE'
 export const CHANGE_PASSWORD = 'app/profileCard/CHANGE_PASSWORD'
 export const LOGOUT = 'app/profileCard/LOGOUT'
@@ -49,6 +52,8 @@ export const LOGOUT = 'app/profileCard/LOGOUT'
 export const openProfileCard = createAction<void>(OPEN_PROFILE_CARD)
 export const closeProfileCard = createAction<void>(CLOSE_PROFILE_CARD)
 export const changeView = createAction<BottomView>(CHANGE_VIEW)
+export const fetchProfile = createAction<void>(FETCH_PROFILE)
+export const setAvatar = createAction<string>(SET_AVATAR)
 export const updateProfile = createSubmitAction<ProfileFields, void>(UPDATE_PROFILE)
 export const changePassword = createSubmitAction<PasswordFields, void>(CHANGE_PASSWORD)
 export const logout = createAction<void>(LOGOUT)
@@ -58,10 +63,11 @@ export const logout = createAction<void>(LOGOUT)
  * Reducer
  */
 
-const initialState: State = from<StateObj>({
+const initialState: State = from<StateMap>({
   open: false,
   bottomView: 'buttons',
   spinner: false,
+  src: '',
   editProfileForm: {
     firstName: '',
     lastName: '',
@@ -87,19 +93,23 @@ export default createReducer<State>({
     state.merge({ bottomView: payload })
   ),
 
+  [SET_AVATAR]: (state: State, { payload: src }: Action<string>): State => (
+    state.merge({ src })
+  ),
+
   [updateProfile.REQUEST]: (state: State): State => (
     state.merge({ spinner: true })
   ),
 
-  [updateProfile.SUCCESS]: (state: State, { payload }: Action<ProfileFields>): State => (
-    state.merge({ spinner: false, editProfileForm: payload })
+  [updateProfile.SUCCESS]: (state: State): State => (
+    state.merge({ spinner: false })
   ),
 
   [changePassword.REQUEST]: (state: State): State => (
     state.merge({ spinner: true })
   ),
 
-  [changePassword.SUCCESS]: (state: State, { payload }: Action<PasswordFields>): State => (
-    state.merge({ spinner: false, changePasswordForm: payload })
+  [changePassword.SUCCESS]: (state: State): State => (
+    state.merge({ spinner: false })
   )
 }, initialState)

@@ -1,17 +1,39 @@
 import { SagaIterator } from 'redux-saga'
 import { takeLatest, takeEvery, call, put, select, fork } from 'redux-saga/effects'
+import { initialize } from 'redux-form'
 import { Action } from '../../utils/actions'
+import { get, put as putFunc } from '../../utils/api'
 
-import { put as putFunc } from '../../utils/api'
+import { profileCardFormFields } from '../../helpers/common/profileCardEditProfile'
 import {
   changePassword, updateProfile,
   changeView, closeProfileCard,
-  LOGOUT
+  LOGOUT, FETCH_PROFILE, setAvatar
 } from '../../redux/modules/app/profileCard'
 import { fetchUser } from '../../redux/modules/app/appLayout'
 import { logout } from '../../redux/modules/app/app'
 
 import { PasswordFields, ProfileFields } from '../../redux/modules/app/profileCard'
+
+
+function* getProfileIterator(): SagaIterator {
+  try {
+    const { data: { profile } } = yield call(get, '/employee/me')
+    const { avatar } = profile
+    const formFields = yield call(profileCardFormFields, profile)
+    yield put(initialize('ProfileCardEdit', formFields, false))
+    yield put(setAvatar(avatar))
+  } catch (e) {
+    yield call(console.log, e)
+  }
+}
+
+function* getProfileSaga(): SagaIterator {
+  yield takeLatest(
+    FETCH_PROFILE,
+    getProfileIterator
+  )
+}
 
 
 const getCompanyState = state => state.app.appLayout.user.company
@@ -42,10 +64,11 @@ function* updateProfileIterator({ payload }: Action<ProfileFields>): SagaIterato
 
   try {
     yield call(putFunc, '/employee/me', body)
+    yield put(updateProfile.success())
     yield put(fetchUser())
     yield put(changeView('buttons'))
   } catch (e) {
-    yield put(fetchUser.failure(e))
+    yield put(updateProfile.failure(e))
   }
 }
 
@@ -73,6 +96,7 @@ function* logoutSaga(): SagaIterator {
 export default function* (): SagaIterator {
   yield [
     fork(changePasswordSaga),
+    fork(getProfileSaga),
     fork(updateProfileSaga),
     fork(logoutSaga)
   ]
