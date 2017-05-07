@@ -5,7 +5,7 @@ import { Action } from '../../utils/actions'
 import { push } from 'react-router-redux'
 
 import { post, put as putFunc, get } from '../../utils/api'
-import { restorePassword, confirmEmail, setNewPassword } from '../../redux/modules/auth/restorePassword'
+import { restorePassword, confirmEmail, setNewPassword, resetState } from '../../redux/modules/auth/restorePassword'
 import { login } from '../../redux/modules/app/app'
 
 import { FormFields as RestoreFields } from '../../containers/auth/RequestPasswordForm'
@@ -68,6 +68,7 @@ function* newPasswordIterator({ payload }: Action<NewPasswordFields>): SagaItera
     const { data } = yield call(putFunc, '/employee/changePassword', body)
 
     yield put(setNewPassword.success())
+    yield put(login(data.token))
     yield put(push('/app/profile'))
   } catch (e) {
     yield put(setNewPassword.failure(new SubmissionError(e)))
@@ -82,12 +83,31 @@ export function* newPasswordSaga(): SagaIterator {
 }
 
 /**
+ * Reset Form
+ */
+function* resetSignInIterator({ payload }: Action<any>) {
+  const { pathname } = payload
+
+  if (pathname === '/auth/password') {
+    yield put(resetState())
+  }
+}
+
+export function* resetSignInSaga() {
+  yield takeLatest(
+    '@@router/LOCATION_CHANGE',
+    resetSignInIterator
+  )
+}
+
+/**
  * Restore password saga
  */
 export default function* (): SagaIterator {
   yield [
     fork(restorePasswordSaga),
     fork(confirmEmailSaga),
-    fork(newPasswordSaga)
+    fork(newPasswordSaga),
+    fork(resetSignInSaga)
   ]
 }

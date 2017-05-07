@@ -45,7 +45,7 @@ class RequestPasswordForm extends Component<Props, {}> {
           placeholder="Email"
         />
 
-        <Button type="submit" spinner={spinner} disabled={invalid}>Отправить</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>Подтвердить</Button>
       </Form>
     )
   }
