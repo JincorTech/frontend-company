@@ -10,12 +10,13 @@ import FieldError from '../../common/FieldError'
 export type Props = WrappedFieldProps<any> & TextareaProps
 
 const RenderTextarea: SFC<Props> = (props) => {
-  const { placeholder, input, meta } = props
+  const { placeholder, input, meta, maxLength } = props
 
   return (
     <FieldError meta={meta}>
       <Textarea
         placeholder={placeholder}
+        maxLength={maxLength}
         {...input}/>
     </FieldError>
   )
