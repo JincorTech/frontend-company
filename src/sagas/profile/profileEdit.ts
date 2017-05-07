@@ -36,7 +36,7 @@ function* getProfileIterator(): SagaIterator {
       ({name, id: value }) => ({ value, name })
     )
 
-    const { id } = profile.profile.formattedAddress.country
+    const { id } = profile.profile.address.country
     const { picture: src } = profile.profile
 
     yield put(updateCities(id))
