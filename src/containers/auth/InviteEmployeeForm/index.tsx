@@ -32,8 +32,12 @@ export type StateProps = {
  * Component
  */
 class InviteEmployeeForm extends Component<Props, {}> {
+  public componentWillUnmount(): void {
+    this.props.resetState()
+  }
+
   public render() {
-    const { inviteEmployee, resetState, textareaValid, spinner } = this.props
+    const { inviteEmployee, textareaValid, spinner } = this.props
 
     return(
       <Form
@@ -55,7 +59,6 @@ class InviteEmployeeForm extends Component<Props, {}> {
         <Link
           styleName="skip"
           to="/app/profile"
-          onClick={resetState}
           children="Пропустить"/>
       </Form>
     )

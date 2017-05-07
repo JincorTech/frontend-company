@@ -6,6 +6,7 @@ import { push } from 'react-router-redux'
 
 import { post, put as putFunc, get } from '../../utils/api'
 import { restorePassword, confirmEmail, setNewPassword } from '../../redux/modules/auth/restorePassword'
+import { login } from '../../redux/modules/app/app'
 
 import { FormFields as RestoreFields } from '../../containers/auth/RequestPasswordForm'
 import { FormFields as ConfirmFields } from '../../containers/auth/ConfirmPasswordForm'
@@ -64,9 +65,10 @@ function* newPasswordIterator({ payload }: Action<NewPasswordFields>): SagaItera
   const body = { ...payload, companyId, verificationId}
 
   try {
-    yield call(putFunc, '/employee/changePassword', body)
+    const { data } = yield call(putFunc, '/employee/changePassword', body)
+
     yield put(setNewPassword.success())
-    yield put(push('/auth/signin'))
+    yield put(push('/app/profile'))
   } catch (e) {
     yield put(setNewPassword.failure(new SubmissionError(e)))
   }
