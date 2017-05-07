@@ -13,13 +13,12 @@ import {
   showCompanyList,
   resetState,
   SELECT_COMPANY,
-  FETCH_LOGIN
+  FETCH_LOGIN,
+  LoginData
 } from '../../redux/modules/auth/signIn'
 
 import { login } from '../../redux/modules/app/app'
-
 import { FormFields as LoginFields } from '../../containers/auth/LoginForm'
-import { LoginData } from '../../redux/modules/auth/signIn'
 
 
 /**
@@ -89,6 +88,7 @@ const getSignInState = (state) => state.auth.signIn
 function* loginCompanyIterator(action: Action<string>): SagaIterator {
   const { payload: companyId } = action
   const { employee } = yield select(getSignInState)
+
   yield put(fetchLogin({ ...employee, companyId }))
 }
 

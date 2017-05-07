@@ -21,7 +21,7 @@ import {
   resetState
 } from '../../redux/modules/auth/signUp'
 
-import { setToken } from '../../utils/auth'
+import { login } from '../../redux/modules/app/app'
 
 /**
  * Create company
@@ -95,7 +95,8 @@ function* confirmEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator
     yield put(confirmEmail.success())
 
     const { data } = yield call(post, '/employee/register', employeeData)
-    yield call(setToken, data.token)
+
+    yield put(login(data.token))
     yield put(accountCreated())
   } catch (e) {
     yield put(confirmEmail.failure(new SubmissionError(e.errors)))
@@ -120,8 +121,8 @@ function* inviteEmployeeIterator(action: Action<string[]>): SagaIterator {
 
   try {
     const { data } = yield call(post, 'company/invite', { emails })
+
     yield put(inviteEmployee.success())
-    yield put(resetState())
     yield put(push('/app/profile'))
   } catch (e) {
     yield put(inviteEmployee.failure(e))
