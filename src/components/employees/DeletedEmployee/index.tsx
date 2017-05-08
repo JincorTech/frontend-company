@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
+import { format } from 'date-fns'
 import { getBackgroundColor, getInitials } from '../../../utils/colorFunction'
 
 import { DeletedEmployee as DeletedEmployeeProps } from '../../../redux/modules/employees/employees'
@@ -35,7 +36,7 @@ const DeletedEmployee: SFC<Props> = ({ employee }) => {
         </div>
       </div>
 
-      <div styleName="status">Удален {meta.deletedAt}</div>
+      <div styleName="status">Удален {format(meta.deletedAt, 'DD.MM.YYYY')}</div>
     </div>
   )
 }

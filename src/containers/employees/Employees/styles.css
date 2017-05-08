@@ -1,7 +1,7 @@
 @use postcss-short;
 
 .container {
-  width: 600px;
+  width: 605px;
   margin: 0 auto;
   padding: 50px 0;
 }
@@ -16,7 +16,8 @@
 
 .invite-employee-form {
   width: 600px;
-  margin: 0 0 5px 0;
+  margin-bottom: 5px;
+  padding-left: 5px;
 }
 
 .invite-input {
