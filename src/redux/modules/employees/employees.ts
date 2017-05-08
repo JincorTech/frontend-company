@@ -45,7 +45,7 @@ export type InvitedEmployee = {
     email: string
   }
   meta: {
-    invited_at: string
+    invitedAt: string
     status: 'invited'
   }
 }
