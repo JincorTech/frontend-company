@@ -132,8 +132,7 @@
   background-size: contain;
   vertical-align: middle;
   margin-right: 9px;
-  position: absolute;
-  left: -5px;
+  position: absolute -4px * * -5px;
 }
 
 .company-icon {
