@@ -12,7 +12,7 @@ const Header: SFC<{}> = ({ children }) => {
       <Alert />
       <header styleName="header">
         <div styleName="container">
-          <Logo  to="/"/>
+          <Logo styleName="logo" to="/"/>
 
           <nav styleName="pull-right">
             <Link to="/auth/signin">Войти</Link>
