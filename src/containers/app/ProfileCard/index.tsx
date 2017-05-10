@@ -115,11 +115,11 @@ class ProfileCard extends Component<Props, {}> {
 
     return (
       <Popup
-        styleName={ profile.avatar ? 'profile-card' : 'profile-card-avatar-empty' }
+        styleName="profile-card"
         modalId="profile-card-popup"
         open={open}
         onClose={closeProfileCard}>
-        <div styleName="top">
+        <div styleName={profile.avatar ? 'top' : 'top-avatar-empty'}>
           {
             profile.avatar
               ? <img styleName="avatar" src={profile.avatar}/>
@@ -128,8 +128,8 @@ class ProfileCard extends Component<Props, {}> {
 
           <div styleName={bottomView !== 'profile-form' ? 'company' : 'company-hidden'}>
             <div styleName="company-name">{company.legalName}</div>
-            <div styleName={ company.picture ? 'company-logo' : 'company-logo-empty' }>
-              <img src={company.picture}/>
+            <div styleName={ company.profile.picture ? 'company-logo' : 'company-logo-empty' }>
+              <img src={company.profile.picture}/>
             </div>
           </div>
 

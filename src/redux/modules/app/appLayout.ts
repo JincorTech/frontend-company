@@ -34,13 +34,15 @@ export type UserContacts = {
 export type UserCompany = {
   id: string
   legalName: string
-  country: {
-    id: string
-    name: string
-  },
-  formattedAddress: string
-  type: string
-  picture: string
+  profile: {
+    country: {
+      id: string
+      name: string
+    },
+    formattedAddress: string
+    type: string
+    picture: string
+  }
 }
 
 
@@ -79,13 +81,15 @@ const initialState: State = from<StateMap>({
     company: {
       id: '',
       legalName: '',
-      country: {
-        id: '',
-        name: ''
-      },
-      formattedAddress: '',
-      type: '',
-      picture: ''
+      profile: {
+        country: {
+          id: '',
+          name: ''
+        },
+        formattedAddress: '',
+        type: '',
+        picture: ''
+      }
     }
   }
 })

@@ -8,7 +8,8 @@ import { profileCardFormFields } from '../../helpers/common/profileCardEditProfi
 import {
   changePassword, updateProfile,
   changeView, closeProfileCard,
-  LOGOUT, FETCH_PROFILE, setAvatar
+  LOGOUT, FETCH_PROFILE, setAvatar,
+  OPEN_PROFILE_CARD
 } from '../../redux/modules/app/profileCard'
 import { fetchUser } from '../../redux/modules/app/appLayout'
 import { logout } from '../../redux/modules/app/app'
@@ -93,11 +94,29 @@ function* logoutSaga(): SagaIterator {
 }
 
 
+function* fetchUserIterator(): SagaIterator {
+  try {
+    const { data } = yield call(get, '/employee/me')
+    yield put(fetchUser.success(data))
+  } catch (e) {
+    yield put(fetchUser.failure(e))
+  }
+}
+
+function* fetchUserSaga(): SagaIterator {
+  yield takeLatest(
+    OPEN_PROFILE_CARD,
+    fetchUserIterator
+  )
+}
+
+
 export default function* (): SagaIterator {
   yield [
     fork(changePasswordSaga),
     fork(getProfileSaga),
     fork(updateProfileSaga),
-    fork(logoutSaga)
+    fork(logoutSaga),
+    fork(fetchUserSaga)
   ]
 }
