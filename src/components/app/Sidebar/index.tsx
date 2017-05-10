@@ -4,7 +4,7 @@ import * as CSSModules from 'react-css-modules'
 import { InjectedCSSModuleProps } from 'react-css-modules'
 
 import { Link } from 'react-router'
-import Icon from '../../../../components/common/Icon'
+import Icon from '../../common/Icon'
 
 
 export type SidebarProps = HTMLProps<HTMLDivElement> & InjectedCSSModuleProps & {
@@ -30,4 +30,4 @@ const Sidebar: SFC<SidebarProps> = props => {
   )
 }
 
-export default CSSModules(Sidebar, require('../styles.css'))
+export default CSSModules(Sidebar, require('./styles.css'))

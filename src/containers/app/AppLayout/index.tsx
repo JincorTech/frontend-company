@@ -2,29 +2,37 @@ import * as React from 'react'
 import { Component } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { connect } from 'react-redux'
+import { RouteComponentProps } from 'react-router'
 
 import {
   openSidebar,
   closeSidebar,
   fetchUser,
-  StateMap as StateProps
+  User
 } from '../../../redux/modules/app/appLayout'
 
 import { openProfileCard } from '../../../redux/modules/app/profileCard'
 
 import Logo from '../../../components/common/Logo'
-import Toggle from './components/Toggle'
-import UserAvatar from './components/UserAvatar'
-import Sidebar from './components/Sidebar'
+import Toggle from '../../../components/app/Toggle'
+import UserAvatar from '../../../components/app/UserAvatar'
+import Sidebar from '../../../components/app/Sidebar'
+import PageName from '../../../components/app/PageName'
 import ProfileCard from '../ProfileCard'
 
 
 /**
  * Types
  */
-export type Props = ComponentProps & StateProps & DispatchProps
+export type Props = ComponentProps & StateProps & DispatchProps & RouteComponentProps<ComponentProps, {}>
 
 export type ComponentProps = {}
+
+export type StateProps = {
+  user: User
+  sidebarOpen: boolean
+  isAuth: boolean
+}
 
 export type DispatchProps = {
   openSidebar: () => void
@@ -45,8 +53,10 @@ class AppLayout extends Component<Props, StateProps> {
   }
 
   render() {
-    const { sidebarOpen, children, openSidebar, closeSidebar, openProfileCard, user } = this.props
+    const { sidebarOpen, children,  user, isAuth, location } = this.props
+    const { openSidebar, closeSidebar, openProfileCard } = this.props
     const { id, profile, contacts, company } = user
+
     return (
       <div styleName="app-layout">
         <Sidebar open={sidebarOpen} onClose={closeSidebar}/>
@@ -55,8 +65,15 @@ class AppLayout extends Component<Props, StateProps> {
           <Toggle onClick={openSidebar}/>
 
           <div styleName="container">
-            <Logo styleName="logo"  to="/"/>
-            <span styleName="module-name">Profile</span>
+            <div styleName="pull-left">
+              {isAuth
+                ? <Logo styleName="logo"  to="/app/profile"/>
+                : <Logo styleName="logo"  to="/auth/signin"/>}
+
+              <PageName
+                styleName="module-name"
+                pathname={location.pathname}/>
+            </div>
 
             <UserAvatar
               styleName="pull-right"
@@ -85,8 +102,11 @@ class AppLayout extends Component<Props, StateProps> {
  */
 const StyledComponent = CSSModules(AppLayout, require('./styles.css'))
 
-export default connect<StateProps, DispatchProps, {}>(
-  state => state.app.appLayout,
+export default connect<StateProps, DispatchProps, any>(
+  (state) => ({
+    ...state.app.appLayout,
+    isAuth: state.app.app.authorized
+  }),
   {
     openSidebar,
     closeSidebar,
