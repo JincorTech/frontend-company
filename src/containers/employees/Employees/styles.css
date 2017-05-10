@@ -1,4 +1,5 @@
 @use postcss-short;
+@use postcss-inline-svg;
 
 .container {
   width: 605px;
@@ -30,4 +31,9 @@
   size: 165px 45px;
   display: inline-block;
   vertical-align: top;
+}
+
+/* Back button */
+.back {
+  position: absolute 104px * * 55px;
 }

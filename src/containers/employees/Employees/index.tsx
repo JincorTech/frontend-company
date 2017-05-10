@@ -10,6 +10,7 @@ import InvitedEmployee from '../../../components/employees/InvitedEmployee'
 import DeletedEmployee from '../../../components/employees/DeletedEmployee'
 import ConfirmPopup from '../../../components/common/ConfirmPopup'
 import EmployeeCard from '../../../components/employees/EmployeeCard'
+import BackButton from '../../../components/common/BackButton'
 
 import {
   openConfirmDeletePopup, closeConfirmDeletePopup,
@@ -125,6 +126,10 @@ class Employees extends Component<Props, StateProps> {
 
     return (
       <div styleName="container">
+        <div styleName="back">
+          <BackButton/>
+        </div>
+
         <InviteEmployeeForm spinner={employees.spinner}/>
 
         <Scrollbar height="calc(100vh - 227px)">
