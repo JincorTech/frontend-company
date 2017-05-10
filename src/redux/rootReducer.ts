@@ -14,6 +14,7 @@ import activityTypes from './modules/common/activityTypes'
 import signUp from './modules/auth/signUp'
 import signIn from './modules/auth/signIn'
 import restorePassword from './modules/auth/restorePassword'
+import registerEmployee from './modules/auth/registerEmployee'
 import createCompany from './modules/auth/createCompany'
 
 import profileView from './modules/profile/profileView'
@@ -44,6 +45,7 @@ export default combineReducers({
     signIn,
     signUp,
     restorePassword,
+    registerEmployee,
     createCompany
   }),
 

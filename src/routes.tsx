@@ -9,6 +9,7 @@ import AuthLayout from './components/auth/AuthLayout'
 import SignUp from './containers/auth/SignUp'
 import SignIn from './containers/auth/SignIn'
 import RestorePassword from './containers/auth/RestorePassword'
+import RegisterEmployee from './containers/auth/RegisterEmployee'
 
 import AppLayout from './containers/app/AppLayout'
 import ProfileEdit from './containers/profile/ProfileEdit'
@@ -33,6 +34,7 @@ export default (
       <Route path="signup" component={SignUp}/>
       <Route path="signin" component={SignIn}/>
       <Route path="password" component={RestorePassword}/>
+      <Route path="invite/:verificationId/:code" component={RegisterEmployee}/>
     </Route>
 
     <Route path="app" component={UserIsAuthenticated(AppLayout)}>

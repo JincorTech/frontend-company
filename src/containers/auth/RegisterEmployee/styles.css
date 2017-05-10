@@ -1,0 +1,13 @@
+@use postcss-short;
+
+.register-employee {
+  padding-bottom: 80px;
+}
+
+.title {
+  font-size: 17px/24px;
+  letter-spacing: -0.2px;
+  text-align: center;
+  color: #9da0a4;
+  margin: 64px * 41px;
+}
