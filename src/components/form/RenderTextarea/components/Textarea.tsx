@@ -16,7 +16,7 @@ const Textarea: SFC<Props> = (props) => {
   const { invalid, maxLength, value, onChange, ...textareaProps } = props
   const length = value.length ? value.length : 0
   const handleDescriptionChange = (e: any) =>
-    onChange(maxLength ? e.target.value.substr(0, maxLength): e.target.value)
+    onChange(maxLength ? e.target.value.substr(0, maxLength) : e.target.value)
 
   return (
     <div styleName="wrapper">

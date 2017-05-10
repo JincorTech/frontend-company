@@ -15,4 +15,4 @@ const MenuToggle: SFC<ToggleProps> = (props) => {
   )
 }
 
-export default CSSModules(MenuToggle, require('../styles.css'))
+export default CSSModules(MenuToggle, require('./styles.css'))
