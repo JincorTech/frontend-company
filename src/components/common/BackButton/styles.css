@@ -1,0 +1,8 @@
+@use postcss-short;
+@use postcss-inline-svg;
+
+.back-button {
+  display: block;
+  size: size('./svg/arrow-large-black.svg');
+  background: svg-load('./svg/arrow-large-black.svg');
+}

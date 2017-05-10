@@ -15,7 +15,7 @@ export function minLength(limit: number, msg?: string): Validator {
 export function maxLength(limit: number, msg?: string): Validator {
   return (value: string): string => limit && value && value.length <= limit
     ? ''
-    : msg || `minLength ${limit}`
+    : msg || `maxLength ${limit}`
 }
 
 export function length(prop: number, msg?: string): Validator {

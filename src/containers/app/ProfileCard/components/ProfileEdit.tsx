@@ -34,15 +34,40 @@ class ProfileEdit extends Component<Props, {}> {
     onMount()
   }
 
-  public render(): JSX.Element {
-    const { invalid, handleSubmit, onCancel, avatar, spinner } = this.props
+  private renderBlackout(): JSX.Element {
+    const { avatar } = this.props
 
-    const blackout = (
-      <div style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0,
-        backgroundColor: 'rgba(0, 0, 0, .5)'}}>
-        <div styleName="camera" style={{top: '20px', left: '20px', right: 'auto', bottom: 'auto'}}/>
+    const blackout = {
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundImage: avatar
+        ? `linear-gradient(to bottom,
+          rgba(0, 0, 0, 0.4),
+          rgba(0, 0, 0, 0.15) 32%,
+          rgba(0, 0, 0, 0.15) 66%,
+          rgba(0, 0, 0, 0.4))`
+        : 'rgba(0, 0, 0, .2)'
+    }
+
+    const camera = {
+      top: '20px',
+      left: '20px',
+      right: 'auto',
+      bottom: 'auto'
+    }
+
+    return (
+      <div style={blackout}>
+        <div styleName="camera" style={camera}/>
       </div>
     )
+  }
+
+  public render(): JSX.Element {
+    const { invalid, handleSubmit, onCancel, avatar, spinner } = this.props
 
     return (
       <form
@@ -53,7 +78,8 @@ class ProfileEdit extends Component<Props, {}> {
           <Field
             src={avatar}
             component={RenderImageUpload}
-            overlay={blackout}
+            overlay={this.renderBlackout()}
+            styleName="upload-field"
             name="avatar"
             width={325}
             height={325}/>

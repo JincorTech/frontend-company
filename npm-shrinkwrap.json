@@ -1846,6 +1846,11 @@
         }
       }
     },
+    "date-fns": {
+      "version": "1.28.4",
+      "from": "date-fns@latest",
+      "resolved": "https://registry.npmjs.org/date-fns/-/date-fns-1.28.4.tgz"
+    },
     "date-now": {
       "version": "0.1.4",
       "from": "date-now@>=0.1.4 <0.2.0",

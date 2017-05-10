@@ -3,9 +3,19 @@ import { FormFields } from '../../containers/profile/ProfileEdit'
 
 
 export function req(payload) {
-  const { name: legalName, email, phone, description, activityTypes: economicalActivityTypes, socialLinks, upload: picture } = payload
-  const links = socialLinks.map(link => ({ name: '', value: link })) // TODO name should be NULL
+  const {
+    name: legalName,
+    email,
+    phone,
+    description,
+    activityTypes: economicalActivityTypes,
+    socialLinks,
+    upload: picture,
+    city,
+    country
+  } = payload
 
+  const links = socialLinks.map(link => ({ name: '', value: link })) // TODO name should be NULL
   const upload = picture === '' ? {} : { picture }
 
   return {
@@ -16,7 +26,12 @@ export function req(payload) {
       phone,
       description,
       links,
-      economicalActivityTypes
+      economicalActivityTypes,
+      address: {
+        formattedAddress: '',
+        city,
+        country
+      }
     }
   }
 }
@@ -24,8 +39,8 @@ export function req(payload) {
 
 export function profileFormFields(company: Company): FormFields {
   const { legalName: name, profile, economicalActivityTypes, companyType: { id: type } } = company
-  const { picture: upload, email, phone, description, links, formattedAddress } = profile
-  const { country: { id: country }, city } = formattedAddress
+  const { picture: upload, email, phone, description, links, address } = profile
+  const { country: { id: country }, city: { id: city } } = address
   const activityTypes = economicalActivityTypes.map(({ id }) => id)
   const socialLinks = links.map(({ value }) => value)
 

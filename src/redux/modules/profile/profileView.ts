@@ -29,7 +29,7 @@ export type Profile = {
   email: string
   phone: string
   description: string
-  formattedAddress: FormattedAddress
+  address: Address
 }
 
 export type ActivityType = {
@@ -44,12 +44,15 @@ export type CompanyType = {
   code: string
 }
 
-export type FormattedAddress = {
+export type Address = {
   country: {
     id: string
     name: string
   }
-  city: string
+  city: {
+    id: string
+    name: string
+  }
   formattedAddress: string
 }
 
@@ -83,12 +86,15 @@ const initialState = from<StateMap>({
       email: '',
       phone: '',
       description: '',
-      formattedAddress: {
+      address: {
         country: {
           id: '',
           name: ''
         },
-        city: '',
+        city: {
+          name: '',
+          id: ''
+        },
         formattedAddress: ''
       }
     },
