@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Component, HTMLProps, MouseEvent } from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
 import * as classnames from 'classnames'
+
 const { popup, overlay, close } = require('./styles.css')
 
 import Icon from '../Icon'
@@ -64,15 +65,19 @@ class Popup extends Component<Props, {}> {
   /**
    * Pass props to portal element
    */
-  public componentDidUpdate(): void {
+  public componentWillReceiveProps(nextProps: Props): void {
     const { open } = this.props
 
-    if (open) {
+    if (!open && nextProps.open) {
       document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
     }
 
+    if (open && !nextProps.open) {
+      document.body.style.overflow = ''
+    }
+  }
+
+  private componentDidUpdate(): void {
     this.renderModal()
   }
 
