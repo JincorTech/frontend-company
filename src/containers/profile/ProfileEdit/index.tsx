@@ -7,7 +7,7 @@ import { Link } from 'react-router'
 
 import { fetchActivities } from '../../../redux/modules/common/activityTypes'
 import { updateProfile, fetchProfile, updateCities, StateMap as StateProps } from '../../../redux/modules/profile/profileEdit'
-import { required, minLength } from '../../../utils/validators'
+import { required, minLength, maxLength } from '../../../utils/validators'
 
 import InfoItem from '../../../components/profile/InfoItem'
 import CompanyLogo from '../../../components/profile/CompanyLogo'
@@ -130,6 +130,7 @@ class ProfileEdit extends Component<Props, {}> {
             <Field
               name="description"
               placeholder="Описание компании"
+              maxLength={550}
               component={RenderTextarea}/>
           </InfoItem>
 

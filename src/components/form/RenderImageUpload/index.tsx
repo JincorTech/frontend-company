@@ -13,7 +13,7 @@ export type Props = UploadProps & WrappedFieldProps<any>
  * Component
  */
 const RenderImageUpload: SFC<Props> = (props) => {
-  const { width, height, defaultElement, overlay, src, alt, onImgSelect, input, meta } = props
+  const { width, height, defaultElement, overlay, src, alt, onImgSelect, input, meta, ref, ...divProps } = props
   const { value, onChange, onBlur } = input
   const { dirty } = meta
 
@@ -29,6 +29,7 @@ const RenderImageUpload: SFC<Props> = (props) => {
     overlay={overlay}
     defaultElement={defaultElement}
     onImgSelect={handleChange}
+    {...divProps}
   />
 }
 

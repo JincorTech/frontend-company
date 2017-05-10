@@ -5,6 +5,13 @@
   position: relative;
   background-color: transparent;
   border-radius: 4px;
+}
+
+.top {
+  size: 325px;
+  position: relative;
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
 
   &:before {
     content: '';
@@ -20,20 +27,13 @@
   }
 }
 
-.profile-card-avatar-empty {
-  composes: profile-card;
+.top-avatar-empty {
+  composes: top;
 
   &:before {
     background-image: none;
     background-color: rgba(0, 0, 0, .2);
   }
-}
-
-.top {
-  size: 325px;
-  position: relative;
-  border-radius: 4px 4px 0 0;
-  overflow: hidden;
 }
 
 .avatar {
@@ -157,7 +157,6 @@
 .bottom-view {
   padding: 15px 30px 30px;
   size: 100%;
-  background-color: #fff;
   position: absolute 0 * * 0;
   transition: .2s linear opacity;
 }
@@ -183,6 +182,12 @@
   top: -340px;
   left: -30px;
   z-index: 1;
+}
+
+.upload-field {
+  position: relative;
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
 }
 
 .form-buttons {

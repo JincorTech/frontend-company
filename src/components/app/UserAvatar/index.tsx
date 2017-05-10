@@ -2,7 +2,7 @@ import * as React from 'react'
 import { SFC, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 
-import { getInitials, getBackgroundColor } from '../../../../utils/colorFunction'
+import { getInitials, getBackgroundColor } from '../../../utils/colorFunction'
 
 
 export type UserAvatarProps = HTMLProps<HTMLDivElement> & {
@@ -26,4 +26,4 @@ const UserAvatar: SFC<UserAvatarProps> = (props) => {
   )
 }
 
-export default CSSModules(UserAvatar, require('../styles.css'))
+export default CSSModules(UserAvatar, require('./styles.css'))

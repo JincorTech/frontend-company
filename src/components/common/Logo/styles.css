@@ -5,5 +5,4 @@
   display: inline-block;
   size: size('svg/jincor.svg');
   background: svg-load('svg/jincor.svg');
-  margin: 6px *;
 }

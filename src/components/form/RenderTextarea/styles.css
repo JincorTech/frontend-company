@@ -14,15 +14,12 @@
   --invalid: #D0011B;
 }
 
+.wrapper {
+  position: relative;
+}
+
 .textarea-wrap {
-  border-radius: 4px;
-  background-color: var(--background);
-  padding: 9px 2px 5px;
-  transition: border-color linear 0.2s;
-  
   & .textarea {
-    background: transparent !important;
-    border: 0px !important;
     resize: none !important;
     outline: 0px !important;
     width: 100%;
@@ -31,8 +28,10 @@
     font-size: 16px/22px;
     letter-spacing: -0.2px;
     color: #222;
-    padding: 0 10px;
     overflow-y: hidden;
+    border-radius: 4px;
+    padding: 9px 12px 5px;
+    transition: border-color linear 0.2s;
 
     &::placeholder {
       transition: color linear 0.2s;
@@ -40,11 +39,18 @@
   }
 }
 
+.counter {
+  position: absolute 0 * * calc(100% + 10px);
+  color: #9da0a4;
+  font-size: 16px;
+}
+
 .default {
   composes: textarea-wrap;
-  border: solid 1px var(--border-default);
 
   & .textarea {
+    border: solid 1px var(--border-default);
+
     &::placeholder {
       color: var(--placeholder-default);
     }
@@ -62,11 +68,11 @@
 
 .invalid {
   composes: textarea-wrap;
-  border: solid 1px var(--invalid);
 
   & .textarea {
+    border: solid 1px var(--invalid);
     color: var(--invalid);
-    
+
     &::placeholder {
       color: var(--invalid);
     }

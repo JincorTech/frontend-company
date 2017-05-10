@@ -23,7 +23,8 @@ export type EmployeeCardProps = {
 
 const EmployeeCard: SFC<Props> = ({ employee, company, ...popupProps }) => {
   const { id, profile } = employee
-  const { legalName, picture } = company
+  const { legalName, profile: companyProfile } = company
+  const { picture } = companyProfile
   const backgroundColor = getBackgroundColor(id)
   const initials = getInitials(profile.name)
 

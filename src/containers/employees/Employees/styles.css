@@ -1,7 +1,8 @@
 @use postcss-short;
+@use postcss-inline-svg;
 
 .container {
-  width: 600px;
+  width: 605px;
   margin: 0 auto;
   padding: 50px 0;
 }
@@ -16,7 +17,8 @@
 
 .invite-employee-form {
   width: 600px;
-  margin: 0 0 5px 0;
+  margin-bottom: 5px;
+  padding-left: 5px;
 }
 
 .invite-input {
@@ -29,4 +31,9 @@
   size: 165px 45px;
   display: inline-block;
   vertical-align: top;
+}
+
+/* Back button */
+.back {
+  position: absolute 104px * * 55px;
 }
