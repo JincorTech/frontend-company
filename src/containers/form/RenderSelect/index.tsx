@@ -44,6 +44,7 @@ const RenderSelect: SFC<Props> = (props) => {
 RenderSelect.defaultProps = {
   onOptionSelect: () => {}
 }
+
 /**
  * Decorators
  */

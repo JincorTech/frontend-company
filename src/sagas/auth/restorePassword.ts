@@ -1,9 +1,9 @@
 import { SagaIterator } from 'redux-saga'
 import { takeLatest, call, put, select, fork } from 'redux-saga/effects'
 import { SubmissionError } from 'redux-form'
-import { Action } from '../../utils/actions'
 import { push } from 'react-router-redux'
 
+import { Action } from '../../utils/actions'
 import { post, put as putFunc, get } from '../../utils/api'
 import { restorePassword, confirmEmail, setNewPassword, resetState } from '../../redux/modules/auth/restorePassword'
 import { login } from '../../redux/modules/app/app'

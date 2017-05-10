@@ -14,6 +14,9 @@ import RenderPassword from '../../../components/form/RenderPassword'
 /**
  * Types
  */
+
+export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>
+
 export type FormFields = {
   password: string
 }
@@ -23,12 +26,11 @@ export type ComponentProps = {
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>
 }
 
-export type NewPasswordProps = ComponentProps & FormProps<FormFields, ComponentProps, any>
 
 /**
  * Component
  */
-class NewPasswordForm extends Component<NewPasswordProps, {}> {
+class NewPasswordForm extends Component<Props, {}> {
   public render(): JSX.Element {
     const { invalid, spinner, handleSubmit } = this.props
 
@@ -53,6 +55,7 @@ class NewPasswordForm extends Component<NewPasswordProps, {}> {
  * Decorators
  */
 const StyledComponent = CSSModules(NewPasswordForm, require('./styles.css'))
+
 export default reduxForm<FormFields, ComponentProps>({
   form: 'newPassword',
   validate,
