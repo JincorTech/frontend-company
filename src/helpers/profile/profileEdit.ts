@@ -40,7 +40,7 @@ export function req(payload) {
 export function profileFormFields(company: Company): FormFields {
   const { legalName: name, profile, economicalActivityTypes, companyType: { id: type } } = company
   const { picture: upload, email, phone, description, links, address } = profile
-  const { country: { id: country }, city: { id: city } } = address
+  const { country: { id: country }, city } = address
   const activityTypes = economicalActivityTypes.map(({ id }) => id)
   const socialLinks = links.map(({ value }) => value)
 
@@ -48,7 +48,7 @@ export function profileFormFields(company: Company): FormFields {
     upload: '',
     name,
     country,
-    city,
+    city: city ? city.id : '',
     type,
     description,
     activityTypes,
