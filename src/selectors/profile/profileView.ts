@@ -13,7 +13,7 @@ export const companySelector = createSelector<State, ComponentProps, Company>(
   ({ id, profile, legalName: name, economicalActivityTypes, companyType }) => {
     const { picture: logo, email, phone, description, links, address } = profile
     const { name: type } = companyType
-    const { country: { name: country }, city: { name: city } } = address
+    const { country: { name: country }, city } = address
 
     return {
       id,
@@ -21,7 +21,7 @@ export const companySelector = createSelector<State, ComponentProps, Company>(
       name,
       type,
       country,
-      city,
+      city: city ? city.name : null,
       description,
       email,
       phone,
