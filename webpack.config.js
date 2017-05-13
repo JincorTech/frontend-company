@@ -65,7 +65,8 @@ module.exports = {
       {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
       {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'},
       {test: /\.(jpe?g|png|gif)$/i, loader: 'file?name=[name].[ext]'},
-      {test: /\.ico$/, loader: 'file?name=[name].[ext]'}
+      {test: /\.ico$/, loader: 'file?name=[name].[ext]'},
+      {test: /\.json$/, loader: 'json-loader'}
     ]
   },
 
@@ -97,7 +98,7 @@ module.exports = {
     }),
     doiuse({
       browsers: ['ie >= 10', '> 5%'],
-      ignore: ['css-transitions', 'calc', 'css3-cursors', 'css-gradients', 'transforms3d']
+      ignore: ['css-transitions', 'calc', 'css3-cursors', 'css-gradients', 'transforms3d', 'viewport-units']
     }),
     reporter({
       clearAllMessages: true

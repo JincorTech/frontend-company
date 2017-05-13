@@ -3,12 +3,12 @@ import { Component, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 
 
-export type InputProps = HTMLProps<HTMLInputElement> & {
+export type Props = HTMLProps<HTMLInputElement> & {
   invalid?: boolean
 }
 
 
-export class Input extends Component<InputProps, {}> {
+export class Input extends Component<Props, {}> {
   public inputElement: HTMLInputElement
 
   public render(): JSX.Element {

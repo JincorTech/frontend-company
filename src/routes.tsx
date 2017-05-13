@@ -16,6 +16,7 @@ import ProfileEdit from './containers/profile/ProfileEdit'
 import ProfileView from './containers/profile/ProfileView'
 import Employees from './containers/employees/Employees'
 import Search from './containers/search/Search'
+import Messenger from './containers/messenger/Messenger'
 
 
 const UserIsAuthenticated = UserAuthWrapper({
@@ -42,6 +43,7 @@ export default (
       <Route path="profile/edit" component={ProfileEdit}/>
       <Route path="employees" component={Employees}/>
       <Route path="search" component={Search}/>
+      <Route path="messenger" component={Messenger}/>
     </Route>
 
     <Redirect from="*" to="/auth/signin" />
