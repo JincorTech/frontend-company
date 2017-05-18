@@ -5,7 +5,7 @@
   position: relative;
   padding: 60px * 20px;
   clear: fix;
-}  
+}
 
 .company-logo {
   float: left;
@@ -53,7 +53,7 @@
 }
 
 .social {
-  width: 400px;
+  width: 390px;
 }
 
 .contacts, .social {

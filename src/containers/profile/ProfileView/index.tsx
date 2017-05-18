@@ -97,8 +97,8 @@ class CompanyProfile extends Component<Props, StateProps> {
             </InfoItem>
 
             <InfoItem styleName="contacts" title="Контакты">
-              {email && <ContactItem type="email" value={email}/>}
               {phone && <ContactItem type="phone" value={phone}/>}
+              {email && <ContactItem type="email" value={email}/>}
               {email || phone ? '' : <div styleName="empty-value">Не заполнено</div>}
             </InfoItem>
           </div>
