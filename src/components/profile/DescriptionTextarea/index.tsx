@@ -63,6 +63,7 @@ class DescriptionTextarea extends Component<Props, State> {
     if (onBlur) {
       onBlur(e.target.value)
     }
+
     this.setState({ countVisible: false })
   }
 
