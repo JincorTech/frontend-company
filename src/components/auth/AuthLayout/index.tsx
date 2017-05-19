@@ -15,7 +15,7 @@ const Header: SFC<{}> = ({ children }) => {
           <Logo styleName="logo" to="/"/>
 
           <nav styleName="pull-right">
-            <Link to="/auth/signin">Войти</Link>
+            <Link styleName="enter-link" to="/auth/signin">Войти</Link>
             <Link to="/auth/signup" withBorder>Новая компания</Link>
           </nav>
         </div>

@@ -13,7 +13,6 @@
 
 .default {
   composes: link;
-  margin-right: 25px;
 }
 
 .bordered {
