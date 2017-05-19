@@ -5,6 +5,7 @@ import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
 import { ActionCreator } from '../../../utils/actions'
 
 import { validate, initialValues } from '../../../helpers/auth/loginForm'
+import { password } from '../../../utils/validators'
 
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
@@ -50,6 +51,7 @@ class LogInForm extends Component<Props, {}> {
         <Field
           component={RenderPassword}
           name="password"
+          warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}
           placeholder="Пароль"/>
 
         <Button type="submit" spinner={spinner} disabled={invalid}>Войти</Button>

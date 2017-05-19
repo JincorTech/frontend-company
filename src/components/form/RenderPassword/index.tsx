@@ -5,6 +5,7 @@ import * as CSSModules from 'react-css-modules'
 
 import Password from './components/Password'
 import FieldError from '../../common/FieldError'
+import FieldHint from '../../common/FieldHint'
 
 /**
  * Types
@@ -40,13 +41,15 @@ class RenderPassword extends Component<Props, State> {
     const { placeholder, input, meta } = this.props
 
     return (
-      <FieldError meta={meta}>
-        <Password
-          visible={visible}
-          placeholder={placeholder}
-          onChangeVisibility={this.handleChangeVisibility}
-          {...input}/>
-      </FieldError>
+      <FieldHint meta={meta}>
+        <FieldError meta={meta}>
+          <Password
+            visible={visible}
+            placeholder={placeholder}
+            onChangeVisibility={this.handleChangeVisibility}
+            {...input}/>
+        </FieldError>
+      </FieldHint>
     )
   }
 }
