@@ -13,7 +13,9 @@
 }
 
 .img-bg {
-  background-color: #cdcecf;
+  & > img {
+    background-color: #fff;
+  }
 }
 
 .overlay {
