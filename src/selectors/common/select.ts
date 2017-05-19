@@ -5,7 +5,9 @@ const stateSelector = (state: State): State => state
 
 export const optionsSelector = createSelector<State, string[], State>(
   stateSelector,
-  ({ options, filterValue, optionsMap }) => options.filter((optionValue) =>
-    new RegExp(filterValue, 'i').test(optionsMap[optionValue].name)
-  )
+  ({ options, filterValue, optionsMap }) => {
+    const regExp = new RegExp(`^${filterValue}`, 'i')
+
+    return options.filter((optionValue) => regExp.test(optionsMap[optionValue].name))
+  }
 )
