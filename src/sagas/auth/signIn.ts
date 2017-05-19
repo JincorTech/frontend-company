@@ -17,6 +17,7 @@ import {
   LoginData
 } from '../../redux/modules/auth/signIn'
 
+import { emitAlert } from '../../redux/modules/common/alert'
 import { login } from '../../redux/modules/app/app'
 import { FormFields as LoginFields } from '../../containers/auth/LoginForm'
 
@@ -37,6 +38,7 @@ function* employeeCompaniesIterator(action: Action<LoginFields>): SagaIterator {
     if (companyCount === 0) {
       const error = new SubmissionError<LoginFields>({ email: '', password: '' })
       yield put(fetchCompanies.failure(error))
+      yield put(emitAlert('Не удается войти. Пожалуйста, проверьте правильность написания логина и пароля.'))
     }
 
     if (companyCount === 1) {
