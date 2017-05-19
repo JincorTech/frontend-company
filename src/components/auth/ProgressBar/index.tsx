@@ -3,7 +3,7 @@ import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
 import * as classNames from 'classnames'
 
-import Step from './components/Step'
+import Step from '../Step'
 
 type ProgressBarProps = {
   currentStep: 1 | 2 | 3

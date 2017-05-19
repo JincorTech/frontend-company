@@ -10,4 +10,4 @@ const Step: SFC<StepProps> = ({ type }) => (
   <span styleName={type} />
 )
 
-export default CSSModules(Step, require('../styles.css'))
+export default CSSModules(Step, require('./styles.css'))

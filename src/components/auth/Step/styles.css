@@ -1,0 +1,24 @@
+@use postcss-short;
+@use postcss-inline-svg;
+
+.step {
+  display: inline-block;
+  size: 20px;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.active {
+  composes: step;
+  border: 1px solid #0070e0;
+}
+
+.uncompleted {
+  composes: step;
+  border: 1px solid #dbdfe4
+}
+
+.completed {
+  composes: step;
+  background: #0070e0 svg-load('svg/ok.svg') center no-repeat;
+}
