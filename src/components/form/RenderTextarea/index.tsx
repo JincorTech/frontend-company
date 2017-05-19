@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
 import { WrappedFieldProps } from 'redux-form'
 
-import Textarea, { Props as TextareaProps } from './components/Textarea'
+import Textarea, { Props as TextareaProps } from '../../profile/DescriptionTextarea'
 import FieldError from '../../common/FieldError'
 
 
@@ -22,4 +21,4 @@ const RenderTextarea: SFC<Props> = (props) => {
   )
 }
 
-export default CSSModules(RenderTextarea, require('./styles.css'))
+export default RenderTextarea

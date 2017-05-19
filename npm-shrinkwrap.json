@@ -5975,9 +5975,9 @@
       "resolved": "https://registry.npmjs.org/react-router-redux/-/react-router-redux-4.0.8.tgz"
     },
     "react-textarea-autosize": {
-      "version": "4.0.5",
-      "from": "react-textarea-autosize@4.0.5",
-      "resolved": "https://registry.npmjs.org/react-textarea-autosize/-/react-textarea-autosize-4.0.5.tgz"
+      "version": "4.3.2",
+      "from": "react-textarea-autosize@4.3.2",
+      "resolved": "https://registry.npmjs.org/react-textarea-autosize/-/react-textarea-autosize-4.3.2.tgz"
     },
     "react-waypoint": {
       "version": "6.0.0",
