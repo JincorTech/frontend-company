@@ -37,13 +37,13 @@
   transition: transform linear 0.2s;
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 }
 
 .overlay:hover {
   .camera {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 }
 

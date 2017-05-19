@@ -20,7 +20,7 @@
 
 .sidebar-close {
   composes: sidebar;
-  left: -240px;
+  left: -250px;
 }
 
 .link {
