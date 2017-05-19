@@ -101,7 +101,6 @@ class ProfileEdit extends Component<Props, {}> {
               modalId="select-country"
               filter
               validate={required()}
-              options={[]}
               onOptionSelect={(value) => updateCities(value)}
               component={RenderSelect}
               styleName="select-input"/>
@@ -110,7 +109,6 @@ class ProfileEdit extends Component<Props, {}> {
               name="city"
               modalId="select-city"
               filter
-              options={[]}
               component={RenderSelect}
               styleName="select-input"/>
           </div>
@@ -121,7 +119,6 @@ class ProfileEdit extends Component<Props, {}> {
               validate={required()}
               modalId="select-company-type"
               placeholder="Тип компании"
-              options={[]}
               component={RenderSelect}
               styleName="select-input"/>
           </InfoItem>
@@ -130,7 +127,6 @@ class ProfileEdit extends Component<Props, {}> {
             <Field
               name="description"
               placeholder="Описание компании"
-              maxLength={550}
               component={RenderTextarea}/>
           </InfoItem>
 
