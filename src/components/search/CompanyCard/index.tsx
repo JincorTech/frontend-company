@@ -1,34 +1,41 @@
 import * as React from 'react'
-import { SFC } from 'react'
+import { SFC, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 
 import Button from '../../common/Button'
 import Icon from '../../common/Icon'
 
-export type Props = {
-  name?: string
+import { Company } from '../../../redux/modules/profile/profileView'
+
+import SocialLink from '../../profile/SocialLink'
+import CompanyLogo from '../../profile/CompanyLogo'
+
+
+export type Props = HTMLProps<HTMLDivElement> & {
+  company: Company
 }
 
 
-const CompanyCard: SFC<Props> = props => {
+const CompanyCard: SFC<Props> = ({ company, ...divProps }) => {
+  const { legalName, profile, economicalActivityTypes, companyType } = company
+  const { picture, links, email, phone, address } = profile
+
   return (
-    <div styleName="card">
-      <button type="button" styleName="bookmark">
+    <div styleName="card" {...divProps}>
+      <button type="button" styleName="bookmark" onClick={e => e.stopPropagation()}>
         <Icon styleName="bookmark-icon" name="bookmark"/>
       </button>
 
       <div styleName="logo">
-        <img src="https://static.sporcle.com/small/930175.png?v=1479411141"/>
+        <CompanyLogo src={picture}/>
       </div>
 
-      <div styleName="name">{props.name}</div>
-      <div styleName="address">Chicago, USA</div>
-      <div styleName="button"><Button styleName="btn" bStyle="outline">Написать</Button></div>
-      <div styleName="activity"><Icon styleName="icon" name="activity"/>Банковский сектор</div>
+      <div styleName="name">{legalName}</div>
+      <div styleName="address">{address.country.name || ''} {address.city ? address.city.name : ''}</div>
+      <div styleName="button"><Button styleName="btn" bStyle="outline" onClick={e => e.stopPropagation()}>Написать</Button></div>
+      <div styleName="activity"><Icon styleName="icon" name="activity"/>{companyType.name}</div>
       <div styleName="socials">
-        <a href="javascript:void(0)"><Icon styleName="soc-icon" name="social-instagram"/></a>
-        <a href="javascript:void(0)"><Icon styleName="soc-icon" name="social-twitter"/></a>
-        <a href="javascript:void(0)"><Icon styleName="soc-icon" name="social-facebook"/></a>
+        {Boolean(links.length) && links.map((link, i) => <SocialLink styleName="social" displayName={false} size={28} {...link} key={link.value + i}/>)}
       </div>
     </div>
   )

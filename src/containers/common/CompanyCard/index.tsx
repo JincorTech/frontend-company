@@ -2,7 +2,9 @@ import * as React from 'react'
 import { SFC, HTMLProps } from 'react'
 import { connect } from 'react-redux'
 import * as CSSModules from 'react-css-modules'
-import { openCompanyCard, closeCompanyCard, flipCompanyCard } from '../../../redux/modules/common/companyCard'
+
+import { closeCompanyCard } from '../../../redux/modules/common/companyCard'
+import { Company as CompanyProps } from '../../../redux/modules/profile/profileView'
 
 import { LinkProps } from '../../../components/profile/SocialLink'
 import Popup from '../../../components/common/FullscreenPopup'
@@ -12,31 +14,14 @@ import SocialLink from '../../../components/profile/SocialLink'
 import CompanyLogo from '../../../components/profile/CompanyLogo'
 
 
-export type Props = ComponentProps & StateProps & DispatchProps
-
-export type ComponentProps = HTMLProps<HTMLDivElement> & {
-  company: CompanyInfo
-}
-
-export type CompanyInfo = {
-  logo: string
-  name: string
-  type: string
-  city: string
-  country: string
-  email: string
-  phone: string
-  activities: any
-  socialLinks: LinkProps[]
-  description: string
-}
+export type Props = StateProps & DispatchProps
 
 export type StateProps = {
   open: boolean
+  company: CompanyProps
 }
 
 export type DispatchProps = {
-  openCompanyCard: () => void,
   closeCompanyCard: () => void
 }
 
@@ -45,7 +30,10 @@ export type DispatchProps = {
  */
 const CompanyCard: SFC<Props> = props => {
   const { open, company, closeCompanyCard } = props
-  const { logo, type, name, city, country, description, email, phone, activities, socialLinks } = company
+  const { legalName, profile, economicalActivityTypes, companyType } = company
+  const { picture, links, email, phone, address, description } = profile
+  const city = address.city ? address.city.name : ''
+  const country = address.country ? address.country.name : ''
 
   return (
     <Popup
@@ -56,11 +44,11 @@ const CompanyCard: SFC<Props> = props => {
 
       <div styleName="top">
         <div styleName="logo">
-          <CompanyLogo src={logo}/>
+          <CompanyLogo src={picture}/>
         </div>
         <div styleName="title">
           <div styleName="inner">
-            <div styleName="name">{name}</div>
+            <div styleName="name">{legalName}</div>
             <span styleName="address">{city ? `${country}, ${city}` : country}</span>
             <div styleName="buttons">
               <Button styleName="transparent-button">Написать</Button>
@@ -78,10 +66,10 @@ const CompanyCard: SFC<Props> = props => {
 
         <div styleName="info">
           <ul styleName="activities">
-            <li styleName="item"><div styleName="company-icon"/>{type}</li>
+            <li styleName="item"><div styleName="company-icon"/>{companyType.name}</li>
 
-            {activities.length
-              ? activities.map((activity, i) =>
+            {economicalActivityTypes.length
+              ? economicalActivityTypes.map((activity, i) =>
                 <li styleName="item" key={i}><div styleName="activity-icon"/>{activity.name}</li>)
               : <li styleName="item-empty"><div styleName="activity-icon"/>Отрасли не указаны</li>}
 
@@ -95,9 +83,9 @@ const CompanyCard: SFC<Props> = props => {
           </ul>
 
           <div styleName="socials">
-            {Boolean(socialLinks.length) &&
+            {Boolean(links.length) &&
             <ul>
-              {socialLinks.map((social, i) => <SocialLink styleName="social" displayName={false} size={40} {...social} key={i}/>)}
+              {links.map((social, i) => <SocialLink styleName="social" displayName={false} size={40} {...social} key={i}/>)}
             </ul>}
           </div>
         </div>
@@ -108,11 +96,7 @@ const CompanyCard: SFC<Props> = props => {
 
 const StyledComponent = CSSModules(CompanyCard, require('./styles.css'))
 
-export default connect<StateProps, DispatchProps, ComponentProps>(
+export default connect<StateProps, DispatchProps, {}>(
   (state) => state.common.companyCard,
-  {
-    openCompanyCard,
-    closeCompanyCard,
-    flipCompanyCard
-  }
+  { closeCompanyCard }
 )(StyledComponent)

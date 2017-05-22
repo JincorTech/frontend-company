@@ -18,7 +18,6 @@ export type Props = WrappedFieldProps<any> & InjectedCSSModuleProps & {
   placeholder: string
   openPopup: () => void
   closePopup: () => void
-  handleRemove: () => void
   onActivitySelect: (activityId: string) => void
 }
 
@@ -28,8 +27,10 @@ export const RenderActivity: SFC<Props> = (props) => {
     input,
     meta,
     index,
-    handleRemove,
     styles,
+    open,
+    openPopup,
+    closePopup,
     ...inputProps
   } = props
 
@@ -50,8 +51,6 @@ export const RenderActivity: SFC<Props> = (props) => {
           placeholder={placeholder}
           {...inputProps}/>
       </FieldError>
-
-      <a styleName="activity-remove" onClick={handleRemove}>удалить</a>
     </div>
   )
 }

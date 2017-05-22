@@ -6,12 +6,24 @@
   position: relative;
   size: 100%;
   border-radius: 4px;
-  background-color: rgba(219, 223, 228, 0.5);
+  background-color: #fff;
+  overflow: hidden;
 
   & img {
     size: 100%;
-    border-radius: 4px;
   }
+}
+
+.blackout {
+  position: absolute 0 * * 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .05);
+}
+
+.blackout-empty {
+  composes: blackout;
+  background-color: transparent;
 }
 
 .empty {

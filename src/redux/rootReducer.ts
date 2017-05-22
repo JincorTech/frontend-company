@@ -1,5 +1,6 @@
 import { combineReducers, routerReducer } from 'redux-seamless-immutable'
 import { reducer as formReducer } from 'redux-form'
+import { loadingBarReducer } from 'react-redux-loading-bar'
 
 import app from './modules/app/app'
 import appLayout from './modules/app/appLayout'
@@ -21,6 +22,7 @@ import profileView from './modules/profile/profileView'
 import profileEdit from './modules/profile/profileEdit'
 
 import employees from './modules/employees/employees'
+import search from './modules/search/search'
 
 import emojiSelect from './modules/messenger/emojiSelect'
 
@@ -28,6 +30,7 @@ import emojiSelect from './modules/messenger/emojiSelect'
 export default combineReducers({
   routing: routerReducer,
   form: formReducer,
+  loadingBar: loadingBarReducer,
 
   app: combineReducers({
     app,
@@ -52,13 +55,16 @@ export default combineReducers({
   }),
 
   profile: combineReducers({
-    // activityTypes,
     profileEdit,
     profileView
   }),
 
   employees: combineReducers({
     employees
+  }),
+
+  search: combineReducers({
+    search
   }),
 
   messenger: combineReducers({

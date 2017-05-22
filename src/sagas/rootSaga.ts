@@ -17,6 +17,7 @@ import createCompanySaga from './auth/createCompany'
 import profileSaga from './profile/profileView'
 import profileEditSaga from './profile/profileEdit'
 import employeesSaga from './employees/employees'
+import searchSaga from './search/search'
 
 
 export default function* (): SagaIterator {
@@ -35,6 +36,7 @@ export default function* (): SagaIterator {
     fork(profileEditSaga),
     fork(selectSaga),
     fork(employeesSaga),
-    fork(profileCardSaga)
+    fork(profileCardSaga),
+    fork(searchSaga)
   ]
 }

@@ -9,6 +9,7 @@
   border-radius: 4px;
   margin: 20px 15px;
   padding: 40px 20px 30px;
+  cursor: pointer;
   transition: .1s linear box-shadow;
 
   &:hover {
@@ -21,6 +22,7 @@
 }
 
 .bookmark {
+  display: none;
   opacity: 0;
   transition: .1s linear opacity;
   background: transparent;
@@ -38,11 +40,6 @@
   size: 75px;
   margin: 0 auto;
   border-radius: 4px;
-
-  & > img {
-    width: 100%;
-    border-radius: 4px;
-  }
 }
 
 .name {
@@ -51,6 +48,11 @@
   color: #222;
   text-align: center;
   margin: 12px 0 0 0;
+  max-height: 66px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .address {
@@ -92,19 +94,9 @@
   text-align: center;
   position: absolute * * 25px 0;
   width: 100%;
+}
 
-  & a {
-    display: inline-block;
-    margin: 0 7px;
-  }
-
-  & .soc-icon {
-    size: 28px;
-    background-size: contain;
-    transition: .1s linear transform;
-
-    &:hover {
-      transform: scale(1.2);
-    }
-  }
+.social {
+  display: inline-block;
+  margin: 0 7px;
 }
