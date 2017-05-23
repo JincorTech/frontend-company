@@ -81,12 +81,8 @@
   background-color: #c8c8c8;
   margin-left: -5px;
   border-radius: 0 4px;
-
-  & img {
-    size: 48px;
-    display: block;
-    border-radius: 0 4px;
-  }
+  size: 48px;
+  overflow: hidden;
 }
 
 .company-logo-empty {

@@ -25,7 +25,7 @@ export type Profile = {
     [locale: string]: string
   }
   picture: string
-  links: Links[]
+  links: Link[]
   email: string
   phone: string
   description: string
@@ -56,7 +56,7 @@ export type Address = {
   formattedAddress: string
 }
 
-export type Links = {
+export type Link = {
   name: string
   value: string
   iconUrl?: string

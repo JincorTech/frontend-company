@@ -19,6 +19,7 @@ import UserAvatar from '../../../components/app/UserAvatar'
 import Sidebar from '../../../components/app/Sidebar'
 import PageName from '../../../components/app/PageName'
 import ProfileCard from '../ProfileCard'
+import CompanyCard from '../../common/CompanyCard'
 
 
 /**
@@ -92,6 +93,7 @@ class AppLayout extends Component<Props, StateProps> {
         </section>
 
         <ProfileCard user={user}/>
+        <CompanyCard/>
       </div>
     )
   }

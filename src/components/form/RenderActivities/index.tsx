@@ -22,15 +22,16 @@ const RenderActivities: SFC<Props> = (props) => {
   return (
     <div styleName="activity-list">
       {fields.map((field, i) => (
-        <Field
-          key={i}
-          index={i}
-          name={field}
-          component={RenderActivity}
-          validate={required()}
-          styleName="activity-field"
-          placeholder={i > 0 ? 'Дополнительная сфера деятельности' : 'Oсновная сфера деятельности'}
-          handleRemove={() => fields.remove(i)}/>
+        <div styleName="group" key={i}>
+          <Field
+            index={i}
+            name={field}
+            component={RenderActivity}
+            validate={required()}
+            styleName="activity-field"
+            placeholder={i > 0 ? 'Дополнительная сфера деятельности' : 'Oсновная сфера деятельности'}/>
+            <a styleName="activity-remove" onClick={() => fields.remove(i)}>удалить</a>
+        </div>
       ))}
       {fields.length < 3 && <AddInput children="добавить отрасль" onClick={() => fields.push('')}/>}
     </div>

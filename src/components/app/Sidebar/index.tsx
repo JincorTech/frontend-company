@@ -59,7 +59,7 @@ class Sidebar extends PureComponent<Props, {}> {
         <nav>
           <Link className={link} activeClassName={active} to="/app/messenger">Мессенджер</Link>
           <Link className={link} activeClassName={active} to="/app/profile">Моя компания</Link>
-          <Link className={link} activeClassName={active} to="/app/favorites">Избранное</Link>
+          {/*<Link className={link} activeClassName={active} to="/app/favorites">Избранное</Link>*/}
           <Link className={link} activeClassName={active} to="/app/search">Поиск</Link>
         </nav>
       </aside>

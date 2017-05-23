@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Component, cloneElement, SFC } from 'react'
+import { Component, cloneElement } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -26,7 +26,6 @@ import Option, { OptionItem } from './components/Option'
 import SelectInput from '../../../components/common/SelectInput'
 import Popup from '../../../components/common/Popup'
 import Input from '../../../components/common/Input'
-import { SelectInputProps } from '../../../components/common/SelectDropdown'
 
 
 /**
@@ -42,7 +41,7 @@ export type ComponentProps = {
   placeholder?: string
   invalid?: boolean
   filter: boolean
-  Button?: SFC<SelectInputProps>
+  button?: JSX.Element
   onChange: (e?: any) => void
   onBlur: (e?: any) => void
 }
@@ -133,16 +132,23 @@ class Select extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { filter, modalId, Button, select, title, placeholder, invalid, actions, options, optionValue, ...divProps } = this.props
+    const { filter, modalId, button, select, title, placeholder, invalid, actions, options, optionValue, ...divProps } = this.props
     const { open, selectedOption, optionsMap, filterValue } = select
     const option = optionsMap[selectedOption] || { name: '', value: '' }
 
     return (
       <div styleName="select">
         {
-          Button
-          ? <Button value={option.name} placeholder={placeholder} invalid={invalid} onClick={actions.openSelect} {...divProps}/>
-          : <SelectInput value={option.name} placeholder={placeholder} invalid={invalid} onClick={actions.openSelect} {...divProps}/>
+          button
+          ? cloneElement(button, {
+              value: option.name,
+              placeholder,
+              onClick: actions.openSelect
+            })
+          : <SelectInput
+              value={option.name}
+              placeholder={placeholder}
+              onClick={actions.openSelect}/>
         }
 
         <Popup modalId={modalId} styleName="select-popup" open={open} onClose={actions.closeSelect}>

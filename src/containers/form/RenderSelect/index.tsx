@@ -17,7 +17,7 @@ export type Props = SelectProps & WrappedFieldProps<any> & {
  * Props
  */
 const RenderSelect: SFC<Props> = (props) => {
-  const { title, onOptionSelect, placeholder, input, meta, options, modalId, filter, Button, ...divProps } = props
+  const { title, onOptionSelect, placeholder, input, meta, options, modalId, filter, button, select, actions, ...divProps } = props
 
   const handleChange = (value: any) => {
     input.onChange(value)
@@ -31,7 +31,7 @@ const RenderSelect: SFC<Props> = (props) => {
         filter={filter}
         title={placeholder}
         options={options}
-        Button={Button}
+        button={button}
         optionValue={input.value}
         onChange={handleChange}
         onBlur={input.onBlur}

@@ -5,9 +5,6 @@ import * as CSSModules from 'react-css-modules'
 
 import { getBackgroundColor, getInitials } from '../../../utils/colorFunction'
 
-import Popup, { Props as PopupProps } from '../../../components/common/Popup'
-import Icon from '../../../components/common/Icon'
-
 import ProfileEdit from './components/ProfileEdit'
 import ChangePassword from './components/ChangePassword'
 import {
@@ -21,6 +18,10 @@ import {
 } from '../../../redux/modules/app/profileCard'
 import { User as UserProps } from '../../../redux/modules/app/appLayout'
 import { StateMap as StateProps, BottomView as BottomViewProps } from '../../../redux/modules/app/profileCard'
+
+import Popup, { Props as PopupProps } from '../../../components/common/Popup'
+import Icon from '../../../components/common/Icon'
+import CompanyLogo from '../../../components/profile/CompanyLogo'
 
 
 type Props = JSX.IntrinsicAttributes
@@ -129,7 +130,7 @@ class ProfileCard extends Component<Props, {}> {
           <div styleName={bottomView !== 'profile-form' ? 'company' : 'company-hidden'}>
             <div styleName="company-name">{company.legalName}</div>
             <div styleName={ company.profile.picture ? 'company-logo' : 'company-logo-empty' }>
-              <img src={company.profile.picture}/>
+              <CompanyLogo src={company.profile.picture} borderRadius="0 4px"/>
             </div>
           </div>
 
