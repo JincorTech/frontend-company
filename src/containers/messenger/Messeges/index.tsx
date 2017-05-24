@@ -2,7 +2,6 @@ import * as React from 'react'
 import { Component, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { Scrollbars } from 'react-custom-scrollbars'
-import getEmoji from 'get-emoji'
 
 import Icon from '../../../components/common/Icon'
 import Emoji from '../../../components/messenger/Emoji'
