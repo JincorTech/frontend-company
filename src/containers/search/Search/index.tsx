@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import * as isEqual from 'shallowequal'
 
 import { fetchActivities } from '../../../redux/modules/common/activityTypes'
-import { search, fetchCountries, StateMap as StateProps, SearchRequest } from '../../../redux/modules/search/search'
+import { search, fetchCountries, nextPage, StateMap as StateProps, SearchRequest } from '../../../redux/modules/search/search'
 import { openCompanyCard } from '../../../redux/modules/common/companyCard'
 import { Company as CompanyProps } from '../../../redux/modules/profile/profileView'
 
@@ -25,7 +25,6 @@ export type ComponentProps = {
   request: string
   activity: string
   country: string
-  page: number
 }
 
 export type DispatchProps = {
@@ -34,6 +33,7 @@ export type DispatchProps = {
   search: (req: SearchRequest) => void
   handleCountryChange: (e: any) => void
   openCompanyCard: (company: CompanyProps) => void
+  nextPage: (req: SearchRequest) => void
 }
 
 
@@ -44,14 +44,12 @@ class Search extends Component<Props, ComponentProps> {
     this.state = {
       request: this.props.request || '',
       country: this.props.country || '',
-      activity: this.props.activity || '',
-      page: 0
+      activity: this.props.activity || ''
     }
 
     this.handleCountryChange = this.handleCountryChange.bind(this)
     this.handleActivityChange = this.handleActivityChange.bind(this)
     this.handleRequestChange = this.handleRequestChange.bind(this)
-    // this.pushCompanies = this.pushCompanies.bind(this)
   }
 
   public componentWillMount(): void {
@@ -73,17 +71,30 @@ class Search extends Component<Props, ComponentProps> {
     this.setState({ request })
   }
 
-  // private pushCompanies(): void {
-  //   this.setState({ page: this.state.page + this.props.meta.pagination.perPage })
-  //   console.log(`fetch request blah blah ${this.state.page + this.props.meta.pagination.perPage}`)
-  // }
+  private renderWaypoint(): JSX.Element {
+    const { companies, isLoading, meta } = this.props
+    const { pagination: { perPage, currentPage, lastPage } } = meta
+
+    if (!isLoading && companies.length >= perPage && currentPage < lastPage) {
+      return <Waypoint onEnter={() => this.pushCompanies()} scrollableAncestor={window}/>
+    }
+  }
+
+  private pushCompanies(): void {
+    const { nextPage, meta, page } = this.props
+    const { pagination: { perPage } } = meta
+    const { request, country, activity } = this.state
+
+    nextPage({ request, country, activity, perPage, page: page + 1 })
+  }
 
   public componentWillUpdate(nextProps, nextState): void {
-    if (!isEqual(this.state, nextState) && nextState.request.length > 2) {
-      const { search } = this.props
+    if (!isEqual(this.state, nextState)) {
+      const { search, meta, page } = this.props
+      const { pagination: { perPage } } = meta
       const { request, country, activity } = nextState
 
-      search({ request, country, activity })
+      search({ request, country, activity, perPage, page })
     }
   }
 
@@ -145,7 +156,7 @@ class Search extends Component<Props, ComponentProps> {
           )}
         </div>
 
-        {/*<Waypoint onEnter={this.pushCompanies}/>*/}
+        {this.renderWaypoint()}
       </div>
     )
   }
@@ -159,5 +170,5 @@ export default connect<StateProps, DispatchProps, ComponentProps>(
     loadingBar: state.loadingBar,
     ...state.search.search
   }),
-  { fetchActivities, fetchCountries, search, openCompanyCard }
+  { fetchActivities, fetchCountries, search, nextPage, openCompanyCard }
 )(StyledComponent)

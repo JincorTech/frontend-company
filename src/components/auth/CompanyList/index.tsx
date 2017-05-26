@@ -3,7 +3,7 @@ import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { ActionCreator } from '../../../utils/actions'
 
-import CompanyItem from './components/CompanyItem'
+import CompanyItem from '../CompanyItem'
 
 
 export type Company = {
@@ -12,6 +12,7 @@ export type Company = {
   country: string
   formattedAddress: string
   type: string
+  src: string
 }
 
 export type Props = {
@@ -27,13 +28,11 @@ const CompanyList: SFC<Props> = ({ companies, onSelect }) => {
 
       <div styleName="company-list">
         {
-          companies.map(({legalName, type, country, id}, i) => (
+          companies.map((company) => (
             <CompanyItem
-              key={i}
-              name={legalName}
-              country={country}
-              type={type}
-              onClick={() => onSelect(id)}/>
+              key={company.id}
+              company={company}
+              onClick={() => onSelect(company.id)}/>
           ))
         }
       </div>

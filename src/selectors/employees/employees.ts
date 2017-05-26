@@ -1,19 +1,21 @@
 import { createSelector } from 'reselect'
-import { StateObj as State, Employee } from '../../redux/modules/employees/employees'
+import { StateObj as State, ActiveEmployee } from '../../redux/modules/employees/employees'
 
-const employeesSelector = (state: State): Employee[] => state.employees.list
 
-export const activeEmployeesSelector = createSelector<State, Employee[], Employee[]>(
+const employeesSelector = (state: State): ActiveEmployee[] => state.active
+
+const comparator = (x, y) => {
+  const role = (r) => r === 'company-admin' ? 10 : 2
+
+  const X = role(x.profile.role)
+  const Y = role(y.profile.role)
+
+  if (X < Y) return 1
+  if (X > Y) return -1
+  return 0
+}
+
+export const activeSortSelector = createSelector<State, ActiveEmployee[], ActiveEmployee[]>(
   employeesSelector,
-  employees => employees.filter(employee => employee.meta.status === 'active')
-)
-
-export const invitedEmployeesSelector = createSelector<State, Employee[], Employee[]>(
-  employeesSelector,
-  employees => employees.filter(employee => employee.meta.status === 'invited')
-)
-
-export const deletedEmployeesSelector = createSelector<State, Employee[], Employee[]>(
-  employeesSelector,
-  employees => employees.filter(employee => employee.meta.status === 'deleted')
+  employees => Array.from(employees).sort(comparator)
 )

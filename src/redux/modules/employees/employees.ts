@@ -8,19 +8,34 @@ export type State = StateObj & ImmutableObject<StateObj>
 
 export type StateObj = {
   preloader: boolean
-  employees: Employees
+  self: Self
+  active: ActiveEmployee[]
+  invited: InvitedEmployee[]
+  deleted: DeletedEmployee[]
+  spinner: boolean
   confirmDelete: ConfirmPopup
   confirmAdmin: ConfirmPopup
   confirmRmAdmin: ConfirmPopup
   employeeCard: EmployeeCard
 }
 
-export type Employees = {
-  spinner: boolean
-  list: Employee[]
+export type Self = {
+  id: string
+  contacts: {
+    email: string
+    phone?: string
+  }
+  meta: {
+    registeredAt: string
+    status: 'active' | ''
+  }
+  profile: {
+    avatar?: string
+    role: string
+    name: string
+    position: string
+  }
 }
-
-export type Employee = ActiveEmployee | InvitedEmployee | DeletedEmployee
 
 export type ActiveEmployee = {
   id: string
@@ -68,6 +83,13 @@ export type DeletedEmployee = {
   }
 }
 
+export type EmployeesResponse = {
+  self: Self
+  active: ActiveEmployee[]
+  invited: InvitedEmployee[]
+  deleted: DeletedEmployee[]
+}
+
 export type ConfirmPopup = {
   open: boolean
   userId: string
@@ -108,7 +130,7 @@ export const openConfirmRmAdminPopup  = createAction<void>(OPEN_CONFIRM_RM_ADMIN
 export const closeConfirmRmAdminPopup = createAction<void>(CLOSE_CONFIRM_RM_ADMIN_POPUP)
 export const openEmployeeCard         = createAction<ActiveEmployee>(OPEN_EMPLOYEE_CARD)
 export const closeEmployeeCard        = createAction<void>(CLOSE_EMPLOYEE_CARD)
-export const fetchEmployees           = createAsyncAction<void, Employee[]>(FETCH_EMPLOYEES)
+export const fetchEmployees           = createAsyncAction<void, EmployeesResponse[]>(FETCH_EMPLOYEES)
 export const inviteEmployees          = createAsyncAction<void, void>(INVITE_EMPLOYEES)
 export const makeAdmin                = createAsyncAction<void, void>(MAKE_ADMIN)
 export const unmakeAdmin              = createAsyncAction<void, void>(UNMAKE_ADMIN)
@@ -120,10 +142,26 @@ export const resetState               = createAction<void>(RESET_STATE)
  */
 const initialState: State = from<StateObj>({
   preloader: true,
-  employees: {
-    spinner: false,
-    list: []
+  self: {
+    id: '',
+    contacts: {
+      email: ''
+    },
+    meta: {
+      registeredAt: '',
+      status: ''
+    },
+    profile: {
+      avatar: '',
+      role: '',
+      name: '',
+      position: ''
+    }
   },
+  active: [],
+  invited: [],
+  deleted: [],
+  spinner: false,
   confirmDelete: {
     open: false,
     userId: ''
@@ -192,15 +230,15 @@ export default createReducer<State>({
   ),
 
   [inviteEmployees.REQUEST]: (state: State): State => (
-    state.merge({ employees: { ...state.employees, spinner: true } })
+    state.merge({ spinner: true })
   ),
 
   [inviteEmployees.SUCCESS]: (state: State): State => (
-    state.merge({ employees: { ...state.employees, spinner: false } })
+    state.merge({ spinner: false })
   ),
 
-  [fetchEmployees.SUCCESS]: (state: State, { payload }: Action<Employee[]>): State => (
-    state.merge({ preloader: false, employees: { ...state.employees, list: payload } })
+  [fetchEmployees.SUCCESS]: (state: State, { payload }: Action<EmployeesResponse[]>): State => (
+    state.merge({ preloader: false, ...payload })
   ),
 
   [RESET_STATE]: (state: State): State => (

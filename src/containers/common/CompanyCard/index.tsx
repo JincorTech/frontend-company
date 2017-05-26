@@ -13,6 +13,8 @@ import Icon from '../../../components/common/Icon'
 import SocialLink from '../../../components/profile/SocialLink'
 import CompanyLogo from '../../../components/profile/CompanyLogo'
 
+import stringCut from '../../../helpers/common/stringCut'
+
 
 export type Props = StateProps & DispatchProps
 
@@ -48,7 +50,7 @@ const CompanyCard: SFC<Props> = props => {
         </div>
         <div styleName="title">
           <div styleName="inner">
-            <div styleName="name">{legalName}</div>
+            <div styleName="name">{stringCut(legalName, 30)}</div>
             <span styleName="address">{city ? `${country}, ${city}` : country}</span>
             <div styleName="buttons">
               <Button styleName="transparent-button">Написать</Button>

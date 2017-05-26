@@ -7,6 +7,7 @@ import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/em
 
 import InviteEmployee from '../../../components/employees/InviteEmployee'
 import Scrollbar from '../../../components/common/Scrollbar'
+import Self from '../../../components/employees/Self'
 import ActiveEmployee from '../../../components/employees/ActiveEmployee'
 import InvitedEmployee from '../../../components/employees/InvitedEmployee'
 import DeletedEmployee from '../../../components/employees/DeletedEmployee'
@@ -46,10 +47,11 @@ class EmployeesView extends Component<Props, {}> {
 
   public render(): JSX.Element {
     const {
-      employees,
-      activeEmployees,
-      invitedEmployees,
-      deletedEmployees,
+      self,
+      active,
+      invited,
+      deleted,
+      spinner,
       company,
       confirmDelete,
       confirmAdmin,
@@ -61,7 +63,8 @@ class EmployeesView extends Component<Props, {}> {
       closeEmployeeCard,
       makeAdmin,
       unmakeAdmin,
-      deleteEmployee
+      deleteEmployee,
+      openProfileCard
     } = this.props
 
     return (
@@ -70,34 +73,36 @@ class EmployeesView extends Component<Props, {}> {
           <BackButton/>
         </div>
 
-        <InviteEmployee spinner={employees.spinner}/>
+        <InviteEmployee spinner={spinner}/>
 
         <Scrollbar height="calc(100vh - 227px)">
-          {activeEmployees.length > 0 &&
-            <div styleName="list">
-              {activeEmployees.map(employee => (
-                <ActiveEmployee
-                  key={`active-employee-${employee.id}`}
-                  onDelete={this.onDeleteEmployee}
-                  onMakeAdmin={this.onMakeAdmin}
-                  onUnmakeAdmin={this.onUnmakeAdmin}
-                  onOpenProfile={this.onOpenProfile}
-                  employee={employee}/>))}
-            </div>
-          }
+          <div styleName="list">
+            <Self
+              onOpenProfile={openProfileCard}
+              employee={self}/>
 
-          {invitedEmployees.length > 0 &&
+            {active.map(employee => (
+              <ActiveEmployee
+                key={`active-employee-${employee.id}`}
+                onDelete={this.onDeleteEmployee}
+                onMakeAdmin={this.onMakeAdmin}
+                onUnmakeAdmin={this.onUnmakeAdmin}
+                onOpenProfile={this.onOpenProfile}
+                employee={employee}/>))}
+          </div>
+
+          {invited.length > 0 &&
             <div styleName="list">
-              {invitedEmployees.map(employee => (
+              {invited.map(employee => (
                 <InvitedEmployee
                   key={`invited-employee-${employee.id}`}
                   employee={employee}/>))}
             </div>
           }
 
-          {deletedEmployees.length > 0 &&
+          {deleted.length > 0 &&
             <div styleName="list">
-              {deletedEmployees.map(employee => (
+              {deleted.map(employee => (
                 <DeletedEmployee
                   key={`deleted-employee-${employee.id}`}
                   employee={employee}/>))}
