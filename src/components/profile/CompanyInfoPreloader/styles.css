@@ -1,0 +1,123 @@
+@use postcss-short;
+@use postcss-clearfix;
+
+:root {
+  --backgroud-color: #fbfbfb;
+}
+
+.company-profile-preloader {
+  margin-top: 50px;
+}
+
+.logo {
+  size: 165px;
+  border-radius: 2px;
+  background-color: var(--backgroud-color);
+  float: left;
+}
+
+.info {
+  float: left;
+  padding-left: 30px;
+  width: 750px;
+}
+
+.name {
+  width: 305px;
+  height: 40px;
+  border-radius: 2px;
+  background-color: var(--backgroud-color);
+  margin-bottom: 25px;
+}
+
+.region {
+  width: 195px;
+  height: 16px;
+  border-radius: 2px;
+  background-color: var(--backgroud-color);
+}
+
+.type {
+  width: 180px;
+  height: 16px;
+  border-radius: 2px;
+  background-color: var(--backgroud-color);
+}
+
+.description {
+  width: 763px;
+  height: 16px;
+  border-radius: 2px;
+  background-color: var(--backgroud-color);
+  margin-bottom: 6px;
+
+  &:last-child {
+    width: 427px;
+    margin-bottom: 0;
+  }
+}
+
+.activity {
+  width: 281px;
+  height: 16px;
+  border-radius: 2px;
+  background-color: var(--backgroud-color);
+  margin-bottom: 20px;
+}
+
+.contacts-block {
+  clear: fix;
+}
+
+.contacts, .social {
+  float: left;
+}
+
+.social {
+  width: 390px;
+}
+
+.social-link {
+  margin-bottom: 10px;
+}
+
+.social-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  size: 36px;
+  border-radius: 100%;
+  background-color: var(--backgroud-color);
+}
+
+.social-desc {
+  display: inline-block;
+  vertical-align: middle;
+  width: 134px;
+  height: 16px;
+  border-radius: 2px;
+  background-color: var(--backgroud-color);
+}
+
+.contact {
+  margin-bottom: 6px;
+}
+
+.contact-icon {
+  display: inline-block;
+  vertical-align: middle;
+  size: 30px;
+  border-radius: 100%;
+  background-color: var(--backgroud-color);
+  margin-right: 13px;
+}
+
+.contact-desc {
+  display: inline-block;
+  vertical-align: middle;
+  width: 180px;
+  height: 16px;
+  border-radius: 2px;
+  background-color: var(--backgroud-color);
+}
+

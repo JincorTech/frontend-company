@@ -1,0 +1,97 @@
+@use postcss-short;
+@use postcss-clearfix;
+
+.company-profile {
+  position: relative;
+  padding: 60px * 20px;
+  clear: fix;
+}
+
+.company-logo {
+  float: left;
+  size: 165px;
+}
+
+.company-info {
+  float: left;
+  padding-left: 30px;
+  width: 750px;
+}
+
+.company-name {
+  font-size: 40px/55px;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: #222222;
+  margin: 0 0 25px;
+}
+
+.company-desc {
+  padding-top: 9px;
+  max-width: 750px;
+}
+
+.value {
+  font-size: 16px/26px;
+  letter-spacing: -0.2px;
+  color: #000;
+  margin: 0;
+}
+
+.activity {
+  composes: value;
+  margin-bottom: 10px;
+}
+
+.activities {
+  margin: 0;
+  padding: 9px 0 0;
+}
+
+.social-links {
+  padding-top: 9px;
+}
+
+.social {
+  width: 390px;
+}
+
+.contacts, .social {
+  float: left;
+}
+
+.contacts-block {
+  clear: fix;
+}
+
+.company-link {
+  display: block;
+  font-size: 16px;
+}
+
+.company-link, .edit-button {
+  margin-bottom: 18px;
+}
+
+.edit-button {
+  display: inline-block;
+  font-size: 15px;
+  color: #0070e0;
+  padding: 8px 22px;
+  border: 1px solid #dbdfe4;
+  border-radius: 4px;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.controls-block {
+  position: absolute 60px 0px * *;
+  text-align: right;
+}
+
+.empty-value {
+  font-size: 15px;
+  color: #9da0a4;
+}

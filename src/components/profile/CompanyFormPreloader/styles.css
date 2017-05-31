@@ -1,0 +1,74 @@
+@use postcss-short;
+@use postcss-clearfix;
+
+:root {
+  --backgroud-color: #fbfbfb;
+}
+
+.company-profile-preloader {
+  margin-top: 60px;
+}
+
+.logo {
+  size: 165px;
+  border-radius: 2px;
+  background-color: var(--backgroud-color);
+  float: left;
+}
+
+.info {
+  float: left;
+  padding-left: 30px;
+  width: 750px;
+}
+
+.name {
+  width: 555px;
+  height: 80px;
+  border-radius: 4px;
+  background-color: var(--backgroud-color);
+  margin-bottom: 30px;
+}
+
+.region {
+  clear: fix;
+  margin-bottom: 30px;
+}
+
+.city, .country {
+  width: 200px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: var(--backgroud-color);
+  margin-right: 20px;
+  float: left;
+}
+
+.type {
+  width: 420px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: var(--backgroud-color);
+}
+
+.description {
+  width: 555px;
+  height: 85px;
+  border-radius: 4px;
+  background-color: var(--backgroud-color);
+}
+
+.input {
+  width: 555px;
+  height: 40px;
+  border-radius: 4px;
+  margin-bottom: 13px;
+  background-color: var(--backgroud-color);
+}
+
+.add-input {
+  width: 220px;
+  height: 20px;
+  border-radius: 4px;
+  background-color: var(--backgroud-color);
+}

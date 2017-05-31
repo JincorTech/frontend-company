@@ -1,5 +1,5 @@
 import { Company } from '../../redux/modules/profile/profileView'
-import { FormFields } from '../../containers/profile/ProfileEdit'
+import { FormFields } from '../../redux/modules/profile/profileEdit'
 
 
 export function req(payload) {
