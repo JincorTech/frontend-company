@@ -8,6 +8,7 @@ import { from, ImmutableObject } from 'seamless-immutable'
 export type State = StateMap & ImmutableObject<StateMap>
 
 export type StateMap = {
+  preloader: boolean
   company: Company
 }
 
@@ -65,17 +66,20 @@ export type Link = {
 /**
  * Actions
  */
-export const FETCH_COMPANY  = 'profile/profile/FETCH_COMPANY'
+export const FETCH_COMPANY = 'profile/profile/FETCH_COMPANY'
+export const RESET_STATE   = 'profile/profile/RESET_PROFILE_VIEW_STATE'
 
 /**
  * Action creators
  */
 export const fetchCompany = createAsyncAction<string, Company>(FETCH_COMPANY)
+export const resetState   = createAction<void>(RESET_STATE)
 
 /**
  * Reducer
  */
 const initialState = from<StateMap>({
+  preloader: true,
   company: {
     id: '',
     legalName: '',
@@ -108,7 +112,15 @@ const initialState = from<StateMap>({
 })
 
 export default createReducer<State>({
+  [fetchCompany.REQUEST]: (state: State): State => (
+    state.merge({ preloader: true })
+  ),
+
   [fetchCompany.SUCCESS]: (state: State, { payload: company }: Action<Company>): State => (
-    state.merge({ company })
+    state.merge({ preloader: false, company })
+  ),
+
+  [RESET_STATE]: (state: State): State => (
+    state.merge(initialState)
   )
 }, initialState)

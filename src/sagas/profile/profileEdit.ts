@@ -6,12 +6,19 @@ import { put as putFunc, get } from '../../utils/api'
 import { Action } from '../../utils/actions'
 
 import { req, profileFormFields } from '../../helpers/profile/profileEdit'
-import { updateProfile, updateCities, FETCH_PROFILE, UPDATE_CITIES, setLogo } from '../../redux/modules/profile/profileEdit'
+import {
+  updateProfile,
+  updateCities,
+  hidePreloader,
+  setLogo
+} from '../../redux/modules/profile/profileEdit'
+import { FETCH_PROFILE, UPDATE_CITIES } from '../../redux/modules/profile/profileEdit'
 import { setOptions } from '../../redux/modules/common/select'
 import { optionTransformer } from '../../helpers/common/select'
 
 
-const getState = state => state.profile.profileView.company
+const getState = (state) => state.profile.profileView.company
+const transformFunc = ({name, id: value }) => ({ value, name })
 
 function* getProfileIterator(): SagaIterator {
   try {
@@ -21,28 +28,22 @@ function* getProfileIterator(): SagaIterator {
       call(get, '/company/my')
     ]
 
-    const formFields = yield call(profileFormFields, profile)
-    yield put(initialize('profileEdit', formFields, false))
-
-    const countryOptions = yield call(
-      optionTransformer,
-      countries.data,
-      ({name, id: value }) => ({ value, name })
-    )
-
-    const typeOptions = yield call(
-      optionTransformer,
-      types.data,
-      ({name, id: value }) => ({ value, name })
-    )
-
-    const { id } = profile.profile.address.country
+    const { id: countryId } = profile.profile.address.country
     const { picture: src } = profile.profile
 
-    yield put(updateCities(id))
+    const cities = yield call(get, `/dictionary/city?country=${countryId}`)
+
+    const formFields     = yield call(profileFormFields, profile)
+    const cityOptions    = yield call(optionTransformer, cities.data, transformFunc)
+    const countryOptions = yield call(optionTransformer, countries.data, transformFunc)
+    const typeOptions    = yield call(optionTransformer, types.data, transformFunc)
+
+    yield put(initialize('profileEdit', formFields, false))
     yield put(setLogo(src))
+    yield put(setOptions('select-city', cityOptions))
     yield put(setOptions('select-country', countryOptions))
     yield put(setOptions('select-company-type', typeOptions))
+    yield put(hidePreloader())
   } catch (e) {
     yield call(console.log, e)
   }

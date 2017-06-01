@@ -27,8 +27,8 @@
 }
 
 .empty {
-  background-image: svg-load('./logo.svg');
-  size: size('./logo.svg');
+  background-image: svg-load('./svg/logo.svg');
+  size: size('./svg/logo.svg');
   top: center;
   left: center;
 }
