@@ -1,0 +1,73 @@
+@use postcss-inline-svg;
+@use postcss-short;
+
+.employee {
+  position: relative;
+  margin: 5px 0;
+  padding: 5px 10px 5px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: .1s linear background-color;
+
+  &:hover {
+    background-color: #f8f8f8;
+
+    & .button {
+      opacity: 1;
+    }
+
+    & .email-slide {
+      top: -23px;
+    }
+  }
+}
+
+.avatar {
+  size: 50px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 10px 0 0;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.avatar-empty {
+  composes: avatar;
+  font: semibold 20px/50px 'Open Sans';
+  text-align: center;
+  color: #fff;
+}
+
+.info {
+  display: inline-block;
+  line-height: 23px;
+}
+
+.full-name {
+  color: #000;
+  font-size: 16px;
+}
+
+.label {
+  color: #fff;
+  background-color: #4094e8;
+  border-radius: 16px;
+  font-size: 13px;
+  padding: 1px 10px;
+  margin: 0 0 0 15px;
+}
+
+.email-n-position {
+  position: relative;
+  color: #9c9c9c;
+  font-size: 14px;
+  height: 23px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.email-slide {
+  position: relative;
+  top: 0;
+  transition: .1s linear top;
+}

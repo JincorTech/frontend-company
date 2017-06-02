@@ -16,11 +16,11 @@ export const companyTransformer = (companyProps: Company): CompanyProps => {
     id,
     legalName,
     companyType: { name: type },
-    profile: { formattedAddress: address }
+    profile: { address, picture: src }
   } = companyProps
   const { formattedAddress, country: { name: country }} = address
 
-  return { id, legalName, type, formattedAddress, country }
+  return { id, legalName, type, formattedAddress, country, src }
 }
 
 /**

@@ -3,10 +3,11 @@ import { takeLatest, takeEvery, call, put, select, fork } from 'redux-saga/effec
 import { get } from '../../utils/api'
 import { Action } from '../../utils/actions'
 
-import { search, fetchCountries, SearchRequest } from '../../redux/modules/search/search'
+import { search, nextPage, fetchCountries, SearchRequest } from '../../redux/modules/search/search'
 import { setOptions } from '../../redux/modules/common/select'
 import { optionTransformer } from '../../helpers/common/select'
 import { showLoading, hideLoading, resetLoading } from 'react-redux-loading-bar'
+import { request } from '../../helpers/search/search'
 
 
 function* getCountriesIterator(): SagaIterator {
@@ -36,18 +37,17 @@ function* getCountriesSaga(): SagaIterator {
 function* getCompaniesIterator({ payload }: Action<SearchRequest>): SagaIterator {
   try {
     yield put(resetLoading())
-    yield call(delay, 1000)
+    yield call(delay, 600)
     yield put(showLoading())
-    yield call(console.log, payload)
-    yield call(get, '/company/my')
-    yield put(search.success())
+    const searchRequest = yield call(request, payload)
+    const { data: companies, meta } = yield call(get, `/company/search?${searchRequest}`)
+    yield put(search.success({ companies, meta }))
   } catch (e) {
     yield put(search.failure(e))
   } finally {
     yield put(hideLoading())
   }
 }
-
 
 function* getCompaniesSaga(): SagaIterator {
   yield takeLatest(
@@ -57,9 +57,28 @@ function* getCompaniesSaga(): SagaIterator {
 }
 
 
+function* pushCompaniesIterator({ payload }: Action<void>): SagaIterator {
+  try {
+    const req = yield call(request, payload)
+    const { data: companies, meta } = yield call(get, `/company/search?${req}`)
+    yield put(nextPage.success({ companies, meta }))
+  } catch (e) {
+    yield put(nextPage.failure(e))
+  }
+}
+
+function* pushCompaniesSaga(): SagaIterator {
+  yield takeLatest(
+    nextPage.REQUEST,
+    pushCompaniesIterator
+  )
+}
+
+
 export default function* (): SagaIterator {
   yield [
     fork(getCountriesSaga),
-    fork(getCompaniesSaga)
+    fork(getCompaniesSaga),
+    fork(pushCompaniesSaga)
   ]
 }

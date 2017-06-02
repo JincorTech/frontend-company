@@ -16,7 +16,8 @@ export type StateMap = {
 export type Company = {
   id: string
   legalName: string
-  profile: Profile,
+  employeesCount: number
+  profile: Profile
   economicalActivityTypes: ActivityType[]
   companyType: CompanyType
 }
@@ -83,6 +84,7 @@ const initialState = from<StateMap>({
   company: {
     id: '',
     legalName: '',
+    employeesCount: 0,
     profile: {
       brandName: {},
       picture: '',

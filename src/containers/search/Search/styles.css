@@ -20,6 +20,7 @@
 
 .result {
   margin: -20px -16px;
+  min-height: 300px;
 }
 
 .search-field-wrapper {

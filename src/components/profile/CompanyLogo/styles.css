@@ -28,7 +28,8 @@
 
 .empty {
   background-image: svg-load('./svg/logo.svg');
-  size: size('./svg/logo.svg');
+  background-size: contain;
+  size: 100%;
   top: center;
   left: center;
 }

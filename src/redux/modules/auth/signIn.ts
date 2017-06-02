@@ -34,7 +34,7 @@ export type Company = {
   profile: {
     brandName: string
     email: string
-    formattedAddress: {
+    address: {
       city: string
       country: {
         id: string

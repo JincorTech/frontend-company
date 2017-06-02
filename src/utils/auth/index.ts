@@ -9,6 +9,17 @@ export function getToken(): string {
   return localStorage.getItem('token') || ''
 }
 
+export function getEmail(): string {
+  const token = getToken()
+
+  if (token) {
+    const decoded = jwtDecode(token)
+    return decoded.login.split(':')[1]
+  }
+
+  return null
+}
+
 export function isAuth(): boolean {
   const token = getToken()
 

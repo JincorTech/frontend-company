@@ -33,6 +33,7 @@ const initialState: State = from<StateMap>({
   company: {
     id: '',
     legalName: '',
+    employeesCount: 0,
     profile: {
       brandName: {},
       picture: '',
