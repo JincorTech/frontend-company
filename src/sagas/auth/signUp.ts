@@ -6,12 +6,10 @@ import { get, post } from '../../utils/api'
 import { push } from 'react-router-redux'
 
 import { isEmail } from '../../helpers/common/emailTextarea'
-
-import { FormFields as CompanyFields } from '../../containers/auth/CreateCompanyForm'
-import { FormFields as AccountFields } from '../../containers/auth/CreateAccountForm'
-import { FormFields as ConfirmFields } from '../../containers/auth/ConfirmEmailForm'
+import { optionTransformer } from '../../helpers/common/select'
 
 import {
+  fetchDict,
   createCompany,
   verifyEmail,
   setUserInfo,
@@ -20,8 +18,42 @@ import {
   accountCreated,
   resetState
 } from '../../redux/modules/auth/signUp'
-
 import { login } from '../../redux/modules/app/app'
+import { setOptions } from '../../redux/modules/common/select'
+
+import { FormFields as CompanyFields } from '../../components/auth/CreateCompanyForm'
+import { FormFields as AccountFields } from '../../components/auth/CreateAccountForm'
+import { FormFields as ConfirmFields } from '../../components/auth/ConfirmEmailForm'
+
+
+const transformFunc = ({name, id: value }) => ({ value, name })
+
+/**
+ * Fetch countries saga
+ */
+export function* fetchCountriesAndTypesIterator(): SagaIterator {
+  try {
+    const [countries, types] = yield [
+      call(get, '/dictionary/country'),
+      call(get, '/company/types')
+    ]
+
+    const countryOptions = yield call(optionTransformer, countries.data, transformFunc)
+    const typeOptions    = yield call(optionTransformer, types.data, transformFunc)
+
+    yield put(setOptions('select-country', countryOptions))
+    yield put(setOptions('select-company-type', typeOptions))
+  } catch (e) {
+    yield put(fetchDict.failure(e))
+  }
+}
+
+export function* fetchCountriesAndTypesSaga(): SagaIterator {
+  yield takeLatest(
+    fetchDict.REQUEST,
+    fetchCountriesAndTypesIterator
+  )
+}
 
 /**
  * Create company
@@ -163,6 +195,7 @@ export default function* (): SagaIterator {
     fork(verifyEmailSaga),
     fork(confirmEmailSaga),
     fork(inviteEmployeeSaga),
-    fork(resetSignInSaga)
+    fork(resetSignInSaga),
+    fork(fetchCountriesAndTypesSaga)
   ]
 }

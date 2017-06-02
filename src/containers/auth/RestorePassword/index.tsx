@@ -12,9 +12,9 @@ import {
 } from '../../../redux/modules/auth/restorePassword'
 import { companySelector } from '../../../selectors/auth/signIn'
 
-import RequestPasswordForm from '../RequestPasswordForm'
-import ConfirmPasswordForm from '../ConfirmPasswordForm'
-import NewPasswordForm from '../NewPasswordForm'
+import RequestPasswordForm from '../../../components/auth/RequestPasswordForm'
+import ConfirmPasswordForm from '../../../components/auth/ConfirmPasswordForm'
+import NewPasswordForm from '../../../components/auth/NewPasswordForm'
 import CompanyList, { Company } from '../../../components/auth/CompanyList'
 
 /**

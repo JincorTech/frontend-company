@@ -8,9 +8,9 @@ import {
   Action
 } from '../../../utils/actions'
 
-import { FormFields as CompanyFields } from '../../../containers/auth/CreateCompanyForm'
-import { FormFields as AccountFields } from '../../../containers/auth/CreateAccountForm'
-import { FormFields as ConfirmFields } from '../../../containers/auth/ConfirmEmailForm'
+import { FormFields as CompanyFields } from '../../../components/auth/CreateCompanyForm'
+import { FormFields as AccountFields } from '../../../components/auth/CreateAccountForm'
+import { FormFields as ConfirmFields } from '../../../components/auth/ConfirmEmailForm'
 
 /**
  * Types
@@ -51,10 +51,12 @@ export const CONFIRM_EMAIL    = 'auth/signUp/CONFIRM_EMAIL'
 export const ACCOUNT_CREATED  = 'auth/signUp/CREATE_ACCOUNT_SUCCESS'
 export const INVITE_EMPLOYEE  = 'auth/signUp/EMPLOYEE'
 export const RESET_STATE      = 'auth/signUp/RESET_STATE'
+export const FETCH_DICT       = 'jincor/auth/signUp/FETCH_DICT'
 
 /**
  * Actions creators
  */
+export const fetchDict      = createAsyncAction<void, void>(FETCH_DICT)
 export const createCompany  = createSubmitAction<CompanyFields, Company>(CREATE_COMPANY)
 export const setUserInfo    = createAction<Employee>(SET_USER_INFO)
 export const verifyEmail    = createSubmitAction<AccountFields, void>(VERIFY_EMAIL)

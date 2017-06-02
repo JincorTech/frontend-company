@@ -13,10 +13,10 @@ import {
 } from '../../../redux/modules/auth/signUp'
 
 import ProgressBar from '../../../components/auth/ProgressBar'
-import CreateCompanyForm from '../CreateCompanyForm'
-import CreateAccountForm from '../CreateAccountForm'
-import ConfirmEmailForm from '../ConfirmEmailForm'
-import InviteEmployeeForm from '../InviteEmployeeForm'
+import CreateCompanyForm from '../../../components/auth/CreateCompanyForm'
+import CreateAccountForm from '../../../components/auth/CreateAccountForm'
+import ConfirmEmailForm from '../../../components/auth/ConfirmEmailForm'
+import InviteEmployeeForm from '../../../components/auth/InviteEmployee'
 
 
 export type Props = ComponentProps & StateProps

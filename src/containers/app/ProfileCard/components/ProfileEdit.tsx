@@ -29,9 +29,7 @@ export type FormFields = {
 
 class ProfileEdit extends Component<Props, {}> {
   public componentWillMount(): void {
-    const { onMount } = this.props
-
-    onMount()
+    this.props.onMount()
   }
 
   private renderBlackout(): JSX.Element {

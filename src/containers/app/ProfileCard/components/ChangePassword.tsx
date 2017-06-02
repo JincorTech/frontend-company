@@ -37,6 +37,7 @@ class ChangePassword extends Component<Props, {}> {
             required('Поле не может быть пустым'),
             password()
           ]}
+          warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}
           name="oldPassword"
           type="password"
           placeholder="Старый пароль"/>
@@ -47,6 +48,7 @@ class ChangePassword extends Component<Props, {}> {
             required('Поле не может быть пустым'),
             password()
           ]}
+          warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}
           name="password"
           type="password"
           placeholder="Новый пароль"/>

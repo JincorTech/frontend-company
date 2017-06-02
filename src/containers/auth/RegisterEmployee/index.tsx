@@ -6,7 +6,7 @@ import { RouteComponentProps, RouteComponent } from 'react-router'
 
 import { registerEmployee, StateMap as StateProps } from '../../../redux/modules/auth/registerEmployee'
 
-import RegisterEmployeeForm from '../RegisterEmployeeForm'
+import RegisterEmployeeForm from '../../../components/auth/RegisterEmployeeForm'
 
 /**
  * Types

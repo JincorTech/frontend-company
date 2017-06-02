@@ -4,7 +4,6 @@ import { initialize } from 'redux-form'
 import { Action } from '../../utils/actions'
 import { get, put as putFunc } from '../../utils/api'
 
-import { profileCardFormFields } from '../../helpers/common/profileCardEditProfile'
 import {
   changePassword, updateProfile,
   changeView, closeProfileCard,
@@ -21,8 +20,8 @@ function* getProfileIterator(): SagaIterator {
   try {
     const { data: { profile } } = yield call(get, '/employee/me')
     const { avatar } = profile
-    const formFields = yield call(profileCardFormFields, profile)
-    yield put(initialize('ProfileCardEdit', formFields, false))
+
+    yield put(initialize('ProfileCardEdit', { ...profile, avatar: '' }, false))
     yield put(setAvatar(avatar))
   } catch (e) {
     yield call(console.log, e)

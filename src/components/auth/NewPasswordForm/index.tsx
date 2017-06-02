@@ -4,11 +4,11 @@ import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
 import { ActionCreator } from '../../../utils/actions'
 
-import { initialValues, validate } from '../../../helpers/auth/newPassword'
+import { password } from '../../../utils/validators'
 
-import Form from '../../../components/form/Form'
-import Button from '../../../components/common/Button'
-import RenderPassword from '../../../components/form/RenderPassword'
+import Form from '../../form/Form'
+import Button from '../../common/Button'
+import RenderPassword from '../../form/RenderPassword'
 
 
 /**
@@ -43,7 +43,9 @@ class NewPasswordForm extends Component<Props, {}> {
         <Field
           component={RenderPassword}
           name="password"
-          placeholder="Пароль"/>
+          placeholder="Пароль"
+          validate={password()}
+          warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}/>
 
         <Button type="submit" spinner={spinner} disabled={invalid}>Сохранить и войти</Button>
       </Form>
@@ -58,6 +60,7 @@ const StyledComponent = CSSModules(NewPasswordForm, require('./styles.css'))
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'newPassword',
-  validate,
-  initialValues
+  initialValues: {
+    password: ''
+  }
 })(StyledComponent)
