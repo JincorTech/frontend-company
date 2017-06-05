@@ -131,6 +131,7 @@ class Search extends Component<Props, ComponentProps> {
                 options={[]}
                 button={<SelectDropdown/>}
                 optionValue={this.state.country}
+                defaultOption="Все страны"
                 onChange={this.handleCountryChange}
                 onBlur={() => {}}
                 placeholder="Все страны"/>
@@ -142,6 +143,7 @@ class Search extends Component<Props, ComponentProps> {
                 title="Выбрать отрасль"
                 onActivitySelect={this.handleActivityChange}
                 activityValue={this.state.activity}
+                defaultOption="Все отрасли"
                 placeholder="Все отрасли"/>
             </div>
           </div>
