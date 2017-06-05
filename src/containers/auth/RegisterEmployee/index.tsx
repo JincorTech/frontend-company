@@ -2,7 +2,6 @@ import * as React from 'react'
 import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { connect } from 'react-redux'
-import { RouteComponentProps, RouteComponent } from 'react-router'
 
 import { registerEmployee, StateMap as StateProps } from '../../../redux/modules/auth/registerEmployee'
 
@@ -13,23 +12,23 @@ import RegisterEmployeeForm from '../../../components/auth/RegisterEmployeeForm'
  */
 export type Props = StateProps & ComponentProps
 
-export type RouteParams = {
+export type ComponentProps = {
   verificationId: string
+  companyName: string
+  pin: string
+  email: string
 }
-
-export type ComponentProps = RouteComponentProps<StateProps, RouteParams>
 
 /**
  * Component
  */
-const RegisterEmployee: SFC<Props> = ({ spinner, params: { verificationId }}) => {
+export const RegisterEmployee: SFC<Props> = ({ companyName, ...props }) => {
   return (
     <div styleName="register-employee">
-      <p styleName="title">Приглашение от компании Ромашка</p>
+      <p styleName="title">Приглашение от компании {companyName}</p>
 
       <RegisterEmployeeForm
-        spinner={spinner}
-        verificationId={verificationId}
+        {...props}
         onSubmit={registerEmployee}/>
     </div>
   )

@@ -17,16 +17,20 @@ import RenderPassword from '../../../components/form/RenderPassword'
 export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>
 
 export type FormFields = {
+  verificationId: string
+  pin: string
+  email: string
   firstName: string
   lastName: string
   position: string
   password: string
-  verificationId: string
 }
 
 export type ComponentProps = {
   spinner: boolean
-  verificationId: string,
+  verificationId: string
+  pin: string
+  email: string
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>
 }
 
@@ -36,9 +40,11 @@ export type ComponentProps = {
  */
 class CreateAccountForm extends Component<Props, {}> {
   public componentDidMount(): void {
-    const { change, verificationId } = this.props
+    const { change, verificationId, pin, email } = this.props
 
     change('verificationId', verificationId)
+    change('pin', pin)
+    change('email', email)
   }
 
   public render(): JSX.Element {
@@ -56,6 +62,18 @@ class CreateAccountForm extends Component<Props, {}> {
           name="verificationId"
           type="hidden"
           validate={required()}/>
+
+        <Field
+          component="input"
+          name="pin"
+          type="hidden"
+          validate={required()}/>
+
+        <Field
+          component="input"
+          name="email"
+          type="hidden"
+          validate={[required(), email()]}/>
 
         <Field
           component={RenderInput}
@@ -107,6 +125,8 @@ export default reduxForm<FormFields, ComponentProps>({
     firstName: '',
     position: '',
     password: '',
-    verificationId: ''
+    verificationId: '',
+    pin: '',
+    email: ''
   }
 })(StyledComponent)
