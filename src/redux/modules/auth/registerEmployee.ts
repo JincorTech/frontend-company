@@ -1,7 +1,7 @@
 import { createSubmitAction, createReducer } from '../../../utils/actions'
 import { from, ImmutableObject } from 'seamless-immutable'
 
-import { FormFields as EmployeeFields } from '../../../containers/auth/RegisterEmployeeForm'
+import { FormFields as EmployeeFields } from '../../../components/auth/RegisterEmployeeForm'
 
 /**
  * Types

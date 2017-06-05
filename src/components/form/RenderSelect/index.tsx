@@ -3,7 +3,7 @@ import { SFC, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { WrappedFieldProps } from 'redux-form'
 
-import Select, { Props as SelectProps } from '../../common/Select'
+import Select, { Props as SelectProps } from '../../../containers/common/Select'
 import FieldError from '../../../components/common/FieldError'
 
 /**

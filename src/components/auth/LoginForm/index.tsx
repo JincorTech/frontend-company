@@ -2,16 +2,15 @@ import * as React from 'react'
 import { Component } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
-import { ActionCreator } from '../../../utils/actions'
-
-import { validate, initialValues } from '../../../helpers/auth/loginForm'
-import { password } from '../../../utils/validators'
-
-import Form from '../../../components/form/Form'
-import Button from '../../../components/common/Button'
 import { Link } from 'react-router'
-import RenderInput from '../../../components/form/RenderInput'
-import RenderPassword from '../../../components/form/RenderPassword'
+
+import { ActionCreator } from '../../../utils/actions'
+import { email, password } from '../../../utils/validators'
+
+import Form from '../../form/Form'
+import Button from '../../common/Button'
+import RenderInput from '../../form/RenderInput'
+import RenderPassword from '../../form/RenderPassword'
 
 
 /**
@@ -46,13 +45,15 @@ class LogInForm extends Component<Props, {}> {
           component={RenderInput}
           name="email"
           type="text"
-          placeholder="Email"/>
+          placeholder="Email"
+          validate={email()}/>
 
         <Field
           component={RenderPassword}
           name="password"
-          warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}
-          placeholder="Пароль"/>
+          placeholder="Пароль"
+          validate={password()}
+          warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}/>
 
         <Button type="submit" spinner={spinner} disabled={invalid}>Войти</Button>
 
@@ -66,6 +67,8 @@ const StyledComponent = CSSModules(LogInForm, require('./styles.css'))
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'account',
-  initialValues,
-  validate
+  initialValues: {
+    email: '',
+    password: ''
+  }
 })(StyledComponent)

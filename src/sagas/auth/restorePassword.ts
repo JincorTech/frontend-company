@@ -8,9 +8,9 @@ import { post, put as putFunc, get } from '../../utils/api'
 import { restorePassword, confirmEmail, setNewPassword, resetState } from '../../redux/modules/auth/restorePassword'
 import { login } from '../../redux/modules/app/app'
 
-import { FormFields as RestoreFields } from '../../containers/auth/RequestPasswordForm'
-import { FormFields as ConfirmFields } from '../../containers/auth/ConfirmPasswordForm'
-import { FormFields as NewPasswordFields } from '../../containers/auth/RequestPasswordForm'
+import { FormFields as RestoreFields } from '../../components/auth/RequestPasswordForm'
+import { FormFields as ConfirmFields } from '../../components/auth/ConfirmPasswordForm'
+import { FormFields as NewPasswordFields } from '../../components/auth/RequestPasswordForm'
 
 
 const getState = (state) => state.auth.restorePassword

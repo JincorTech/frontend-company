@@ -8,7 +8,7 @@ import {
 
 import { from, ImmutableObject } from 'seamless-immutable'
 
-import { FormFields as LoginFields } from '../../../containers/auth/LoginForm'
+import { FormFields as LoginFields } from '../../../components/auth/LoginForm'
 
 /**
  * Types

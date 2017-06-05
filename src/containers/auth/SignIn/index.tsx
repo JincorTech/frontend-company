@@ -4,7 +4,7 @@ import * as CSSModules from 'react-css-modules'
 import { connect } from 'react-redux'
 import { SubmitHandler } from 'redux-form'
 
-import LogInForm from '../LoginForm'
+import LogInForm from '../../../components/auth/LoginForm'
 import CompanyList, { Company } from '../../../components/auth/CompanyList'
 
 import { fetchCompanies, selectCompany, Employee } from '../../../redux/modules/auth/signIn'

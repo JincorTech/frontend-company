@@ -3,7 +3,7 @@ import { Component } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
 
-import { initialValues, validate } from '../../../helpers/auth/confirmEmail'
+import { length, number, required } from '../../../utils/validators'
 
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
@@ -44,14 +44,15 @@ class ConfirmEmailForm extends Component<ConfirmFormProps, {}> {
         <Field
           component="input"
           name="verificationId"
-          type="hidden"/>
+          type="hidden"
+          validate={required()}/>
 
         <Field
           component={RenderInput}
           name="verificationCode"
           type="text"
           placeholder="Введите код"
-        />
+          validate={[number(), length(6)]}/>
 
         <Button type="submit" spinner={spinner} disabled={invalid}>Далее</Button>
       </Form>
@@ -63,6 +64,8 @@ const StyledComponent = CSSModules(ConfirmEmailForm, require('./styles.css'))
 
 export default reduxForm<FormFields, ConfirmComponentProps>({
   form: 'confirmEmail',
-  initialValues,
-  validate
+  initialValues: {
+    verificationCode: '',
+    verificationId: ''
+  }
 })(StyledComponent)

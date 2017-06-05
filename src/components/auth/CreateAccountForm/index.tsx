@@ -2,26 +2,22 @@ import * as React from 'react'
 import { Component } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
-import { RouteComponentProps } from 'react-router'
 
-import { initialValues, validate } from '../../../helpers/auth/createAccount'
 import { required, email, password } from '../../../utils/validators'
 
-import Form from '../../../components/form/Form'
-import Button from '../../../components/common/Button'
-import RenderInput from '../../../components/form/RenderInput'
-import RenderPassword from '../../../components/form/RenderPassword'
-
+import Form from '../../form/Form'
+import Button from '../../common/Button'
+import RenderInput from '../../form/RenderInput'
+import RenderPassword from '../../form/RenderPassword'
 
 /**
  * Types
  */
-export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>
-
 export type FormFields = {
   firstName: string
   lastName: string
   position: string
+  email: string
   password: string
   verificationId: string
 }
@@ -32,6 +28,7 @@ export type ComponentProps = {
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>
 }
 
+export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>
 
 /**
  * Component
@@ -49,14 +46,15 @@ class CreateAccountForm extends Component<Props, {}> {
     return (
       <Form
         onSubmit={handleSubmit}
-        styleName="create-employee-form"
+        styleName="create-account-form"
         title="Регистрация пользователя"
         hint="Чтобы начать совместную работу со своими коллегами, зарегистрируйте первого пользователя">
 
         <Field
           component="input"
           name="verificationId"
-          type="hidden"/>
+          type="hidden"
+          validate={required()}/>
 
         <Field
           component={RenderInput}
@@ -80,16 +78,20 @@ class CreateAccountForm extends Component<Props, {}> {
           validate={required()}/>
 
         <Field
+          component={RenderInput}
+          name="email"
+          type="email"
+          placeholder="Email"
+          validate={email()}/>
+
+        <Field
           component={RenderPassword}
           name="password"
           placeholder="Пароль"
-          validate={password()}/>
+          validate={password()}
+          warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}/>
 
-        <Button
-          type="submit"
-          spinner={spinner}
-          disabled={invalid}
-          children="Далее"/>
+        <Button type="submit" spinner={spinner} disabled={invalid}>Далее</Button>
       </Form>
     )
   }
@@ -101,11 +103,12 @@ class CreateAccountForm extends Component<Props, {}> {
 const StyledComponent = CSSModules(CreateAccountForm, require('./styles.css'))
 
 export default reduxForm<FormFields, ComponentProps>({
-  form: 'employee',
+  form: 'account',
   initialValues: {
     lastName: '',
     firstName: '',
     position: '',
+    email: '',
     password: '',
     verificationId: ''
   }

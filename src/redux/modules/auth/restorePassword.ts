@@ -1,9 +1,9 @@
 import { createReducer, createAction, createSubmitAction, Action } from '../../../utils/actions'
 import { from, ImmutableObject } from 'seamless-immutable'
 
-import { FormFields as RestoreFields } from '../../../containers/auth/RequestPasswordForm'
-import { FormFields as ConfirmFields } from '../../../containers/auth/ConfirmPasswordForm'
-import { FormFields as NewPasswordFields } from '../../../containers/auth/NewPasswordForm'
+import { FormFields as RestoreFields } from '../../../components/auth/RequestPasswordForm'
+import { FormFields as ConfirmFields } from '../../../components/auth/ConfirmPasswordForm'
+import { FormFields as NewPasswordFields } from '../../../components/auth/NewPasswordForm'
 
 /**
  * Types

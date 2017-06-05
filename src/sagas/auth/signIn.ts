@@ -19,7 +19,7 @@ import {
 
 import { emitAlert } from '../../redux/modules/common/alert'
 import { login } from '../../redux/modules/app/app'
-import { FormFields as LoginFields } from '../../containers/auth/LoginForm'
+import { FormFields as LoginFields } from '../../components/auth/LoginForm'
 
 
 /**

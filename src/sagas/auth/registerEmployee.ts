@@ -3,7 +3,7 @@ import { takeLatest, call, put, fork } from 'redux-saga/effects'
 
 import { Action } from '../../utils/actions'
 import { post } from '../../utils/api'
-import { FormFields } from '../../containers/auth/RegisterEmployeeForm'
+import { FormFields } from '../../components/auth/RegisterEmployeeForm'
 import { registerEmployee } from '../../redux/modules/auth/registerEmployee'
 import { login } from '../../redux/modules/app/app'
 
