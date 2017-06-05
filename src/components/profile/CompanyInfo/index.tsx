@@ -19,7 +19,7 @@ export type Props = {
 
 const CompanyInfo: SFC<Props> = (props) => {
   const { company, openCompanyCard } = props
-  const { legalName, profile, economicalActivityTypes, companyType } = company
+  const { legalName, employeesCount, profile, economicalActivityTypes, companyType } = company
   const { picture, links, email, phone, address, description } = profile
 
   const city = address.city ? address.city.name : ''
@@ -82,7 +82,7 @@ const CompanyInfo: SFC<Props> = (props) => {
           styleName="company-link"
           children="Посмотреть в виде карточки"/>
 
-        <Link to="/app/employees" styleName="company-link">Сотрудники (5)</Link>
+        <Link to="/app/employees" styleName="company-link">Сотрудники ({employeesCount})</Link>
       </div>
     </div>
   )
