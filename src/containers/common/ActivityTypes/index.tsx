@@ -40,6 +40,7 @@ export type ComponentProps = {
   button?: JSX.Element
   placeholder?: string
   invalid?: string
+  defaultOption?: string
   onActivitySelect: (activityId: string) => void
 }
 
@@ -72,6 +73,7 @@ class ActivityTypes extends Component<Props, {}> {
     this.renderActivityType = this.renderActivityType.bind(this)
     this.renderActivityLeaf = this.renderActivityLeaf.bind(this)
     this.renderActivityNode = this.renderActivityNode.bind(this)
+    this.renderDefaultLeaf  = this.renderDefaultLeaf.bind(this)
   }
 
   public componentWillMount(): void {
@@ -147,13 +149,41 @@ class ActivityTypes extends Component<Props, {}> {
     </div>
   }
 
+  private renderDefaultLeaf(): JSX.Element {
+    const {
+      defaultOption,
+      actions: { selectValue },
+      onActivitySelect
+    } = this.props
+
+    return (
+      <div
+        styleName="activity-leaf"
+        onClick={() => {
+          selectValue('')
+          onActivitySelect('')
+        }}>
+        <div styleName="activity-name">{defaultOption}</div>
+      </div>
+    )
+  }
+
   public render(): JSX.Element {
-    const { name, actions, activityMap, select, button, title, placeholder, rootNodes } = this.props
+    const {
+      name,
+      actions,
+      activityMap,
+      select,
+      button,
+      title,
+      placeholder,
+      rootNodes,
+      defaultOption
+    } = this.props
     const { openSelect, closeSelect } = actions
     const { open, selectedActivity } = select
-    const nameValue = activityMap[selectedActivity]
-      ? activityMap[selectedActivity].name
-      : ''
+    const activity = activityMap[selectedActivity]
+    const nameValue = activity ? activity.name : ''
 
     return (
       <div>
@@ -180,6 +210,7 @@ class ActivityTypes extends Component<Props, {}> {
 
           <Scrollbars autoHide autoHeight autoHeightMax={537}>
             <div styleName="activity-types">
+              {defaultOption && this.renderDefaultLeaf()}
               {rootNodes.map((id) => this.renderActivityType(id))}
             </div>
           </Scrollbars>

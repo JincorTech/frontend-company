@@ -42,6 +42,7 @@ export type ComponentProps = {
   invalid?: boolean
   filter: boolean
   button?: JSX.Element
+  defaultOption?: string
   onChange: (e?: any) => void
   onBlur: (e?: any) => void
 }
@@ -73,6 +74,7 @@ class Select extends Component<Props, {}> {
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
+    this.handleDefaultSelect = this.handleDefaultSelect.bind(this)
   }
 
   public static defaultProps: any = {
@@ -131,8 +133,27 @@ class Select extends Component<Props, {}> {
     selectOption(value)
   }
 
+  private handleDefaultSelect(): void {
+    const { onChange, actions: { selectOption }} = this.props
+    onChange('')
+    selectOption('')
+  }
+
   public render(): JSX.Element {
-    const { filter, modalId, button, select, title, placeholder, invalid, actions, options, optionValue, ...divProps } = this.props
+    const {
+      filter,
+      modalId,
+      button,
+      select,
+      title,
+      placeholder,
+      invalid,
+      actions,
+      options,
+      optionValue,
+      defaultOption,
+      ...divProps
+    } = this.props
     const { open, selectedOption, optionsMap, filterValue } = select
     const option = optionsMap[selectedOption] || { name: '', value: '' }
 
@@ -169,6 +190,10 @@ class Select extends Component<Props, {}> {
               autoHeight
               autoHeightMin={275}
               autoHeightMax={553}>
+              {defaultOption && <Option
+                option={{name: defaultOption, value: ''}}
+                onSelectOption={this.handleDefaultSelect}/>
+              }
               {select.options.map((optionValue, i) => (
                 <Option
                   key={i}
