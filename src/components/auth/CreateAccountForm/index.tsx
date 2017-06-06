@@ -3,7 +3,7 @@ import { Component } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
 
-import { required, email, password } from '../../../utils/validators'
+import { required, email, password, maxLength, minLength } from '../../../utils/validators'
 
 import Form from '../../form/Form'
 import Button from '../../common/Button'
@@ -61,34 +61,50 @@ class CreateAccountForm extends Component<Props, {}> {
           name="firstName"
           type="text"
           placeholder="Имя"
-          validate={required()}/>
+          validate={[
+            required(),
+            maxLength(15)
+          ]}/>
 
         <Field
           component={RenderInput}
           name="lastName"
           type="text"
           placeholder="Фамилия"
-          validate={required()}/>
+          validate={[
+            required(),
+            maxLength(15)
+          ]}/>
 
         <Field
           component={RenderInput}
           name="position"
           type="text"
           placeholder="Должность"
-          validate={required()}/>
+          validate={[
+            required(),
+            minLength(2),
+            maxLength(60)
+          ]}/>
 
         <Field
           component={RenderInput}
           name="email"
           type="email"
           placeholder="Email"
-          validate={email()}/>
+          validate={[
+            required(),
+            email()
+          ]}/>
 
         <Field
           component={RenderPassword}
           name="password"
           placeholder="Пароль"
-          validate={password()}
+          validate={[
+            required(),
+            password()
+          ]}
           warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}/>
 
         <Button type="submit" spinner={spinner} disabled={invalid}>Далее</Button>

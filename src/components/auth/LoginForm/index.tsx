@@ -5,7 +5,7 @@ import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
 import { Link } from 'react-router'
 
 import { ActionCreator } from '../../../utils/actions'
-import { email, password } from '../../../utils/validators'
+import { email, password, required } from '../../../utils/validators'
 
 import Form from '../../form/Form'
 import Button from '../../common/Button'
@@ -46,13 +46,19 @@ class LogInForm extends Component<Props, {}> {
           name="email"
           type="text"
           placeholder="Email"
-          validate={email()}/>
+          validate={[
+            required(),
+            email()
+          ]}/>
 
         <Field
           component={RenderPassword}
           name="password"
           placeholder="Пароль"
-          validate={password()}
+          validate={[
+            required(),
+            password()
+          ]}
           warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}/>
 
         <Button type="submit" spinner={spinner} disabled={invalid}>Войти</Button>
