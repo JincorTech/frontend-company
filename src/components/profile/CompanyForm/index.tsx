@@ -64,7 +64,11 @@ class CompanyForm extends Component<Props, {}> {
             name="name"
             styleName="company-name"
             placeholder="Имя компании"
-            validate={minLength(3)}
+            validate={[
+              required(),
+              minLength(3),
+              maxLength(60)
+            ]}
             component={RenderInput}/>
 
           <div styleName="region">
