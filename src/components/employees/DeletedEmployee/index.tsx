@@ -30,8 +30,8 @@ const DeletedEmployee: SFC<Props> = ({ employee }) => {
         <div styleName="full-name">{profile.name}</div>
         <div styleName="email-n-position">
           <div styleName="email-slide">
-            <div>{contacts.email}</div>
             <div>{profile.position}</div>
+            <div>{contacts.email}</div>
           </div>
         </div>
       </div>
