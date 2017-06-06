@@ -14,11 +14,12 @@ export type LinkProps = {
 }
 
 const SocialLink: SFC<Props> = (props) => {
-  const { name, iconUrl, value: url, displayName, size = 36, ...liProps } = props
+  const { name, iconUrl, value: url, displayName, size, ...liProps } = props
+  const style = { width: size, height: size }
 
   return (
     <li styleName="social-link" {...liProps}>
-      <a styleName="link-icon" href={url} style={{ width: size, height: size }}>
+      <a styleName="link-icon" target="_blank" href={url} style={style}>
         {iconUrl
           ? <img src={iconUrl}/>
           : <img src={require('./svg/default.svg')}/>}
@@ -29,7 +30,8 @@ const SocialLink: SFC<Props> = (props) => {
 }
 
 SocialLink.defaultProps = {
-  displayName: true
+  displayName: true,
+  size: 36
 }
 
 export default CSSModules(SocialLink, require('./styles.css'))
