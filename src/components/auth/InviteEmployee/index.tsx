@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { SFC } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import * as CSSModules from 'react-css-modules'
 
 import { inviteEmployee } from '../../../redux/modules/auth/signUp'
+import { resetTextarea } from '../../../redux/modules/common/emailTextarea'
 
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
@@ -21,6 +22,7 @@ export type ComponentProps = {
 
 export type DispatchProps = {
   inviteEmployee: () => void
+  resetTextarea: () => void
 }
 
 export type StateProps = {
@@ -30,32 +32,38 @@ export type StateProps = {
 /**
  * Component
  */
-const InviteEmployee: SFC<Props> = (props) => {
-  const { inviteEmployee, textareaValid, spinner } = props
+class InviteEmployee extends Component<Props, {}> {
+  public componentWillUnmount(): void {
+    this.props.resetTextarea()
+  }
 
-  return (
-    <Form
-      styleName="invite-employee-form"
-      title="Пригласите сотрудников"
-      hint="Чтобы начать совместную работу со своими коллегами, пригласите их через электронную почту">
+  public render(): JSX.Element {
+    const { inviteEmployee, textareaValid, spinner } = this.props
 
-      <EmailTextarea
-        placeholder="Введите email"/>
+    return (
+      <Form
+        styleName="invite-employee-form"
+        title="Пригласите сотрудников"
+        hint="Чтобы начать совместную работу со своими коллегами, пригласите их через электронную почту">
 
-      <Button
-        type="button"
-        spinner={spinner}
-        disabled={!textareaValid}
-        onClick={inviteEmployee}>
-        Пригласить
-      </Button>
+        <EmailTextarea
+          placeholder="Введите email"/>
 
-      <Link
-        styleName="skip"
-        to="/app/profile"
-        children="Пропустить"/>
-    </Form>
-  )
+        <Button
+          type="button"
+          spinner={spinner}
+          disabled={!textareaValid}
+          onClick={inviteEmployee}>
+          Пригласить
+        </Button>
+
+        <Link
+          styleName="skip"
+          to="/app/profile"
+          children="Пропустить"/>
+      </Form>
+    )
+  }
 }
 
 /**
@@ -65,5 +73,5 @@ const StyledComponent = CSSModules(InviteEmployee, require('./styles.css'))
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => ({ textareaValid : state.common.emailTextarea.valid }),
-  { inviteEmployee }
+  { inviteEmployee, resetTextarea }
 )(StyledComponent)
