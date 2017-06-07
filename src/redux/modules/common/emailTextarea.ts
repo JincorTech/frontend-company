@@ -100,6 +100,6 @@ export default createReducer<State>({
   ),
 
   [RESET_TEXTAREA]: (state: State): State => (
-    state.merge({ ...initialState })
+    state.merge(initialState)
   )
 }, initialState)

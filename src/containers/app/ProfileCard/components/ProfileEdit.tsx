@@ -106,7 +106,9 @@ class ProfileEdit extends Component<Props, {}> {
         <Field
           component={RenderInput}
           validate={[
-            maxLength(20, 'Максимум 20 символов')
+            required(),
+            minLength(2, 'Минимум 15 символов'),
+            maxLength(60, 'Максимум 20 символов')
           ]}
           name="position"
           type="text"

@@ -60,6 +60,12 @@
   float: left;
 }
 
+.contacts {
+  & > h4 {
+    margin-bottom: 10px !important;
+  }
+}
+
 .contacts-block {
   clear: fix;
 }

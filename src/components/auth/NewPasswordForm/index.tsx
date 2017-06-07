@@ -4,7 +4,7 @@ import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
 import { ActionCreator } from '../../../utils/actions'
 
-import { password } from '../../../utils/validators'
+import { password, required } from '../../../utils/validators'
 
 import Form from '../../form/Form'
 import Button from '../../common/Button'
@@ -44,7 +44,10 @@ class NewPasswordForm extends Component<Props, {}> {
           component={RenderPassword}
           name="password"
           placeholder="Пароль"
-          validate={password()}
+          validate={[
+            required(),
+            password()
+          ]}
           warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}/>
 
         <Button type="submit" spinner={spinner} disabled={invalid}>Сохранить и войти</Button>

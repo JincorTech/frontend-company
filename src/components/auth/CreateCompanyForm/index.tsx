@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import { fetchDict } from '../../../redux/modules/auth/signUp'
 import { ActionCreator } from '../../../utils/actions'
-import { required, minLength } from '../../../utils/validators'
+import { required, minLength, maxLength } from '../../../utils/validators'
 
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
@@ -78,7 +78,11 @@ class CreateCompanyForm extends Component<Props, {}> {
           name="legalName"
           type="text"
           placeholder="Название компании"
-          validate={minLength(3)}/>
+          validate={[
+            required(),
+            minLength(3),
+            maxLength(60)
+          ]}/>
 
         <Button type="submit" spinner={spinner} disabled={invalid}>Добавить</Button>
       </Form>

@@ -42,8 +42,8 @@ const ActiveEmployee: SFC<Props> = props => {
         </div>
         <div styleName="email-n-position">
           <div styleName="email-slide">
-            <div>{contacts.email}</div>
             <div>{profile.position}</div>
+            <div>{contacts.email}</div>
           </div>
         </div>
       </div>

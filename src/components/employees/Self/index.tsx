@@ -35,8 +35,8 @@ const Self: SFC<Props> = (props) => {
         <div styleName="full-name">{profile.name} {profile.role === 'company-admin' && <span styleName="label">Администратор</span>}</div>
         <div styleName="email-n-position">
           <div styleName="email-slide">
-            <div>{contacts.email}</div>
             <div>{profile.position}</div>
+            <div>{contacts.email}</div>
           </div>
         </div>
       </div>

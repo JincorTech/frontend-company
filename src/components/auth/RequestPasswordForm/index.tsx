@@ -3,7 +3,7 @@ import { Component } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
 
-import { email } from '../../../utils/validators'
+import { email, required } from '../../../utils/validators'
 
 import Form from '../../../components/form/Form'
 import Button from '../../../components/common/Button'
@@ -43,7 +43,10 @@ class RequestPasswordForm extends Component<Props, {}> {
           name="email"
           type="email"
           placeholder="Email"
-          validate={email()}/>
+          validate={[
+            required(),
+            email()
+          ]}/>
 
         <Button type="submit" spinner={spinner} disabled={invalid}>Подтвердить</Button>
       </Form>
