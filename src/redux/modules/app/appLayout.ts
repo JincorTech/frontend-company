@@ -22,6 +22,8 @@ export type User = {
 
 export type UserProfile = {
   name: string
+  firstName: string
+  lastName: string
   position: string
   avatar?: string
 }
@@ -71,6 +73,8 @@ const initialState: State = from<StateMap>({
     id: '',
     profile: {
       name: '',
+      firstName: '',
+      lastName: '',
       position: '',
       avatar: ''
     },

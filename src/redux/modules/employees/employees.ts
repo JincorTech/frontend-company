@@ -33,6 +33,8 @@ export type Self = {
     avatar?: string
     role: string
     name: string
+    firstName: string
+    lastName: string
     position: string
   }
 }
@@ -51,6 +53,8 @@ export type ActiveEmployee = {
     avatar?: string
     role: string
     name: string
+    firstName: string
+    lastName: string
     position: string
   }
 }
@@ -70,6 +74,8 @@ export type DeletedEmployee = {
   id: string
   profile: {
     name: string
+    firstName: string
+    lastName: string
     position: string
     role: string
     avatar?: string
@@ -155,6 +161,8 @@ const initialState: State = from<StateObj>({
       avatar: '',
       role: '',
       name: '',
+      firstName: '',
+      lastName: '',
       position: ''
     }
   },
@@ -190,6 +198,8 @@ const initialState: State = from<StateObj>({
         role: '',
         avatar: '',
         name: '',
+        firstName: '',
+        lastName: '',
         position: ''
       }
     }

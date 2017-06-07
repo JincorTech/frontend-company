@@ -2,13 +2,12 @@ import * as React from 'react'
 import { SFC, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 
-import { getInitials, getBackgroundColor } from '../../../utils/colorFunction'
-
-import Popup, { Props as PopupProps } from '../../common/Popup'
-
+import { Props as PopupProps } from '../../common/Popup'
 import { EmployeeCard as EmployeeCardState } from '../../../redux/modules/employees/employees'
 import { UserCompany as UserCompanyProps } from '../../../redux/modules/app/appLayout'
 
+import Popup from '../../common/Popup'
+import CardAvatar from '../../app/CardAvatar'
 
 export type Props =
   JSX.IntrinsicAttributes &
@@ -22,37 +21,42 @@ export type EmployeeCardProps = {
 }
 
 const EmployeeCard: SFC<Props> = ({ employee, company, ...popupProps }) => {
-  const { id, profile } = employee
-  const { legalName, profile: companyProfile } = company
-  const { picture } = companyProfile
-  const backgroundColor = getBackgroundColor(id)
-  const initials = getInitials(profile.name)
+  const {
+    id,
+    profile
+  } = employee
+
+  const {
+    avatar,
+    name,
+    firstName,
+    lastName,
+    position
+  } = profile
+
+  const {
+    legalName,
+    profile: { picture }
+  } = company
 
   return (
-    <Popup styleName={profile.avatar ? 'employee-card' : 'employee-card-empty-avatar'} {...popupProps}>
-      {
-        profile.avatar
-          ? <img styleName="avatar" src={profile.avatar}/>
-          : <div styleName="avatar-empty" style={backgroundColor}>{initials}</div>
-      }
-
-      <div styleName="company">
-        <div styleName="company-name">{legalName}</div>
-        <div styleName={picture ? 'company-logo' : 'company-logo-empty'}>
-          <img src={picture}/>
+    <Popup styleName="employee-card" {...popupProps}>
+      <CardAvatar
+        type="employee"
+        avatar={avatar}
+        id={id}
+        name={name}
+        firstName={firstName}
+        lastName={lastName}
+        position={position}
+        companyName={legalName}
+        companyLogo={picture}>
+        <div styleName="buttons">
+          <button type="button">Сообщение</button>
+          <button type="button">Добавить в контакты</button>
+          <button type="button">Заблокировать</button>
         </div>
-      </div>
-
-      <div styleName="info">
-        <div styleName="full-name">{profile.name}</div>
-        <div styleName="position">{profile.position}</div>
-      </div>
-
-      <div styleName="buttons">
-        <button type="button">Сообщение</button>
-        <button type="button">Добавить в контакты</button>
-        <button type="button">Заблокировать</button>
-      </div>
+      </CardAvatar>
     </Popup>
   )
 }

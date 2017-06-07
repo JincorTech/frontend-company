@@ -16,12 +16,13 @@ import { logout } from '../../redux/modules/app/app'
 import { PasswordFields, ProfileFields } from '../../redux/modules/app/profileCard'
 
 
+const getUserState = state => state.app.appLayout.user.profile
+
 function* getProfileIterator(): SagaIterator {
   try {
-    const { data: { profile } } = yield call(get, '/employee/me')
-    const { avatar } = profile
+    const { avatar, firstName, lastName, position } = yield select(getUserState)
 
-    yield put(initialize('ProfileCardEdit', { ...profile, avatar: '' }, false))
+    yield put(initialize('cardUpdateProfile', { avatar: '', firstName, lastName, position }, false))
     yield put(setAvatar(avatar))
   } catch (e) {
     yield call(console.log, e)
