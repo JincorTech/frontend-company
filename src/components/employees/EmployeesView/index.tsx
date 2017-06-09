@@ -47,6 +47,7 @@ class EmployeesView extends Component<Props, {}> {
 
   public render(): JSX.Element {
     const {
+      auth,
       self,
       active,
       invited,
@@ -73,7 +74,7 @@ class EmployeesView extends Component<Props, {}> {
           <BackButton/>
         </div>
 
-        <InviteEmployee spinner={spinner}/>
+        {auth.admin && <InviteEmployee spinner={spinner}/>}
 
         <Scrollbar height="calc(100vh - 227px)">
           <div styleName="list">
@@ -88,6 +89,7 @@ class EmployeesView extends Component<Props, {}> {
                 onMakeAdmin={this.onMakeAdmin}
                 onUnmakeAdmin={this.onUnmakeAdmin}
                 onOpenProfile={this.onOpenProfile}
+                auth={auth}
                 employee={employee}/>))}
           </div>
 

@@ -9,11 +9,13 @@ export type State = StateMap & ImmutableObject<StateMap>
 
 export type StateMap = {
   authorized: boolean
+  admin: boolean
   token: string
 }
 
 export type AuthProps = {
   authorized: boolean
+  admin: boolean
   token: string
 }
 
@@ -40,6 +42,7 @@ export const checkAuth    = createAction<void>(CHECK_AUTH)
  */
 const initialState: State = from<StateMap>({
   authorized: false,
+  admin: false,
   token: ''
 })
 

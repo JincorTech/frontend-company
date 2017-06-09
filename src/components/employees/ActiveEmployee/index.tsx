@@ -7,12 +7,14 @@ import { getBackgroundColor, getInitials } from '../../../utils/colorFunction'
 import EmployeeMenu from './components/EmployeeMenu'
 
 import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/employees/employees'
+import { StateMap as AuthProps } from '../../../redux/modules/app/app'
 
 
 export type Props = ComponentProps & DispatchProps
 
 export type ComponentProps = {
   employee: ActiveEmployeeProps
+  auth: AuthProps
 }
 
 export type DispatchProps = {
@@ -23,7 +25,7 @@ export type DispatchProps = {
 }
 
 const ActiveEmployee: SFC<Props> = props => {
-  const { employee, onDelete, onMakeAdmin, onUnmakeAdmin, onOpenProfile } = props
+  const { auth, employee, onDelete, onMakeAdmin, onUnmakeAdmin, onOpenProfile } = props
   const { id, contacts, profile } = employee
   const backgroundColor = getBackgroundColor(id)
   const initials = getInitials(profile.name)
@@ -48,7 +50,7 @@ const ActiveEmployee: SFC<Props> = props => {
         </div>
       </div>
 
-      <EmployeeMenu>
+      {auth.admin && <EmployeeMenu>
         {profile.role === 'company-admin'
           ? <button
             type="button"
@@ -72,7 +74,7 @@ const ActiveEmployee: SFC<Props> = props => {
           styleName="menu-button-danger"
           onClick={e => onDelete(e, employee.id)}>
           Удалить пользователя</button>
-      </EmployeeMenu>
+      </EmployeeMenu>}
     </div>
   )
 }
