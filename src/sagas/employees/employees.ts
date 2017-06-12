@@ -11,6 +11,7 @@ import {
   makeAdmin, unmakeAdmin, deleteEmployee,
   closeConfirmAdminPopup, closeConfirmRmAdminPopup, closeConfirmDeletePopup
 } from '../../redux/modules/employees/employees'
+import { updateProfile } from '../../redux/modules/app/profileCard'
 import { resetTextarea } from '../../redux/modules/common/emailTextarea'
 
 
@@ -24,10 +25,16 @@ function* fetchEmployeesIterator(): SagaIterator {
 }
 
 function* fetchEmployeesSaga(): SagaIterator {
-  yield takeLatest(
-    fetchEmployees.REQUEST,
-    fetchEmployeesIterator
-  )
+  yield [
+    takeLatest(
+      fetchEmployees.REQUEST,
+      fetchEmployeesIterator
+    ),
+    takeLatest(
+      updateProfile.SUCCESS,
+      fetchEmployeesIterator
+    )
+  ]
 }
 
 

@@ -1,0 +1,60 @@
+@use postcss-short;
+
+.edit-profile {
+  padding: 15px 30px 30px;
+  size: 100%;
+  position: absolute 0 * * 0;
+  transition: .2s linear opacity;
+}
+
+.profile-bottom-form {
+  height: 100%;
+  position: relative;
+
+  & input {
+    height: 40px;
+    margin: 0;
+  }
+}
+
+.avatar-upload {
+  size: 325px;
+  position: absolute;
+  top: -340px;
+  left: -30px;
+  z-index: 1;
+}
+
+.upload-field {
+  position: relative;
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+}
+
+.form-buttons {
+  position: absolute;
+  bottom: 0;
+}
+
+.form-submit-button {
+  width: 160px;
+  display: inline-block;
+}
+
+.form-cancel-button {
+  width: 100px;
+  margin: 0 5px 0 0;
+  display: inline-block;
+  font-weight: normal;
+  background-color: transparent;
+  color: #0070e0;
+
+  &:hover {
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+  &:active {
+    background-color: transparent;
+  }
+}

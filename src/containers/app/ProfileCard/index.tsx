@@ -3,51 +3,47 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import * as CSSModules from 'react-css-modules'
 
-import { getBackgroundColor, getInitials } from '../../../utils/colorFunction'
-
-import ProfileEdit from './components/ProfileEdit'
-import ChangePassword from './components/ChangePassword'
-import {
-  changeView,
-  closeProfileCard,
-  openProfileCard,
-  changePassword,
-  fetchProfile,
-  updateProfile,
-  logout
-} from '../../../redux/modules/app/profileCard'
-import { User as UserProps } from '../../../redux/modules/app/appLayout'
 import { StateMap as StateProps, BottomView as BottomViewProps } from '../../../redux/modules/app/profileCard'
+import { User as UserProps } from '../../../redux/modules/app/appLayout'
+import { Props as PopupProps } from '../../../components/common/Popup'
 
-import Popup, { Props as PopupProps } from '../../../components/common/Popup'
+import { closeProfileCard, changeView, fetchProfile, changePassword, updateProfile, logout } from '../../../redux/modules/app/profileCard'
+
+import Popup from '../../../components/common/Popup'
 import Icon from '../../../components/common/Icon'
 import CompanyLogo from '../../../components/profile/CompanyLogo'
+import CardAvatar from '../../../components/app/CardAvatar'
+import CardButtonsView from '../../../components/app/CardButtonsView'
+import CardChangePassword from '../../../components/app/CardChangePassword'
+import CardUpdateProfile from '../../../components/app/CardUpdateProfile'
 
+/**
+ * Types
+ */
 
-type Props = JSX.IntrinsicAttributes
-  & JSX.IntrinsicClassAttributes<any>
-  & PopupProps
-  & DispatchProps
-  & ComponentProps
-  & StateProps
+export type Props = StateProps & ComponentProps & DispatchProps
 
 export type ComponentProps = {
   user: UserProps
 }
 
 export type DispatchProps = {
-  openProfileCard: () => void,
-  closeProfileCard: () => void,
-  changeView: (view: BottomViewProps) => void,
+  openProfileCard: () => void
+  closeProfileCard: () => void
+  changeView: (view: BottomViewProps) => void
   logout: () => void
+  updateProfile: () => void
   fetchProfile: () => void
 }
+
+/**
+ * Component
+ */
 
 class ProfileCard extends Component<Props, {}> {
   constructor(props) {
     super(props)
 
-    this.renderView = this.renderView.bind(this)
     this.fetchProfile = this.fetchProfile.bind(this)
   }
 
@@ -57,62 +53,63 @@ class ProfileCard extends Component<Props, {}> {
     fetchProfile()
   }
 
-  private renderView(view: BottomViewProps) {
-    const { user: { profile }, changeView, logout, src, spinner } = this.props
+  public render(): JSX.Element {
+    const {
+      open,
+      spinner,
+      user,
+      src,
+      bottomView,
+      closeProfileCard,
+      changeView,
+      logout
+    } = this.props
 
-    switch (view) {
-      case 'buttons':
-        return (
-          <div styleName="control-buttons">
-            <button
-              type="button"
-              onClick={() => changeView('profile-form')}>
-              <Icon name="pencil" styleName="icon"/> Редактировать профиль
-            </button>
+    const {
+      id,
+      profile,
+      company
+    } = user
 
-            <button
-              type="button"
-              onClick={() => changeView('password-form')}>
-              <Icon name="lock" styleName="icon"/> Изменить пароль
-            </button>
+    const {
+      avatar,
+      position,
+      name,
+      firstName,
+      lastName
+    } = profile
 
-            <button
-              type="button"
-              onClick={() => logout()}>
-              <Icon name="logout" styleName="icon"/> Выйти
-            </button>
-          </div>
-        )
+    const {
+      legalName,
+      profile: { picture }
+    } = company
 
-      case 'profile-form':
-        return (
-          <div styleName="edit-profile">
-            <ProfileEdit
+    const renderBottom = () => {
+      switch (bottomView) {
+        case 'buttons':
+          return (
+            <CardButtonsView
+              changeView={changeView}
+              logout={logout}/>
+          )
+        case 'profile-form':
+          return (
+            <CardUpdateProfile
               avatar={src}
               spinner={spinner}
               onMount={this.fetchProfile}
               onSubmit={updateProfile}
               onCancel={() => changeView('buttons')}/>
-          </div>
-        )
-
-      case 'password-form':
-        return (
-          <div styleName="change-password">
-            <ChangePassword
+          )
+        case 'password-form':
+          return (
+            <CardChangePassword
               spinner={spinner}
               onSubmit={changePassword}
               onCancel={() => changeView('buttons')}/>
-          </div>
-        )
+          )
+      }
     }
-  }
-
-  public render(): JSX.Element {
-    const { user, open, bottomView, closeProfileCard } = this.props
-    const { id, profile, company } = user
-    const backgroundColor = getBackgroundColor(id)
-    const initials = getInitials(profile.name)
 
     return (
       <Popup
@@ -120,37 +117,43 @@ class ProfileCard extends Component<Props, {}> {
         modalId="profile-card-popup"
         open={open}
         onClose={closeProfileCard}>
-        <div styleName={profile.avatar ? 'top' : 'top-avatar-empty'}>
-          {
-            profile.avatar
-              ? <img styleName="avatar" src={profile.avatar}/>
-              : <div styleName="avatar-empty" style={backgroundColor}>{initials}</div>
-          }
 
-          <div styleName={bottomView !== 'profile-form' ? 'company' : 'company-hidden'}>
-            <div styleName="company-name">{company.legalName}</div>
-            <div styleName={ company.profile.picture ? 'company-logo' : 'company-logo-empty' }>
-              <CompanyLogo src={company.profile.picture} borderRadius="0 4px"/>
-            </div>
+          <div styleName="top">
+            <CardAvatar
+              avatar={avatar}
+              id={id}
+              name={name}
+              firstName={firstName}
+              lastName={lastName}
+              bottomView={bottomView}
+              position={position}
+              companyLogo={picture}
+              companyName={legalName}/>
           </div>
 
-          <div styleName={bottomView !== 'profile-form' ? 'info' : 'info-hidden'}>
-            <div styleName="full-name">{profile.name}</div>
-            <div styleName="position">{profile.position}</div>
+          <div styleName="bottom">
+            {renderBottom()}
           </div>
-        </div>
 
-        <div styleName="bottom">
-          {this.renderView(bottomView)}
-        </div>
       </Popup>
     )
   }
 }
 
+/**
+ * Export
+ */
+
 const StyledComponent = CSSModules(ProfileCard, require('./styles.css'))
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
-  state => state.app.profileCard,
-  { openProfileCard, closeProfileCard, changeView, logout, fetchProfile }
+  (state) => state.app.profileCard,
+  {
+    closeProfileCard,
+    changeView,
+    logout,
+    changePassword,
+    updateProfile,
+    fetchProfile
+  }
 )(StyledComponent)

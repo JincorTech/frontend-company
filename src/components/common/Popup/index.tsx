@@ -123,4 +123,4 @@ class Popup extends Component<Props, {}> {
   }
 }
 
-export default Popup 
+export default Popup
