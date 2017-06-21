@@ -29,6 +29,7 @@ import {
   DeletedEmployee as DeletedEmployeeProps
 } from '../../../redux/modules/employees/employees'
 import { UserCompany as UserCompanyProps } from '../../../redux/modules/app/appLayout'
+import { StateMap as AuthProps } from '../../../redux/modules/app/app'
 
 import { activeSortSelector } from '../../../selectors/employees/employees'
 
@@ -54,6 +55,7 @@ export type StateProps = {
   confirmRmAdmin: ConfirmPopupProps
   employeeCard: EmployeeCardProps
   company: UserCompanyProps
+  auth: AuthProps
 }
 
 export type DispatchProps = {
@@ -108,6 +110,7 @@ const StyledComponent = CSSModules(Employees, require('./styles.css'))
 export default connect<StateProps, DispatchProps, {}>(
   (state) => ({
     ...state.employees.employees,
+    auth: state.app.app,
     company: state.app.appLayout.user.company,
     active: activeSortSelector(state.employees.employees)
   }),

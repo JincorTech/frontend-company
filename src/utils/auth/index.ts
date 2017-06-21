@@ -33,6 +33,18 @@ export function isAuth(): boolean {
   }
 }
 
+export function isAdmin(): boolean {
+  const token = getToken()
+
+  if (token) {
+    const decoded = jwtDecode(token)
+
+    return decoded.scope === 'company-admin'
+  } else {
+    return false
+  }
+}
+
 export function removeToken(): void {
   localStorage.clear()
 }
