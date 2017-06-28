@@ -1,4 +1,4 @@
-{
+  {
   "name": "jincor-frontend",
   "version": "0.2.0",
   "description": "Jincor react SPA",
@@ -9,7 +9,7 @@
     "test": "karma start",
     "doc": "rm -rf tmp/typedoc && typedoc --options typedoc.json src/index.tsx",
     "lint": "tslint 'src/**/*.+(ts|tsx)'",
-    "stylelint": "stylelint 'src/modules/**/*.css'"
+    "stylelint": "stylelint './src/**/*.css'"
   },
   "keywords": [
     "jincor",
