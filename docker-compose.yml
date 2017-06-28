@@ -1,0 +1,20 @@
+version: '3'
+services:
+
+  company-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./dist:/usr/src/companies/dist
+    command: npm run build
+
+  nginx:
+     image: registry.jincor.com/frontend/nginx:latest
+     volumes:
+       - ./dist:/usr/src/companies/dist
+
+  src:
+    image: tianon/true
+    volumes:
+      - ./dist:/usr/src/companies/dist
