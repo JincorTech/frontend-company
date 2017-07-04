@@ -1,8 +1,0 @@
-FROM alpine:3.5
-
-RUN mkdir -p /usr/src/companies/dist
-COPY dist /usr/src/companies/dist
-
-VOLUME /usr/src/companies/dist
-
-CMD /bin/true
