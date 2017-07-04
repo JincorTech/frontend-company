@@ -1,7 +1,8 @@
 version: '3'
 services:
 
-  company-frontend:
+  company:
+    image: registry.jincor.com/frontend/company:latest
     build:
       context: .
       dockerfile: Dockerfile

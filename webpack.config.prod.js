@@ -25,7 +25,7 @@ module.exports = {
   target: 'web',
   output: {
     path: path.resolve('./dist'),
-    publicPath: '/',
+    publicPath: '/cmp/',
     filename: '[name].[chunkhash].js'
   },
   plugins: [
