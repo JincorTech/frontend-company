@@ -19,15 +19,6 @@ import Employees from './containers/employees/Employees'
 import Search from './containers/search/Search'
 import Messenger from './containers/messenger/Messenger'
 
-
-const UserIsAuthenticated = UserAuthWrapper({
-  authSelector: (state) => state.app.app,
-  predicate: (app) => app.authorized,
-  redirectAction: push,
-  failureRedirectPath: '/cmp/auth/singin',
-  allowRedirectBack: false
-})
-
 // named routes
 export const routes = {
   base: '/cmp',
@@ -40,6 +31,22 @@ export const routes = {
   employees: '/cmp/app/employees',
   search: '/cmp/app/search'
 }
+
+const UserIsAuthenticated = UserAuthWrapper({
+  authSelector: (state) => state.app.app,
+  predicate: (app) => app.authorized,
+  redirectAction: push,
+  failureRedirectPath: routes.signIn,
+  allowRedirectBack: false
+})
+
+const UserIsAdmin = UserAuthWrapper({
+  authSelector: (state) => state.app.app,
+  predicate: (app) => app.admin,
+  redirectAction: push,
+  failureRedirectPath: routes.base,
+  allowRedirectBack: false
+})
 
 export default (
   <Route path="/cmp" component={App}>
@@ -54,7 +61,7 @@ export default (
 
     <Route path="app" component={UserIsAuthenticated(AppLayout)}>
       <Route path="profile" component={ProfileView}/>
-      <Route path="profile/edit" component={ProfileEdit}/>
+      <Route path="profile/edit" component={UserIsAdmin(ProfileEdit)}/>
       <Route path="employees" component={Employees}/>
       <Route path="search" component={Search}/>
       <Route path="messenger" component={Messenger}/>
