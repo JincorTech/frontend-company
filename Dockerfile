@@ -1,9 +1,7 @@
-FROM node:6.9.5
+FROM node:6.10.3-alpine
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+VOLUME /usr/src/companies
 
-ADD . /usr/src/app/
-RUN npm i
+WORKDIR /usr/src/companies
 
-CMD npm start
+CMD /bin/true

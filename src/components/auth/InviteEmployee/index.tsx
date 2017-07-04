@@ -59,7 +59,7 @@ class InviteEmployee extends Component<Props, {}> {
 
         <Link
           styleName="skip"
-          to="/app/profile"
+          to="/cmp/app/profile"
           children="Пропустить"/>
       </Form>
     )

@@ -24,13 +24,13 @@ const UserIsAuthenticated = UserAuthWrapper({
   authSelector: (state) => state.app.app,
   predicate: (app) => app.authorized,
   redirectAction: push,
-  failureRedirectPath: '/auth/singin',
+  failureRedirectPath: '/cmp/auth/singin',
   allowRedirectBack: false
 })
 
 export default (
-  <Route path="/" component={App}>
-    <IndexRedirect to="/app/profile"/>
+  <Route path="/cmp" component={App}>
+    <IndexRedirect to="/cmp/app/profile"/>
 
     <Route path="auth" component={AuthLayout}>
       <Route path="signup" component={SignUp}/>
@@ -47,6 +47,6 @@ export default (
       <Route path="messenger" component={Messenger}/>
     </Route>
 
-    <Redirect from="*" to="/auth/signin" />
+    <Redirect from="*" to="/cmp/auth/signin" />
   </Route>
 )

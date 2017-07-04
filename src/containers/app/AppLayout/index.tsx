@@ -68,8 +68,8 @@ class AppLayout extends Component<Props, StateProps> {
           <div styleName="container">
             <div styleName="pull-left">
               {isAuth
-                ? <Logo styleName="logo"  to="/app/profile"/>
-                : <Logo styleName="logo"  to="/auth/signin"/>}
+                ? <Logo styleName="logo"  to="/cmp/app/profile"/>
+                : <Logo styleName="logo"  to="/cmp/auth/signin"/>}
 
               <PageName
                 styleName="module-name"

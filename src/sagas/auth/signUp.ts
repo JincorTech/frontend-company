@@ -155,7 +155,7 @@ function* inviteEmployeeIterator(action: Action<string[]>): SagaIterator {
     const { data } = yield call(post, 'company/invite', { emails })
 
     yield put(inviteEmployee.success())
-    yield put(push('/app/profile'))
+    yield put(push('/cmp/app/profile'))
   } catch (e) {
     yield put(inviteEmployee.failure(e))
   }

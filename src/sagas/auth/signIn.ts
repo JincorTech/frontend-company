@@ -69,7 +69,7 @@ function* loginSagaIterator(action: Action<LoginData>): SagaIterator {
     const { data: { token }} = yield call(post, '/employee/login', action.payload)
 
     yield put(login(token))
-    yield put(push('/app/profile'))
+    yield put(push('/cmp/app/profile'))
   } catch (e) {
     // yield put(fetchLogin.failure(new SubmissionError(e)))
   }

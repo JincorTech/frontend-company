@@ -135,7 +135,7 @@ class CompanyForm extends Component<Props, {}> {
 
         <div styleName="company-controls">
           <Button styleName="submit-btn" type="submit" spinner={spinner} disabled={invalid}>Сохранить</Button>
-          <Link to="/app/profile" styleName="cancel-btn">отменить</Link>
+          <Link to="/cmp/app/profile" styleName="cancel-btn">отменить</Link>
         </div>
       </form>
     )
