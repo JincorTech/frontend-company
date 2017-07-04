@@ -3,6 +3,7 @@ import { takeLatest, call, put, select, fork } from 'redux-saga/effects'
 import { SubmissionError } from 'redux-form'
 import { Action } from '../../utils/actions'
 import { push } from 'react-router-redux'
+import { routes } from '../../routes'
 
 import { get, post } from '../../utils/api'
 import { setToken } from '../../utils/auth'
@@ -69,7 +70,7 @@ function* loginSagaIterator(action: Action<LoginData>): SagaIterator {
     const { data: { token }} = yield call(post, '/employee/login', action.payload)
 
     yield put(login(token))
-    yield put(push('/cmp/app/profile'))
+    yield put(push(routes.profile))
   } catch (e) {
     // yield put(fetchLogin.failure(new SubmissionError(e)))
   }
@@ -107,7 +108,7 @@ export function* loginCompanySaga(): SagaIterator {
 function* resetSignInIterator(action: Action<any>) {
   const { pathname } = action.payload
 
-  if (pathname === '/auth/signin') {
+  if (pathname === routes.signIn) {
     yield put(resetState())
   }
 }

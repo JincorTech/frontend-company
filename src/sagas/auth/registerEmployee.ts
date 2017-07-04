@@ -1,6 +1,7 @@
 import { SagaIterator } from 'redux-saga'
 import { takeLatest, call, put, fork } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
+import { routes } from '../../routes'
 
 import { Action } from '../../utils/actions'
 import { post, get } from '../../utils/api'
@@ -31,7 +32,7 @@ function* registerEmployeeIterator({ payload: employee }: Action<FormFields>): S
 
     yield put(login(token))
     yield put(registerEmployee.success())
-    yield put(push('/cmp/app/profile'))
+    yield put(push(routes.profile))
   } catch (e) {
     yield put(registerEmployee.failure())
   }

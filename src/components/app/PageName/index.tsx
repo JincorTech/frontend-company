@@ -7,12 +7,12 @@ export type Props = HTMLProps<HTMLSpanElement> & {
 }
 
 const pages = {
-  '/app/profile': 'Профиль компании',
-  '/app/search': 'Поиск',
-  '/app/employees': 'Моя компания',
-  '/app/profile/edit': 'Профиль компании',
-  '/app/messenger': 'Messenger',
-  '/app/bookmarks': 'Избранное'
+  '/cmp/app/profile': 'Профиль компании',
+  '/cmp/app/search': 'Поиск',
+  '/cmp/app/employees': 'Моя компания',
+  '/cmp/app/profile/edit': 'Профиль компании',
+  '/cmp/app/messenger': 'Messenger',
+  '/cmp/app/bookmarks': 'Избранное'
 }
 
 const PageName: SFC<Props> = ({ pathname, ...spanProps }) => (

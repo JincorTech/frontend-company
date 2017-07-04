@@ -4,6 +4,7 @@ import * as CSSModules from 'react-css-modules'
 import { InjectedCSSModuleProps } from 'react-css-modules'
 
 import { Link } from 'react-router'
+import { routes } from '../../../routes'
 import Icon from '../../common/Icon'
 
 /**
@@ -57,10 +58,10 @@ class Sidebar extends PureComponent<Props, {}> {
         <Icon styleName="close-icon" name="close" onClick={onClose}/>
 
         <nav>
-          <Link className={link} activeClassName={active} to="/msg">Мессенджер</Link>
-          <Link className={link} activeClassName={active} to="/cmp/app/profile">Моя компания</Link>
+          <a className={link} href="/msg">Мессенджер</a>
+          <Link className={link} activeClassName={active} to={routes.profile}>Моя компания</Link>
           {/*<Link className={link} activeClassName={active} to="/app/favorites">Избранное</Link>*/}
-          <Link className={link} activeClassName={active} to="/cmp/app/search">Поиск</Link>
+          <Link className={link} activeClassName={active} to={routes.search}>Поиск</Link>
         </nav>
       </aside>
     )

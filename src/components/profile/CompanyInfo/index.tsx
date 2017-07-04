@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
+import { routes } from '../../../routes'
 import { Link } from 'react-router'
 
 import { Company } from '../../../redux/modules/profile/profileView'
@@ -75,14 +76,14 @@ const CompanyInfo: SFC<Props> = (props) => {
       </div>
 
       <div styleName="controls-block">
-        <Link to="/cmp/app/profile/edit" styleName="edit-button">Редактировать</Link>
+        <Link to={routes.profileEdit} styleName="edit-button">Редактировать</Link>
 
         <a
           onClick={() => openCompanyCard(company)}
           styleName="company-link"
           children="Посмотреть в виде карточки"/>
 
-        <Link to="/cmp/app/employees" styleName="company-link">Сотрудники ({employeesCount})</Link>
+        <Link to={routes.employees} styleName="company-link">Сотрудники ({employeesCount})</Link>
       </div>
     </div>
   )

@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Component, HTMLProps } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { reduxForm, Field, FieldArray, FormProps, SubmitHandler } from 'redux-form'
+import { routes } from '../../../routes'
 import { Link } from 'react-router'
 
 import { updateProfile, FormFields } from '../../../redux/modules/profile/profileEdit'
@@ -135,7 +136,7 @@ class CompanyForm extends Component<Props, {}> {
 
         <div styleName="company-controls">
           <Button styleName="submit-btn" type="submit" spinner={spinner} disabled={invalid}>Сохранить</Button>
-          <Link to="/cmp/app/profile" styleName="cancel-btn">отменить</Link>
+          <Link to={routes.profile} styleName="cancel-btn">отменить</Link>
         </div>
       </form>
     )
