@@ -12,11 +12,11 @@ const Header: SFC<{}> = ({ children }) => {
       <Alert />
       <header styleName="header">
         <div styleName="container">
-          <Logo to="/"/>
+          <Logo to="/cmp/"/>
 
           <nav styleName="pull-right">
-            <Link styleName="enter-link" to="/auth/signin">Войти</Link>
-            <Link to="/auth/signup" withBorder>Новая компания</Link>
+            <Link styleName="enter-link" to="/cmp/auth/signin">Войти</Link>
+            <Link to="/cmp/auth/signup" withBorder>Новая компания</Link>
           </nav>
         </div>
       </header>

@@ -57,10 +57,10 @@ class Sidebar extends PureComponent<Props, {}> {
         <Icon styleName="close-icon" name="close" onClick={onClose}/>
 
         <nav>
-          <Link className={link} activeClassName={active} to="/app/messenger">Мессенджер</Link>
-          <Link className={link} activeClassName={active} to="/app/profile">Моя компания</Link>
+          <Link className={link} activeClassName={active} to="/msg">Мессенджер</Link>
+          <Link className={link} activeClassName={active} to="/cmp/app/profile">Моя компания</Link>
           {/*<Link className={link} activeClassName={active} to="/app/favorites">Избранное</Link>*/}
-          <Link className={link} activeClassName={active} to="/app/search">Поиск</Link>
+          <Link className={link} activeClassName={active} to="/cmp/app/search">Поиск</Link>
         </nav>
       </aside>
     )

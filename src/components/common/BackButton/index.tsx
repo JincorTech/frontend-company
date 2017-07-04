@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 
 
 const BackButton: SFC<{}> = () => (
-  <Link styleName="back-button" to="/app/profile"/>
+  <Link styleName="back-button" to="/cmp/app/profile"/>
 )
 
 export default CSSModules(BackButton, require('./styles.css'))

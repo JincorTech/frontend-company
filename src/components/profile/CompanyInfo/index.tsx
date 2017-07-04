@@ -75,14 +75,14 @@ const CompanyInfo: SFC<Props> = (props) => {
       </div>
 
       <div styleName="controls-block">
-        <Link to="/app/profile/edit" styleName="edit-button">Редактировать</Link>
+        <Link to="/cmp/app/profile/edit" styleName="edit-button">Редактировать</Link>
 
         <a
           onClick={() => openCompanyCard(company)}
           styleName="company-link"
           children="Посмотреть в виде карточки"/>
 
-        <Link to="/app/employees" styleName="company-link">Сотрудники ({employeesCount})</Link>
+        <Link to="/cmp/app/employees" styleName="company-link">Сотрудники ({employeesCount})</Link>
       </div>
     </div>
   )
