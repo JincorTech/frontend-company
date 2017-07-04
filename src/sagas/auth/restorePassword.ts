@@ -2,6 +2,7 @@ import { SagaIterator } from 'redux-saga'
 import { takeLatest, call, put, select, fork } from 'redux-saga/effects'
 import { SubmissionError } from 'redux-form'
 import { push } from 'react-router-redux'
+import { routes } from '../../routes'
 
 import { Action } from '../../utils/actions'
 import { post, put as putFunc, get } from '../../utils/api'
@@ -69,7 +70,7 @@ function* newPasswordIterator({ payload }: Action<NewPasswordFields>): SagaItera
 
     yield put(setNewPassword.success())
     yield put(login(data.token))
-    yield put(push('/cmp/app/profile'))
+    yield put(push(routes.profile))
   } catch (e) {
     yield put(setNewPassword.failure(new SubmissionError(e)))
   }
@@ -88,7 +89,7 @@ export function* newPasswordSaga(): SagaIterator {
 function* resetSignInIterator({ payload }: Action<any>) {
   const { pathname } = payload
 
-  if (pathname === '/auth/password') {
+  if (pathname === '/cmp/auth/password') {
     yield put(resetState())
   }
 }

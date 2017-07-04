@@ -4,6 +4,7 @@ import { SubmissionError } from 'redux-form'
 import { takeLatest, call, put, fork, select } from 'redux-saga/effects'
 import { get, post } from '../../utils/api'
 import { push } from 'react-router-redux'
+import { routes } from '../../routes'
 
 import { isEmail } from '../../helpers/common/emailTextarea'
 import { optionTransformer } from '../../helpers/common/select'
@@ -155,7 +156,7 @@ function* inviteEmployeeIterator(action: Action<string[]>): SagaIterator {
     const { data } = yield call(post, 'company/invite', { emails })
 
     yield put(inviteEmployee.success())
-    yield put(push('/cmp/app/profile'))
+    yield put(push(routes.profile))
   } catch (e) {
     yield put(inviteEmployee.failure(e))
   }
@@ -174,7 +175,7 @@ export function* inviteEmployeeSaga(): SagaIterator {
 function* resetSignInIterator(action: Action<any>) {
   const { pathname } = action.payload
 
-  if (pathname === '/auth/signup') {
+  if (pathname === routes.signUp) {
     yield put(resetState())
   }
 }

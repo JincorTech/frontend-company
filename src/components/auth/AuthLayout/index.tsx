@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { SFC } from 'react'
 import * as CSSModules from 'react-css-modules'
+import { routes } from '../../../routes'
 
 import Link from '../../common/Link'
 import Logo from '../../common/Logo'
@@ -12,11 +13,11 @@ const Header: SFC<{}> = ({ children }) => {
       <Alert />
       <header styleName="header">
         <div styleName="container">
-          <Logo to="/cmp/"/>
+          <Logo to={routes.base}/>
 
           <nav styleName="pull-right">
-            <Link styleName="enter-link" to="/cmp/auth/signin">Войти</Link>
-            <Link to="/cmp/auth/signup" withBorder>Новая компания</Link>
+            <Link styleName="enter-link" to={routes.signIn}>Войти</Link>
+            <Link to={routes.signUp} withBorder>Новая компания</Link>
           </nav>
         </div>
       </header>

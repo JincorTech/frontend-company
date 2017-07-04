@@ -1,6 +1,5 @@
 import { SagaIterator } from 'redux-saga'
 import { takeLatest, call, put, fork } from 'redux-saga/effects'
-import { push } from 'react-router-redux'
 
 import { get } from '../../utils/api'
 import { removeToken, setToken, getToken, isAuth, isAdmin } from '../../utils/auth'

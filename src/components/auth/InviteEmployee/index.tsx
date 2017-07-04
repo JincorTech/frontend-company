@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import * as CSSModules from 'react-css-modules'
+import { routes } from '../../../routes'
 
 import { inviteEmployee } from '../../../redux/modules/auth/signUp'
 import { resetTextarea } from '../../../redux/modules/common/emailTextarea'
@@ -59,7 +60,7 @@ class InviteEmployee extends Component<Props, {}> {
 
         <Link
           styleName="skip"
-          to="/cmp/app/profile"
+          to={routes.profile}
           children="Пропустить"/>
       </Form>
     )

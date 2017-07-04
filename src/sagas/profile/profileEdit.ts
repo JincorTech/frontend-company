@@ -2,6 +2,7 @@ import { SagaIterator } from 'redux-saga'
 import { takeLatest, call, put, select, fork } from 'redux-saga/effects'
 import { initialize } from 'redux-form'
 import { push } from 'react-router-redux'
+import { routes } from '../../routes'
 import { put as putFunc, get } from '../../utils/api'
 import { Action } from '../../utils/actions'
 
@@ -87,7 +88,7 @@ function* updateProfileIterator({ payload }): SagaIterator {
     const state = yield select(getState)
     yield call(putFunc, '/company/my', req(payload))
     yield put(updateProfile.success())
-    yield put(push('/cmp/app/profile'))
+    yield put(push(routes.profile))
   } catch (e) {
     yield put(updateProfile.failure(e))
   }

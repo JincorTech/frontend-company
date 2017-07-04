@@ -20,7 +20,7 @@ function VerifyEmployeeToken(RegisterEmployee: any): any {
       try {
         decoded = jwtDecode(token)
       } catch (e) {
-        router.replace('/auth/signin')
+        router.replace('/cmp/auth/signin')
       }
 
       return decoded && <RegisterEmployee {...decoded}/>

@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Component } from 'react'
 import * as CSSModules from 'react-css-modules'
 import { connect } from 'react-redux'
+import { routes } from '../../../routes'
 import { RouteComponentProps } from 'react-router'
 
 import {
@@ -68,8 +69,8 @@ class AppLayout extends Component<Props, StateProps> {
           <div styleName="container">
             <div styleName="pull-left">
               {isAuth
-                ? <Logo styleName="logo"  to="/cmp/app/profile"/>
-                : <Logo styleName="logo"  to="/cmp/auth/signin"/>}
+                ? <Logo styleName="logo"  to={routes.profile}/>
+                : <Logo styleName="logo"  to={routes.signIn}/>}
 
               <PageName
                 styleName="module-name"

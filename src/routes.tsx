@@ -28,6 +28,19 @@ const UserIsAuthenticated = UserAuthWrapper({
   allowRedirectBack: false
 })
 
+// named routes
+export const routes = {
+  base: '/cmp',
+  signIn: '/cmp/auth/signin',
+  signUp: '/cmp/auth/signup',
+  restorePassword: '/cmp/auth/password',
+  inviteEmployees: '/cmp/auth/invite',
+  profile: '/cmp/app/profile',
+  profileEdit: '/cmp/app/profile/edit',
+  employees: '/cmp/app/employees',
+  search: '/cmp/app/search'
+}
+
 export default (
   <Route path="/cmp" component={App}>
     <IndexRedirect to="/cmp/app/profile"/>
