@@ -87,7 +87,7 @@ function* updateProfileIterator({ payload }): SagaIterator {
     const state = yield select(getState)
     yield call(putFunc, '/company/my', req(payload))
     yield put(updateProfile.success())
-    yield put(push('/app/profile'))
+    yield put(push('/cmp/app/profile'))
   } catch (e) {
     yield put(updateProfile.failure(e))
   }

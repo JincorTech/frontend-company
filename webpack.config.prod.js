@@ -24,7 +24,7 @@ module.exports = {
   entry: ['babel-polyfill', path.resolve('./src/index')],
   target: 'web',
   output: {
-    path: path.resolve('./nginx/dist'),
+    path: path.resolve('./dist'),
     publicPath: '/',
     filename: '[name].[chunkhash].js'
   },
