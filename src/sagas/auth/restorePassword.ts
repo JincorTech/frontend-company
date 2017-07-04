@@ -69,7 +69,7 @@ function* newPasswordIterator({ payload }: Action<NewPasswordFields>): SagaItera
 
     yield put(setNewPassword.success())
     yield put(login(data.token))
-    yield put(push('/app/profile'))
+    yield put(push('/cmp/app/profile'))
   } catch (e) {
     yield put(setNewPassword.failure(new SubmissionError(e)))
   }

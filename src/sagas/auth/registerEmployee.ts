@@ -31,7 +31,7 @@ function* registerEmployeeIterator({ payload: employee }: Action<FormFields>): S
 
     yield put(login(token))
     yield put(registerEmployee.success())
-    yield put(push('/app/profile'))
+    yield put(push('/cmp/app/profile'))
   } catch (e) {
     yield put(registerEmployee.failure())
   }
