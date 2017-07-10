@@ -3,6 +3,7 @@ import { SagaIterator } from 'redux-saga'
 import { SubmissionError } from 'redux-form'
 import { takeLatest, call, put, fork, select } from 'redux-saga/effects'
 import { get, post } from '../../utils/api'
+import { setUser, getUser, removeUser } from '../../utils/auth'
 import { push } from 'react-router-redux'
 import { routes } from '../../routes'
 
@@ -17,7 +18,8 @@ import {
   confirmEmail,
   inviteEmployee,
   accountCreated,
-  resetState
+  resetState,
+  signupEmail
 } from '../../redux/modules/auth/signUp'
 import { login } from '../../redux/modules/app/app'
 import { setOptions } from '../../redux/modules/common/select'
@@ -67,8 +69,8 @@ function* createCompanyIterator({ payload }: Action<CompanyFields>): SagaIterato
   } = payload
 
   try {
-    const res = yield call(post, '/company', { countryId, companyType, legalName })
-    const { id: verificationId, companyId: id } = res.data
+    const { data } = yield call(post, '/company', { countryId, companyType, legalName })
+    const { id: verificationId, companyId: id } = data
 
     yield put(createCompany.success({ id, verificationId }))
   } catch (e) {
@@ -100,6 +102,7 @@ function* verifyEmailRequestSaga({ payload }: Action<AccountFields>): SagaIterat
   try {
     yield call(get, `/employee/verifyEmail?verificationId=${verificationId}&email=${email}`)
 
+    yield call(setUser, { verificationId, ...employee })
     yield put(setUserInfo(employee))
     yield put(verifyEmail.success())
   } catch (e) {
@@ -140,6 +143,29 @@ export function* confirmEmailSaga() {
   yield takeLatest(
     confirmEmail.REQUEST,
     confirmEmailIterator
+  )
+}
+
+/**
+ * Sign up from email
+ */
+function* signupEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator {
+  try {
+    const user = yield call(getUser)
+    yield call(post, '/employee/verifyEmail', payload)
+    const { data } = yield call(post, '/employee/register', user)
+    yield put(login(data.token))
+    yield call(removeUser)
+  } catch (e) {
+    yield put(signupEmail.failure(e))
+    yield put(push(routes.signIn))
+  }
+}
+
+function* signupEmailSaga(): SagaIterator {
+  yield takeLatest(
+    signupEmail.REQUEST,
+    signupEmailIterator
   )
 }
 
@@ -195,6 +221,7 @@ export default function* (): SagaIterator {
     fork(createCompanySaga),
     fork(verifyEmailSaga),
     fork(confirmEmailSaga),
+    fork(signupEmailSaga),
     fork(inviteEmployeeSaga),
     fork(resetSignInSaga),
     fork(fetchCountriesAndTypesSaga)

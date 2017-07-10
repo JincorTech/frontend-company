@@ -7,8 +7,7 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import routes from './routes'
 
-
-import 'normalize.css'
+import './assets/normalize.css'
 import './assets/fonts/OpenSans/stylesheet.css'
 import './assets/main.css'
 

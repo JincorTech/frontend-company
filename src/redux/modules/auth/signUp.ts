@@ -53,6 +53,8 @@ export const INVITE_EMPLOYEE  = 'auth/signUp/EMPLOYEE'
 export const RESET_STATE      = 'auth/signUp/RESET_STATE'
 export const FETCH_DICT       = 'jincor/auth/signUp/FETCH_DICT'
 
+export const SIGNUP_EMAIL = 'auth/signUp/SIGNUP_EMAIL'
+
 /**
  * Actions creators
  */
@@ -64,6 +66,8 @@ export const confirmEmail   = createSubmitAction<ConfirmFields, void>(CONFIRM_EM
 export const accountCreated = createAction<void>(ACCOUNT_CREATED)
 export const inviteEmployee = createAsyncAction<void, void>(INVITE_EMPLOYEE)
 export const resetState     = createAction<void>(RESET_STATE)
+
+export const signupEmail = createAsyncAction<ConfirmFields, void>(SIGNUP_EMAIL)
 
 
 /**
