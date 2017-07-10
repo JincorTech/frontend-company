@@ -1,4 +1,4 @@
-  {
+{
   "name": "jincor-frontend",
   "version": "0.2.0",
   "description": "Jincor react SPA",
@@ -26,6 +26,7 @@
     "babel-runtime": "6.23.0",
     "classnames": "^2.2.5",
     "date-fns": "1.28.4",
+    "favicons-webpack-plugin": "0.0.7",
     "i18next": "7.1.0",
     "jwt-decode": "2.1.0",
     "prop-types": "15.5.8",
@@ -51,6 +52,7 @@
     "reselect": "2.5.4",
     "seamless-immutable": "7.1.1",
     "shallowequal": "0.2.2",
+    "stylelint-config-css-modules": "1.0.0",
     "whatwg-fetch": "2.0.2"
   },
   "devDependencies": {

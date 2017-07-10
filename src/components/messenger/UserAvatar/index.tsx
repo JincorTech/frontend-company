@@ -15,7 +15,7 @@ export type Props = HTMLProps<HTMLDivElement> & {
 
 /**
  * Component
- * @param props 
+ * @param props
  */
 const UserAvatar: SFC<Props> = (props) => {
   const { src, fullName, id, ...divProps } = props

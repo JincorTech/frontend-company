@@ -11,6 +11,7 @@ import SignIn from './containers/auth/SignIn'
 import RestorePassword from './containers/auth/RestorePassword'
 import RegisterEmployee from './containers/auth/RegisterEmployee'
 import VerifyEmployeeToken from './components/auth/VerifyEmployeeToken'
+import InviteEmployees from './containers/auth/InviteEmployees'
 
 import AppLayout from './containers/app/AppLayout'
 import ProfileEdit from './containers/profile/ProfileEdit'
@@ -25,7 +26,8 @@ export const routes = {
   signIn: '/cmp/auth/signin',
   signUp: '/cmp/auth/signup',
   restorePassword: '/cmp/auth/password',
-  inviteEmployees: '/cmp/auth/invite',
+  employeeSignUp: '/cmp/auth/invite',
+  inviteEmployees: 'cmp/auth/verify',
   profile: '/cmp/app/profile',
   profileEdit: '/cmp/app/profile/edit',
   employees: '/cmp/app/employees',
@@ -57,6 +59,7 @@ export default (
       <Route path="signin" component={SignIn}/>
       <Route path="password" component={RestorePassword}/>
       <Route path="invite" component={VerifyEmployeeToken(RegisterEmployee)}/>
+      <Route path="verify" component={InviteEmployees}/>
     </Route>
 
     <Route path="app" component={UserIsAuthenticated(AppLayout)}>

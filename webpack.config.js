@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 // Plugins
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 // Postcss
 var postcssNext = require('postcss-cssnext')
@@ -30,7 +31,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
-    new webpack.DefinePlugin({ 
+    new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development'),
         API_PREFIX: JSON.stringify(process.env.API_PREFIX || ''),
@@ -40,7 +41,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
-      template: 'src/assets/index.html',
+      template: 'src/index.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true
@@ -49,7 +50,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       { from: 'src/locales', to: 'locales'}
-    ])
+    ]),
+    new FaviconsWebpackPlugin('./src/assets/favicon.png')
   ],
   module: {
     preLoaders: [
