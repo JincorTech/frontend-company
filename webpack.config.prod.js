@@ -26,7 +26,7 @@ module.exports = {
   output: {
     path: path.resolve('./dist'),
     publicPath: '/cmp/',
-    filename: '[name].[chunkhash].js'
+    filename: '[name  ].[chunkhash].js'
   },
   plugins: [
     new WebpackMd5Hash(),
