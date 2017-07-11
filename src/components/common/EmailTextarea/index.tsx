@@ -134,7 +134,7 @@ class EmailTextarea extends Component<TextAreaProps, TextAreaState> {
       : []
   }
 
-  //helpers
+  // helpers
   private isValidEmail(str: string): boolean {
     return this.validEmails.test(str)
   }
@@ -143,7 +143,7 @@ class EmailTextarea extends Component<TextAreaProps, TextAreaState> {
     return str.match(this.email)
   }
 
-  //render
+  // render
   public render(): JSX.Element {
     const { placeholder, emails } = this.props
     const { value, inputWidth } = this.state

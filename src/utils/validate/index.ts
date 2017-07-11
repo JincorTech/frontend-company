@@ -19,7 +19,7 @@ export type ValidatorMap = {
 
 /**
  * Create redux-form Sync validate function
- * @param validators 
+ * @param validators
  */
 export default function createValidation(validators: ValidatorMap) {
   return function validate(values: any, props: any): any {

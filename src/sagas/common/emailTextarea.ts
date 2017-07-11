@@ -19,7 +19,7 @@ import { canGetEmails, getEmails, isEmail } from '../../helpers/common/emailText
 const getState = (state) => state.common.emailTextarea
 
 /**
- * Take email from string or change value 
+ * Take email from string or change value
  */
 function* validateEmailIterator({ payload }: Action<string>): SagaIterator {
   const { valid, emails } = yield select(getState)

@@ -16,6 +16,7 @@ import signUp from './modules/auth/signUp'
 import signIn from './modules/auth/signIn'
 import restorePassword from './modules/auth/restorePassword'
 import registerEmployee from './modules/auth/registerEmployee'
+import inviteEmployees from './modules/auth/inviteEmployees'
 
 import profileView from './modules/profile/profileView'
 import profileEdit from './modules/profile/profileEdit'
@@ -49,7 +50,8 @@ export default combineReducers({
     signIn,
     signUp,
     restorePassword,
-    registerEmployee
+    registerEmployee,
+    inviteEmployees
   }),
 
   profile: combineReducers({

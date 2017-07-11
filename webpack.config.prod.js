@@ -3,6 +3,7 @@ var webpack = require('webpack')
 // Plugins
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 var WebpackMd5Hash = require('webpack-md5-hash')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 // Postcss
@@ -64,7 +65,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       { from: 'src/locales', to: 'locales'}
-    ])
+    ]),
+    new FaviconsWebpackPlugin('./src/assets/favicon.png')
   ],
   module: {
     preLoaders: [

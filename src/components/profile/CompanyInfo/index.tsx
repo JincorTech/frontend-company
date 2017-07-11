@@ -5,6 +5,7 @@ import { routes } from '../../../routes'
 import { Link } from 'react-router'
 
 import { Company } from '../../../redux/modules/profile/profileView'
+import { AuthProps } from '../../../redux/modules/app/app'
 
 import CompanyLogo from '../../../components/profile/CompanyLogo'
 import InfoItem from '../../../components/profile/InfoItem'
@@ -15,11 +16,12 @@ import Text from '../../../components/profile/Text'
 
 export type Props = {
   company: Company
+  auth: AuthProps
   openCompanyCard: (company: Company) => void
 }
 
 const CompanyInfo: SFC<Props> = (props) => {
-  const { company, openCompanyCard } = props
+  const { company, auth, openCompanyCard } = props
   const { legalName, employeesCount, profile, economicalActivityTypes, companyType } = company
   const { picture, links, email, phone, address, description } = profile
 
@@ -76,7 +78,7 @@ const CompanyInfo: SFC<Props> = (props) => {
       </div>
 
       <div styleName="controls-block">
-        <Link to={routes.profileEdit} styleName="edit-button">Редактировать</Link>
+        {auth.admin && <Link to={routes.profileEdit} styleName="edit-button">Редактировать</Link>}
 
         <a
           onClick={() => openCompanyCard(company)}
