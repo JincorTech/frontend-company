@@ -42,7 +42,7 @@ module.exports = {
     }),
     new ExtractTextPlugin('[name].[contenthash].css', { allChunks: true }),
     new HtmlWebpackPlugin({
-      template: 'src/assets/index.html',
+      template: 'src/index.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
