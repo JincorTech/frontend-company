@@ -3,7 +3,6 @@
 
 .input {
   position: relative;
-  font-size: 16px/22px;
   text-align: left;
   size: 100% 45px;
   border-radius: 4px;
@@ -25,7 +24,7 @@
 }
 
 .placeholder-invalid {
-  color: #D0011B;
+  color: #d0011b;
 }
 
 .placeholder-default {

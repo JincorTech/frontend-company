@@ -25,11 +25,11 @@
   }
 
   &:hover {
-    background-color: color(#0070e0 shade(10%))
+    background-color: color(#0070e0 shade(10%));
   }
 
   &:active {
-    background-color: color(#0070e0 shade(20%))
+    background-color: color(#0070e0 shade(20%));
   }
 }
 

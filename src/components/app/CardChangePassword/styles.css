@@ -42,5 +42,5 @@
   padding: 15px 30px 30px;
   size: 100%;
   position: absolute 0 * * 0;
-  transition: .2s linear opacity;
+  transition: 0.2s linear opacity;
 }

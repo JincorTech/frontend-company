@@ -1,13 +1,19 @@
 @use postcss-inline-svg;
 @use postcss-short;
 
+.email-slide {
+  position: relative;
+  top: 0;
+  transition: 0.1s linear top;
+}
+
 .employee {
   position: relative;
   margin: 5px 0;
   padding: 5px 10px 5px 5px;
   border-radius: 4px;
   cursor: pointer;
-  transition: .1s linear background-color;
+  transition: 0.1s linear background-color;
 
   &:hover {
     background-color: #f8f8f8;
@@ -33,7 +39,9 @@
 
 .avatar-empty {
   composes: avatar;
+  /* stylelint-disable font-family-name-quotes */
   font: semibold 20px/50px 'Open Sans';
+  /* stylelint-enable */
   text-align: center;
   color: #fff;
 }
@@ -64,10 +72,4 @@
   height: 23px;
   white-space: nowrap;
   overflow: hidden;
-}
-
-.email-slide {
-  position: relative;
-  top: 0;
-  transition: .1s linear top;
 }

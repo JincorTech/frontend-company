@@ -4,8 +4,8 @@
   color: #222;
   padding: 5px * 6px;
   height: 32px;
-  border: 0px;
-  outline: 0px;
+  border: 0;
+  outline: 0;
   display: inline-block;
   margin-bottom: 4px;
 }
@@ -28,16 +28,16 @@
   cursor: text;
   border: solid 1px #dbdfe4;
   font: normal 19px/1 'SF UI Text';
-  background: #ffffff;
+  background: #fff;
   border-radius: 4px;
-  padding: 0px 2px 0px 8px;
+  padding: 0 2px 0 8px;
   margin-bottom: 15px;
   transition: border-color linear 0.2s;
 }
 
 .email-item {
   display: inline-block;
-  font: 400 19px/23px 'SF UI Text';
+  font: normal 19px/23px 'SF UI Text';
   color: #222;
   margin-right: 6px;
   margin-bottom: 4px;

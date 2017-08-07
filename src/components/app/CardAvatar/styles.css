@@ -6,28 +6,31 @@
 }
 
 .blackout {
-  &:before {
+  &::before {
     z-index: 1;
     content: '';
     position: absolute 0 * * 0;
     size: 100%;
     border-radius: 4px 4px 0 0;
-    background-image: linear-gradient(to bottom,
-    rgba(0, 0, 0, 0.4),
-    rgba(0, 0, 0, 0.15) 32%,
-    rgba(0, 0, 0, 0.15) 66%,
-    rgba(0, 0, 0, 0.4));
+    background-image:
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.15) 32%,
+        rgba(0, 0, 0, 0.15) 66%,
+        rgba(0, 0, 0, 0.4)
+      );
   }
 }
 
 .blackout-empty {
-  &:before {
+  &::before {
     z-index: 1;
     content: '';
     position: absolute 0 * * 0;
     size: 100%;
     border-radius: 4px 4px 0 0;
-    background-color: rgba(0, 0, 0, .2);
+    background-color: rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -45,14 +48,14 @@
   font: bold 150px/350px 'Open Sans';
   text-align: center;
   border-radius: 4px 4px 0 0;
-  color: rgba(255, 255, 255, .25);
+  color: rgba(255, 255, 255, 0.25);
   cursor: default;
   user-select: none;
 }
 
 .company {
   z-index: 1;
-  position: absolute 0px 0px * *;
+  position: absolute 0 0 * *;
   height: 48px;
   text-align: right;
   user-select: none;
@@ -70,7 +73,7 @@
   font-size: 18px/48px;
   margin: 0 15px 0 0;
   color: #fff;
-  letter-spacing: -.2px;
+  letter-spacing: -0.2px;
   white-space: nowrap;
   max-width: 250px;
   overflow: hidden;
@@ -103,7 +106,7 @@
   opacity: 1;
   user-select: none;
   cursor: default;
-  transition: .2s linear all;
+  transition: 0.2s linear all;
 }
 
 .info-hidden {
@@ -114,7 +117,7 @@
 .name {
   font: bold 30px/1.17 'Open Sans';
   color: #fff;
-  letter-spacing: -.2px;
+  letter-spacing: -0.2px;
   user-select: none;
   cursor: default;
   height: 35px;
@@ -126,10 +129,10 @@
 .position {
   font: normal 18px 'Open Sans';
   color: #fff;
-  letter-spacing: -.2px;
+  letter-spacing: -0.2px;
   user-select: none;
   cursor: default;
-  margin: 5px 0 0 0;
+  margin: 5px 0 0;
 }
 
 
@@ -140,17 +143,20 @@
 
   & .blackout,
   & .blackout-empty {
-    &:after {
+    &::after {
       z-index: 1;
       content: '';
       opacity: 0;
       position: absolute 0 * * 0;
       size: 100%;
       border-radius: 4px 4px 0 0;
-      background-image: linear-gradient(to bottom,
-      rgba(0, 0, 0, 0.3),
-      rgba(0, 0, 0, 0.3));
-      transition: .2s linear all;
+      background-image:
+        linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.3),
+          rgba(0, 0, 0, 0.3)
+        );
+      transition: 0.2s linear all;
     }
   }
 
@@ -159,9 +165,9 @@
       opacity: 0;
     }
 
-    & .blackout ,
+    & .blackout,
     & .blackout-empty {
-      &:after {
+      &::after {
         opacity: 1;
       }
     }

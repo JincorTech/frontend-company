@@ -5,7 +5,7 @@
   position: relative;
   font-size: 16px/22px;
   text-align: left;
-  background: #ffffff;
+  background: #fff;
   size: 100% 45px;
   border-radius: 4px;
   padding: 10px 40px 12px 12px;
@@ -23,11 +23,11 @@
 
 .input-invalid {
   composes: input;
-  border: solid 1px #D0011B;
+  border: solid 1px #d0011b;
 }
 
 .placeholder-invalid {
-  color: #D0011B;
+  color: #d0011b;
 }
 
 .placeholder-default {

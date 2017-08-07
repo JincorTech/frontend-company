@@ -4,11 +4,11 @@
 * Render select
 */
 .render-select {
-  position: relative
+  position: relative;
 }
 
 .error {
-  position: absolute 0px * * 100%;
+  position: absolute 0 * * 100%;
   width: 210px;
   padding-left: 15px;
 }
@@ -16,7 +16,7 @@
 /* Option */
 .option {
   font: normal 16px/22px 'Open Sans';
-  color: #222222;
+  color: #222;
   letter-spacing: -0.2px;
   padding: 0 30px;
   background: #fff;
@@ -33,7 +33,7 @@
 }
 
 
-/*Select */
+/* Select */
 .select {
   text-align: left;
 }
@@ -51,4 +51,6 @@
   padding: 0 30px;
 }
 
-.select-options {}
+.select-options {
+  /* TODO is it need here? */
+}
