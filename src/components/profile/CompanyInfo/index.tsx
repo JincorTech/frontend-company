@@ -1,32 +1,31 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { routes } from '../../../routes'
-import { Link } from 'react-router'
+import * as React from 'react';
+import { SFC } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { routes } from '../../../routes';
+import { Link } from 'react-router';
 
-import { Company } from '../../../redux/modules/profile/profileView'
-import { AuthProps } from '../../../redux/modules/app/app'
+import { Company } from '../../../redux/modules/profile/profileView';
+import { AuthProps } from '../../../redux/modules/app/app';
 
-import CompanyLogo from '../../../components/profile/CompanyLogo'
-import InfoItem from '../../../components/profile/InfoItem'
-import SocialLink, { LinkProps } from '../../../components/profile/SocialLink'
-import ContactItem from '../../../components/profile/ContactItem'
-import Text from '../../../components/profile/Text'
-
+import CompanyLogo from '../../../components/profile/CompanyLogo';
+import InfoItem from '../../../components/profile/InfoItem';
+import SocialLink, { LinkProps } from '../../../components/profile/SocialLink';
+import ContactItem from '../../../components/profile/ContactItem';
+import Text from '../../../components/profile/Text';
 
 export type Props = {
   company: Company
   auth: AuthProps
   openCompanyCard: (company: Company) => void
-}
+};
 
 const CompanyInfo: SFC<Props> = (props) => {
-  const { company, auth, openCompanyCard } = props
-  const { legalName, employeesCount, profile, economicalActivityTypes, companyType } = company
-  const { picture, links, email, phone, address, description } = profile
+  const { company, auth, openCompanyCard } = props;
+  const { legalName, employeesCount, profile, economicalActivityTypes, companyType } = company;
+  const { picture, links, email, phone, address, description } = profile;
 
-  const city = address.city ? address.city.name : ''
-  const country = address.country ? address.country.name : ''
+  const city = address.city ? address.city.name : '';
+  const country = address.country ? address.country.name : '';
 
   return (
     <div styleName="company-profile">
@@ -88,7 +87,7 @@ const CompanyInfo: SFC<Props> = (props) => {
         <Link to={routes.employees} styleName="company-link">Сотрудники ({employeesCount})</Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CSSModules(CompanyInfo, require('./styles.css'))
+export default CSSModules(CompanyInfo, require('./styles.css'));

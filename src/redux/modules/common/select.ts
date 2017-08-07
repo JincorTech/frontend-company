@@ -1,14 +1,14 @@
-import { createReducer, createAction, createMetaAction, Action, ActionMeta } from '../../../utils/actions'
-import { from, ImmutableObject } from 'seamless-immutable'
+import { createReducer, createAction, createMetaAction, Action, ActionMeta } from '../../../utils/actions';
+import { from, ImmutableObject } from 'seamless-immutable';
 
 /**
  * Types
  */
-export type State = StateMap & ImmutableObject<StateMap>
+export type State = StateMap & ImmutableObject<StateMap>;
 
 export type StateMap = {
   [selectName: string]: SelectState
-}
+};
 
 export type SelectState = {
   name: string
@@ -18,55 +18,54 @@ export type SelectState = {
   optionsMap: OptionMap
   hasFilter: boolean
   filterValue?: string
-}
+};
 
 export type OptionMap = {
   [value: string]: Option
-}
+};
 
 export type Option = {
   value: string
   name: string
-}
+};
 
 export type NormalizedOptions = {
   options: string[]
   optionsMap: OptionMap
-}
+};
 
 /**
  * Constants
  */
-export const REGISTER_SELECT  = 'common/Select/REGISTER_SELECT'
-export const REGISTER_FILTER  = 'common/Select/REGISTER_FILTER_SELECT'
-export const REMOVE_SELECT    = 'common/Select/REMOVE_SELECT'
-export const OPEN_SELECT      = 'common/Select/OPEN_SELECT'
-export const CLOSE_SELECT     = 'common/Select/CLOSE_SELECT'
-export const SET_OPTIONS      = 'common/Select/SET_OPTIONS'
-export const SET_NORMALIZED   = 'common/Select/SET_NORMALIZED_OPTIONS'
-export const SELECT_OPTION    = 'common/Select/SELECT_OPTION'
-export const SET_OPTION       = 'common/Select/SET_OPTION'
-export const CHANGE_FILTER    = 'common/Select/CHANGE_FILTER'
+export const REGISTER_SELECT  = 'common/Select/REGISTER_SELECT';
+export const REGISTER_FILTER  = 'common/Select/REGISTER_FILTER_SELECT';
+export const REMOVE_SELECT    = 'common/Select/REMOVE_SELECT';
+export const OPEN_SELECT      = 'common/Select/OPEN_SELECT';
+export const CLOSE_SELECT     = 'common/Select/CLOSE_SELECT';
+export const SET_OPTIONS      = 'common/Select/SET_OPTIONS';
+export const SET_NORMALIZED   = 'common/Select/SET_NORMALIZED_OPTIONS';
+export const SELECT_OPTION    = 'common/Select/SELECT_OPTION';
+export const SET_OPTION       = 'common/Select/SET_OPTION';
+export const CHANGE_FILTER    = 'common/Select/CHANGE_FILTER';
 
 /**
  * Action Creators
 */
-export const registerSelect = createAction<string>(REGISTER_SELECT)
-export const registerFilter = createAction<string>(REGISTER_FILTER)
-export const removeSelect   = createAction<string>(REMOVE_SELECT)
-export const setOptions     = createMetaAction<string, Option[]>(SET_OPTIONS)
-export const setNormalized  = createMetaAction<string, NormalizedOptions>(SET_NORMALIZED)
-export const openSelect     = createMetaAction<string, void>(OPEN_SELECT)
-export const closeSelect    = createMetaAction<string, void>(CLOSE_SELECT)
-export const selectOption   = createMetaAction<string, string>(SELECT_OPTION)
-export const setOption      = createMetaAction<string, string>(SET_OPTION)
-export const changeFilter   = createMetaAction<string, string>(CHANGE_FILTER)
+export const registerSelect = createAction<string>(REGISTER_SELECT);
+export const registerFilter = createAction<string>(REGISTER_FILTER);
+export const removeSelect   = createAction<string>(REMOVE_SELECT);
+export const setOptions     = createMetaAction<string, Option[]>(SET_OPTIONS);
+export const setNormalized  = createMetaAction<string, NormalizedOptions>(SET_NORMALIZED);
+export const openSelect     = createMetaAction<string, void>(OPEN_SELECT);
+export const closeSelect    = createMetaAction<string, void>(CLOSE_SELECT);
+export const selectOption   = createMetaAction<string, string>(SELECT_OPTION);
+export const setOption      = createMetaAction<string, string>(SET_OPTION);
+export const changeFilter   = createMetaAction<string, string>(CHANGE_FILTER);
 
 /**
  * Reducer
  */
-const initialState: State = from<StateMap>({})
-
+const initialState: State = from<StateMap>({});
 
 export default createReducer<State>({
   [REGISTER_SELECT]: (state: State, { payload }: Action<string>): State => (
@@ -129,4 +128,4 @@ export default createReducer<State>({
       [meta]: { filterValue: payload }
     }, { deep: true })
   )
-}, initialState)
+}, initialState);

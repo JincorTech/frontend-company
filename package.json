@@ -9,6 +9,7 @@
     "test": "karma start",
     "doc": "rm -rf tmp/typedoc && typedoc --options typedoc.json src/index.tsx",
     "tslint": "tslint -t stylish -p tsconfig.json 'src/**/*.+(ts|tsx)'",
+    "tslint:fix": "tslint -t stylish -p tsconfig.json 'src/**/*.+(ts|tsx)' --fix",
     "stylelint": "stylelint './src/**/*.css'"
   },
   "keywords": [

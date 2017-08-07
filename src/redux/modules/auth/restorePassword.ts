@@ -1,14 +1,14 @@
-import { createReducer, createAction, createSubmitAction, Action } from '../../../utils/actions'
-import { from, ImmutableObject } from 'seamless-immutable'
+import { createReducer, createAction, createSubmitAction, Action } from '../../../utils/actions';
+import { from, ImmutableObject } from 'seamless-immutable';
 
-import { FormFields as RestoreFields } from '../../../components/auth/RequestPasswordForm'
-import { FormFields as ConfirmFields } from '../../../components/auth/ConfirmPasswordForm'
-import { FormFields as NewPasswordFields } from '../../../components/auth/NewPasswordForm'
+import { FormFields as RestoreFields } from '../../../components/auth/RequestPasswordForm';
+import { FormFields as ConfirmFields } from '../../../components/auth/ConfirmPasswordForm';
+import { FormFields as NewPasswordFields } from '../../../components/auth/NewPasswordForm';
 
 /**
  * Types
  */
-export type State = StateMap & ImmutableObject<StateMap>
+export type State = StateMap & ImmutableObject<StateMap>;
 
 export type StateMap = {
   step: Step
@@ -16,7 +16,7 @@ export type StateMap = {
   verificationId: string
   companyId: string
   companies: Company[]
-}
+};
 
 export type Company = {
   id: string
@@ -42,27 +42,27 @@ export type Company = {
     phone: string
     picture: string
   }
-}
+};
 
-export type Step = 'email' | 'confirm' | 'companies' | 'new'
+export type Step = 'email' | 'confirm' | 'companies' | 'new';
 
 /**
  * Constants
  */
-export const RESTORE_PASSWORD = 'auth/restorePassword/RESTORE_PASSWORD'
-export const CONFIRM_EMAIL    = 'auth/restorePassword/CONFIRM_EMAIL'
-export const SELECT_COMPANY   = 'auth/restorePassword/SELECT_COMPANY'
-export const NEW_PASSWORD     = 'auth/restorePassword/SET_NEW_PASSWORD'
-export const RESET_STORE      = 'auth/restorePassword/RESET_STORE'
+export const RESTORE_PASSWORD = 'auth/restorePassword/RESTORE_PASSWORD';
+export const CONFIRM_EMAIL    = 'auth/restorePassword/CONFIRM_EMAIL';
+export const SELECT_COMPANY   = 'auth/restorePassword/SELECT_COMPANY';
+export const NEW_PASSWORD     = 'auth/restorePassword/SET_NEW_PASSWORD';
+export const RESET_STORE      = 'auth/restorePassword/RESET_STORE';
 
 /**
  * Action Creators
  */
-export const restorePassword  = createSubmitAction<RestoreFields, string>(RESTORE_PASSWORD)
-export const confirmEmail     = createSubmitAction<ConfirmFields, Company[]>(CONFIRM_EMAIL)
-export const selectCompany    = createAction<string>(SELECT_COMPANY)
-export const setNewPassword   = createSubmitAction<NewPasswordFields, void>(NEW_PASSWORD)
-export const resetState       = createAction<void>(RESET_STORE)
+export const restorePassword  = createSubmitAction<RestoreFields, string>(RESTORE_PASSWORD);
+export const confirmEmail     = createSubmitAction<ConfirmFields, Company[]>(CONFIRM_EMAIL);
+export const selectCompany    = createAction<string>(SELECT_COMPANY);
+export const setNewPassword   = createSubmitAction<NewPasswordFields, void>(NEW_PASSWORD);
+export const resetState       = createAction<void>(RESET_STORE);
 
 /**
  * Reducer
@@ -73,7 +73,7 @@ const initialState: State = from<StateMap>({
   companyId: '',
   verificationId: '',
   companies: []
-})
+});
 
 export default createReducer<State>({
   [restorePassword.REQUEST]: (state: State): State => (
@@ -124,4 +124,4 @@ export default createReducer<State>({
   [RESET_STORE]: (state: State): State => (
     state.merge(initialState)
   )
-}, initialState)
+}, initialState);

@@ -1,41 +1,40 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import { connect } from 'react-redux'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC, HTMLProps } from 'react';
+import { connect } from 'react-redux';
+import * as CSSModules from 'react-css-modules';
 
-import { closeCompanyCard } from '../../../redux/modules/common/companyCard'
-import { Company as CompanyProps } from '../../../redux/modules/profile/profileView'
+import { closeCompanyCard } from '../../../redux/modules/common/companyCard';
+import { Company as CompanyProps } from '../../../redux/modules/profile/profileView';
 
-import { LinkProps } from '../../../components/profile/SocialLink'
-import Popup from '../../../components/common/FullscreenPopup'
-import Button from '../../../components/common/Button'
-import Icon from '../../../components/common/Icon'
-import SocialLink from '../../../components/profile/SocialLink'
-import CompanyLogo from '../../../components/profile/CompanyLogo'
+import { LinkProps } from '../../../components/profile/SocialLink';
+import Popup from '../../../components/common/FullscreenPopup';
+import Button from '../../../components/common/Button';
+import Icon from '../../../components/common/Icon';
+import SocialLink from '../../../components/profile/SocialLink';
+import CompanyLogo from '../../../components/profile/CompanyLogo';
 
-import stringCut from '../../../helpers/common/stringCut'
+import stringCut from '../../../helpers/common/stringCut';
 
-
-export type Props = StateProps & DispatchProps
+export type Props = StateProps & DispatchProps;
 
 export type StateProps = {
   open: boolean
   company: CompanyProps
-}
+};
 
 export type DispatchProps = {
   closeCompanyCard: () => void
-}
+};
 
 /**
  * CompanyCard
  */
 const CompanyCard: SFC<Props> = props => {
-  const { open, company, closeCompanyCard } = props
-  const { legalName, profile, economicalActivityTypes, companyType } = company
-  const { picture, links, email, phone, address, description } = profile
-  const city = address.city ? address.city.name : ''
-  const country = address.country ? address.country.name : ''
+  const { open, company, closeCompanyCard } = props;
+  const { legalName, profile, economicalActivityTypes, companyType } = company;
+  const { picture, links, email, phone, address, description } = profile;
+  const city = address.city ? address.city.name : '';
+  const country = address.country ? address.country.name : '';
 
   return (
     <Popup
@@ -93,12 +92,12 @@ const CompanyCard: SFC<Props> = props => {
         </div>
       </div>
     </Popup>
-  )
-}
+  );
+};
 
-const StyledComponent = CSSModules(CompanyCard, require('./styles.css'))
+const StyledComponent = CSSModules(CompanyCard, require('./styles.css'));
 
 export default connect<StateProps, DispatchProps, {}>(
   (state) => state.common.companyCard,
   { closeCompanyCard }
-)(StyledComponent)
+)(StyledComponent);

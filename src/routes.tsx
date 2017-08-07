@@ -48,7 +48,7 @@ const UserIsAdmin = UserAuthWrapper({
   redirectAction: push,
   failureRedirectPath: routes.base,
   allowRedirectBack: false
-})
+});
 
 export default (
   <Route path="/cmp" component={App}>

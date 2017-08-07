@@ -1,8 +1,8 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
 
-import Icon from '../../common/Icon'
+import Icon from '../../common/Icon';
 
 /**
  * Type
@@ -12,13 +12,13 @@ export type Props = HTMLProps<HTMLDivElement> & {
   content: string
   favorite: boolean
   unread: boolean
-}
+};
 
 /**
  * Component
  */
 const Message: SFC<Props> = (props) => {
-  const { date, content, favorite, unread } = props
+  const { date, content, favorite, unread } = props;
 
   return (
     <div styleName="message">
@@ -30,7 +30,7 @@ const Message: SFC<Props> = (props) => {
         ? <Icon styleName="favorite" name="favorite-active"/>
         : <Icon styleName="favorite" name="favorite"/>}
     </div>
-  )
-}
+  );
+};
 
-export default CSSModules(Message, require('./styles.css'))
+export default CSSModules(Message, require('./styles.css'));

@@ -1,31 +1,31 @@
-import * as React from 'react'
-import { Component } from 'react'
-import { connect } from 'react-redux'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { Component } from 'react';
+import { connect } from 'react-redux';
+import * as CSSModules from 'react-css-modules';
 
-import { StateMap as StateProps, BottomView as BottomViewProps } from '../../../redux/modules/app/profileCard'
-import { User as UserProps } from '../../../redux/modules/app/appLayout'
-import { Props as PopupProps } from '../../../components/common/Popup'
+import { StateMap as StateProps, BottomView as BottomViewProps } from '../../../redux/modules/app/profileCard';
+import { User as UserProps } from '../../../redux/modules/app/appLayout';
+import { Props as PopupProps } from '../../../components/common/Popup';
 
-import { closeProfileCard, changeView, fetchProfile, changePassword, updateProfile, logout } from '../../../redux/modules/app/profileCard'
+import { closeProfileCard, changeView, fetchProfile, changePassword, updateProfile, logout } from '../../../redux/modules/app/profileCard';
 
-import Popup from '../../../components/common/Popup'
-import Icon from '../../../components/common/Icon'
-import CompanyLogo from '../../../components/profile/CompanyLogo'
-import CardAvatar from '../../../components/app/CardAvatar'
-import CardButtonsView from '../../../components/app/CardButtonsView'
-import CardChangePassword from '../../../components/app/CardChangePassword'
-import CardUpdateProfile from '../../../components/app/CardUpdateProfile'
+import Popup from '../../../components/common/Popup';
+import Icon from '../../../components/common/Icon';
+import CompanyLogo from '../../../components/profile/CompanyLogo';
+import CardAvatar from '../../../components/app/CardAvatar';
+import CardButtonsView from '../../../components/app/CardButtonsView';
+import CardChangePassword from '../../../components/app/CardChangePassword';
+import CardUpdateProfile from '../../../components/app/CardUpdateProfile';
 
 /**
  * Types
  */
 
-export type Props = StateProps & ComponentProps & DispatchProps
+export type Props = StateProps & ComponentProps & DispatchProps;
 
 export type ComponentProps = {
   user: UserProps
-}
+};
 
 export type DispatchProps = {
   openProfileCard: () => void
@@ -34,7 +34,7 @@ export type DispatchProps = {
   logout: () => void
   updateProfile: () => void
   fetchProfile: () => void
-}
+};
 
 /**
  * Component
@@ -42,15 +42,15 @@ export type DispatchProps = {
 
 class ProfileCard extends Component<Props, {}> {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.fetchProfile = this.fetchProfile.bind(this)
+    this.fetchProfile = this.fetchProfile.bind(this);
   }
 
   private fetchProfile(): void {
-    const { fetchProfile } = this.props
+    const { fetchProfile } = this.props;
 
-    fetchProfile()
+    fetchProfile();
   }
 
   public render(): JSX.Element {
@@ -63,13 +63,13 @@ class ProfileCard extends Component<Props, {}> {
       closeProfileCard,
       changeView,
       logout
-    } = this.props
+    } = this.props;
 
     const {
       id,
       profile,
       company
-    } = user
+    } = user;
 
     const {
       avatar,
@@ -77,12 +77,12 @@ class ProfileCard extends Component<Props, {}> {
       name,
       firstName,
       lastName
-    } = profile
+    } = profile;
 
     const {
       legalName,
       profile: { picture }
-    } = company
+    } = company;
 
     const renderBottom = () => {
       switch (bottomView) {
@@ -91,7 +91,7 @@ class ProfileCard extends Component<Props, {}> {
             <CardButtonsView
               changeView={changeView}
               logout={logout}/>
-          )
+          );
         case 'profile-form':
           return (
             <CardUpdateProfile
@@ -100,16 +100,16 @@ class ProfileCard extends Component<Props, {}> {
               onMount={this.fetchProfile}
               onSubmit={updateProfile}
               onCancel={() => changeView('buttons')}/>
-          )
+          );
         case 'password-form':
           return (
             <CardChangePassword
               spinner={spinner}
               onSubmit={changePassword}
               onCancel={() => changeView('buttons')}/>
-          )
+          );
       }
-    }
+    };
 
     return (
       <Popup
@@ -136,7 +136,7 @@ class ProfileCard extends Component<Props, {}> {
           </div>
 
       </Popup>
-    )
+    );
   }
 }
 
@@ -144,7 +144,7 @@ class ProfileCard extends Component<Props, {}> {
  * Export
  */
 
-const StyledComponent = CSSModules(ProfileCard, require('./styles.css'))
+const StyledComponent = CSSModules(ProfileCard, require('./styles.css'));
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => state.app.profileCard,
@@ -156,4 +156,4 @@ export default connect<StateProps, DispatchProps, ComponentProps>(
     updateProfile,
     fetchProfile
   }
-)(StyledComponent)
+)(StyledComponent);

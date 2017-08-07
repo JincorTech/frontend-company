@@ -1,9 +1,8 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC } from 'react';
+import * as CSSModules from 'react-css-modules';
 
-import InfoItem from '../InfoItem'
-
+import InfoItem from '../InfoItem';
 
 const CompanyInfoPreloader: SFC<{}> = () => (
   <div styleName="company-profile-preloader">
@@ -63,6 +62,6 @@ const CompanyInfoPreloader: SFC<{}> = () => (
       </div>
     </div>
   </div>
-)
+);
 
-export default CSSModules(CompanyInfoPreloader, require('./styles.css'))
+export default CSSModules(CompanyInfoPreloader, require('./styles.css'));

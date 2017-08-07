@@ -1,46 +1,46 @@
-import * as React from 'react'
-import { Component } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { reduxForm, FormProps, Field, SubmitHandler } from 'redux-form'
-import { connect } from 'react-redux'
+import * as React from 'react';
+import { Component } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { reduxForm, FormProps, Field, SubmitHandler } from 'redux-form';
+import { connect } from 'react-redux';
 
-import { fetchDict } from '../../../redux/modules/auth/signUp'
-import { ActionCreator } from '../../../utils/actions'
-import { required, minLength, maxLength } from '../../../utils/validators'
+import { fetchDict } from '../../../redux/modules/auth/signUp';
+import { ActionCreator } from '../../../utils/actions';
+import { required, minLength, maxLength } from '../../../utils/validators';
 
-import Form from '../../../components/form/Form'
-import Button from '../../../components/common/Button'
-import RenderInput from '../../../components/form/RenderInput'
-import RenderSelect from '../../../components/form/RenderSelect'
+import Form from '../../../components/form/Form';
+import Button from '../../../components/common/Button';
+import RenderInput from '../../../components/form/RenderInput';
+import RenderSelect from '../../../components/form/RenderSelect';
 
 /**
  * Types
  */
-export type Props = ReduxFormProps & DispatchProps
+export type Props = ReduxFormProps & DispatchProps;
 
 export type DispatchProps = {
   fetchCountriesAndTypes: ActionCreator<void>
-}
+};
 
-export type ReduxFormProps = ComponentProps & FormProps<FormFields, ComponentProps, any>
+export type ReduxFormProps = ComponentProps & FormProps<FormFields, ComponentProps, any>;
 
 export type ComponentProps = {
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
   spinner: boolean
-}
+};
 
 export type FormFields = {
   countryId: string
   companyType: string
   legalName: string
-}
+};
 
 /**
  * Component
  */
 class CreateCompanyForm extends Component<Props, {}> {
   public componentDidMount(): void {
-    this.props.fetchCountriesAndTypes()
+    this.props.fetchCountriesAndTypes();
   }
 
   public render(): JSX.Element {
@@ -49,7 +49,7 @@ class CreateCompanyForm extends Component<Props, {}> {
       handleSubmit,
       invalid,
       error
-    } = this.props
+    } = this.props;
 
     return (
       <Form
@@ -86,14 +86,14 @@ class CreateCompanyForm extends Component<Props, {}> {
 
         <Button type="submit" spinner={spinner} disabled={invalid}>Добавить</Button>
       </Form>
-    )
+    );
   }
 }
 
 /**
  * Decorators
  */
-const StyledComponent = CSSModules(CreateCompanyForm, require('./styles.css'))
+const StyledComponent = CSSModules(CreateCompanyForm, require('./styles.css'));
 
 const FormComponent = reduxForm<FormFields, ComponentProps>({
   form: 'company',
@@ -102,9 +102,9 @@ const FormComponent = reduxForm<FormFields, ComponentProps>({
     companyType: '',
     legalName: ''
   }
-})(StyledComponent)
+})(StyledComponent);
 
 export default connect<{}, DispatchProps, ReduxFormProps>(
   () => ({}),
   { fetchCountriesAndTypes: fetchDict }
-)(FormComponent)
+)(FormComponent);

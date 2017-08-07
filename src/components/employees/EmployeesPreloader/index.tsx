@@ -1,7 +1,6 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import * as CSSModules from 'react-css-modules'
-
+import * as React from 'react';
+import { SFC } from 'react';
+import * as CSSModules from 'react-css-modules';
 
 const EmployeesPreloader: SFC<{}> = () => (
   <div styleName="container">
@@ -37,6 +36,6 @@ const EmployeesPreloader: SFC<{}> = () => (
       </div>
     </div>
   </div>
-)
+);
 
-export default CSSModules(EmployeesPreloader, require('./styles.css'))
+export default CSSModules(EmployeesPreloader, require('./styles.css'));

@@ -1,27 +1,26 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { format } from 'date-fns'
-import { getBackgroundColor, getInitials } from '../../../utils/colorFunction'
+import * as React from 'react';
+import { SFC } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { format } from 'date-fns';
+import { getBackgroundColor, getInitials } from '../../../utils/colorFunction';
 
-import { Self as SelfProps } from '../../../redux/modules/employees/employees'
+import { Self as SelfProps } from '../../../redux/modules/employees/employees';
 
-
-export type Props = ComponentProps & DispatchProps
+export type Props = ComponentProps & DispatchProps;
 
 export type ComponentProps = {
   employee: SelfProps
-}
+};
 
 export type DispatchProps = {
   onOpenProfile: () => void
-}
+};
 
 const Self: SFC<Props> = (props) => {
-  const { employee, onOpenProfile } = props
-  const { id, profile, contacts, meta } = employee
-  const backgroundColor = getBackgroundColor(id)
-  const initials = getInitials(profile.name)
+  const { employee, onOpenProfile } = props;
+  const { id, profile, contacts, meta } = employee;
+  const backgroundColor = getBackgroundColor(id);
+  const initials = getInitials(profile.name);
 
   return (
     <div styleName="employee" onClick={() => onOpenProfile()}>
@@ -41,7 +40,7 @@ const Self: SFC<Props> = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CSSModules(Self, require('./styles.css'))
+export default CSSModules(Self, require('./styles.css'));

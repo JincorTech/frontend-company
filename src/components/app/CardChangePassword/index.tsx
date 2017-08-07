@@ -1,29 +1,29 @@
-import * as React from 'react'
-import { Component } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
+import * as React from 'react';
+import { Component } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form';
 
-import { required, password } from '../../../utils/validators'
+import { required, password } from '../../../utils/validators';
 
-import Button from '../../common/Button'
-import RenderPassword from '../../form/RenderPassword'
+import Button from '../../common/Button';
+import RenderPassword from '../../form/RenderPassword';
 
 /**
  * Types
  */
 
-export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>
+export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>;
 
 export type ComponentProps = {
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
   onCancel: () => void
   spinner: boolean
-}
+};
 
 export type FormFields = {
   oldPassword: string,
   password: string
-}
+};
 
 /**
  * Component
@@ -31,7 +31,7 @@ export type FormFields = {
 
 class CardChangePassword extends Component<Props, {}> {
   public render(): JSX.Element {
-    const { invalid, handleSubmit, onCancel, spinner } = this.props
+    const { invalid, handleSubmit, onCancel, spinner } = this.props;
 
     return (
       <div styleName="change-password">
@@ -67,7 +67,7 @@ class CardChangePassword extends Component<Props, {}> {
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
 
@@ -75,7 +75,7 @@ class CardChangePassword extends Component<Props, {}> {
  * Export
  */
 
-const StyledComponent = CSSModules(CardChangePassword, require('./styles.css'))
+const StyledComponent = CSSModules(CardChangePassword, require('./styles.css'));
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'cardChangePassword',
@@ -83,4 +83,4 @@ export default reduxForm<FormFields, ComponentProps>({
     oldPassword: '',
     password: ''
   }
-})(StyledComponent)
+})(StyledComponent);

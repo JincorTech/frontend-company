@@ -1,9 +1,9 @@
-import * as React from 'react'
-import { Component, cloneElement } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import Scrollbars from 'react-custom-scrollbars'
+import * as React from 'react';
+import { Component, cloneElement } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Scrollbars from 'react-custom-scrollbars';
 
 import {
   registerSelect,
@@ -14,7 +14,7 @@ import {
   selectValue,
   openNode,
   closeNode
-} from '../../../redux/modules/common/activityTypes'
+} from '../../../redux/modules/common/activityTypes';
 
 import {
   ActivityMap,
@@ -22,16 +22,16 @@ import {
   ActivityLeaf,
   ActivityNode,
   selectInitialState
-} from '../../../redux/modules/common/activityTypes'
+} from '../../../redux/modules/common/activityTypes';
 
-import Icon from '../../../components/common/Icon'
-import Popup from '../../../components/common/Popup'
-import SelectInput from '../../../components/common/SelectInput'
+import Icon from '../../../components/common/Icon';
+import Popup from '../../../components/common/Popup';
+import SelectInput from '../../../components/common/SelectInput';
 
 /**
  * Types
  */
-export type Props = ComponentProps & DispatchProps & StateProps
+export type Props = ComponentProps & DispatchProps & StateProps;
 
 export type ComponentProps = {
   name: string
@@ -42,7 +42,7 @@ export type ComponentProps = {
   invalid?: string
   defaultOption?: string
   onActivitySelect: (activityId: string) => void
-}
+};
 
 export type DispatchProps = {
   actions: {
@@ -55,67 +55,67 @@ export type DispatchProps = {
     openNode: (activityId: string) => void
     closeNode: (activityIs: string) => void
   }
-}
+};
 
 export type StateProps = {
   rootNodes: string[]
   activityMap: ActivityMap
   select: SelectState
-}
+};
 
 /**
  * Component
  */
 class ActivityTypes extends Component<Props, {}> {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.renderActivityType = this.renderActivityType.bind(this)
-    this.renderActivityLeaf = this.renderActivityLeaf.bind(this)
-    this.renderActivityNode = this.renderActivityNode.bind(this)
-    this.renderDefaultLeaf  = this.renderDefaultLeaf.bind(this)
+    this.renderActivityType = this.renderActivityType.bind(this);
+    this.renderActivityLeaf = this.renderActivityLeaf.bind(this);
+    this.renderActivityNode = this.renderActivityNode.bind(this);
+    this.renderDefaultLeaf  = this.renderDefaultLeaf.bind(this);
   }
 
   public componentWillMount(): void {
-    const { name, activityValue, actions } = this.props
+    const { name, activityValue, actions } = this.props;
 
     if (name) {
-      actions.registerSelect(name)
+      actions.registerSelect(name);
     } else {
-      throw new Error('name required')
+      throw new Error('name required');
     }
 
     if (activityValue) {
-      actions.selectValue(activityValue)
+      actions.selectValue(activityValue);
     }
   }
 
   public componentWillUnmount(): void {
-    const { name, actions } = this.props
+    const { name, actions } = this.props;
 
-    actions.unregisterSelect(name)
+    actions.unregisterSelect(name);
   }
 
   public componentWillReceiveProps({ activityValue: nextActivityValue }: Props): void {
-    const { activityValue, actions } = this.props
+    const { activityValue, actions } = this.props;
 
     if (nextActivityValue !== activityValue) {
-      actions.selectValue(nextActivityValue)
+      actions.selectValue(nextActivityValue);
     }
   }
 
   private renderActivityType(activityId: string): JSX.Element {
-    const { activityMap } = this.props
-    const activity = activityMap[activityId]
+    const { activityMap } = this.props;
+    const activity = activityMap[activityId];
 
     return activity.type === 'node'
       ? this.renderActivityNode(activity)
-      : this.renderActivityLeaf(activity)
+      : this.renderActivityLeaf(activity);
   }
 
   private renderActivityNode(activity: ActivityNode): JSX.Element {
-    const { id, name, visible, childrenIds, open } = activity
-    const { activityMap, actions: { openNode, closeNode }} = this.props
+    const { id, name, visible, childrenIds, open } = activity;
+    const { activityMap, actions: { openNode, closeNode }} = this.props;
 
     return visible && <div key={id} styleName="activity-node">
       <div
@@ -131,22 +131,22 @@ class ActivityTypes extends Component<Props, {}> {
       {open && <div styleName="children">
         {childrenIds.map((activityId) => this.renderActivityType(activityId))}
       </div>}
-    </div>
+    </div>;
   }
 
   private renderActivityLeaf(activity: ActivityLeaf): JSX.Element {
-    const { id, name, visible } = activity
-    const { actions: { selectValue }, onActivitySelect } = this.props
+    const { id, name, visible } = activity;
+    const { actions: { selectValue }, onActivitySelect } = this.props;
 
     return visible && <div
       key={id}
       styleName="activity-leaf"
       onClick={() => {
-        selectValue(id)
-        onActivitySelect(id)
+        selectValue(id);
+        onActivitySelect(id);
       }}>
       <div styleName="activity-name">{name}</div>
-    </div>
+    </div>;
   }
 
   private renderDefaultLeaf(): JSX.Element {
@@ -154,18 +154,18 @@ class ActivityTypes extends Component<Props, {}> {
       defaultOption,
       actions: { selectValue },
       onActivitySelect
-    } = this.props
+    } = this.props;
 
     return (
       <div
         styleName="activity-leaf"
         onClick={() => {
-          selectValue('')
-          onActivitySelect('')
+          selectValue('');
+          onActivitySelect('');
         }}>
         <div styleName="activity-name">{defaultOption}</div>
       </div>
-    )
+    );
   }
 
   public render(): JSX.Element {
@@ -179,21 +179,21 @@ class ActivityTypes extends Component<Props, {}> {
       placeholder,
       rootNodes,
       defaultOption
-    } = this.props
-    const { openSelect, closeSelect } = actions
-    const { open, selectedActivity } = select
-    const activity = activityMap[selectedActivity]
-    const nameValue = activity ? activity.name : ''
+    } = this.props;
+    const { openSelect, closeSelect } = actions;
+    const { open, selectedActivity } = select;
+    const activity = activityMap[selectedActivity];
+    const nameValue = activity ? activity.name : '';
 
     return (
       <div>
         {
           button
             ? cloneElement(button, {
-                value: nameValue,
-                placeholder,
-                onClick: openSelect
-              })
+              value: nameValue,
+              placeholder,
+              onClick: openSelect
+            })
             : <SelectInput
                 value={nameValue}
                 placeholder={placeholder}
@@ -216,19 +216,18 @@ class ActivityTypes extends Component<Props, {}> {
           </Scrollbars>
         </Popup>
       </div>
-    )
+    );
   }
 }
 
-
-const StyledComponent = CSSModules(ActivityTypes, require('./styles.css'))
+const StyledComponent = CSSModules(ActivityTypes, require('./styles.css'));
 
 const mapStateToProps = (state, { name }: Props): StateProps => {
-  const { activityMap, selectMap, rootNodes } = state.common.activityTypes
-  const select = selectMap[name] || selectInitialState
+  const { activityMap, selectMap, rootNodes } = state.common.activityTypes;
+  const select = selectMap[name] || selectInitialState;
 
-  return { activityMap, select, rootNodes }
-}
+  return { activityMap, select, rootNodes };
+};
 
 const mapDispatchToProps = (dispatch, { name }: Props): DispatchProps => ({
   actions: bindActionCreators({
@@ -241,9 +240,9 @@ const mapDispatchToProps = (dispatch, { name }: Props): DispatchProps => ({
     openNode,
     closeNode
   }, dispatch)
-})
+});
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   mapStateToProps,
   mapDispatchToProps
-)(StyledComponent)
+)(StyledComponent);

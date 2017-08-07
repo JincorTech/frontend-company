@@ -1,10 +1,10 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
 
-import UserAvatar from './components/UserAvatar'
-import Message, { Props as MessageProps } from '../Message'
-import Icon from '../../common/Icon'
+import UserAvatar from './components/UserAvatar';
+import Message, { Props as MessageProps } from '../Message';
+import Icon from '../../common/Icon';
 
 export type Props = HTMLProps<HTMLDivElement> & {
   id: string
@@ -12,7 +12,7 @@ export type Props = HTMLProps<HTMLDivElement> & {
   fullName: string
   company: string
   messages: MessageProps[]
-}
+};
 
 const MessageWrapper: SFC<Props> = (props) => {
   const {
@@ -22,10 +22,10 @@ const MessageWrapper: SFC<Props> = (props) => {
     company,
     messages,
     ...divProps
-  } = props
+  } = props;
 
-  const [firstMsg, ...msgs] = messages
-  const { date, unread, favorite, content } = firstMsg
+  const [firstMsg, ...msgs] = messages;
+  const { date, unread, favorite, content } = firstMsg;
 
   return (
     <div styleName="messages-wrapper">
@@ -55,7 +55,7 @@ const MessageWrapper: SFC<Props> = (props) => {
         <Message key={i} {...msg}/>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default CSSModules(MessageWrapper, require('./styles.css'))
+export default CSSModules(MessageWrapper, require('./styles.css'));

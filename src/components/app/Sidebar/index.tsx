@@ -1,11 +1,11 @@
-import * as React from 'react'
-import { PureComponent, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { InjectedCSSModuleProps } from 'react-css-modules'
+import * as React from 'react';
+import { PureComponent, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { InjectedCSSModuleProps } from 'react-css-modules';
 
-import { Link } from 'react-router'
-import { routes } from '../../../routes'
-import Icon from '../../common/Icon'
+import { Link } from 'react-router';
+import { routes } from '../../../routes';
+import Icon from '../../common/Icon';
 
 /**
  * Types
@@ -13,41 +13,41 @@ import Icon from '../../common/Icon'
 export type Props = HTMLProps<HTMLDivElement> & InjectedCSSModuleProps & {
   open?: boolean
   onClose: () => void
-}
+};
 
 /**
  * Component
  */
 class Sidebar extends PureComponent<Props, {}> {
-  private aside: HTMLElement
+  private aside: HTMLElement;
 
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.handleOutsideClick = this.handleOutsideClick.bind(this)
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
   public componentWillReceiveProps(nextProps: Props): void {
-    const { open } = this.props
+    const { open } = this.props;
 
     if (!open && nextProps.open) {
-      document.addEventListener('click', this.handleOutsideClick)
+      document.addEventListener('click', this.handleOutsideClick);
     }
 
     if (open && !nextProps.open) {
-      document.removeEventListener('click', this.handleOutsideClick)
+      document.removeEventListener('click', this.handleOutsideClick);
     }
   }
 
   private handleOutsideClick(e: any): void {
     if (!this.aside.contains(e.target)) {
-      this.props.onClose()
+      this.props.onClose();
     }
   }
 
   public render(): JSX.Element {
-    const { open, onClose, styles, ...divProps } = this.props
-    const { link, active } = styles
+    const { open, onClose, styles, ...divProps } = this.props;
+    const { link, active } = styles;
 
     return (
       <aside
@@ -64,8 +64,8 @@ class Sidebar extends PureComponent<Props, {}> {
           <Link className={link} activeClassName={active} to={routes.search}>Поиск</Link>
         </nav>
       </aside>
-    )
+    );
   }
 }
 
-export default CSSModules(Sidebar, require('./styles.css'))
+export default CSSModules(Sidebar, require('./styles.css'));

@@ -1,11 +1,11 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { routes } from '../../../routes'
+import * as React from 'react';
+import { SFC } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { routes } from '../../../routes';
 
-import Link from '../../common/Link'
-import Logo from '../../common/Logo'
-import Alert from '../../../containers/common/Alert'
+import Link from '../../common/Link';
+import Logo from '../../common/Logo';
+import Alert from '../../../containers/common/Alert';
 
 const Header: SFC<{}> = ({ children }) => {
   return (
@@ -28,7 +28,7 @@ const Header: SFC<{}> = ({ children }) => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default CSSModules(Header, require('./styles.css'))
+export default CSSModules(Header, require('./styles.css'));
