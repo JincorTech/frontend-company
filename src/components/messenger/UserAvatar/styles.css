@@ -1,6 +1,8 @@
 @use postcss-short;
 
-.avatar {}
+.avatar {
+  /* TODO is it need here? */
+}
 
 .empty {
   size: 60px;
@@ -9,6 +11,6 @@
   letter-spacing: -0.3px;
   padding: 16px *;
   text-align: center;
-  color: #ffffff;
+  color: #fff;
   cursor: default;
 }

@@ -69,7 +69,8 @@
   clear: fix;
 }
 
-.contacts, .social {
+.contacts,
+.social {
   float: left;
 }
 
