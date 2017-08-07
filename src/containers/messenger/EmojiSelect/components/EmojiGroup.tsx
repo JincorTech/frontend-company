@@ -1,28 +1,27 @@
-import * as React from 'react'
-import { PureComponent, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
-import * as Waypoint from 'react-waypoint'
+import * as React from 'react';
+import { PureComponent, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
+import * as Waypoint from 'react-waypoint';
 
-import { emojiList } from '../../../../utils/emoji'
+import { emojiList } from '../../../../utils/emoji';
 
-import Emoji from '../../../../components/messenger/Emoji'
-
+import Emoji from '../../../../components/messenger/Emoji';
 
 /**
  * Types
  */
 export type Props = HTMLProps<HTMLDivElement> & {
   name: string
-}
+};
 
 /**
  * Components
  */
 class EmojiGroup extends PureComponent<Props, {}> {
-  private waypoint: any
+  private waypoint: any;
 
   public render(): JSX.Element {
-    const { name } = this.props
+    const { name } = this.props;
 
     return (
       <div styleName="group" ref={(wp) => this.waypoint = wp}>
@@ -33,11 +32,11 @@ class EmojiGroup extends PureComponent<Props, {}> {
             name={emojiName}/>
         ))}
       </div>
-    )
+    );
   }
 }
 
 /**
  * Decorators
  */
-export default CSSModules(EmojiGroup, require('../styles.css'))
+export default CSSModules(EmojiGroup, require('../styles.css'));
