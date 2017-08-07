@@ -15,18 +15,18 @@ export type StateObj = {
 /**
  * Constants
  */
-export const OPEN_DROPDOWN      = 'messenger/emojiSelect/OPEN_DROPDOWN';
-export const CLOSE_DROPDOWN     = 'messenger/emojiSelect/CLOSE_DROPDOWN';
-export const SET_CURRENT_GROUP  = 'messenger/emojiSelect/SET_CURRENT_GROUP';
-export const SCROLL_TO          = 'messenger/emojiSelect/SCROLL_TO';
+export const OPEN_DROPDOWN = 'messenger/emojiSelect/OPEN_DROPDOWN';
+export const CLOSE_DROPDOWN = 'messenger/emojiSelect/CLOSE_DROPDOWN';
+export const SET_CURRENT_GROUP = 'messenger/emojiSelect/SET_CURRENT_GROUP';
+export const SCROLL_TO = 'messenger/emojiSelect/SCROLL_TO';
 
 /**
  * Action Creators
  */
-export const openDropdown     = createAction<void>(OPEN_DROPDOWN);
-export const closeDropdown    = createAction<void>(CLOSE_DROPDOWN);
-export const setCurrentGroup  = createAction<string>(SET_CURRENT_GROUP);
-export const scrollTo         = createAction<string>(SCROLL_TO);
+export const openDropdown = createAction<void>(OPEN_DROPDOWN);
+export const closeDropdown = createAction<void>(CLOSE_DROPDOWN);
+export const setCurrentGroup = createAction<string>(SET_CURRENT_GROUP);
+export const scrollTo = createAction<string>(SCROLL_TO);
 
 /**
  * Create Reducer

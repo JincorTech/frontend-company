@@ -50,19 +50,19 @@ export type Step = 'email' | 'confirm' | 'companies' | 'new';
  * Constants
  */
 export const RESTORE_PASSWORD = 'auth/restorePassword/RESTORE_PASSWORD';
-export const CONFIRM_EMAIL    = 'auth/restorePassword/CONFIRM_EMAIL';
-export const SELECT_COMPANY   = 'auth/restorePassword/SELECT_COMPANY';
-export const NEW_PASSWORD     = 'auth/restorePassword/SET_NEW_PASSWORD';
-export const RESET_STORE      = 'auth/restorePassword/RESET_STORE';
+export const CONFIRM_EMAIL = 'auth/restorePassword/CONFIRM_EMAIL';
+export const SELECT_COMPANY = 'auth/restorePassword/SELECT_COMPANY';
+export const NEW_PASSWORD = 'auth/restorePassword/SET_NEW_PASSWORD';
+export const RESET_STORE = 'auth/restorePassword/RESET_STORE';
 
 /**
  * Action Creators
  */
-export const restorePassword  = createSubmitAction<RestoreFields, string>(RESTORE_PASSWORD);
-export const confirmEmail     = createSubmitAction<ConfirmFields, Company[]>(CONFIRM_EMAIL);
-export const selectCompany    = createAction<string>(SELECT_COMPANY);
-export const setNewPassword   = createSubmitAction<NewPasswordFields, void>(NEW_PASSWORD);
-export const resetState       = createAction<void>(RESET_STORE);
+export const restorePassword = createSubmitAction<RestoreFields, string>(RESTORE_PASSWORD);
+export const confirmEmail = createSubmitAction<ConfirmFields, Company[]>(CONFIRM_EMAIL);
+export const selectCompany = createAction<string>(SELECT_COMPANY);
+export const setNewPassword = createSubmitAction<NewPasswordFields, void>(NEW_PASSWORD);
+export const resetState = createAction<void>(RESET_STORE);
 
 /**
  * Reducer

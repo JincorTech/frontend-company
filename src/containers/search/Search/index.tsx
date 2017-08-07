@@ -131,7 +131,7 @@ class Search extends Component<Props, ComponentProps> {
                 optionValue={this.state.country}
                 defaultOption="Все страны"
                 onChange={this.handleCountryChange}
-                onBlur={() => {}}
+                onBlur={() => void(0)}
                 placeholder="Все страны"/>
             </div>
             <div styleName="filter">

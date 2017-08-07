@@ -42,7 +42,7 @@ const RenderSelect: SFC<Props> = (props) => {
 };
 
 RenderSelect.defaultProps = {
-  onOptionSelect: () => {}
+  onOptionSelect: () => void(0)
 };
 
 /**

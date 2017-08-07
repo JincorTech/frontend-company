@@ -22,17 +22,17 @@ export type AuthProps = {
  * Constants
  */
 export const SET_AUTH_STATE = 'app/app/SET_AUTH_STATE';
-export const LOGOUT         = 'app/app/LOGOUT';
-export const LOGIN          = 'app/app/LOGIN';
-export const CHECK_AUTH     = 'app/app/CHECK_AUTH';
+export const LOGOUT = 'app/app/LOGOUT';
+export const LOGIN = 'app/app/LOGIN';
+export const CHECK_AUTH = 'app/app/CHECK_AUTH';
 
 /**
  * Action creators
  */
 export const setAuthState = createAction<AuthProps>(SET_AUTH_STATE);
-export const login        = createAction<string>(LOGIN);
-export const logout       = createAction<void>(LOGOUT);
-export const checkAuth    = createAction<void>(CHECK_AUTH);
+export const login = createAction<string>(LOGIN);
+export const logout = createAction<void>(LOGOUT);
+export const checkAuth = createAction<void>(CHECK_AUTH);
 
 /**
  * Reducer

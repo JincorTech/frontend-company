@@ -73,7 +73,7 @@ class ActivityTypes extends Component<Props, {}> {
     this.renderActivityType = this.renderActivityType.bind(this);
     this.renderActivityLeaf = this.renderActivityLeaf.bind(this);
     this.renderActivityNode = this.renderActivityNode.bind(this);
-    this.renderDefaultLeaf  = this.renderDefaultLeaf.bind(this);
+    this.renderDefaultLeaf = this.renderDefaultLeaf.bind(this);
   }
 
   public componentWillMount(): void {

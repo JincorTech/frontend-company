@@ -41,7 +41,7 @@ export function* fetchCountriesAndTypesIterator(): SagaIterator {
     ];
 
     const countryOptions = yield call(optionTransformer, countries.data, transformFunc);
-    const typeOptions    = yield call(optionTransformer, types.data, transformFunc);
+    const typeOptions = yield call(optionTransformer, types.data, transformFunc);
 
     yield put(setOptions('select-country', countryOptions));
     yield put(setOptions('select-company-type', typeOptions));

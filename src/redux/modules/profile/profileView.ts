@@ -67,13 +67,13 @@ export type Link = {
  * Actions
  */
 export const FETCH_COMPANY = 'profile/profile/FETCH_COMPANY';
-export const RESET_STATE   = 'profile/profile/RESET_PROFILE_VIEW_STATE';
+export const RESET_STATE = 'profile/profile/RESET_PROFILE_VIEW_STATE';
 
 /**
  * Action creators
  */
 export const fetchCompany = createAsyncAction<string, Company>(FETCH_COMPANY);
-export const resetState   = createAction<void>(RESET_STATE);
+export const resetState = createAction<void>(RESET_STATE);
 
 /**
  * Reducer

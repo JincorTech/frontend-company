@@ -37,30 +37,30 @@ export type NormalizedOptions = {
 /**
  * Constants
  */
-export const REGISTER_SELECT  = 'common/Select/REGISTER_SELECT';
-export const REGISTER_FILTER  = 'common/Select/REGISTER_FILTER_SELECT';
-export const REMOVE_SELECT    = 'common/Select/REMOVE_SELECT';
-export const OPEN_SELECT      = 'common/Select/OPEN_SELECT';
-export const CLOSE_SELECT     = 'common/Select/CLOSE_SELECT';
-export const SET_OPTIONS      = 'common/Select/SET_OPTIONS';
-export const SET_NORMALIZED   = 'common/Select/SET_NORMALIZED_OPTIONS';
-export const SELECT_OPTION    = 'common/Select/SELECT_OPTION';
-export const SET_OPTION       = 'common/Select/SET_OPTION';
-export const CHANGE_FILTER    = 'common/Select/CHANGE_FILTER';
+export const REGISTER_SELECT = 'common/Select/REGISTER_SELECT';
+export const REGISTER_FILTER = 'common/Select/REGISTER_FILTER_SELECT';
+export const REMOVE_SELECT = 'common/Select/REMOVE_SELECT';
+export const OPEN_SELECT = 'common/Select/OPEN_SELECT';
+export const CLOSE_SELECT = 'common/Select/CLOSE_SELECT';
+export const SET_OPTIONS = 'common/Select/SET_OPTIONS';
+export const SET_NORMALIZED = 'common/Select/SET_NORMALIZED_OPTIONS';
+export const SELECT_OPTION = 'common/Select/SELECT_OPTION';
+export const SET_OPTION = 'common/Select/SET_OPTION';
+export const CHANGE_FILTER = 'common/Select/CHANGE_FILTER';
 
 /**
  * Action Creators
-*/
+ */
 export const registerSelect = createAction<string>(REGISTER_SELECT);
 export const registerFilter = createAction<string>(REGISTER_FILTER);
-export const removeSelect   = createAction<string>(REMOVE_SELECT);
-export const setOptions     = createMetaAction<string, Option[]>(SET_OPTIONS);
-export const setNormalized  = createMetaAction<string, NormalizedOptions>(SET_NORMALIZED);
-export const openSelect     = createMetaAction<string, void>(OPEN_SELECT);
-export const closeSelect    = createMetaAction<string, void>(CLOSE_SELECT);
-export const selectOption   = createMetaAction<string, string>(SELECT_OPTION);
-export const setOption      = createMetaAction<string, string>(SET_OPTION);
-export const changeFilter   = createMetaAction<string, string>(CHANGE_FILTER);
+export const removeSelect = createAction<string>(REMOVE_SELECT);
+export const setOptions = createMetaAction<string, Option[]>(SET_OPTIONS);
+export const setNormalized = createMetaAction<string, NormalizedOptions>(SET_NORMALIZED);
+export const openSelect = createMetaAction<string, void>(OPEN_SELECT);
+export const closeSelect = createMetaAction<string, void>(CLOSE_SELECT);
+export const selectOption = createMetaAction<string, string>(SELECT_OPTION);
+export const setOption = createMetaAction<string, string>(SET_OPTION);
+export const changeFilter = createMetaAction<string, string>(CHANGE_FILTER);
 
 /**
  * Reducer

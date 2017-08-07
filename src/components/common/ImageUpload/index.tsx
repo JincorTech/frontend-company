@@ -22,7 +22,7 @@ class ImageUpload extends Component<Props, {}> {
   private input: HTMLInputElement;
 
   public static defaultProps = {
-    onImgSelect: (value: string): void => {}
+    onImgSelect: (value: string): void => void(0)
   };
 
   constructor(props) {

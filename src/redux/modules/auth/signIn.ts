@@ -62,20 +62,20 @@ export type LoginData = {
 /**
  * Constans
  */
-export const FETCH_COMPANIES    = 'auth/signIn/FETCH_COMPANIES';
-export const SHOW_COMPANY_LIST  = 'auth/signIn/SHOW_COMPANY_LIST';
-export const FETCH_LOGIN        = 'auth/signIn/FETCH_LOGIN';
-export const SELECT_COMPANY     = 'auth/signIn/SELECT_COMPANY';
-export const RESET_STATE        = 'auth/signIn/RESET_SIGN_IN';
+export const FETCH_COMPANIES = 'auth/signIn/FETCH_COMPANIES';
+export const SHOW_COMPANY_LIST = 'auth/signIn/SHOW_COMPANY_LIST';
+export const FETCH_LOGIN = 'auth/signIn/FETCH_LOGIN';
+export const SELECT_COMPANY = 'auth/signIn/SELECT_COMPANY';
+export const RESET_STATE = 'auth/signIn/RESET_SIGN_IN';
 
 /**
  * Action Creators
  */
-export const fetchCompanies   = createSubmitAction<LoginFields, void>(FETCH_COMPANIES);
-export const showCompanyList  = createAction<void>(SHOW_COMPANY_LIST);
-export const fetchLogin       = createAction<LoginData>(FETCH_LOGIN);
-export const selectCompany    = createAction<string>(SELECT_COMPANY);
-export const resetState       = createAction<void>(RESET_STATE);
+export const fetchCompanies = createSubmitAction<LoginFields, void>(FETCH_COMPANIES);
+export const showCompanyList = createAction<void>(SHOW_COMPANY_LIST);
+export const fetchLogin = createAction<LoginData>(FETCH_LOGIN);
+export const selectCompany = createAction<string>(SELECT_COMPANY);
+export const resetState = createAction<void>(RESET_STATE);
 
 /**
  * Reducer

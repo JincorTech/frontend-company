@@ -44,28 +44,28 @@ export type Company = {
 /**
  * Action types
  */
-export const CREATE_COMPANY   = 'auth/signUp/CREATE_COMPANY';
-export const SET_USER_INFO    = 'auth/signUp/SET_USER_INFO';
-export const VERIFY_EMAIL     = 'auth/signUp/VERIFY_EMAIL';
-export const CONFIRM_EMAIL    = 'auth/signUp/CONFIRM_EMAIL';
-export const ACCOUNT_CREATED  = 'auth/signUp/CREATE_ACCOUNT_SUCCESS';
-export const INVITE_EMPLOYEE  = 'auth/signUp/EMPLOYEE';
-export const RESET_STATE      = 'auth/signUp/RESET_STATE';
-export const FETCH_DICT       = 'jincor/auth/signUp/FETCH_DICT';
+export const CREATE_COMPANY = 'auth/signUp/CREATE_COMPANY';
+export const SET_USER_INFO = 'auth/signUp/SET_USER_INFO';
+export const VERIFY_EMAIL = 'auth/signUp/VERIFY_EMAIL';
+export const CONFIRM_EMAIL = 'auth/signUp/CONFIRM_EMAIL';
+export const ACCOUNT_CREATED = 'auth/signUp/CREATE_ACCOUNT_SUCCESS';
+export const INVITE_EMPLOYEE = 'auth/signUp/EMPLOYEE';
+export const RESET_STATE = 'auth/signUp/RESET_STATE';
+export const FETCH_DICT = 'jincor/auth/signUp/FETCH_DICT';
 
 export const SIGNUP_EMAIL = 'auth/signUp/SIGNUP_EMAIL';
 
 /**
  * Actions creators
  */
-export const fetchDict      = createAsyncAction<void, void>(FETCH_DICT);
-export const createCompany  = createSubmitAction<CompanyFields, Company>(CREATE_COMPANY);
-export const setUserInfo    = createAction<Employee>(SET_USER_INFO);
-export const verifyEmail    = createSubmitAction<AccountFields, void>(VERIFY_EMAIL);
-export const confirmEmail   = createSubmitAction<ConfirmFields, void>(CONFIRM_EMAIL);
+export const fetchDict = createAsyncAction<void, void>(FETCH_DICT);
+export const createCompany = createSubmitAction<CompanyFields, Company>(CREATE_COMPANY);
+export const setUserInfo = createAction<Employee>(SET_USER_INFO);
+export const verifyEmail = createSubmitAction<AccountFields, void>(VERIFY_EMAIL);
+export const confirmEmail = createSubmitAction<ConfirmFields, void>(CONFIRM_EMAIL);
 export const accountCreated = createAction<void>(ACCOUNT_CREATED);
 export const inviteEmployee = createAsyncAction<void, void>(INVITE_EMPLOYEE);
-export const resetState     = createAction<void>(RESET_STATE);
+export const resetState = createAction<void>(RESET_STATE);
 
 export const signupEmail = createAsyncAction<ConfirmFields, void>(SIGNUP_EMAIL);
 

@@ -49,16 +49,16 @@ export type UserCompany = {
 /**
  * Constants
  */
-export const OPEN_SIDEBAR   = 'app/appLayout/OPEN_SIDEBAR';
-export const CLOSE_SIDEBAR  = 'app/appLayout/CLOSE_SIDEBAR';
-export const FETCH_USER     = 'app/appLayout/FETCH_USER';
+export const OPEN_SIDEBAR = 'app/appLayout/OPEN_SIDEBAR';
+export const CLOSE_SIDEBAR = 'app/appLayout/CLOSE_SIDEBAR';
+export const FETCH_USER = 'app/appLayout/FETCH_USER';
 
 /**
  * Action creators
  */
-export const openSidebar  = createAction<void>(OPEN_SIDEBAR);
+export const openSidebar = createAction<void>(OPEN_SIDEBAR);
 export const closeSidebar = createAction<void>(CLOSE_SIDEBAR);
-export const fetchUser    = createAsyncAction<void, User>(FETCH_USER);
+export const fetchUser = createAsyncAction<void, User>(FETCH_USER);
 
 /**
  * Reducer

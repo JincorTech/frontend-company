@@ -33,10 +33,10 @@ function* getProfileIterator(): SagaIterator {
 
     const cities = yield call(get, `/dictionary/city?country=${countryId}`);
 
-    const formFields     = yield call(profileFormFields, profile);
-    const cityOptions    = yield call(optionTransformer, cities.data, transformFunc);
+    const formFields = yield call(profileFormFields, profile);
+    const cityOptions = yield call(optionTransformer, cities.data, transformFunc);
     const countryOptions = yield call(optionTransformer, countries.data, transformFunc);
-    const typeOptions    = yield call(optionTransformer, types.data, transformFunc);
+    const typeOptions = yield call(optionTransformer, types.data, transformFunc);
 
     yield put(initialize('profileEdit', formFields, false));
     yield put(setLogo(src));
