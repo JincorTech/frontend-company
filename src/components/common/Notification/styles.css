@@ -1,0 +1,12 @@
+.notifications {
+  display: block;
+  z-index: 99999999999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.foo {
+  background-color: #7f7f7f;
+}

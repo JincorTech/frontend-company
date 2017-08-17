@@ -1,6 +1,7 @@
 import { combineReducers, routerReducer } from 'redux-seamless-immutable';
 import { reducer as formReducer } from 'redux-form';
 import { loadingBarReducer } from 'react-redux-loading-bar';
+import * as Notifications from 'react-notification-system-redux';
 
 import app from './modules/app/app';
 import appLayout from './modules/app/appLayout';
@@ -30,6 +31,7 @@ export default combineReducers({
   routing: routerReducer,
   form: formReducer,
   loadingBar: loadingBarReducer,
+  notifications: Notifications.reducer,
 
   app: combineReducers({
     app,

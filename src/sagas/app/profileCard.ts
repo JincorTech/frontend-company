@@ -3,6 +3,7 @@ import { takeLatest, takeEvery, call, put, select, fork } from 'redux-saga/effec
 import { initialize } from 'redux-form';
 import { Action } from '../../utils/actions';
 import { get, put as putFunc } from '../../utils/api';
+import { notify } from '../../utils/notifications';
 
 import {
   changePassword, updateProfile,
@@ -25,6 +26,7 @@ function* getProfileIterator(): SagaIterator {
     yield put(setAvatar(avatar));
   } catch (e) {
     yield call(console.log, e);
+    yield put(notify('error', e.message));
   }
 }
 
@@ -47,6 +49,7 @@ function* changePasswordIterator({ payload }: Action<PasswordFields>): SagaItera
     yield put(changeView('buttons'));
   } catch (e) {
     yield put(changePassword.failure());
+    yield put(notify('error', e.message));
   }
 }
 
@@ -67,6 +70,7 @@ function* updateProfileIterator({ payload }: Action<ProfileFields>): SagaIterato
     yield put(changeView('buttons'));
   } catch (e) {
     yield put(updateProfile.failure(e));
+    yield put(notify('error', e.message));
   }
 }
 
@@ -95,6 +99,7 @@ function* fetchUserIterator(): SagaIterator {
     yield put(fetchUser.success(data));
   } catch (e) {
     yield put(fetchUser.failure(e));
+    yield put(notify('error', e.message));
   }
 }
 
