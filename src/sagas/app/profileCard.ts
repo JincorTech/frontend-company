@@ -26,7 +26,7 @@ function* getProfileIterator(): SagaIterator {
     yield put(setAvatar(avatar));
   } catch (e) {
     yield call(console.log, e);
-    yield put(notify('error', e.message));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -49,7 +49,7 @@ function* changePasswordIterator({ payload }: Action<PasswordFields>): SagaItera
     yield put(changeView('buttons'));
   } catch (e) {
     yield put(changePassword.failure());
-    yield put(notify('error', e.message));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -70,7 +70,7 @@ function* updateProfileIterator({ payload }: Action<ProfileFields>): SagaIterato
     yield put(changeView('buttons'));
   } catch (e) {
     yield put(updateProfile.failure(e));
-    yield put(notify('error', e.message));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -99,7 +99,7 @@ function* fetchUserIterator(): SagaIterator {
     yield put(fetchUser.success(data));
   } catch (e) {
     yield put(fetchUser.failure(e));
-    yield put(notify('error', e.message));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
