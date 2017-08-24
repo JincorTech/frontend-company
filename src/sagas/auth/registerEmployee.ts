@@ -5,7 +5,7 @@ import { routes } from '../../routes';
 
 import { Action } from '../../utils/actions';
 import { post, get } from '../../utils/api';
-import { notify } from "../../utils/notifications";
+import { notify } from '../../utils/notifications';
 import { FormFields } from '../../components/auth/RegisterEmployeeForm';
 import { registerEmployee } from '../../redux/modules/auth/registerEmployee';
 import { login } from '../../redux/modules/app/app';

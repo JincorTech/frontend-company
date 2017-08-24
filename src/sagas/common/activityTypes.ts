@@ -5,29 +5,29 @@ import { get } from '../../utils/api';
 import { notify } from '../../utils/notifications';
 
 import {
-OPEN_NODE,
-CLOSE_NODE,
-SELECT_VALUE,
-UNREGISTER_SELECT
+  OPEN_NODE,
+  CLOSE_NODE,
+  SELECT_VALUE,
+  UNREGISTER_SELECT
 } from '../../redux/modules/common/activityTypes';
 
 import {
-openNodeSelector,
-closeNodeSelector,
-normalizeActivities,
-closeAllNodes
+  openNodeSelector,
+  closeNodeSelector,
+  normalizeActivities,
+  closeAllNodes
 } from '../../helpers/common/activityTypes';
 
 import {
-setNodes,
-fetchActivities,
-closeNode,
-disableLeaf,
-activateLeaf,
-setSelectValue,
-closeSelect,
-removeSelect,
-Meta
+  setNodes,
+  fetchActivities,
+  closeNode,
+  disableLeaf,
+  activateLeaf,
+  setSelectValue,
+  closeSelect,
+  removeSelect,
+  Meta
 } from '../../redux/modules/common/activityTypes';
 
 const getState = state => state.common.activityTypes;
