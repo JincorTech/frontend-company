@@ -34,6 +34,7 @@ export type StateProps = {
   user: User
   sidebarOpen: boolean
   isAuth: boolean
+  notifications: any
 };
 
 export type DispatchProps = {
@@ -54,7 +55,14 @@ class AppLayout extends Component<Props, StateProps> {
   }
 
   render() {
-    const { sidebarOpen, children, user, isAuth, location } = this.props;
+    const {
+      sidebarOpen,
+      children,
+      user,
+      isAuth,
+      location,
+      notifications
+    } = this.props;
     const { openSidebar, closeSidebar, openProfileCard } = this.props;
     const { id, profile, contacts, company } = user;
 

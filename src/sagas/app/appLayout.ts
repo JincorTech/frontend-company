@@ -2,6 +2,7 @@ import { SagaIterator } from 'redux-saga';
 import { takeLatest, call, put, fork } from 'redux-saga/effects';
 
 import { get } from '../../utils/api';
+import { notify } from '../../utils/notifications';
 
 import { fetchUser } from '../../redux/modules/app/appLayout';
 
@@ -14,6 +15,7 @@ function* fetchUserIterator(): SagaIterator {
     yield put(fetchUser.success(data));
   } catch (e) {
     yield put(fetchUser.failure(e));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 

@@ -5,6 +5,7 @@ import { routes } from '../../routes';
 
 import { Action } from '../../utils/actions';
 import { post, get } from '../../utils/api';
+import { notify } from "../../utils/notifications";
 import { FormFields } from '../../components/auth/RegisterEmployeeForm';
 import { registerEmployee } from '../../redux/modules/auth/registerEmployee';
 import { login } from '../../redux/modules/app/app';
@@ -34,6 +35,7 @@ function* registerEmployeeIterator({ payload: employee }: Action<FormFields>): S
     yield put(push(routes.profile));
   } catch (e) {
     yield put(registerEmployee.failure());
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 

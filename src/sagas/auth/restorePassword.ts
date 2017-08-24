@@ -6,6 +6,7 @@ import { routes } from '../../routes';
 
 import { Action } from '../../utils/actions';
 import { post, put as putFunc, get } from '../../utils/api';
+import { notify } from '../../utils/notifications';
 import { restorePassword, confirmEmail, setNewPassword, resetState } from '../../redux/modules/auth/restorePassword';
 import { login } from '../../redux/modules/app/app';
 
@@ -24,6 +25,7 @@ function* restorePasswordIterator({ payload }: Action<RestoreFields>): SagaItera
     yield put(restorePassword.success(data.id));
   } catch (e) {
     yield put(restorePassword.failure(new SubmissionError(e)));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -47,6 +49,7 @@ function* confirmEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator
     yield put(confirmEmail.success(companies));
   } catch (e) {
     yield put(confirmEmail.failure(new SubmissionError(e)));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -72,6 +75,7 @@ function* newPasswordIterator({ payload }: Action<NewPasswordFields>): SagaItera
     yield put(push(routes.profile));
   } catch (e) {
     yield put(setNewPassword.failure(new SubmissionError(e)));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 

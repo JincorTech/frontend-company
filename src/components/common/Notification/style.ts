@@ -24,7 +24,7 @@ const notificationColors = {
       hex: '#4094e8'
     }
   }
-}
+};
 
 const style = {
   NotificationItem: {
@@ -83,6 +83,6 @@ const style = {
       color: notificationColors.info.color.hex
     }
   }
-}
+};
 
-export default style
+export default style;
