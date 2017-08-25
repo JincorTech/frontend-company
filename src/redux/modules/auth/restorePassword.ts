@@ -90,6 +90,12 @@ export default createReducer<State>({
     })
   ),
 
+  [restorePassword.FAILURE]: (state: State): State => (
+    state.merge({
+      spinner: false
+    })
+  ),
+
   [confirmEmail.REQUEST]: (state: State): State => (
     state.merge({ spinner: true })
   ),
@@ -99,6 +105,12 @@ export default createReducer<State>({
       spinner: false,
       companies: payload,
       step: 'companies'
+    })
+  ),
+
+  [confirmEmail.FAILURE]: (state: State): State => (
+    state.merge({
+      spinner: false
     })
   ),
 
@@ -116,6 +128,12 @@ export default createReducer<State>({
   ),
 
   [setNewPassword.SUCCESS]: (state: State): State => (
+    state.merge({
+      spinner: false
+    })
+  ),
+
+  [setNewPassword.FAILURE]: (state: State): State => (
     state.merge({
       spinner: false
     })
