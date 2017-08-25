@@ -62,7 +62,7 @@ export const restorePassword = createSubmitAction<RestoreFields, string>(RESTORE
 export const confirmEmail = createSubmitAction<ConfirmFields, Company[]>(CONFIRM_EMAIL);
 export const selectCompany = createAction<string>(SELECT_COMPANY);
 export const setNewPassword = createSubmitAction<NewPasswordFields, void>(NEW_PASSWORD);
-export const resetState = createAction<void>(RESET_STORE);
+export const resetStore = createAction<void>(RESET_STORE);
 
 /**
  * Reducer

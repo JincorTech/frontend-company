@@ -102,11 +102,19 @@ export default createReducer<State>({
     state.merge({ spinner: false })
   ),
 
+  [updateProfile.FAILURE]: (state: State): State => (
+    state.merge({ spinner: false })
+  ),
+
   [changePassword.REQUEST]: (state: State): State => (
     state.merge({ spinner: true })
   ),
 
   [changePassword.SUCCESS]: (state: State): State => (
+    state.merge({ spinner: false })
+  ),
+
+  [changePassword.FAILURE]: (state: State): State => (
     state.merge({ spinner: false })
   )
 }, initialState);

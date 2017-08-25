@@ -7,7 +7,7 @@ import { routes } from '../../routes';
 import { Action } from '../../utils/actions';
 import { post, put as putFunc, get } from '../../utils/api';
 import { notify } from '../../utils/notifications';
-import { restorePassword, confirmEmail, setNewPassword, resetState } from '../../redux/modules/auth/restorePassword';
+import { restorePassword, confirmEmail, setNewPassword, resetStore } from '../../redux/modules/auth/restorePassword';
 import { login } from '../../redux/modules/app/app';
 
 import { FormFields as RestoreFields } from '../../components/auth/RequestPasswordForm';
@@ -24,6 +24,7 @@ function* restorePasswordIterator({ payload }: Action<RestoreFields>): SagaItera
     const { data } = yield call(post, '/employee/restorePassword', payload);
     yield put(restorePassword.success(data.id));
   } catch (e) {
+    yield call(console.log, new SubmissionError(e));
     yield put(restorePassword.failure(new SubmissionError(e)));
     yield put(notify('error', 'Oops', e.message));
   }
@@ -93,7 +94,7 @@ function* resetSignInIterator({ payload }: Action<any>) {
   const { pathname } = payload;
 
   if (pathname === '/cmp/auth/password') {
-    yield put(resetState());
+    yield put(resetStore());
   }
 }
 
