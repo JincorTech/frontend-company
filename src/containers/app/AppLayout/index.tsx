@@ -21,7 +21,6 @@ import Sidebar from '../../../components/app/Sidebar';
 import PageName from '../../../components/app/PageName';
 import ProfileCard from '../ProfileCard';
 import CompanyCard from '../../common/CompanyCard';
-import Notification from '../../../components/common/Notification';
 
 /**
  * Types
@@ -34,7 +33,6 @@ export type StateProps = {
   user: User
   sidebarOpen: boolean
   isAuth: boolean
-  notifications: any
 };
 
 export type DispatchProps = {
@@ -60,8 +58,7 @@ class AppLayout extends Component<Props, StateProps> {
       children,
       user,
       isAuth,
-      location,
-      notifications
+      location
     } = this.props;
     const { openSidebar, closeSidebar, openProfileCard } = this.props;
     const { id, profile, contacts, company } = user;
@@ -102,7 +99,6 @@ class AppLayout extends Component<Props, StateProps> {
 
         <ProfileCard user={user}/>
         <CompanyCard/>
-        <Notification/>
       </div>
     );
   }

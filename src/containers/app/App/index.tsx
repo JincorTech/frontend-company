@@ -4,6 +4,7 @@ import * as CSSModules from 'react-css-modules';
 import { connect } from 'react-redux';
 
 import { checkAuth, StateMap as StateProps } from '../../../redux/modules/app/app';
+import Notification from '../../../components/common/Notification';
 
 /**
  * Types
@@ -26,6 +27,7 @@ class App extends Component<Props, StateProps> {
     return (
       <div styleName="app">
         {this.props.children}
+        <Notification/>
       </div>
     );
   }

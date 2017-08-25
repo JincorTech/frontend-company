@@ -105,6 +105,12 @@ export default createReducer<State>({
     })
   ),
 
+  [fetchCompanies.FAILURE]: (state: State): State => (
+    state.merge({
+      spinner: false
+    })
+  ),
+
   [SHOW_COMPANY_LIST]: (state: State): State => (
     state.merge({ step: 'companies' })
   ),

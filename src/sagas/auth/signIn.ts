@@ -7,6 +7,7 @@ import { routes } from '../../routes';
 
 import { get, post } from '../../utils/api';
 import { setToken } from '../../utils/auth';
+import { notify } from '../../utils/notifications';
 
 import {
   fetchCompanies,
@@ -38,6 +39,8 @@ function* employeeCompaniesIterator(action: Action<LoginFields>): SagaIterator {
     if (companyCount === 0) {
       const error = new SubmissionError<LoginFields>({ email: '', password: '' });
       yield put(fetchCompanies.failure(error));
+      // TODO определить - что использовать в качестве нотификаций
+      yield put(notify('error', 'Не удается войти.', ' Пожалуйста, проверьте правильность написания логина и пароля.'));
       yield put(emitAlert('Не удается войти. Пожалуйста, проверьте правильность написания логина и пароля.'));
     }
 
@@ -51,6 +54,7 @@ function* employeeCompaniesIterator(action: Action<LoginFields>): SagaIterator {
     }
   } catch (e) {
     yield put({ type: fetchCompanies.FAILURE, payload: new SubmissionError(e) });
+    yield put(notify('error', 'Не удается войти.', ' Пожалуйста, проверьте подключеие к сети интернет.'));
   }
 }
 

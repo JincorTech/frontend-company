@@ -24,7 +24,6 @@ function* restorePasswordIterator({ payload }: Action<RestoreFields>): SagaItera
     const { data } = yield call(post, '/employee/restorePassword', payload);
     yield put(restorePassword.success(data.id));
   } catch (e) {
-    yield call(console.log, new SubmissionError(e));
     yield put(restorePassword.failure(new SubmissionError(e)));
     yield put(notify('error', 'Oops', e.message));
   }
