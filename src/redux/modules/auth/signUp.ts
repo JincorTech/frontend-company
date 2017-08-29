@@ -102,6 +102,10 @@ export default createReducer<State>({
     })
   ),
 
+  [createCompany.FAILURE]: (state: State): State => (
+    state.merge({ spinner: false })
+  ),
+
   [verifyEmail.REQUEST]: (state: State): State => (
     state.merge({ spinner: true })
   ),
@@ -119,8 +123,16 @@ export default createReducer<State>({
     })
   ),
 
+  [verifyEmail.FAILURE]: (state: State): State => (
+    state.merge({ spinner: false })
+  ),
+
   [confirmEmail.REQUEST]: (state: State): State => (
     state.merge({ spinner: true })
+  ),
+
+  [confirmEmail.FAILURE]: (state: State): State => (
+    state.merge({ spinner: false })
   ),
 
   [ACCOUNT_CREATED]: (state: State): State => (
@@ -136,6 +148,10 @@ export default createReducer<State>({
   ),
 
   [inviteEmployee.SUCCESS]: (state: State): State => (
+    state.merge({ spinner: false })
+  ),
+
+  [inviteEmployee.FAILURE]: (state: State): State => (
     state.merge({ spinner: false })
   ),
 

@@ -4,6 +4,7 @@ import { SubmissionError } from 'redux-form';
 import { takeLatest, call, put, fork, select } from 'redux-saga/effects';
 import { get, post } from '../../utils/api';
 import { setUser, getUser, removeUser } from '../../utils/auth';
+import { notify } from '../../utils/notifications';
 import { push } from 'react-router-redux';
 import { routes } from '../../routes';
 
@@ -47,6 +48,7 @@ export function* fetchCountriesAndTypesIterator(): SagaIterator {
     yield put(setOptions('select-company-type', typeOptions));
   } catch (e) {
     yield put(fetchDict.failure(e));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -74,6 +76,7 @@ function* createCompanyIterator({ payload }: Action<CompanyFields>): SagaIterato
     yield put(createCompany.success({ id, verificationId }));
   } catch (e) {
     yield put(createCompany.failure(new SubmissionError(e.errors)));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -106,6 +109,7 @@ function* verifyEmailRequestSaga({ payload }: Action<AccountFields>): SagaIterat
     yield put(verifyEmail.success());
   } catch (e) {
     yield put(verifyEmail.failure(new SubmissionError(e.errors)));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -135,6 +139,7 @@ function* confirmEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator
     yield put(accountCreated());
   } catch (e) {
     yield put(confirmEmail.failure(new SubmissionError(e.errors)));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -157,6 +162,7 @@ function* signupEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator 
     yield call(removeUser);
   } catch (e) {
     yield put(signupEmail.failure(e));
+    yield put(notify('error', 'Oops', e.message));
     yield put(push(routes.signIn));
   }
 }
@@ -184,6 +190,7 @@ function* inviteEmployeeIterator(action: Action<string[]>): SagaIterator {
     yield put(push(routes.profile));
   } catch (e) {
     yield put(inviteEmployee.failure(e));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
