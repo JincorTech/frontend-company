@@ -2,6 +2,7 @@ import { SagaIterator, delay } from 'redux-saga';
 import { takeLatest, takeEvery, call, put, select, fork } from 'redux-saga/effects';
 import { get } from '../../utils/api';
 import { Action } from '../../utils/actions';
+import { notify } from '../../utils/notifications';
 
 import { search, nextPage, fetchCountries, SearchRequest } from '../../redux/modules/search/search';
 import { setOptions } from '../../redux/modules/common/select';
@@ -20,7 +21,7 @@ function* getCountriesIterator(): SagaIterator {
 
     yield put(setOptions('select-country', countryOptions));
   } catch (e) {
-    yield call(console.log, e);
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -41,6 +42,7 @@ function* getCompaniesIterator({ payload }: Action<SearchRequest>): SagaIterator
     yield put(search.success({ companies, meta }));
   } catch (e) {
     yield put(search.failure(e));
+    yield put(notify('error', 'Oops', e.message));
   } finally {
     yield put(hideLoading());
   }
@@ -60,6 +62,7 @@ function* pushCompaniesIterator({ payload }: Action<void>): SagaIterator {
     yield put(nextPage.success({ companies, meta }));
   } catch (e) {
     yield put(nextPage.failure(e));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 

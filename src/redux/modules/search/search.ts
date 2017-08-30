@@ -75,11 +75,19 @@ export default createReducer<State>({
     state.merge({ ...state, ...payload, isLoading: false })
   ),
 
+  [search.FAILURE]: (state: State): State => (
+    state.merge({ isLoading: false })
+  ),
+
   [nextPage.REQUEST]: (state: State): State => (
     state.merge({ isLoading: true })
   ),
 
   [nextPage.SUCCESS]: (state: State, { payload }: Action<SearchResponse>): State => (
     state.merge({ meta: payload.meta, companies: state.companies.concat(payload.companies), isLoading: false })
+  ),
+
+  [nextPage.FAILURE]: (state: State): State => (
+    state.merge({ isLoading: false })
   )
 }, initialState);
