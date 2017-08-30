@@ -69,6 +69,12 @@ export default createReducer<State>({
     })
   ),
 
+  [updateProfile.FAILURE]: (state: State): State => (
+    state.merge({
+      spinner: false
+    })
+  ),
+
   [SET_LOGO]: (state: State, { payload: src }: Action<string>): State => (
     state.merge({ src })
   ),

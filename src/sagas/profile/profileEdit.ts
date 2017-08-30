@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 import { routes } from '../../routes';
 import { put as putFunc, get } from '../../utils/api';
 import { Action } from '../../utils/actions';
+import { notify } from '../../utils/notifications';
 
 import { req, profileFormFields } from '../../helpers/profile/profileEdit';
 import {
@@ -45,7 +46,8 @@ function* getProfileIterator(): SagaIterator {
     yield put(setOptions('select-company-type', typeOptions));
     yield put(hidePreloader());
   } catch (e) {
-    yield call(console.log, e);
+    yield put(hidePreloader());
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -68,7 +70,7 @@ function* updateCitiesIterator({ payload: countryId }: Action<string>): SagaIter
 
     yield put(setOptions('select-city', cityOptions));
   } catch (e) {
-    yield call(console.log, e);
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -90,6 +92,7 @@ function* updateProfileIterator({ payload }): SagaIterator {
     yield put(push(routes.profile));
   } catch (e) {
     yield put(updateProfile.failure(e));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 

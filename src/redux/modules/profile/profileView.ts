@@ -121,6 +121,10 @@ export default createReducer<State>({
     state.merge({ preloader: false, company })
   ),
 
+  [fetchCompany.FAILURE]: (state: State): State => (
+    state.merge({ preloader: false })
+  ),
+
   [RESET_STATE]: (state: State): State => (
     state.merge(initialState)
   )
