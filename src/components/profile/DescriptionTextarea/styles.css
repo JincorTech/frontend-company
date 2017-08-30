@@ -5,13 +5,13 @@
 * Textarea
 */
 :root {
-  --color: #222222;
-  --background: #ffffff;
+  --color: #222;
+  --background: #fff;
   --border-default: #dbdfe4;
   --placeholder-default: #9da0a4;
   --border-focused: #0070e0;
   --placeholder-focused: #ebeced;
-  --invalid: #D0011B;
+  --invalid: #d0011b;
 }
 
 .wrapper {
@@ -21,7 +21,7 @@
 .textarea-wrap {
   & .textarea {
     resize: none !important;
-    outline: 0px !important;
+    outline: 0 !important;
     width: 100%;
     min-height: 66px;
     box-sizing: border-box;
@@ -44,7 +44,7 @@
   color: #9da0a4;
   font-size: 16px;
 }
-
+/* stylelint-disable no-descending-specificity */
 .default {
   composes: textarea-wrap;
 
@@ -84,3 +84,4 @@
     }
   }
 }
+/* stylelint-enable no-descending-specificity */

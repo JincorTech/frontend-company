@@ -1,4 +1,4 @@
-const groups = require('./groups.json')
+const groups = require('./groups.json');
 
 /**
  * Return emojis by group name
@@ -6,7 +6,7 @@ const groups = require('./groups.json')
  * @return - emoji names
  */
 export function emojiList(name: string): string[] {
-  return groups[name]
+  return groups[name];
 }
 
 /**
@@ -14,5 +14,5 @@ export function emojiList(name: string): string[] {
  * @return - group names
  */
 export function emojiGroups(): string[] {
-  return Object.keys(groups)
+  return Object.keys(groups);
 }

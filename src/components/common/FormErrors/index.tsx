@@ -1,14 +1,13 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
-
+import * as React from 'react';
+import { SFC, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
 
 /**
  * Types
  */
 export type Props = HTMLProps<HTMLDivElement> & {
   errors?: any
-}
+};
 
 /**
  * Component
@@ -21,6 +20,6 @@ const FormErrors: SFC<Props> = ({ errors }) => (
       ))}
     </ul>
   </div>
-)
+);
 
-export default CSSModules(FormErrors, require('./styles.css'))
+export default CSSModules(FormErrors, require('./styles.css'));

@@ -1,34 +1,33 @@
-import * as React from 'react'
-import { SFC, MouseEvent } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC, MouseEvent } from 'react';
+import * as CSSModules from 'react-css-modules';
 
-import { getBackgroundColor, getInitials } from '../../../utils/colorFunction'
+import { getBackgroundColor, getInitials } from '../../../utils/colorFunction';
 
-import EmployeeMenu from './components/EmployeeMenu'
+import EmployeeMenu from './components/EmployeeMenu';
 
-import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/employees/employees'
-import { StateMap as AuthProps } from '../../../redux/modules/app/app'
+import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/employees/employees';
+import { StateMap as AuthProps } from '../../../redux/modules/app/app';
 
-
-export type Props = ComponentProps & DispatchProps
+export type Props = ComponentProps & DispatchProps;
 
 export type ComponentProps = {
   employee: ActiveEmployeeProps
   auth: AuthProps
-}
+};
 
 export type DispatchProps = {
   onDelete: (e: MouseEvent<HTMLButtonElement>, id: string) => void,
   onMakeAdmin: (e: MouseEvent<HTMLButtonElement>, id: string) => void,
   onUnmakeAdmin: (e: MouseEvent<HTMLButtonElement>, id: string) => void,
   onOpenProfile: (employee: ActiveEmployeeProps) => void
-}
+};
 
 const ActiveEmployee: SFC<Props> = props => {
-  const { auth, employee, onDelete, onMakeAdmin, onUnmakeAdmin, onOpenProfile } = props
-  const { id, contacts, profile } = employee
-  const backgroundColor = getBackgroundColor(id)
-  const initials = getInitials(profile.name)
+  const { auth, employee, onDelete, onMakeAdmin, onUnmakeAdmin, onOpenProfile } = props;
+  const { id, contacts, profile } = employee;
+  const backgroundColor = getBackgroundColor(id);
+  const initials = getInitials(profile.name);
 
   return (
     <div styleName="employee" onClick={() => onOpenProfile(employee)}>
@@ -76,7 +75,7 @@ const ActiveEmployee: SFC<Props> = props => {
           Удалить пользователя</button>
       </EmployeeMenu>}
     </div>
-  )
-}
+  );
+};
 
-export default CSSModules(ActiveEmployee, require('./styles.css'))
+export default CSSModules(ActiveEmployee, require('./styles.css'));

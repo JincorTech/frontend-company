@@ -11,14 +11,14 @@
   border-radius: 4px;
   background-color: #d0021b;
   text-align: center;
-  color: #ffffff;
+  color: #fff;
   transition: top ease-out 0.2s;
 }
 
 .open {
   composes: alert;
   top: 70px;
-  visibility: visible
+  visibility: visible;
 }
 
 .close {
@@ -27,7 +27,7 @@
   visibility: hidden;
 }
 
-.close-icon { 
+.close-icon {
   position: absolute 12px 12px * *;
   cursor: pointer;
   opacity: 0.75;

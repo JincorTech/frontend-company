@@ -15,7 +15,7 @@
 
 .uncompleted {
   composes: step;
-  border: 1px solid #dbdfe4
+  border: 1px solid #dbdfe4;
 }
 
 .completed {

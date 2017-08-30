@@ -1,11 +1,11 @@
-import * as React from 'react'
-import { Component } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { connect } from 'react-redux'
-import { Scrollbars } from 'react-custom-scrollbars'
-import * as Waypoint from 'react-waypoint'
+import * as React from 'react';
+import { Component } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { connect } from 'react-redux';
+import { Scrollbars } from 'react-custom-scrollbars';
+import * as Waypoint from 'react-waypoint';
 
-import { emojiGroups } from '../../../utils/emoji'
+import { emojiGroups } from '../../../utils/emoji';
 
 import {
   setCurrentGroup,
@@ -13,96 +13,96 @@ import {
   scrollTo,
   closeDropdown,
   StateObj as StateProps
-} from '../../../redux/modules/messenger/emojiSelect'
+} from '../../../redux/modules/messenger/emojiSelect';
 
-import EmojiGroup from './components/EmojiGroup'
+import EmojiGroup from './components/EmojiGroup';
 
 /**
  * Types
  */
-export type Props = ComponentProps & DispatchProps & StateProps
+export type Props = ComponentProps & DispatchProps & StateProps;
 
 export type ComponentProps = {
   open: boolean
   currentGroup: string
-}
+};
 
 export type DispatchProps = {
   setCurrentGroup: (name: string) => void
   openDropdown: () => void
   closeDropdown: () => void
   scrollTo: (groupName: string) => void
-}
+};
 
 type WaypointMap = {
   [groupName: string]: any
-}
+};
 
 /**
  * Component
  */
 class EmojiSelect extends Component<Props, {}> {
-  private scrollInnerWrap: HTMLDivElement
-  private scrollbar: Scrollbars
-  private groups: string[]
-  private waypoints: WaypointMap = {}
+  private scrollInnerWrap: HTMLDivElement;
+  private scrollbar: Scrollbars;
+  private groups: string[];
+  private waypoints: WaypointMap = {};
 
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.groups = emojiGroups()
-    this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.handleLeave = this.handleLeave.bind(this)
-    this.handleEnter = this.handleEnter.bind(this)
-    this.scrollTo = this.scrollTo.bind(this)
+    this.groups = emojiGroups();
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleLeave = this.handleLeave.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
+    this.scrollTo = this.scrollTo.bind(this);
   }
 
   public componentDidUpdate(): void {
-    const { scrollPosition } = this.props
+    const { scrollPosition } = this.props;
 
     if (scrollPosition !== '') {
-      this.scrollTo(scrollPosition)
+      this.scrollTo(scrollPosition);
     }
   }
 
   private handleOpen(): void {
-    this.props.openDropdown()
+    this.props.openDropdown();
   }
 
   private handleClose(): void {
-    this.props.closeDropdown()
-    this.scrollTo('nature')
+    this.props.closeDropdown();
+    this.scrollTo('nature');
   }
 
   private handleLeave(name: string): Function {
-    const { setCurrentGroup } = this.props
+    const { setCurrentGroup } = this.props;
 
     return ({ previousPosition, currentPosition }: any) => {
       if (currentPosition === 'above' && previousPosition === 'inside') {
-        setCurrentGroup(name)
+        setCurrentGroup(name);
       }
-    }
+    };
   }
 
   private handleEnter(name: string): Function {
-    const { setCurrentGroup } = this.props
+    const { setCurrentGroup } = this.props;
 
     return ({ previousPosition, currentPosition }: any) => {
       if (currentPosition === 'inside' && previousPosition === 'above') {
-        setCurrentGroup(name)
+        setCurrentGroup(name);
       }
-    }
+    };
   }
 
   public scrollTo(groupName: string) {
-    const { top } = this.scrollInnerWrap.getBoundingClientRect()
-    const { top: waypointTop } = this.waypoints[groupName].waypoint.getBoundingClientRect()
-    const position = waypointTop - top
+    const { top } = this.scrollInnerWrap.getBoundingClientRect();
+    const { top: waypointTop } = this.waypoints[groupName].waypoint.getBoundingClientRect();
+    const position = waypointTop - top;
 
-    this.scrollbar.scrollTop(position + 1)
-    this.props.scrollTo('')
-    this.props.setCurrentGroup(groupName)
+    this.scrollbar.scrollTop(position + 1);
+    this.props.scrollTo('');
+    this.props.setCurrentGroup(groupName);
   }
 
   public render(): JSX.Element {
@@ -112,9 +112,9 @@ class EmojiSelect extends Component<Props, {}> {
       currentGroup,
       setCurrentGroup,
       scrollTo
-    } = this.props
+    } = this.props;
 
-    const displayWaypoints = !!scrollPosition
+    const displayWaypoints = !!scrollPosition;
 
     return (
       <div styleName="emoji-select" onMouseLeave={this.handleClose}>
@@ -158,11 +158,11 @@ class EmojiSelect extends Component<Props, {}> {
           </ul>
         </div>
       </div>
-    )
+    );
   }
 }
 
-const StyledComponent = CSSModules(EmojiSelect, require('./styles.css'))
+const StyledComponent = CSSModules(EmojiSelect, require('./styles.css'));
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => state.messenger.emojiSelect,
@@ -172,4 +172,4 @@ export default connect<StateProps, DispatchProps, ComponentProps>(
     closeDropdown,
     scrollTo
   }
-)(StyledComponent)
+)(StyledComponent);

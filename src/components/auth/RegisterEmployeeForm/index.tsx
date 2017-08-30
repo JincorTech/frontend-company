@@ -1,20 +1,19 @@
-import * as React from 'react'
-import { Component } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
+import * as React from 'react';
+import { Component } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form';
 
-import { required, email, password, minLength, maxLength } from '../../../utils/validators'
+import { required, email, password, minLength, maxLength } from '../../../utils/validators';
 
-import Form from '../../../components/form/Form'
-import Button from '../../../components/common/Button'
-import RenderInput from '../../../components/form/RenderInput'
-import RenderPassword from '../../../components/form/RenderPassword'
-
+import Form from '../../../components/form/Form';
+import Button from '../../../components/common/Button';
+import RenderInput from '../../../components/form/RenderInput';
+import RenderPassword from '../../../components/form/RenderPassword';
 
 /**
  * Types
  */
-export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>
+export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>;
 
 export type FormFields = {
   verificationId: string
@@ -24,7 +23,7 @@ export type FormFields = {
   lastName: string
   position: string
   password: string
-}
+};
 
 export type ComponentProps = {
   spinner: boolean
@@ -32,23 +31,22 @@ export type ComponentProps = {
   pin: string
   email: string
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>
-}
-
+};
 
 /**
  * Component
  */
 class CreateAccountForm extends Component<Props, {}> {
   public componentDidMount(): void {
-    const { change, verificationId, pin, email } = this.props
+    const { change, verificationId, pin, email } = this.props;
 
-    change('verificationId', verificationId)
-    change('pin', pin)
-    change('email', email)
+    change('verificationId', verificationId);
+    change('pin', pin);
+    change('email', email);
   }
 
   public render(): JSX.Element {
-    const { invalid, handleSubmit, spinner } = this.props
+    const { invalid, handleSubmit, spinner } = this.props;
 
     return (
       <Form
@@ -125,14 +123,14 @@ class CreateAccountForm extends Component<Props, {}> {
           disabled={invalid}
           children="Далее"/>
       </Form>
-    )
+    );
   }
 }
 
 /**
  * Decorators
  */
-const StyledComponent = CSSModules(CreateAccountForm, require('./styles.css'))
+const StyledComponent = CSSModules(CreateAccountForm, require('./styles.css'));
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'employee',
@@ -145,4 +143,4 @@ export default reduxForm<FormFields, ComponentProps>({
     pin: '',
     email: ''
   }
-})(StyledComponent)
+})(StyledComponent);

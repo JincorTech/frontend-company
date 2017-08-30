@@ -1,11 +1,11 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { getBackgroundColor, getInitials } from '../../../utils/colorFunction'
+import * as React from 'react';
+import { SFC } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { getBackgroundColor, getInitials } from '../../../utils/colorFunction';
 
-import { BottomView as BottomViewProps } from '../../../redux/modules/app/profileCard'
+import { BottomView as BottomViewProps } from '../../../redux/modules/app/profileCard';
 
-import CompanyLogo from '../../profile/CompanyLogo'
+import CompanyLogo from '../../profile/CompanyLogo';
 
 /**
  * Types
@@ -22,7 +22,7 @@ export type Props = {
   bottomView?: BottomViewProps
   companyName: string
   companyLogo: string
-}
+};
 
 /**
  * Component
@@ -41,7 +41,7 @@ const CardAvatar: SFC<Props> = (props) => {
     companyName,
     companyLogo,
     children
-  } = props
+  } = props;
 
   return (
     <div styleName={type === 'employee' && type}>
@@ -70,15 +70,15 @@ const CardAvatar: SFC<Props> = (props) => {
 
       {children}
     </div>
-  )
-}
+  );
+};
 
 CardAvatar.defaultProps = {
   type: 'user'
-}
+};
 
 /**
  * Export
  */
 
-export default CSSModules(CardAvatar, require('./styles.css'))
+export default CSSModules(CardAvatar, require('./styles.css'));

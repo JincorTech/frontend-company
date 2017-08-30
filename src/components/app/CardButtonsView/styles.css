@@ -13,9 +13,9 @@
     padding: 1px 10px;
     margin: 0 0 5px;
     font: normal 16px/30px 'Open Sans';
-    letter-spacing: -.3px;
+    letter-spacing: -0.3px;
     cursor: pointer;
-    transition: .2s linear background-color;
+    transition: 0.2s linear background-color;
 
     & .icon {
       size: 30px;
@@ -24,7 +24,7 @@
     }
 
     &:hover {
-      background-color: rgba(0, 0, 0, .03);
+      background-color: rgba(0, 0, 0, 0.03);
     }
   }
 }

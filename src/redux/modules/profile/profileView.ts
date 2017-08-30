@@ -1,16 +1,15 @@
-import { createReducer, createAction, createAsyncAction, Action } from '../../../utils/actions'
-import { from, ImmutableObject } from 'seamless-immutable'
-
+import { createReducer, createAction, createAsyncAction, Action } from '../../../utils/actions';
+import { from, ImmutableObject } from 'seamless-immutable';
 
 /**
  * Types
  */
-export type State = StateMap & ImmutableObject<StateMap>
+export type State = StateMap & ImmutableObject<StateMap>;
 
 export type StateMap = {
   preloader: boolean
   company: Company
-}
+};
 
 // User company
 export type Company = {
@@ -20,7 +19,7 @@ export type Company = {
   profile: Profile
   economicalActivityTypes: ActivityType[]
   companyType: CompanyType
-}
+};
 
 export type Profile = {
   brandName: {
@@ -32,19 +31,19 @@ export type Profile = {
   phone: string
   description: string
   address: Address
-}
+};
 
 export type ActivityType = {
   id: string
   name: string
   code: string
-}
+};
 
 export type CompanyType = {
   id: string
   name: string
   code: string
-}
+};
 
 export type Address = {
   country: {
@@ -56,25 +55,25 @@ export type Address = {
     name: string
   }
   formattedAddress: string
-}
+};
 
 export type Link = {
   name: string
   value: string
   iconUrl?: string
-}
+};
 
 /**
  * Actions
  */
-export const FETCH_COMPANY = 'profile/profile/FETCH_COMPANY'
-export const RESET_STATE   = 'profile/profile/RESET_PROFILE_VIEW_STATE'
+export const FETCH_COMPANY = 'profile/profile/FETCH_COMPANY';
+export const RESET_STATE = 'profile/profile/RESET_PROFILE_VIEW_STATE';
 
 /**
  * Action creators
  */
-export const fetchCompany = createAsyncAction<string, Company>(FETCH_COMPANY)
-export const resetState   = createAction<void>(RESET_STATE)
+export const fetchCompany = createAsyncAction<string, Company>(FETCH_COMPANY);
+export const resetState = createAction<void>(RESET_STATE);
 
 /**
  * Reducer
@@ -111,7 +110,7 @@ const initialState = from<StateMap>({
       code: ''
     }
   }
-})
+});
 
 export default createReducer<State>({
   [fetchCompany.REQUEST]: (state: State): State => (
@@ -122,7 +121,11 @@ export default createReducer<State>({
     state.merge({ preloader: false, company })
   ),
 
+  [fetchCompany.FAILURE]: (state: State): State => (
+    state.merge({ preloader: false })
+  ),
+
   [RESET_STATE]: (state: State): State => (
     state.merge(initialState)
   )
-}, initialState)
+}, initialState);

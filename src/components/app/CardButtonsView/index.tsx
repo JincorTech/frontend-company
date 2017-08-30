@@ -1,10 +1,10 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC } from 'react';
+import * as CSSModules from 'react-css-modules';
 
-import { BottomView as BottomViewProps } from '../../../redux/modules/app/profileCard'
+import { BottomView as BottomViewProps } from '../../../redux/modules/app/profileCard';
 
-import Icon from '../../common/Icon'
+import Icon from '../../common/Icon';
 
 /**
  * Types
@@ -13,14 +13,14 @@ import Icon from '../../common/Icon'
 export type Props = {
   changeView: (view: BottomViewProps) => void
   logout: () => void
-}
+};
 
 /**
  * Component
  */
 
 const CardButtonsView: SFC<Props> = (props) => {
-  const { changeView, logout } = props
+  const { changeView, logout } = props;
 
   return (
     <div styleName="control-buttons">
@@ -42,11 +42,11 @@ const CardButtonsView: SFC<Props> = (props) => {
         <Icon name="logout" styleName="icon"/> Выйти
       </button>
     </div>
-  )
-}
+  );
+};
 
 /**
  * Export
  */
 
-export default CSSModules(CardButtonsView, require('./styles.css'))
+export default CSSModules(CardButtonsView, require('./styles.css'));

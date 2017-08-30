@@ -1,8 +1,8 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
 
-import Icon from '../../../components/common/Icon'
+import Icon from '../../../components/common/Icon';
 
 /**
  * Types
@@ -12,13 +12,13 @@ export type Props = HTMLProps<HTMLDivElement> & {
   preview: string
   avatar: JSX.Element
   writeable?: boolean
-}
+};
 
 /**
  * Component
  */
 const UserDialog: SFC<Props> = (props) => {
-  const { id, name, preview, avatar, writeable } = props
+  const { id, name, preview, avatar, writeable } = props;
 
   return (
     <div styleName="dialog">
@@ -44,11 +44,11 @@ const UserDialog: SFC<Props> = (props) => {
         15/03/2017
       </span>
     </div>
-  )
-}
+  );
+};
 
 UserDialog.defaultProps = {
   writeable: false
-}
+};
 
-export default CSSModules(UserDialog, require('./styles.css'))
+export default CSSModules(UserDialog, require('./styles.css'));

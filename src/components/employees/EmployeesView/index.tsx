@@ -1,48 +1,47 @@
-import * as React from 'react'
-import { Component, MouseEvent } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { Component, MouseEvent } from 'react';
+import * as CSSModules from 'react-css-modules';
 
-import { Props } from '../../../containers/employees/Employees'
-import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/employees/employees'
+import { Props } from '../../../containers/employees/Employees';
+import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/employees/employees';
 
-import InviteEmployee from '../../../components/employees/InviteEmployee'
-import Scrollbar from '../../../components/common/Scrollbar'
-import Self from '../../../components/employees/Self'
-import ActiveEmployee from '../../../components/employees/ActiveEmployee'
-import InvitedEmployee from '../../../components/employees/InvitedEmployee'
-import DeletedEmployee from '../../../components/employees/DeletedEmployee'
-import ConfirmPopup from '../../../components/common/ConfirmPopup'
-import EmployeeCard from '../../../components/employees/EmployeeCard'
-import BackButton from '../../../components/common/BackButton'
-
+import InviteEmployee from '../../../components/employees/InviteEmployee';
+import Scrollbar from '../../../components/common/Scrollbar';
+import Self from '../../../components/employees/Self';
+import ActiveEmployee from '../../../components/employees/ActiveEmployee';
+import InvitedEmployee from '../../../components/employees/InvitedEmployee';
+import DeletedEmployee from '../../../components/employees/DeletedEmployee';
+import ConfirmPopup from '../../../components/common/ConfirmPopup';
+import EmployeeCard from '../../../components/employees/EmployeeCard';
+import BackButton from '../../../components/common/BackButton';
 
 class EmployeesView extends Component<Props, {}> {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.onDeleteEmployee = this.onDeleteEmployee.bind(this)
-    this.onMakeAdmin = this.onMakeAdmin.bind(this)
-    this.onUnmakeAdmin = this.onUnmakeAdmin.bind(this)
-    this.onOpenProfile = this.onOpenProfile.bind(this)
+    this.onDeleteEmployee = this.onDeleteEmployee.bind(this);
+    this.onMakeAdmin = this.onMakeAdmin.bind(this);
+    this.onUnmakeAdmin = this.onUnmakeAdmin.bind(this);
+    this.onOpenProfile = this.onOpenProfile.bind(this);
   }
 
   private onDeleteEmployee(e: MouseEvent<HTMLButtonElement>, id: string): void {
-    this.props.openConfirmDeletePopup(id)
-    e.stopPropagation()
+    this.props.openConfirmDeletePopup(id);
+    e.stopPropagation();
   }
 
   private onMakeAdmin(e: MouseEvent<HTMLButtonElement>, id: string): void {
-    this.props.openConfirmAdminPopup(id)
-    e.stopPropagation()
+    this.props.openConfirmAdminPopup(id);
+    e.stopPropagation();
   }
 
   private onUnmakeAdmin(e: MouseEvent<HTMLButtonElement>, id: string): void {
-    this.props.openConfirmRmAdminPopup(id)
-    e.stopPropagation()
+    this.props.openConfirmRmAdminPopup(id);
+    e.stopPropagation();
   }
 
   private onOpenProfile(employee: ActiveEmployeeProps): void {
-    this.props.openEmployeeCard(employee)
+    this.props.openEmployeeCard(employee);
   }
 
   public render(): JSX.Element {
@@ -66,7 +65,7 @@ class EmployeesView extends Component<Props, {}> {
       unmakeAdmin,
       deleteEmployee,
       openProfileCard
-    } = this.props
+    } = this.props;
 
     return (
       <div styleName="container">
@@ -143,8 +142,8 @@ class EmployeesView extends Component<Props, {}> {
           company={company}
           employee={employeeCard.employee}/>
       </div>
-    )
+    );
   }
 }
 
-export default CSSModules(EmployeesView, require('./styles.css'))
+export default CSSModules(EmployeesView, require('./styles.css'));

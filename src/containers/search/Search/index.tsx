@@ -1,31 +1,30 @@
-import * as React from 'react'
-import { Component } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { connect } from 'react-redux'
-import * as isEqual from 'shallowequal'
+import * as React from 'react';
+import { Component } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { connect } from 'react-redux';
+import * as isEqual from 'shallowequal';
 
-import { fetchActivities } from '../../../redux/modules/common/activityTypes'
-import { search, fetchCountries, nextPage, StateMap as StateProps, SearchRequest } from '../../../redux/modules/search/search'
-import { openCompanyCard } from '../../../redux/modules/common/companyCard'
-import { Company as CompanyProps } from '../../../redux/modules/profile/profileView'
+import { fetchActivities } from '../../../redux/modules/common/activityTypes';
+import { search, fetchCountries, nextPage, StateMap as StateProps, SearchRequest } from '../../../redux/modules/search/search';
+import { openCompanyCard } from '../../../redux/modules/common/companyCard';
+import { Company as CompanyProps } from '../../../redux/modules/profile/profileView';
 
-import * as Waypoint from 'react-waypoint'
-import ProgressBar from 'react-redux-loading-bar'
-import CompanyCard from '../../../components/search/CompanyCard'
-import Select from '../../common/Select'
-import ActivityTypes from '../../common/ActivityTypes'
-import SelectDropdown from '../../../components/common/SelectDropdown'
-
+import * as Waypoint from 'react-waypoint';
+import ProgressBar from 'react-redux-loading-bar';
+import CompanyCard from '../../../components/search/CompanyCard';
+import Select from '../../common/Select';
+import ActivityTypes from '../../common/ActivityTypes';
+import SelectDropdown from '../../../components/common/SelectDropdown';
 
 export type Props = ComponentProps & DispatchProps & StateProps & {
   loadingBar: number
-}
+};
 
 export type ComponentProps = {
   request: string
   activity: string
   country: string
-}
+};
 
 export type DispatchProps = {
   fetchActivities: () => void
@@ -34,72 +33,71 @@ export type DispatchProps = {
   handleCountryChange: (e: any) => void
   openCompanyCard: (company: CompanyProps) => void
   nextPage: (req: SearchRequest) => void
-}
-
+};
 
 class Search extends Component<Props, ComponentProps> {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       request: this.props.request || '',
       country: this.props.country || '',
       activity: this.props.activity || ''
-    }
+    };
 
-    this.handleCountryChange = this.handleCountryChange.bind(this)
-    this.handleActivityChange = this.handleActivityChange.bind(this)
-    this.handleRequestChange = this.handleRequestChange.bind(this)
+    this.handleCountryChange = this.handleCountryChange.bind(this);
+    this.handleActivityChange = this.handleActivityChange.bind(this);
+    this.handleRequestChange = this.handleRequestChange.bind(this);
   }
 
   public componentWillMount(): void {
-    const { fetchActivities, fetchCountries } = this.props
+    const { fetchActivities, fetchCountries } = this.props;
 
-    fetchActivities()
-    fetchCountries()
+    fetchActivities();
+    fetchCountries();
   }
 
   private handleCountryChange(country: string): void {
-    this.setState({ country })
+    this.setState({ country });
   }
 
   private handleActivityChange(activity: string): void {
-    this.setState({ activity })
+    this.setState({ activity });
   }
 
   private handleRequestChange({ target: { value: request } }): void {
-    this.setState({ request })
+    this.setState({ request });
   }
 
   private renderWaypoint(): JSX.Element {
-    const { companies, isLoading, meta } = this.props
-    const { pagination: { perPage, currentPage, lastPage } } = meta
+    const { companies, isLoading, meta } = this.props;
+    const { pagination: { perPage, currentPage, lastPage } } = meta;
 
     if (!isLoading && companies.length >= perPage && currentPage < lastPage) {
-      return <Waypoint onEnter={() => this.pushCompanies()} scrollableAncestor={window}/>
+      return <Waypoint onEnter={() => this.pushCompanies()} scrollableAncestor={window}/>;
     }
   }
 
   private pushCompanies(): void {
-    const { nextPage, meta, page } = this.props
-    const { pagination: { perPage } } = meta
-    const { request, country, activity } = this.state
+    const { nextPage, meta, page } = this.props;
+    const { pagination: { perPage } } = meta;
+    const { request, country, activity } = this.state;
 
-    nextPage({ request, country, activity, perPage, page: page + 1 })
+    nextPage({ request, country, activity, perPage, page: page + 1 });
   }
 
   public componentWillUpdate(nextProps, nextState): void {
     if (!isEqual(this.state, nextState)) {
-      const { search, meta, page } = this.props
-      const { pagination: { perPage } } = meta
-      const { request, country, activity } = nextState
+      const { search, meta, page } = this.props;
+      const { pagination: { perPage } } = meta;
+      const { request, country, activity } = nextState;
 
-      search({ request, country, activity, perPage, page })
+      search({ request, country, activity, perPage, page });
     }
   }
 
   public render(): JSX.Element {
-    const { companies, openCompanyCard, loadingBar } = this.props
+    const { companies, openCompanyCard, loadingBar } = this.props;
 
     return (
       <div>
@@ -133,7 +131,7 @@ class Search extends Component<Props, ComponentProps> {
                 optionValue={this.state.country}
                 defaultOption="Все страны"
                 onChange={this.handleCountryChange}
-                onBlur={() => {}}
+                onBlur={() => void(0)}
                 placeholder="Все страны"/>
             </div>
             <div styleName="filter">
@@ -160,12 +158,11 @@ class Search extends Component<Props, ComponentProps> {
 
         {this.renderWaypoint()}
       </div>
-    )
+    );
   }
 }
 
-
-const StyledComponent = CSSModules(Search, require('./styles.css'))
+const StyledComponent = CSSModules(Search, require('./styles.css'));
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => ({
@@ -173,4 +170,4 @@ export default connect<StateProps, DispatchProps, ComponentProps>(
     ...state.search.search
   }),
   { fetchActivities, fetchCountries, search, nextPage, openCompanyCard }
-)(StyledComponent)
+)(StyledComponent);

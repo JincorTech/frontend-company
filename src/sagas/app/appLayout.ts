@@ -1,20 +1,21 @@
-import { SagaIterator } from 'redux-saga'
-import { takeLatest, call, put, fork } from 'redux-saga/effects'
+import { SagaIterator } from 'redux-saga';
+import { takeLatest, call, put, fork } from 'redux-saga/effects';
 
-import { get } from '../../utils/api'
+import { get } from '../../utils/api';
+import { notify } from '../../utils/notifications';
 
-import { fetchUser } from '../../redux/modules/app/appLayout'
-
+import { fetchUser } from '../../redux/modules/app/appLayout';
 
 /**
  * Fetch user saga
  */
 function* fetchUserIterator(): SagaIterator {
   try {
-    const { data } = yield call(get, '/employee/me')
-    yield put(fetchUser.success(data))
+    const { data } = yield call(get, '/employee/me');
+    yield put(fetchUser.success(data));
   } catch (e) {
-    yield put(fetchUser.failure(e))
+    yield put(fetchUser.failure(e));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -22,14 +23,14 @@ function* fetchUserSaga(): SagaIterator {
   yield takeLatest(
     fetchUser.REQUEST,
     fetchUserIterator
-  )
+  );
 }
 
 /**
  * App Layout saga
  */
-export default function* (): SagaIterator {
+export default function*(): SagaIterator {
   yield [
     fork(fetchUserSaga)
-  ]
+  ];
 }

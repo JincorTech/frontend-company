@@ -4,10 +4,10 @@
   display: inline-block;
   font: normal 16px/22px 'Open Sans';
   color: #222;
-  padding: 0px;
+  padding: 0;
   height: 31px;
-  border: 0px;
-  outline: 0px;
+  border: 0;
+  outline: 0;
   margin-bottom: 7px;
   letter-spacing: -0.4px;
 }
@@ -58,7 +58,7 @@
   cursor: text;
   border: solid 1px #dbdfe4;
   font: normal 19px/1 'SF UI Text';
-  background: #ffffff;
+  background: #fff;
   border-radius: 4px;
   padding-left: 7px;
   margin-bottom: 15px;

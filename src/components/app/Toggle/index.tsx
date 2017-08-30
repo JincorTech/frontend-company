@@ -1,9 +1,8 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
 
-
-export type ToggleProps = HTMLProps<HTMLDivElement>
+export type ToggleProps = HTMLProps<HTMLDivElement>;
 
 const MenuToggle: SFC<ToggleProps> = (props) => {
   return (
@@ -12,7 +11,7 @@ const MenuToggle: SFC<ToggleProps> = (props) => {
       <span styleName="stripe" />
       <span styleName="stripe" />
     </div>
-  )
-}
+  );
+};
 
-export default CSSModules(MenuToggle, require('./styles.css'))
+export default CSSModules(MenuToggle, require('./styles.css'));

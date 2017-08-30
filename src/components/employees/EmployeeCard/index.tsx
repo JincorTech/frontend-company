@@ -1,30 +1,30 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
 
-import { Props as PopupProps } from '../../common/Popup'
-import { EmployeeCard as EmployeeCardState } from '../../../redux/modules/employees/employees'
-import { UserCompany as UserCompanyProps } from '../../../redux/modules/app/appLayout'
+import { Props as PopupProps } from '../../common/Popup';
+import { EmployeeCard as EmployeeCardState } from '../../../redux/modules/employees/employees';
+import { UserCompany as UserCompanyProps } from '../../../redux/modules/app/appLayout';
 
-import Popup from '../../common/Popup'
-import CardAvatar from '../../app/CardAvatar'
+import Popup from '../../common/Popup';
+import CardAvatar from '../../app/CardAvatar';
 
 export type Props =
   JSX.IntrinsicAttributes &
   JSX.IntrinsicClassAttributes<any> &
   PopupProps &
   EmployeeCardProps &
-  EmployeeCardState
+  EmployeeCardState;
 
 export type EmployeeCardProps = {
   company: UserCompanyProps
-}
+};
 
 const EmployeeCard: SFC<Props> = ({ employee, company, ...popupProps }) => {
   const {
     id,
     profile
-  } = employee
+  } = employee;
 
   const {
     avatar,
@@ -32,12 +32,12 @@ const EmployeeCard: SFC<Props> = ({ employee, company, ...popupProps }) => {
     firstName,
     lastName,
     position
-  } = profile
+  } = profile;
 
   const {
     legalName,
     profile: { picture }
-  } = company
+  } = company;
 
   return (
     <Popup styleName="employee-card" {...popupProps}>
@@ -58,7 +58,7 @@ const EmployeeCard: SFC<Props> = ({ employee, company, ...popupProps }) => {
         </div>
       </CardAvatar>
     </Popup>
-  )
-}
+  );
+};
 
-export default CSSModules(EmployeeCard, require('./styles.css'))
+export default CSSModules(EmployeeCard, require('./styles.css'));

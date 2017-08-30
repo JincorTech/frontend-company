@@ -2,9 +2,9 @@
 @use postcss-for;
 @use postcss-calc;
 
-@keyframes spinner-animate { 
-  0% { opacity: 1} 
-  100% {opacity: 0} 
+@keyframes spinner-animate {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 .spinner {
@@ -17,7 +17,7 @@
 .stick {
   position: absolute 12px * * 15px;
   size: 2px 8px;
-  background: #ffffff;
+  background: #fff;
   border-radius: 2px;
   animation: spinner-animate 1s linear infinite;
 }
@@ -25,7 +25,10 @@
 @for $i from 0 to 330 by 30 {
   .stick-$i {
     composes: stick;
-    transform: rotate($(i)deg) translate(0,-10px);
+
+    /* stylelint-disable function-whitespace-after */
+    transform: rotate($(i)deg) translate(0, -10px);
+    /* stylelint-enable */
     animation-delay: calc(-0.5s + $i/360);
   }
 }

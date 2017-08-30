@@ -1,13 +1,13 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { Scrollbars } from 'react-custom-scrollbars'
+import * as React from 'react';
+import { SFC, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { Scrollbars } from 'react-custom-scrollbars';
 
-import Icon from '../../../components/common/Icon'
-import SearchInput from '../../../components/messenger/SearchInput'
-import Dialog from '../../../components/messenger/UserDialog'
-import Channel from '../../../components/messenger/ChannelDialog'
-import Inquiry from '../../../components/messenger/InquiryDialog'
+import Icon from '../../../components/common/Icon';
+import SearchInput from '../../../components/messenger/SearchInput';
+import Dialog from '../../../components/messenger/UserDialog';
+import Channel from '../../../components/messenger/ChannelDialog';
+import Inquiry from '../../../components/messenger/InquiryDialog';
 
 /**
  * Types
@@ -15,14 +15,14 @@ import Inquiry from '../../../components/messenger/InquiryDialog'
 export type Props = HTMLProps<HTMLDivElement> & {
   search: boolean
   height: number
-}
+};
 
 /**
  * Component
  */
 const Dialogs: SFC<Props> = (props) => {
-  const { search, height, ...divProps } = props
-  const contentHeight = height - 65
+  const { search, height, ...divProps } = props;
+  const contentHeight = height - 65;
 
   return (
     <div styleName="dialogs" {...divProps}>
@@ -95,7 +95,7 @@ const Dialogs: SFC<Props> = (props) => {
         </div>
       </Scrollbars>
     </div>
-  )
-}
+  );
+};
 
-export default CSSModules(Dialogs, require('./styles.css'))
+export default CSSModules(Dialogs, require('./styles.css'));

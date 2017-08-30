@@ -1,8 +1,8 @@
-import * as React from 'react'
-import { Component, FormEvent, KeyboardEvent, MouseEvent } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { Scrollbars } from 'react-custom-scrollbars'
-import { connect } from 'react-redux'
+import * as React from 'react';
+import { Component, FormEvent, KeyboardEvent, MouseEvent } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { Scrollbars } from 'react-custom-scrollbars';
+import { connect } from 'react-redux';
 
 import {
   validateEmail,
@@ -13,18 +13,18 @@ import {
   selectEmail,
   unselectEmail,
   StateMap as StateProps
-} from '../../../redux/modules/common/emailTextarea'
+} from '../../../redux/modules/common/emailTextarea';
 
-import EmailItem from './components/EmailItem'
+import EmailItem from './components/EmailItem';
 
 /**
  * Types
  */
-export type Props = ComponentProps & DispatchProps & StateProps
+export type Props = ComponentProps & DispatchProps & StateProps;
 
 export type ComponentProps = {
   placeholder?: string
-}
+};
 
 export type DispatchProps = {
   validateEmail: (value: string) => void
@@ -34,98 +34,98 @@ export type DispatchProps = {
   keyPress: (key: string) => void
   selectEmail: (index: number) => void
   unselectEmail: () => void
-}
+};
 
 /**
  * Component
  */
 class EmailTextarea extends Component<Props, {}> {
-  private input: HTMLDivElement
-  private textarea: HTMLDivElement
-  private emailItem: HTMLDivElement
-  private textareaValue: HTMLInputElement
-  private EMAIL_ITEM_RIGTH_PEDDING = 9
+  private input: HTMLDivElement;
+  private textarea: HTMLDivElement;
+  private emailItem: HTMLDivElement;
+  private textareaValue: HTMLInputElement;
+  private EMAIL_ITEM_RIGTH_PEDDING = 9;
 
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleBackspace = this.handleBackspace.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleBackspace = this.handleBackspace.bind(this);
   }
 
   public componentDidMount(): void {
-    const { setInputWidth } = this.props
+    const { setInputWidth } = this.props;
 
-    setInputWidth(this.textarea.clientWidth)
+    setInputWidth(this.textarea.clientWidth);
   }
 
   public componentDidUpdate(): void {
-    const { value, setInputWidth, inputWidth, emails } = this.props
+    const { value, setInputWidth, inputWidth, emails } = this.props;
 
-    const hiddenInputWidth = this.calcInputValueWidth(value)
-    const availableWidth = this.calcAvailableSpace()
-    const textareaWidth = this.textarea.clientWidth
+    const hiddenInputWidth = this.calcInputValueWidth(value);
+    const availableWidth = this.calcAvailableSpace();
+    const textareaWidth = this.textarea.clientWidth;
 
     if (availableWidth !== inputWidth || hiddenInputWidth > inputWidth) {
       const width = hiddenInputWidth > availableWidth
         ? textareaWidth
-        : availableWidth
+        : availableWidth;
 
-      setInputWidth(width)
+      setInputWidth(width);
     }
   }
 
   private handleChange(e: FormEvent<HTMLInputElement>): void {
-    const { validateEmail } = this.props
+    const { validateEmail } = this.props;
 
-    validateEmail(e.currentTarget.value)
+    validateEmail(e.currentTarget.value);
   }
 
   private handleBackspace(e: KeyboardEvent<HTMLInputElement>): void {
-    const { handleEmailRemove } = this.props
+    const { handleEmailRemove } = this.props;
 
     if (e.key === 'Backspace' || e.key === 'Delete') {
-      handleEmailRemove(e.key)
+      handleEmailRemove(e.key);
     }
   }
 
   private handleEmailClick(e: MouseEvent<HTMLDivElement>, index: number): void {
-    const { selectedEmail, selectEmail, unselectEmail } = this.props
-    e.stopPropagation()
+    const { selectedEmail, selectEmail, unselectEmail } = this.props;
+    e.stopPropagation();
 
     selectedEmail !== index
       ? selectEmail(index)
-      : unselectEmail()
+      : unselectEmail();
 
-    this.textareaValue.focus()
+    this.textareaValue.focus();
   }
 
   private calcInputValueWidth(value: string): number {
-    this.input.innerText = value
-    return this.input.clientWidth
+    this.input.innerText = value;
+    return this.input.clientWidth;
   }
 
   private calcAvailableSpace(): number {
-    const textareaWidth = this.textarea.clientWidth
+    const textareaWidth = this.textarea.clientWidth;
 
-    let child = this.textarea.firstElementChild
-    let rowWidth = 0
+    let child = this.textarea.firstElementChild;
+    let rowWidth = 0;
 
     while (child.tagName !== 'INPUT') {
-      let emailWidth = (child as HTMLElement).offsetWidth + this.EMAIL_ITEM_RIGTH_PEDDING
+      let emailWidth = (child as HTMLElement).offsetWidth + this.EMAIL_ITEM_RIGTH_PEDDING;
 
       rowWidth = textareaWidth > rowWidth + emailWidth
         ? rowWidth + emailWidth
-        : emailWidth
+        : emailWidth;
 
-      child = child.nextElementSibling
+      child = child.nextElementSibling;
     }
 
-    return textareaWidth - rowWidth
+    return textareaWidth - rowWidth;
   }
 
   public render(): JSX.Element {
-    const { value, emails, placeholder, inputWidth, selectedEmail, selectEmail, unselectEmail } = this.props
+    const { value, emails, placeholder, inputWidth, selectedEmail, selectEmail, unselectEmail } = this.props;
 
     return (
       <div styleName="textarea-wrap" onClick={() => this.textareaValue.focus()}>
@@ -158,14 +158,14 @@ class EmailTextarea extends Component<Props, {}> {
           </div>
         </Scrollbars>
       </div>
-    )
+    );
   }
 }
 
 /**
  * Decorators
  */
-const StyledComponent = CSSModules(EmailTextarea, require('./styles.css'))
+const StyledComponent = CSSModules(EmailTextarea, require('./styles.css'));
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => state.common.emailTextarea,
@@ -178,4 +178,4 @@ export default connect<StateProps, DispatchProps, ComponentProps>(
     selectEmail,
     unselectEmail
   }
-)(StyledComponent)
+)(StyledComponent);

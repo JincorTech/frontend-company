@@ -1,5 +1,5 @@
-import 'whatwg-fetch'
-import { pathCreator, checkHttpStatus, parseJSON, authHeader } from './helpers'
+import 'whatwg-fetch';
+import { pathCreator, checkHttpStatus, parseJSON, authHeader } from './helpers';
 
 /**
  * Fetch wrapper function
@@ -8,7 +8,7 @@ import { pathCreator, checkHttpStatus, parseJSON, authHeader } from './helpers'
  * @param   options - fetch options
  * @returns         - promise
  */
-function apiFetch (path: string, options: RequestInit = {}): Promise<Response> {
+function apiFetch(path: string, options: RequestInit = {}): Promise<Response> {
   return fetch(pathCreator(path), {
     headers: {
       'Accept': 'application/json',
@@ -18,7 +18,7 @@ function apiFetch (path: string, options: RequestInit = {}): Promise<Response> {
     ...options
   })
     .then(checkHttpStatus)
-    .then(parseJSON)
+    .then(parseJSON);
 }
 
 /**
@@ -30,7 +30,7 @@ function apiFetch (path: string, options: RequestInit = {}): Promise<Response> {
 export function get(path: string): Promise<Response> {
   return apiFetch(path, {
     method: 'GET'
-  })
+  });
 }
 
 /**
@@ -44,7 +44,7 @@ export function post<T>(path: string, body: T): Promise<Response> {
   return apiFetch(path, {
     method: 'POST',
     body: JSON.stringify(body)
-  })
+  });
 }
 
 /**
@@ -58,7 +58,7 @@ export function put<T>(path: string, body: T): Promise<Response> {
   return apiFetch(path, {
     method: 'PUT',
     body: JSON.stringify(body)
-  })
+  });
 }
 
 /**
@@ -70,5 +70,5 @@ export function put<T>(path: string, body: T): Promise<Response> {
 export function del(path: string): Promise<Response> {
   return apiFetch(path, {
     method: 'DELETE'
-  })
+  });
 }

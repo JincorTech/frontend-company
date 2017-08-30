@@ -1,4 +1,4 @@
-import { from, ImmutableObject } from 'seamless-immutable'
+import { from, ImmutableObject } from 'seamless-immutable';
 
 import {
   createReducer,
@@ -6,16 +6,16 @@ import {
   createAction,
   createAsyncAction,
   Action
-} from '../../../utils/actions'
+} from '../../../utils/actions';
 
-import { FormFields as CompanyFields } from '../../../components/auth/CreateCompanyForm'
-import { FormFields as AccountFields } from '../../../components/auth/CreateAccountForm'
-import { FormFields as ConfirmFields } from '../../../components/auth/ConfirmEmailForm'
+import { FormFields as CompanyFields } from '../../../components/auth/CreateCompanyForm';
+import { FormFields as AccountFields } from '../../../components/auth/CreateAccountForm';
+import { FormFields as ConfirmFields } from '../../../components/auth/ConfirmEmailForm';
 
 /**
  * Types
  */
-export type State = StateMap & ImmutableObject<StateMap>
+export type State = StateMap & ImmutableObject<StateMap>;
 
 export type StateMap = {
   spinner: boolean
@@ -23,52 +23,51 @@ export type StateMap = {
   stepIndex: StepIndex
   company: Company
   employee: Employee
-}
+};
 
-export type Step = 'company' | 'account' | 'email' | 'employee'
+export type Step = 'company' | 'account' | 'email' | 'employee';
 
-export type StepIndex = 1 | 2 | 3
+export type StepIndex = 1 | 2 | 3;
 
 export type Employee = {
   firstName: string
   lastName: string
   password: string
   position: string
-}
+};
 
 export type Company = {
   id: string
   verificationId: string
-}
+};
 
 /**
  * Action types
  */
-export const CREATE_COMPANY   = 'auth/signUp/CREATE_COMPANY'
-export const SET_USER_INFO    = 'auth/signUp/SET_USER_INFO'
-export const VERIFY_EMAIL     = 'auth/signUp/VERIFY_EMAIL'
-export const CONFIRM_EMAIL    = 'auth/signUp/CONFIRM_EMAIL'
-export const ACCOUNT_CREATED  = 'auth/signUp/CREATE_ACCOUNT_SUCCESS'
-export const INVITE_EMPLOYEE  = 'auth/signUp/EMPLOYEE'
-export const RESET_STATE      = 'auth/signUp/RESET_STATE'
-export const FETCH_DICT       = 'jincor/auth/signUp/FETCH_DICT'
+export const CREATE_COMPANY = 'auth/signUp/CREATE_COMPANY';
+export const SET_USER_INFO = 'auth/signUp/SET_USER_INFO';
+export const VERIFY_EMAIL = 'auth/signUp/VERIFY_EMAIL';
+export const CONFIRM_EMAIL = 'auth/signUp/CONFIRM_EMAIL';
+export const ACCOUNT_CREATED = 'auth/signUp/CREATE_ACCOUNT_SUCCESS';
+export const INVITE_EMPLOYEE = 'auth/signUp/EMPLOYEE';
+export const RESET_STATE = 'auth/signUp/RESET_STATE';
+export const FETCH_DICT = 'jincor/auth/signUp/FETCH_DICT';
 
-export const SIGNUP_EMAIL = 'auth/signUp/SIGNUP_EMAIL'
+export const SIGNUP_EMAIL = 'auth/signUp/SIGNUP_EMAIL';
 
 /**
  * Actions creators
  */
-export const fetchDict      = createAsyncAction<void, void>(FETCH_DICT)
-export const createCompany  = createSubmitAction<CompanyFields, Company>(CREATE_COMPANY)
-export const setUserInfo    = createAction<Employee>(SET_USER_INFO)
-export const verifyEmail    = createSubmitAction<AccountFields, void>(VERIFY_EMAIL)
-export const confirmEmail   = createSubmitAction<ConfirmFields, void>(CONFIRM_EMAIL)
-export const accountCreated = createAction<void>(ACCOUNT_CREATED)
-export const inviteEmployee = createAsyncAction<void, void>(INVITE_EMPLOYEE)
-export const resetState     = createAction<void>(RESET_STATE)
+export const fetchDict = createAsyncAction<void, void>(FETCH_DICT);
+export const createCompany = createSubmitAction<CompanyFields, Company>(CREATE_COMPANY);
+export const setUserInfo = createAction<Employee>(SET_USER_INFO);
+export const verifyEmail = createSubmitAction<AccountFields, void>(VERIFY_EMAIL);
+export const confirmEmail = createSubmitAction<ConfirmFields, void>(CONFIRM_EMAIL);
+export const accountCreated = createAction<void>(ACCOUNT_CREATED);
+export const inviteEmployee = createAsyncAction<void, void>(INVITE_EMPLOYEE);
+export const resetState = createAction<void>(RESET_STATE);
 
-export const signupEmail = createAsyncAction<ConfirmFields, void>(SIGNUP_EMAIL)
-
+export const signupEmail = createAsyncAction<ConfirmFields, void>(SIGNUP_EMAIL);
 
 /**
  * Reducer
@@ -87,7 +86,7 @@ const initialState: State = from<StateMap>({
     password: '',
     position: ''
   }
-})
+});
 
 export default createReducer<State>({
   [createCompany.REQUEST]: (state: State): State => (
@@ -101,6 +100,10 @@ export default createReducer<State>({
       stepIndex: 2,
       spinner: false
     })
+  ),
+
+  [createCompany.FAILURE]: (state: State): State => (
+    state.merge({ spinner: false })
   ),
 
   [verifyEmail.REQUEST]: (state: State): State => (
@@ -120,8 +123,16 @@ export default createReducer<State>({
     })
   ),
 
+  [verifyEmail.FAILURE]: (state: State): State => (
+    state.merge({ spinner: false })
+  ),
+
   [confirmEmail.REQUEST]: (state: State): State => (
     state.merge({ spinner: true })
+  ),
+
+  [confirmEmail.FAILURE]: (state: State): State => (
+    state.merge({ spinner: false })
   ),
 
   [ACCOUNT_CREATED]: (state: State): State => (
@@ -140,7 +151,11 @@ export default createReducer<State>({
     state.merge({ spinner: false })
   ),
 
+  [inviteEmployee.FAILURE]: (state: State): State => (
+    state.merge({ spinner: false })
+  ),
+
   [RESET_STATE]: (state: State): State => (
     state.merge(initialState)
   )
-}, initialState)
+}, initialState);

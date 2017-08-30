@@ -1,27 +1,25 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
 
-import Popup, { Props as PopupProps } from '../Popup'
-import Button from '../Button'
-
+import Popup, { Props as PopupProps } from '../Popup';
+import Button from '../Button';
 
 export type Props =
   JSX.IntrinsicAttributes &
   JSX.IntrinsicClassAttributes<any> &
   PopupProps &
   ComponentProps &
-  DispatchProps
+  DispatchProps;
 
 export type ComponentProps = {
   title: string,
   userId: string
-}
+};
 
 export type DispatchProps = {
   onConfirm: (userId: string) => void
-}
-
+};
 
 const ConfirmPopup: SFC<Props> = ({ title, userId, onClose, onConfirm, ...popupProps }) => (
   <Popup styleName="confirm-popup" onClose={onClose} {...popupProps}>
@@ -34,6 +32,6 @@ const ConfirmPopup: SFC<Props> = ({ title, userId, onClose, onConfirm, ...popupP
       </div>
     </div>
   </Popup>
-)
+);
 
-export default CSSModules(ConfirmPopup, require('./styles.css'))
+export default CSSModules(ConfirmPopup, require('./styles.css'));

@@ -1,14 +1,14 @@
-import * as React from 'react'
-import { Component, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { Scrollbars } from 'react-custom-scrollbars'
+import * as React from 'react';
+import { Component, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { Scrollbars } from 'react-custom-scrollbars';
 
-import Icon from '../../../components/common/Icon'
-import Emoji from '../../../components/messenger/Emoji'
-import SearchInput from '../../../components/messenger/SearchInput'
-import MessageWrapper from '../../../components/messenger/MessageWrapper'
-import ContentEditable from '../../../components/messenger/ContentEditable'
-import EmojiSelect from '../EmojiSelect'
+import Icon from '../../../components/common/Icon';
+import Emoji from '../../../components/messenger/Emoji';
+import SearchInput from '../../../components/messenger/SearchInput';
+import MessageWrapper from '../../../components/messenger/MessageWrapper';
+import ContentEditable from '../../../components/messenger/ContentEditable';
+import EmojiSelect from '../EmojiSelect';
 
 /**
  * Types
@@ -18,11 +18,11 @@ export type Props = HTMLProps<HTMLDivElement> & {
   company: string
   search: boolean
   height: number
-}
+};
 
 export type State = {
   contentHeight: number
-}
+};
 
 const messages = [{
   date: '11:00',
@@ -39,43 +39,43 @@ const messages = [{
   content: 'Чувства, оттенки, мысли, восприятия, которые остаются неназванными, непроизнесенными и не довольствуются приблизительностью формулировок, скапливаются внутри индивидуума и могут привести к психологическому взрыву или срыву.',
   unread: false,
   favorite: false
-}]
+}];
 
 /**
  * Component
  */
 class Messeges extends Component<Props, State> {
-  private footer: HTMLDivElement
+  private footer: HTMLDivElement;
   public state: State = {
     contentHeight: 0
-  }
+  };
 
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.updateHeight = this.updateHeight.bind(this)
+    this.updateHeight = this.updateHeight.bind(this);
   }
 
   public componentDidMount(): void {
-    const { height } = this.props
+    const { height } = this.props;
 
-    this.updateHeight(height)
+    this.updateHeight(height);
   }
 
   public componentWillReceiveProps({ height }: Props): void {
-    this.updateHeight(height)
+    this.updateHeight(height);
   }
 
   private updateHeight(height: number): void {
-    console.log(this.footer.clientHeight)
-    const contentHeight = height - 65 - 50 // headerHeight
+    console.log(this.footer.clientHeight);
+    const contentHeight = height - 65 - 50; // headerHeight
 
-    this.setState({ contentHeight })
+    this.setState({ contentHeight });
   }
 
   public render(): JSX.Element {
-    const { name, company, search, ...divProps } = this.props
-    const { contentHeight } = this.state
+    const { name, company, search, ...divProps } = this.props;
+    const { contentHeight } = this.state;
 
     return (
       <div styleName="messeges" {...divProps}>
@@ -116,8 +116,8 @@ class Messeges extends Component<Props, State> {
           <EmojiSelect open currentGroup="animals"/>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default CSSModules(Messeges, require('./styles.css'))
+export default CSSModules(Messeges, require('./styles.css'));

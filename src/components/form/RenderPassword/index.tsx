@@ -1,22 +1,22 @@
-import * as React from 'react'
-import { SFC, Component } from 'react'
-import { WrappedFieldProps } from 'redux-form'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC, Component } from 'react';
+import { WrappedFieldProps } from 'redux-form';
+import * as CSSModules from 'react-css-modules';
 
-import Password from './components/Password'
-import FieldError from '../../common/FieldError'
-import FieldHint from '../../common/FieldHint'
+import Password from './components/Password';
+import FieldError from '../../common/FieldError';
+import FieldHint from '../../common/FieldHint';
 
 /**
  * Types
  */
 export type Props = WrappedFieldProps<any> & {
   placeholder?: string
-}
+};
 
 export type State = {
   visible: boolean
-}
+};
 
 /**
  * Component
@@ -24,21 +24,21 @@ export type State = {
 class RenderPassword extends Component<Props, State> {
   public state: State = {
     visible: false
-  }
+  };
 
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.handleChangeVisibility = this.handleChangeVisibility.bind(this)
+    this.handleChangeVisibility = this.handleChangeVisibility.bind(this);
   }
 
   private handleChangeVisibility(visible: boolean): void {
-    this.setState({ visible })
+    this.setState({ visible });
   }
 
   public render(): JSX.Element {
-    const { visible } = this.state
-    const { placeholder, input, meta } = this.props
+    const { visible } = this.state;
+    const { placeholder, input, meta } = this.props;
 
     return (
       <FieldHint meta={meta}>
@@ -50,8 +50,8 @@ class RenderPassword extends Component<Props, State> {
             {...input}/>
         </FieldError>
       </FieldHint>
-    )
+    );
   }
 }
 
-export default CSSModules(RenderPassword, require('./styles.css'))
+export default CSSModules(RenderPassword, require('./styles.css'));

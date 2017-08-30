@@ -3,7 +3,7 @@
 .text {
   font-size: 16px/26px;
   letter-spacing: -0.2px;
-  color: #000000;
+  color: #000;
   max-width: 750px;
   white-space: pre-line;
 }
@@ -14,7 +14,7 @@
   letter-spacing: -0.2px;
   color: #0070e0;
   cursor: pointer;
-  margin-left: 5px; 
+  margin-left: 5px;
 
   &:hover {
     text-decoration: underline;

@@ -1,5 +1,5 @@
 @use postcss-short;
-@use postcss-clearfix;  
+@use postcss-clearfix;
 
 :root {
   --background-color: #fbfbfb;
@@ -16,7 +16,8 @@
   margin-bottom: 30px;
 }
 
-.invite-input, .invite-button {
+.invite-input,
+.invite-button {
   float: left;
 }
 
@@ -47,7 +48,8 @@
   background-color: var(--background-color);
 }
 
-.info, .avatar {
+.info,
+.avatar {
   float: left;
 }
 
