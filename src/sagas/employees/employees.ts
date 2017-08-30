@@ -2,6 +2,7 @@ import { SagaIterator } from 'redux-saga';
 import { takeLatest, call, put, fork, select } from 'redux-saga/effects';
 import { Action } from '../../utils/actions';
 import { get, post, put as putFunc, del } from '../../utils/api';
+import { notify } from '../../utils/notifications';
 
 import { isEmail } from '../../helpers/common/emailTextarea';
 
@@ -20,6 +21,7 @@ function* fetchEmployeesIterator(): SagaIterator {
     yield put(fetchEmployees.success(data));
   } catch (e) {
     yield put(fetchEmployees.failure(e));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -49,6 +51,7 @@ function* inviteEmployeesIterator(): SagaIterator {
     yield put(fetchEmployees());
   } catch (e) {
     yield put(inviteEmployees.failure(e));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -69,6 +72,7 @@ function* makeAdminIterator({ payload }: Action<string>): SagaIterator {
     yield put(fetchEmployees());
   } catch (e) {
     yield put(makeAdmin.failure(e));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -89,6 +93,7 @@ function* unmakeAdminIterator({ payload }: Action<string>): SagaIterator {
     yield put(fetchEmployees());
   } catch (e) {
     yield put(unmakeAdmin.failure());
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 
@@ -107,6 +112,7 @@ function* deleteEmployeeIterator({ payload }: Action<string>): SagaIterator {
     yield put(fetchEmployees());
   } catch (e) {
     yield put(deleteEmployee.failure(e));
+    yield put(notify('error', 'Oops', e.message));
   }
 }
 

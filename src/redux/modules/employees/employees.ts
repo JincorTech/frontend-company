@@ -246,8 +246,16 @@ export default createReducer<State>({
     state.merge({ spinner: false })
   ),
 
+  [inviteEmployees.FAILURE]: (state: State): State => (
+    state.merge({ spinner: false })
+  ),
+
   [fetchEmployees.SUCCESS]: (state: State, { payload }: Action<EmployeesResponse[]>): State => (
     state.merge({ preloader: false, ...payload })
+  ),
+
+  [fetchEmployees.FAILURE]: (state: State): State => (
+    state.merge({ preloader: false })
   ),
 
   [RESET_STATE]: (state: State): State => (
