@@ -2,7 +2,9 @@
 @use postcss-center;
 
 
-.dialogs {}
+.dialogs {
+  /* TODO is it need here? */
+}
 
 .custom-scrollbar {
   margin-left: -25px;

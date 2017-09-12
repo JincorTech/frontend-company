@@ -5,22 +5,21 @@
   position: relative;
   padding: 60px * 20px;
   clear: fix;
-}  
+}
 
 .company-logo {
   float: left;
 }
 
 .delete-logo {
-  font: 400 16px 'Open Sans';
+  font: normal 16px 'Open Sans';
   background-color: transparent;
   padding: 0;
-  margin: 0;
   color: #d0011b;
   cursor: pointer;
   display: block;
   margin: 15px auto 0;
-  transition: .1s linear opacity;
+  transition: 0.1s linear opacity;
 
   &:hover {
     text-decoration: underline;
@@ -40,7 +39,7 @@
 }
 
 .company-controls {
-  position: absolute 60px 0px * *;
+  position: absolute 60px 0 * *;
   text-align: center;
   width: 165px;
 }
@@ -84,7 +83,7 @@
 
   & > h4 {
     margin-bottom: 12px;
-    letter-spacing: .1px;
+    letter-spacing: 0.1px;
   }
 }
 
@@ -106,7 +105,7 @@
 * Render activity type
 */
 .error {
-  position: absolute 0px * * 100%;
+  position: absolute 0 * * 100%;
   width: 210px;
   padding-left: 15px;
 }

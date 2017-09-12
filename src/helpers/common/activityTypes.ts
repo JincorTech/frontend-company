@@ -1,14 +1,14 @@
 /**
  * Types
  */
-import { ActivityMap, ActivityNode, StateMap, NormalizedActivities } from '../../redux/modules/common/activityTypes'
+import { ActivityMap, ActivityNode, StateMap, NormalizedActivities } from '../../redux/modules/common/activityTypes';
 
 export type ActivityType = {
   id: string
   name: string
   code: string
   children?: ActivityType[]
-}
+};
 
 /**
  * Normalize activities types
@@ -17,7 +17,7 @@ export function normalizeActivities(activities: ActivityType[]): NormalizedActiv
   return {
     rootNodes: activities.map((activity) => activity.id),
     activityMap: traverseNodes(activities, null, {})
-  }
+  };
 }
 
 /**
@@ -25,19 +25,19 @@ export function normalizeActivities(activities: ActivityType[]): NormalizedActiv
  */
 export function traverseNodes(activities: ActivityType[], parentId: string, hash: ActivityMap): ActivityMap {
   return activities.reduce((acc, activity) => {
-    const { id, children } = activity
+    const { id, children } = activity;
 
     return children
       ? traverseNodes(children, id, addNode(activity, parentId, hash))
-      : addLeaf(activity, parentId, hash)
-  }, hash)
+      : addLeaf(activity, parentId, hash);
+  }, hash);
 }
 
 /**
  * Add node to ActivityMap
  */
 export function addNode(activity: ActivityType, parentId: string, hash: ActivityMap): ActivityMap {
-  const { id, name, children } = activity
+  const { id, name } = activity;
 
   hash[id] = {
     type: 'node',
@@ -47,16 +47,16 @@ export function addNode(activity: ActivityType, parentId: string, hash: Activity
     visible: true,
     parentId: parentId,
     childrenIds: activity.children.map((child) => child.id)
-  }
+  };
 
-  return hash
+  return hash;
 }
 
 /**
  * Add leaf to ActivityMap
  */
 export function addLeaf(activity: ActivityType, parentId: string, hash: ActivityMap): ActivityMap {
-  const { id, name } = activity
+  const { id, name } = activity;
 
   hash[id] = {
     type: 'leaf',
@@ -65,68 +65,67 @@ export function addLeaf(activity: ActivityType, parentId: string, hash: Activity
     selected: false,
     visible: true,
     parentId
-  }
+  };
 
-  return hash
+  return hash;
 }
-
 
 /**
  * Close activity node and show siblings
  */
 export function closeNodeSelector(activityId: string, state: StateMap): ActivityMap {
-  const { activityMap, rootNodes } = state
-  const { parentId } = activityMap[activityId]
+  const { activityMap, rootNodes } = state;
+  const { parentId } = activityMap[activityId];
 
   const childrenIds = parentId
-    ? (<ActivityNode>activityMap[parentId]).childrenIds
-    : rootNodes
+    ? (activityMap[parentId] as ActivityNode).childrenIds
+    : rootNodes;
 
   return childrenIds.reduce((acc, childId) => {
     acc[childId] = {
       ...activityMap[childId],
       open: false,
       visible: true
-    }
+    };
 
-    return acc
-  }, {})
+    return acc;
+  }, {});
 }
 
 export function closeAllNodes({ activityMap }: StateMap): ActivityMap {
   return Object.keys(activityMap).reduce((acc, activityId) => {
-    const activityType = activityMap[activityId]
+    const activityType = activityMap[activityId];
 
     if (activityType.type === 'node') {
       acc[activityId] = {
         ...activityType,
         open: false,
         visible: true
-      }
+      };
     }
 
-    return acc
-  }, {})
+    return acc;
+  }, {});
 }
 
 /**
  * Open activity node and hide siblings
  */
 export function openNodeSelector(activityId: string, state: StateMap): ActivityMap {
-  const { activityMap, rootNodes } = state
-  const { parentId } = activityMap[activityId]
+  const { activityMap, rootNodes } = state;
+  const { parentId } = activityMap[activityId];
 
   const childrenIds = parentId
-    ? (<ActivityNode>activityMap[parentId]).childrenIds
-    : rootNodes
+    ? (activityMap[parentId] as ActivityNode).childrenIds
+    : rootNodes;
 
   return childrenIds.reduce((acc, childId) => {
     acc[childId] = {
       ...activityMap[childId],
       open: childId === activityId,
       visible: childId === activityId
-    }
+    };
 
-    return acc
-  }, {})
+    return acc;
+  }, {});
 }

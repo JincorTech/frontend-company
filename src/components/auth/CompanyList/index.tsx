@@ -1,10 +1,8 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { ActionCreator } from '../../../utils/actions'
+import * as React from 'react';
+import { SFC } from 'react';
+import * as CSSModules from 'react-css-modules';
 
-import CompanyItem from '../CompanyItem'
-
+import CompanyItem from '../CompanyItem';
 
 export type Company = {
   id: string
@@ -13,13 +11,12 @@ export type Company = {
   formattedAddress: string
   type: string
   src: string
-}
+};
 
 export type Props = {
   companies: Company[],
   onSelect: (companyId: string) => void
-}
-
+};
 
 const CompanyList: SFC<Props> = ({ companies, onSelect }) => {
   return (
@@ -37,7 +34,7 @@ const CompanyList: SFC<Props> = ({ companies, onSelect }) => {
         }
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CSSModules(CompanyList, require('./styles.css'))
+export default CSSModules(CompanyList, require('./styles.css'));

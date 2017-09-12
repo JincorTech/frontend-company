@@ -35,7 +35,8 @@
   margin-bottom: 30px;
 }
 
-.city, .country {
+.city,
+.country {
   width: 200px;
   height: 40px;
   border-radius: 4px;

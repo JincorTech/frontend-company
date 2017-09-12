@@ -3,10 +3,12 @@
 /**
 * Render activity type
 */
-.activity-list {}
+.activity-list {
+  /* TODO is it need here? */
+}
 
 .render-activity {
-  position: relative
+  position: relative;
 }
 
 .activity-remove {
@@ -17,7 +19,7 @@
 }
 
 .error {
-  position: absolute 0px * * 100%;
+  position: absolute 0 * * 100%;
   width: 210px;
   padding-left: 15px;
 }
@@ -25,20 +27,12 @@
 /**
 * Activity types
 */
-.activity-types {}
+.activity-types {
+  /* TODO is it need here? */
+}
 
-.activity-node {}
-
-.children{
-  & .activity-leaf {
-    padding-left: 60px;
-  }
-
-  & .children {
-    & .activity-leaf {
-      padding-left: 90px;
-    }
-  }
+.activity-node {
+  /* TODO is it need here? */
 }
 
 .activity-leaf {
@@ -50,9 +44,21 @@
   }
 }
 
+.children {
+  & .activity-leaf {
+    padding-left: 60px;
+  }
+
+  & .children {
+    & .activity-leaf {
+      padding-left: 90px;
+    }
+  }
+}
+
 .activity-name {
   font-size: 16px;
-  color: #222222;
+  color: #222;
   padding: 13px 0;
   border-bottom: 1px solid #f3f5f8;
   white-space: nowrap;
@@ -74,7 +80,9 @@
   margin-left: 5px;
 }
 
-.activity-select {}
+.activity-select {
+  /* TODO is it need here? */
+}
 
 .activity-popup {
   padding-top: 30px;
@@ -84,12 +92,12 @@
   font-size: 24px/33px;
   font-weight: normal;
   letter-spacing: -0.2px;
-  color: #000000;
+  color: #000;
   margin: 0 0 24px;
-  padding: 0px 30px;
+  padding: 0 30px;
 }
 
-/*Add link*/
+/* Add link */
 .add-input {
   display: inline-block;
   font-size: 16px/26px;

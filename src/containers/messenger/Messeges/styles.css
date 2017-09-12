@@ -2,7 +2,7 @@
 @use postcss-center;
 
 .messeges {
-
+  /* TODO is it need here? */
 }
 
 .header {
@@ -26,7 +26,8 @@
   margin-left: 5px;
 }
 
-.search, .settings {
+.search,
+.settings {
   top: center;
   cursor: pointer;
 }
@@ -40,7 +41,7 @@
 }
 
 .content {
-  
+  /* TODO is it need here? */
 }
 
 .footer {

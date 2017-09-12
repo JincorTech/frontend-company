@@ -1,17 +1,16 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
 
-import Spinner from '../Spinner'
-
+import Spinner from '../Spinner';
 
 type ButtonProps = HTMLProps<HTMLButtonElement> & {
   spinner?: boolean
   bStyle?: 'default' | 'outline'
-}
+};
 
 const Button: SFC<ButtonProps> = (props) => {
-  const {spinner, disabled, children, bStyle = 'default', ...btnProps} = props
+  const {spinner, disabled, children, bStyle = 'default', ...btnProps} = props;
 
   return (
     <button
@@ -20,7 +19,7 @@ const Button: SFC<ButtonProps> = (props) => {
       {...btnProps}>
       {spinner ? <Spinner /> : children}
     </button>
-  )
-}
+  );
+};
 
-export default CSSModules(Button, require('./styles.css'))
+export default CSSModules(Button, require('./styles.css'));

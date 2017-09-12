@@ -22,7 +22,8 @@
   }
 }
 
-.company-logo, .company-info {
+.company-logo,
+.company-info {
   float: left;
 }
 
@@ -53,13 +54,13 @@
 }
 
 .company-type {
-  font: 400 10px/10px 'Open Sans';
+  font: normal 10px/10px 'Open Sans';
   color: #9da0a4;
   margin-bottom: 4px;
   margin-top: 3px;
 }
 
 .company-country {
-  font: 400 13px/13px 'Open Sans';
+  font: normal 13px/13px 'Open Sans';
   color: #9da0a4;
 }

@@ -1,31 +1,30 @@
-import { combineReducers, routerReducer } from 'redux-seamless-immutable'
-import { reducer as formReducer } from 'redux-form'
-import { loadingBarReducer } from 'react-redux-loading-bar'
+import { combineReducers, routerReducer } from 'redux-seamless-immutable';
+import { reducer as formReducer } from 'redux-form';
+import { loadingBarReducer } from 'react-redux-loading-bar';
 
-import app from './modules/app/app'
-import appLayout from './modules/app/appLayout'
-import profileCard from './modules/app/profileCard'
+import app from './modules/app/app';
+import appLayout from './modules/app/appLayout';
+import profileCard from './modules/app/profileCard';
 
-import companyCard from './modules/common/companyCard'
-import emailTextarea from './modules/common/emailTextarea'
-import alert from './modules/common/alert'
-import select from './modules/common/select'
-import activityTypes from './modules/common/activityTypes'
+import companyCard from './modules/common/companyCard';
+import emailTextarea from './modules/common/emailTextarea';
+import alert from './modules/common/alert';
+import select from './modules/common/select';
+import activityTypes from './modules/common/activityTypes';
 
-import signUp from './modules/auth/signUp'
-import signIn from './modules/auth/signIn'
-import restorePassword from './modules/auth/restorePassword'
-import registerEmployee from './modules/auth/registerEmployee'
-import inviteEmployees from './modules/auth/inviteEmployees'
+import signUp from './modules/auth/signUp';
+import signIn from './modules/auth/signIn';
+import restorePassword from './modules/auth/restorePassword';
+import registerEmployee from './modules/auth/registerEmployee';
+import inviteEmployees from './modules/auth/inviteEmployees';
 
-import profileView from './modules/profile/profileView'
-import profileEdit from './modules/profile/profileEdit'
+import profileView from './modules/profile/profileView';
+import profileEdit from './modules/profile/profileEdit';
 
-import employees from './modules/employees/employees'
-import search from './modules/search/search'
+import employees from './modules/employees/employees';
+import search from './modules/search/search';
 
-import emojiSelect from './modules/messenger/emojiSelect'
-
+import emojiSelect from './modules/messenger/emojiSelect';
 
 export default combineReducers({
   routing: routerReducer,
@@ -70,4 +69,4 @@ export default combineReducers({
   messenger: combineReducers({
     emojiSelect
   })
-})
+});

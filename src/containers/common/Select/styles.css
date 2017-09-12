@@ -3,7 +3,7 @@
 /* Option */
 .option {
   font: normal 16px/22px 'Open Sans';
-  color: #222222;
+  color: #222;
   letter-spacing: -0.2px;
   padding: 0 30px;
   background: #fff;
@@ -20,7 +20,8 @@
 }
 
 
-/*Select */
+/* Select */
+
 .select {
   text-align: left;
 }
@@ -38,9 +39,12 @@
   padding: 0 30px;
 }
 
-.select-options {}
+.select-options {
+  /* TODO is it need here? */
+}
 
-/* Filter options*/
+/* Filter options */
+
 .filter {
   padding: 0 30px;
 }

@@ -18,11 +18,12 @@
 .avatar {
   position: absolute 5px * * 40px;
   size: 44px;
+  cursor: pointer;
 }
 
 .content {
   font-size: 14px/20px;
-  color: #222222;
+  color: #222;
 }
 
 .favorite {
@@ -40,7 +41,7 @@
 .unread {
   composes: head;
 
-  &:before {
+  &::before {
     content: '';
     position: absolute 7px -12px * *;
     size: 7px;
@@ -54,6 +55,7 @@
   color: #0070e0;
 }
 
+/* stylelint-disable font-weight-notation */
 .company {
   margin-left: 10px;
   margin-right: 5px;
@@ -61,18 +63,16 @@
   letter-spacing: -0.3px;
   color: #9da0a4;
 }
+/* stylelint-enable */
 
+/* stylelint-disable font-weight-notation */
 .date {
   margin-left: 5px;
   font: 400 12px/19px 'Open Sans';
   letter-spacing: -0.2px;
   color: #9da0a4;
 }
-
-/* User avatar */
-.avatar {
-  cursor: pointer;
-}
+/* stylelint-enable */
 
 .empty {
   size: 44px;
@@ -81,5 +81,5 @@
   letter-spacing: -0.2px;
   padding: 12px *;
   text-align: center;
-  color: #ffffff;
+  color: #fff;
 }

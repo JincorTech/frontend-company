@@ -1,7 +1,6 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import * as CSSModules from 'react-css-modules'
-
+import * as React from 'react';
+import { SFC } from 'react';
+import * as CSSModules from 'react-css-modules';
 
 const EmployeeMenu: SFC<{}> = ({ children }) => (
   <div styleName="settings">
@@ -11,6 +10,6 @@ const EmployeeMenu: SFC<{}> = ({ children }) => (
       </div>
     </div>
   </div>
-)
+);
 
-export default CSSModules(EmployeeMenu, require('../styles.css'))
+export default CSSModules(EmployeeMenu, require('../styles.css'));

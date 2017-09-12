@@ -1,7 +1,9 @@
 @use postcss-short;
 @use postcss-center;
 
-.activity-list {}
+.activity-list {
+  /* TODO is it need here? */
+}
 
 .group {
   position: relative;

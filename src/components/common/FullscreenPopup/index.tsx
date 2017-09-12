@@ -1,54 +1,53 @@
-import * as React from 'react'
-import { Component, HTMLProps, MouseEvent } from 'react'
-import { render, unmountComponentAtNode } from 'react-dom'
-import * as classnames from 'classnames'
-const { popup, overlay, close } = require('./styles.css')
+import * as React from 'react';
+import { Component, HTMLProps, MouseEvent } from 'react';
+import { render, unmountComponentAtNode } from 'react-dom';
+import * as classnames from 'classnames';
+const { popup, overlay, close } = require('./styles.css');
 
-import Icon from '../Icon'
+import Icon from '../Icon';
 
 // TODO don't forget about dat
-import { Provider } from 'react-redux'
-import store from '../../../redux/store'
-
+import { Provider } from 'react-redux';
+import store from '../../../redux/store';
 
 /**
  * Types
  */
-export type Props = HTMLProps<HTMLDivElement> & ComponentProps
+export type Props = HTMLProps<HTMLDivElement> & ComponentProps;
 
 export type ComponentProps = {
   modalId: string
   open?: boolean
   hideClose?: boolean
   onClose?: () => void
-}
+};
 
 /**
  * Component
  */
 class FullscreenPopup extends Component<Props, {}> {
-  private portal: HTMLDivElement
+  private portal: HTMLDivElement;
 
   /**
    * Create portal element
    */
   public componentDidMount(): void {
-    const { modalId, open } = this.props
-    const element = document.getElementById(modalId)
+    const { modalId, open } = this.props;
+    const element = document.getElementById(modalId);
 
     if (element) {
-      throw new Error('modalId parameter must be unique for each Popup component')
+      throw new Error('modalId parameter must be unique for each Popup component');
     }
 
-    this.portal = document.createElement('div')
-    this.portal.id = this.props.modalId
+    this.portal = document.createElement('div');
+    this.portal.id = this.props.modalId;
 
-    document.body.appendChild(this.portal)
+    document.body.appendChild(this.portal);
 
-    this.renderModal()
+    this.renderModal();
 
     if (open) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden';
     }
   }
 
@@ -56,28 +55,28 @@ class FullscreenPopup extends Component<Props, {}> {
    * Remove portal element
    */
   public componentWillUnmount(): void {
-    unmountComponentAtNode(this.portal)
-    document.body.removeChild(this.portal)
-    document.body.style.overflow = ''
+    unmountComponentAtNode(this.portal);
+    document.body.removeChild(this.portal);
+    document.body.style.overflow = '';
   }
 
   /**
    * Pass props to portal element
    */
   public componentDidUpdate(): void {
-    const { open } = this.props
+    const { open } = this.props;
 
     if (open) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = ''
+      document.body.style.overflow = '';
     }
 
-    this.renderModal()
+    this.renderModal();
   }
 
   private handleClick(e: MouseEvent<HTMLDivElement>): void {
-    e.stopPropagation()
+    e.stopPropagation();
   }
 
   /**
@@ -92,7 +91,7 @@ class FullscreenPopup extends Component<Props, {}> {
       modalId,
       className,
       ...divProps
-    } = this.props
+    } = this.props;
 
     render (
       <Provider store={store}>
@@ -107,15 +106,15 @@ class FullscreenPopup extends Component<Props, {}> {
         </div>
       </Provider>,
       document.getElementById(modalId)
-    )
+    );
   }
 
   /**
    * Stop render
    */
   public render(): JSX.Element {
-    return null
+    return null;
   }
 }
 
-export default FullscreenPopup
+export default FullscreenPopup;

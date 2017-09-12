@@ -2,7 +2,7 @@
   "extends": ["stylelint-config-standard", "stylelint-config-css-modules"],
   "rules": {
     "color-named": "never",
-    "font-family-name-quotes": "always-where-required",
+    "font-family-name-quotes": "always-where-recommended",
     "font-weight-notation": "named-where-possible",
     "function-url-no-scheme-relative": true,
     "function-url-quotes": "always",

@@ -1,50 +1,48 @@
-import * as React from 'react'
-import { Component, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { reduxForm, Field, FieldArray, FormProps, SubmitHandler } from 'redux-form'
-import { routes } from '../../../routes'
-import { Link } from 'react-router'
+import * as React from 'react';
+import { Component, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { reduxForm, Field, FieldArray, FormProps, SubmitHandler } from 'redux-form';
+import { routes } from '../../../routes';
+import { Link } from 'react-router';
 
-import { updateProfile, FormFields } from '../../../redux/modules/profile/profileEdit'
-import { required, minLength, maxLength } from '../../../utils/validators'
+import { updateProfile, FormFields } from '../../../redux/modules/profile/profileEdit';
+import { required, minLength, maxLength } from '../../../utils/validators';
 
-import InfoItem from '../../../components/profile/InfoItem'
-import CompanyLogo from '../../../components/profile/CompanyLogo'
-import RenderInput from '../../../components/form/RenderInput'
-import RenderSelect from '../../../components/form/RenderSelect'
-import RenderTextarea from '../../../components/form/RenderTextarea'
-import RenderImageUpload from '../../../components/form/RenderImageUpload'
-import RenderLinkInputs from '../../../components/form/RenderLinkInputs'
-import RenderActivities from '../../../components/form/RenderActivities'
-import Button from '../../../components/common/Button'
+import InfoItem from '../../../components/profile/InfoItem';
+import CompanyLogo from '../../../components/profile/CompanyLogo';
+import RenderInput from '../../../components/form/RenderInput';
+import RenderSelect from '../../../components/form/RenderSelect';
+import RenderTextarea from '../../../components/form/RenderTextarea';
+import RenderImageUpload from '../../../components/form/RenderImageUpload';
+import RenderLinkInputs from '../../../components/form/RenderLinkInputs';
+import RenderActivities from '../../../components/form/RenderActivities';
+import Button from '../../../components/common/Button';
 
-
-export type Props = ReduxFormProps & ComponentProps & HTMLProps<HTMLFormElement>
+export type Props = ReduxFormProps & ComponentProps & HTMLProps<HTMLFormElement>;
 
 export type ComponentProps = {
   updateCities: (id: string) => void
   spinner: boolean
   logo: string
-}
+};
 
-export type ReduxFormProps = FormProps<FormFields, {}, any>
-
+export type ReduxFormProps = FormProps<FormFields, {}, any>;
 
 class CompanyForm extends Component<Props, {}> {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.deleteLogo = this.deleteLogo.bind(this)
+    this.deleteLogo = this.deleteLogo.bind(this);
   }
 
   private deleteLogo(): void {
-    const { change } = this.props
+    const { change } = this.props;
 
-    change('upload', null)
+    change('upload', null);
   }
 
   public render(): JSX.Element {
-    const { handleSubmit, updateCities, spinner, logo, invalid, style } = this.props
+    const { handleSubmit, updateCities, spinner, logo, invalid, style } = this.props;
 
     return (
       <form style={style} styleName="company-profile-edit" onSubmit={handleSubmit(updateProfile)}>
@@ -139,12 +137,12 @@ class CompanyForm extends Component<Props, {}> {
           <Link to={routes.profile} styleName="cancel-btn">отменить</Link>
         </div>
       </form>
-    )
+    );
   }
 }
 
-const StyledComponent = CSSModules(CompanyForm, require('./styles.css'))
+const StyledComponent = CSSModules(CompanyForm, require('./styles.css'));
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'profileEdit'
-})(StyledComponent)
+})(StyledComponent);

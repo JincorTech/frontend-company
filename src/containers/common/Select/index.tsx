@@ -1,10 +1,10 @@
-import * as React from 'react'
-import { Component, cloneElement } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { Scrollbars } from 'react-custom-scrollbars'
-import * as shallowequal from 'shallowequal'
+import * as React from 'react';
+import { Component, cloneElement } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Scrollbars } from 'react-custom-scrollbars';
+import * as shallowequal from 'shallowequal';
 
 import {
   openSelect,
@@ -18,20 +18,19 @@ import {
   changeFilter,
   StateMap,
   SelectState
-} from '../../../redux/modules/common/select'
+} from '../../../redux/modules/common/select';
 
-import { optionsSelector } from '../../../selectors/common/select'
+import { optionsSelector } from '../../../selectors/common/select';
 
-import Option, { OptionItem } from './components/Option'
-import SelectInput from '../../../components/common/SelectInput'
-import Popup from '../../../components/common/Popup'
-import Input from '../../../components/common/Input'
-
+import Option, { OptionItem } from './components/Option';
+import SelectInput from '../../../components/common/SelectInput';
+import Popup from '../../../components/common/Popup';
+import Input from '../../../components/common/Input';
 
 /**
  * Types
  */
-export type Props = ComponentProps & StateProps & DispatchProps
+export type Props = ComponentProps & StateProps & DispatchProps;
 
 export type ComponentProps = {
   modalId: string
@@ -45,7 +44,7 @@ export type ComponentProps = {
   defaultOption?: string
   onChange: (e?: any) => void
   onBlur: (e?: any) => void
-}
+};
 
 export type DispatchProps = {
   actions: {
@@ -59,22 +58,22 @@ export type DispatchProps = {
     setOption: (optionValue: string) => void
     changeFilter: (value: string) => void
   }
-}
+};
 
 export type StateProps = {
   select: SelectState
-}
+};
 
 /**
  * Component
  */
 class Select extends Component<Props, {}> {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleSelect = this.handleSelect.bind(this)
-    this.handleDefaultSelect = this.handleDefaultSelect.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleDefaultSelect = this.handleDefaultSelect.bind(this);
   }
 
   public static defaultProps: any = {
@@ -85,58 +84,58 @@ class Select extends Component<Props, {}> {
       options: [],
       optionsMap: {}
     }
-  }
+  };
 
   public componentWillMount(): void {
-    const { modalId, filter, options, actions } = this.props
-    const { setOptions, registerSelect, registerFilter } = actions
-    if (!modalId) throw new Error('modalId parameter is required!')
+    const { modalId, filter, options, actions } = this.props;
+    const { setOptions, registerSelect, registerFilter } = actions;
+    if (!modalId) throw new Error('modalId parameter is required!');
 
     if (filter) {
-      registerFilter()
+      registerFilter();
     } else {
-      registerSelect()
+      registerSelect();
     }
 
     if (options) {
-      setOptions(options)
+      setOptions(options);
     }
   }
 
   public componentWillUnmount(): void {
-    const { removeSelect } = this.props.actions
+    const { removeSelect } = this.props.actions;
 
-    removeSelect()
+    removeSelect();
   }
 
   public componentWillReceiveProps({ options: newOptions }: Props): void {
-    const { options, optionValue, select, actions } = this.props
-    const { setOptions, setOption } = actions
+    const { options, optionValue, select, actions } = this.props;
+    const { setOptions, setOption } = actions;
 
     if (!shallowequal(options, newOptions)) {
-      setOptions(newOptions)
+      setOptions(newOptions);
     }
 
     if (optionValue !== select.selectedOption) {
-      setOption(optionValue)
+      setOption(optionValue);
     }
   }
 
   private handleInputChange(event: any): void {
-    const { changeFilter } = this.props.actions
-    changeFilter(event.target.value)
+    const { changeFilter } = this.props.actions;
+    changeFilter(event.target.value);
   }
 
   private handleSelect(value: string): void {
-    const { onChange, actions: { selectOption }} = this.props
-    onChange(value)
-    selectOption(value)
+    const { onChange, actions: { selectOption }} = this.props;
+    onChange(value);
+    selectOption(value);
   }
 
   private handleDefaultSelect(): void {
-    const { onChange, actions: { selectOption }} = this.props
-    onChange('')
-    selectOption('')
+    const { onChange, actions: { selectOption }} = this.props;
+    onChange('');
+    selectOption('');
   }
 
   public render(): JSX.Element {
@@ -153,19 +152,19 @@ class Select extends Component<Props, {}> {
       optionValue,
       defaultOption,
       ...divProps
-    } = this.props
-    const { open, selectedOption, optionsMap, filterValue } = select
-    const option = optionsMap[selectedOption] || { name: '', value: '' }
+    } = this.props;
+    const { open, selectedOption, optionsMap, filterValue } = select;
+    const option = optionsMap[selectedOption] || { name: '', value: '' };
 
     return (
       <div styleName="select">
         {
           button
           ? cloneElement(button, {
-              value: option.name,
-              placeholder,
-              onClick: actions.openSelect
-            })
+            value: option.name,
+            placeholder,
+            onClick: actions.openSelect
+          })
           : <SelectInput
               value={option.name}
               placeholder={placeholder}
@@ -204,14 +203,14 @@ class Select extends Component<Props, {}> {
           </div>
         </Popup>
       </div>
-    )
+    );
   }
 }
 
 /**
  * Decorators
  */
-const StyledComponent = CSSModules(Select, require('./styles.css'))
+const StyledComponent = CSSModules(Select, require('./styles.css'));
 
 const defaultSelect = {
   name: '',
@@ -220,17 +219,17 @@ const defaultSelect = {
   options: [],
   optionsMap: {},
   hasFilter: false
-}
+};
 
 function mapStateToProps({ common: { select }}, { modalId }: Props): StateProps {
-  const selectState = select[modalId] || defaultSelect
+  const selectState = select[modalId] || defaultSelect;
   const options = selectState.hasFilter
     ? optionsSelector(selectState)
-    : selectState.options
+    : selectState.options;
 
   return {
     select:  { ...selectState, options}
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch, { modalId }: Props): DispatchProps {
@@ -246,10 +245,10 @@ function mapDispatchToProps(dispatch, { modalId }: Props): DispatchProps {
       setOption: setOption.bind(null, modalId),
       changeFilter: changeFilter.bind(null, modalId)
     }, dispatch)
-  }
+  };
 }
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   mapStateToProps,
   mapDispatchToProps
-)(StyledComponent)
+)(StyledComponent);

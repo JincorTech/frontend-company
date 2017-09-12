@@ -1,19 +1,19 @@
-import * as React from 'react'
-import { Component } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form'
+import * as React from 'react';
+import { Component } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form';
 
-import { required, minLength, maxLength } from '../../../utils/validators'
+import { required, minLength, maxLength } from '../../../utils/validators';
 
-import Button from '../../common/Button'
-import RenderInput from '../../form/RenderInput'
-import RenderImageUpload from '../../form/RenderImageUpload'
+import Button from '../../common/Button';
+import RenderInput from '../../form/RenderInput';
+import RenderImageUpload from '../../form/RenderImageUpload';
 
 /**
  * Types
  */
 
-export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>
+export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>;
 
 export type ComponentProps = {
   onMount: () => void
@@ -21,14 +21,14 @@ export type ComponentProps = {
   onCancel: () => void
   avatar: string
   spinner: boolean
-}
+};
 
 export type FormFields = {
   avatar: string
   firstName: string
   lastName: string
   position: string
-}
+};
 
 /**
  * Component
@@ -36,11 +36,11 @@ export type FormFields = {
 
 class CardUpdateProfile extends Component<Props, {}> {
   public componentWillMount(): void {
-    this.props.onMount()
+    this.props.onMount();
   }
 
   private renderBlackout(): JSX.Element {
-    const { avatar } = this.props
+    const { avatar } = this.props;
 
     const blackout = {
       position: 'absolute',
@@ -55,24 +55,24 @@ class CardUpdateProfile extends Component<Props, {}> {
           rgba(0, 0, 0, 0.15) 66%,
           rgba(0, 0, 0, 0.4))`
         : 'rgba(0, 0, 0, .2)'
-    }
+    };
 
     const camera = {
       top: '20px',
       left: '20px',
       right: 'auto',
       bottom: 'auto'
-    }
+    };
 
     return (
       <div style={blackout}>
         <div styleName="camera" style={camera}/>
       </div>
-    )
+    );
   }
 
   public render(): JSX.Element {
-    const { invalid, handleSubmit, onCancel, avatar, spinner } = this.props
+    const { invalid, handleSubmit, onCancel, avatar, spinner } = this.props;
 
     return (
       <div styleName="edit-profile">
@@ -128,7 +128,7 @@ class CardUpdateProfile extends Component<Props, {}> {
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
 
@@ -136,8 +136,8 @@ class CardUpdateProfile extends Component<Props, {}> {
  * Export
  */
 
-const StyledComponent = CSSModules(CardUpdateProfile, require('./styles.css'))
+const StyledComponent = CSSModules(CardUpdateProfile, require('./styles.css'));
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'cardUpdateProfile'
-})(StyledComponent)
+})(StyledComponent);

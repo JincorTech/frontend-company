@@ -1,27 +1,27 @@
-import { createAsyncAction, createAction, createReducer, Action } from '../../../utils/actions'
-import { from, ImmutableObject } from 'seamless-immutable'
+import { createAsyncAction, createReducer } from '../../../utils/actions';
+import { from, ImmutableObject } from 'seamless-immutable';
 
 /**
  * Types
  */
 
-export type State = StateMap & ImmutableObject<StateMap>
+export type State = StateMap & ImmutableObject<StateMap>;
 
 export type StateMap = {
   spinner: boolean
-}
+};
 
 /**
  * Action types
  */
 
-export const INVITE_EMPLOYEES = 'auth/inviteEmployees/INVITE_EMPLOYEES'
+export const INVITE_EMPLOYEES = 'auth/inviteEmployees/INVITE_EMPLOYEES';
 
 /**
  * Action creators
  */
 
-export const inviteEmployees = createAsyncAction<void, void>(INVITE_EMPLOYEES)
+export const inviteEmployees = createAsyncAction<void, void>(INVITE_EMPLOYEES);
 
 /**
  * Reducer
@@ -29,7 +29,7 @@ export const inviteEmployees = createAsyncAction<void, void>(INVITE_EMPLOYEES)
 
 const initialState: State = from<StateMap>({
   spinner: false
-})
+});
 
 export default createReducer<State>({
   [inviteEmployees.REQUEST]: (state: State): State => (
@@ -43,4 +43,4 @@ export default createReducer<State>({
   [inviteEmployees.FAILURE]: (state: State): State => (
     state.merge({ spinner: false })
   )
-}, initialState)
+}, initialState);

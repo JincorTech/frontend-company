@@ -1,23 +1,21 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { WrappedFieldProps, WrappedFieldArrayProps, Field } from 'redux-form'
-import { connect } from 'react-redux'
+import * as React from 'react';
+import { SFC } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { WrappedFieldProps, WrappedFieldArrayProps, Field } from 'redux-form';
+import { connect } from 'react-redux';
 
-import { required } from '../../../utils/validators'
+import { required } from '../../../utils/validators';
 
-import AddInput from '../../profile/AddButton'
-import RenderActivity from '../RenderActivity'
-
+import AddInput from '../../profile/AddButton';
+import RenderActivity from '../RenderActivity';
 
 /**
  * Render activity field array
  */
-export type Props = WrappedFieldArrayProps<string>
-
+export type Props = WrappedFieldArrayProps<string>;
 
 const RenderActivities: SFC<Props> = (props) => {
-  const { fields } = props
+  const { fields } = props;
 
   return (
     <div styleName="activity-list">
@@ -35,10 +33,10 @@ const RenderActivities: SFC<Props> = (props) => {
       ))}
       {fields.length < 3 && <AddInput children="добавить отрасль" onClick={() => fields.push('')}/>}
     </div>
-  )
-}
+  );
+};
 
 /**
  * Decorator
  */
-export default CSSModules(RenderActivities, require('./styles.css'))
+export default CSSModules(RenderActivities, require('./styles.css'));

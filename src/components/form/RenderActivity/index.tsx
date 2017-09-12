@@ -1,13 +1,12 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { InjectedCSSModuleProps } from 'react-css-modules'
-import { WrappedFieldProps } from 'redux-form'
-import { connect } from 'react-redux'
+import * as React from 'react';
+import { SFC } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { InjectedCSSModuleProps } from 'react-css-modules';
+import { WrappedFieldProps } from 'redux-form';
 
-import FieldError from '../../common/FieldError'
-import ActivityTypes from '../../../containers/common/ActivityTypes'
-import SelectInput from '../../common/SelectInput'
+import FieldError from '../../common/FieldError';
+import ActivityTypes from '../../../containers/common/ActivityTypes';
+import SelectInput from '../../common/SelectInput';
 
 /**
  * Render activity field
@@ -19,7 +18,7 @@ export type Props = WrappedFieldProps<any> & InjectedCSSModuleProps & {
   openPopup: () => void
   closePopup: () => void
   onActivitySelect: (activityId: string) => void
-}
+};
 
 export const RenderActivity: SFC<Props> = (props) => {
   const {
@@ -32,12 +31,10 @@ export const RenderActivity: SFC<Props> = (props) => {
     openPopup,
     closePopup,
     ...inputProps
-  } = props
+  } = props;
 
-  const { invalid, touched, active, dirty, error } = meta
-  const { value, onChange } = input
-  const hasError = touched && !active && invalid && dirty
-  const button = <SelectInput className={styles['select-input']}/>
+  const { value, onChange } = input;
+  const button = <SelectInput className={styles['select-input']}/>;
 
   return (
     <div styleName="render-activity">
@@ -52,7 +49,7 @@ export const RenderActivity: SFC<Props> = (props) => {
           {...inputProps}/>
       </FieldError>
     </div>
-  )
-}
+  );
+};
 
-export default CSSModules(RenderActivity, require('./styles.css'))
+export default CSSModules(RenderActivity, require('./styles.css'));

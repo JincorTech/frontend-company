@@ -1,13 +1,46 @@
 @use postcss-inline-svg;
 @use postcss-short;
 
+.email-slide {
+  position: relative;
+  top: 0;
+  transition: 0.1s linear top;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  background-color: #fff;
+  padding: 10px;
+  cursor: default;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.button {
+  size: 30px;
+  opacity: 0;
+  background: svg-load('./svg/cog.svg') no-repeat 50%;
+  cursor: pointer;
+  outline: none;
+  transition: 0.1s linear opacity;
+
+  &:hover {
+    & .menu {
+      display: block;
+    }
+  }
+}
+
 .employee {
   position: relative;
   margin: 5px 0;
   padding: 5px 10px 5px 5px;
   border-radius: 4px;
   cursor: pointer;
-  transition: .1s linear background-color;
+  transition: 0.1s linear background-color;
 
   &:hover {
     background-color: #f8f8f8;
@@ -33,7 +66,9 @@
 
 .avatar-empty {
   composes: avatar;
+  /* stylelint-disable font-family-name-quotes */
   font: semibold 20px/50px 'Open Sans';
+  /* stylelint-enable */
   text-align: center;
   color: #fff;
 }
@@ -66,12 +101,6 @@
   overflow: hidden;
 }
 
-.email-slide {
-  position: relative;
-  top: 0;
-  transition: .1s linear top;
-}
-
 
 /* menu styles */
 
@@ -79,35 +108,6 @@
   position: relative;
   float: right;
   padding: 10px;
-}
-
-.button {
-  size: 30px;
-  opacity: 0;
-  background: svg-load('./svg/cog.svg') no-repeat 50%;
-  opacity: 0;
-  cursor: pointer;
-  outline: none;
-  transition: .1s linear opacity;
-
-  &:hover {
-    & .menu {
-      display: block;
-    }
-  }
-}
-
-
-.menu {
-  display: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
-  background-color: #fff;
-  padding: 10px;
-  cursor: default;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, .15);
 }
 
 .menu-open {

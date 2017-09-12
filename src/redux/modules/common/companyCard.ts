@@ -1,29 +1,29 @@
-import { createReducer, createAction, Action } from '../../../utils/actions'
-import { from, ImmutableObject } from 'seamless-immutable'
+import { createReducer, createAction, Action } from '../../../utils/actions';
+import { from, ImmutableObject } from 'seamless-immutable';
 
-import { Company } from '../profile/profileView'
+import { Company } from '../profile/profileView';
 
 /**
  * Types
  */
-export type State = StateMap & ImmutableObject<StateMap>
+export type State = StateMap & ImmutableObject<StateMap>;
 
 export type StateMap = {
   open: boolean
   company: Company
-}
+};
 
 /**
  * Action types
  */
-export const OPEN_CARD = 'common/companyCard/OPEN_CARD'
-export const CLOSE_CARD = 'common/companyCard/CLOSE_CARD'
+export const OPEN_CARD = 'common/companyCard/OPEN_CARD';
+export const CLOSE_CARD = 'common/companyCard/CLOSE_CARD';
 
 /**
  * Action creators
  */
-export const openCompanyCard = createAction<Company>(OPEN_CARD)
-export const closeCompanyCard = createAction<void>(CLOSE_CARD)
+export const openCompanyCard = createAction<Company>(OPEN_CARD);
+export const closeCompanyCard = createAction<void>(CLOSE_CARD);
 
 /**
  * Reducer
@@ -60,7 +60,7 @@ const initialState: State = from<StateMap>({
       code: ''
     }
   }
-})
+});
 
 export default createReducer<State>({
   [OPEN_CARD]: (state: State, { payload: company }: Action<Company>): State => (
@@ -70,4 +70,4 @@ export default createReducer<State>({
   [CLOSE_CARD]: (state: State): State => (
     state.merge({ open: false, company: initialState.company })
   )
-}, initialState)
+}, initialState);

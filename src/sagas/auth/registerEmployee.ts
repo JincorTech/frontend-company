@@ -1,14 +1,13 @@
-import { SagaIterator } from 'redux-saga'
-import { takeLatest, call, put, fork } from 'redux-saga/effects'
-import { push } from 'react-router-redux'
-import { routes } from '../../routes'
+import { SagaIterator } from 'redux-saga';
+import { takeLatest, call, put, fork } from 'redux-saga/effects';
+import { push } from 'react-router-redux';
+import { routes } from '../../routes';
 
-import { Action } from '../../utils/actions'
-import { post, get } from '../../utils/api'
-import { FormFields } from '../../components/auth/RegisterEmployeeForm'
-import { registerEmployee } from '../../redux/modules/auth/registerEmployee'
-import { login } from '../../redux/modules/app/app'
-
+import { Action } from '../../utils/actions';
+import { post } from '../../utils/api';
+import { FormFields } from '../../components/auth/RegisterEmployeeForm';
+import { registerEmployee } from '../../redux/modules/auth/registerEmployee';
+import { login } from '../../redux/modules/app/app';
 
 /**
  * Register Employee
@@ -20,21 +19,20 @@ function* registerEmployeeIterator({ payload: employee }: Action<FormFields>): S
     password,
     position,
     verificationId,
-    pin,
-    email
-  } = employee
+    pin
+  } = employee;
 
   try {
-    yield call(post, 'employee/verifyEmail', { verificationId, verificationCode: pin })
+    yield call(post, 'employee/verifyEmail', { verificationId, verificationCode: pin });
 
-    const reqData = { firstName, lastName, password, position, verificationId }
-    const { data: { token }} = yield call(post, '/employee/register', reqData)
+    const reqData = { firstName, lastName, password, position, verificationId };
+    const { data: { token }} = yield call(post, '/employee/register', reqData);
 
-    yield put(login(token))
-    yield put(registerEmployee.success())
-    yield put(push(routes.profile))
+    yield put(login(token));
+    yield put(registerEmployee.success());
+    yield put(push(routes.profile));
   } catch (e) {
-    yield put(registerEmployee.failure())
+    yield put(registerEmployee.failure());
   }
 }
 
@@ -42,14 +40,14 @@ export function* registerEmployeeSaga() {
   yield takeLatest(
     registerEmployee.REQUEST,
     registerEmployeeIterator
-  )
+  );
 }
 
 /**
  * Register Employee Saga
  */
-export default function* () {
+export default function*() {
   yield [
     fork(registerEmployeeSaga)
-  ]
+  ];
 }

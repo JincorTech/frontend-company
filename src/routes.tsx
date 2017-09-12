@@ -1,24 +1,24 @@
-import * as React from 'react'
-import { IndexRoute, Route, IndexRedirect, Redirect } from 'react-router'
-import { push } from 'react-router-redux'
-import { UserAuthWrapper } from 'redux-auth-wrapper'
+import * as React from 'react';
+import { Route, IndexRedirect, Redirect } from 'react-router';
+import { push } from 'react-router-redux';
+import { UserAuthWrapper } from 'redux-auth-wrapper';
 
-import App from './containers/app/App'
+import App from './containers/app/App';
 
-import AuthLayout from './components/auth/AuthLayout'
-import SignUp from './containers/auth/SignUp'
-import SignIn from './containers/auth/SignIn'
-import RestorePassword from './containers/auth/RestorePassword'
-import RegisterEmployee from './containers/auth/RegisterEmployee'
-import VerifyEmployeeToken from './components/auth/VerifyEmployeeToken'
-import InviteEmployees from './containers/auth/InviteEmployees'
+import AuthLayout from './components/auth/AuthLayout';
+import SignUp from './containers/auth/SignUp';
+import SignIn from './containers/auth/SignIn';
+import RestorePassword from './containers/auth/RestorePassword';
+import RegisterEmployee from './containers/auth/RegisterEmployee';
+import VerifyEmployeeToken from './components/auth/VerifyEmployeeToken';
+import InviteEmployees from './containers/auth/InviteEmployees';
 
-import AppLayout from './containers/app/AppLayout'
-import ProfileEdit from './containers/profile/ProfileEdit'
-import ProfileView from './containers/profile/ProfileView'
-import Employees from './containers/employees/Employees'
-import Search from './containers/search/Search'
-import Messenger from './containers/messenger/Messenger'
+import AppLayout from './containers/app/AppLayout';
+import ProfileEdit from './containers/profile/ProfileEdit';
+import ProfileView from './containers/profile/ProfileView';
+import Employees from './containers/employees/Employees';
+import Search from './containers/search/Search';
+import Messenger from './containers/messenger/Messenger';
 
 // named routes
 export const routes = {
@@ -32,7 +32,7 @@ export const routes = {
   profileEdit: '/cmp/app/profile/edit',
   employees: '/cmp/app/employees',
   search: '/cmp/app/search'
-}
+};
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: (state) => state.app.app,
@@ -40,7 +40,7 @@ const UserIsAuthenticated = UserAuthWrapper({
   redirectAction: push,
   failureRedirectPath: routes.signIn,
   allowRedirectBack: false
-})
+});
 
 const UserIsAdmin = UserAuthWrapper({
   authSelector: (state) => state.app.app,
@@ -48,7 +48,7 @@ const UserIsAdmin = UserAuthWrapper({
   redirectAction: push,
   failureRedirectPath: routes.base,
   allowRedirectBack: false
-})
+});
 
 export default (
   <Route path="/cmp" component={App}>
@@ -72,4 +72,4 @@ export default (
 
     <Redirect from="*" to="/cmp/auth/signin" />
   </Route>
-)
+);
