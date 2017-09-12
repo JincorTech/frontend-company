@@ -76,7 +76,7 @@ class Popup extends Component<Props, {}> {
     }
   }
 
-  private componentDidUpdate(): void {
+  public componentDidUpdate(): void {
     this.renderModal();
   }
 
