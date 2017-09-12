@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { PureComponent, HTMLProps } from 'react';
 import * as CSSModules from 'react-css-modules';
-import * as Waypoint from 'react-waypoint';
 
 import { emojiList } from '../../../../utils/emoji';
 

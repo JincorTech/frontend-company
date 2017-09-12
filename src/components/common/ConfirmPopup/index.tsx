@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SFC, HTMLProps } from 'react';
+import { SFC } from 'react';
 import * as CSSModules from 'react-css-modules';
 
 import Popup, { Props as PopupProps } from '../Popup';

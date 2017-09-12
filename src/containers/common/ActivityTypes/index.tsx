@@ -115,7 +115,7 @@ class ActivityTypes extends Component<Props, {}> {
 
   private renderActivityNode(activity: ActivityNode): JSX.Element {
     const { id, name, visible, childrenIds, open } = activity;
-    const { activityMap, actions: { openNode, closeNode }} = this.props;
+    const { actions: { openNode, closeNode }} = this.props;
 
     return visible && <div key={id} styleName="activity-node">
       <div

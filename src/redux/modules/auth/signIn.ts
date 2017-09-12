@@ -2,7 +2,6 @@ import {
   createReducer,
   createAction,
   createSubmitAction,
-  createAsyncAction,
   Action
 } from '../../../utils/actions';
 

@@ -24,7 +24,7 @@ export type ConfirmFormProps = ConfirmComponentProps & FormProps<FormFields, Con
 
 class ConfirmEmailForm extends Component<ConfirmFormProps, {}> {
   public componentDidMount(): void {
-    const { change, verificationId, spinner } = this.props;
+    const { change, verificationId } = this.props;
 
     change('verificationId', verificationId);
   }

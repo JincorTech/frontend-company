@@ -37,7 +37,7 @@ export function traverseNodes(activities: ActivityType[], parentId: string, hash
  * Add node to ActivityMap
  */
 export function addNode(activity: ActivityType, parentId: string, hash: ActivityMap): ActivityMap {
-  const { id, name, children } = activity;
+  const { id, name } = activity;
 
   hash[id] = {
     type: 'node',

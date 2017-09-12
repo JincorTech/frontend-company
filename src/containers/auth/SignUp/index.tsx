@@ -7,7 +7,6 @@ import {
   createCompany,
   verifyEmail,
   confirmEmail,
-  inviteEmployee,
   StateMap as StateProps,
   Step
 } from '../../../redux/modules/auth/signUp';

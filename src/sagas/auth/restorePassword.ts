@@ -42,7 +42,7 @@ function* confirmEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator
   const body = { verificationId, ...payload };
 
   try {
-    const { data } = yield call(post, '/employee/verifyEmail', body);
+    yield call(post, '/employee/verifyEmail', body);
     const { data: companies } = yield call(get, `/employee/companies?verificationId=${verificationId}`);
     yield put(confirmEmail.success(companies));
   } catch (e) {

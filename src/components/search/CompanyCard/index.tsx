@@ -17,8 +17,8 @@ export type Props = HTMLProps<HTMLDivElement> & {
 };
 
 const CompanyCard: SFC<Props> = ({ company, ...divProps }) => {
-  const { legalName, profile, economicalActivityTypes, companyType } = company;
-  const { picture, links, email, phone, address } = profile;
+  const { legalName, profile, economicalActivityTypes } = company;
+  const { picture, links, address } = profile;
   const city = address.city ? address.city.name : '';
   const country = address.country ? address.country.name : '';
   const at = economicalActivityTypes.length ? economicalActivityTypes[0].name : '';

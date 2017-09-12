@@ -5,7 +5,6 @@ import { ActionMeta } from '../../utils/actions';
 import {
   SET_OPTIONS,
   SELECT_OPTION,
-  SET_OPTION,
   setNormalized,
   setOption,
   closeSelect,

@@ -37,7 +37,7 @@ export function req(payload) {
 
 export function profileFormFields(company: Company): FormFields {
   const { legalName: name, profile, economicalActivityTypes, companyType: { id: type } } = company;
-  const { picture: upload, email, phone, description, links, address } = profile;
+  const { email, phone, description, links, address } = profile;
   const { country: { id: country }, city } = address;
   const activityTypes = economicalActivityTypes.map(({ id }) => id);
   const socialLinks = links.map(({ value }) => value);

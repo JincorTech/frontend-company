@@ -6,7 +6,6 @@ import { push } from 'react-router-redux';
 import { routes } from '../../routes';
 
 import { get, post } from '../../utils/api';
-import { setToken } from '../../utils/auth';
 
 import {
   fetchCompanies,

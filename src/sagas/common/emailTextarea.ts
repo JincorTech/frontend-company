@@ -11,7 +11,7 @@ import {
   setValidateState,
   validateEmail,
   HANDLE_EMAIL_REMOVE,
-  VALIDATE_EMAIL, KEY_PRESS
+  VALIDATE_EMAIL
 } from '../../redux/modules/common/emailTextarea';
 
 import { canGetEmails, getEmails, isEmail } from '../../helpers/common/emailTextarea';

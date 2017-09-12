@@ -1,15 +1,12 @@
 import { SagaIterator } from 'redux-saga';
 import { takeLatest, call, put, fork } from 'redux-saga/effects';
 
-import { get } from '../../utils/api';
 import { removeToken, setToken, getToken, isAuth, isAdmin } from '../../utils/auth';
 import { Action } from '../../utils/actions';
 
 import {
-  logout,
   login,
-  setAuthState,
-  checkAuth
+  setAuthState
 } from '../../redux/modules/app/app';
 
 import {

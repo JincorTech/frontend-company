@@ -1,5 +1,5 @@
 import { SagaIterator, delay } from 'redux-saga';
-import { takeLatest, takeEvery, call, put, select, fork } from 'redux-saga/effects';
+import { takeLatest, call, put, fork } from 'redux-saga/effects';
 import { get } from '../../utils/api';
 import { Action } from '../../utils/actions';
 

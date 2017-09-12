@@ -1,4 +1,4 @@
-import { createReducer, createAction, createSubmitAction, createAsyncAction, Action } from '../../../utils/actions';
+import { createReducer, createAsyncAction, Action } from '../../../utils/actions';
 import { from, ImmutableObject } from 'seamless-immutable';
 
 import { Company } from '../profile/profileView';

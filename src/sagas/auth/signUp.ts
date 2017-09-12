@@ -178,7 +178,7 @@ function* inviteEmployeeIterator(action: Action<string[]>): SagaIterator {
   const emails = isEmail(value) ? [...selectedEmails, value] : selectedEmails;
 
   try {
-    const { data } = yield call(post, 'company/invite', { emails });
+    yield call(post, 'company/invite', { emails });
 
     yield put(inviteEmployee.success());
     yield put(push(routes.profile));

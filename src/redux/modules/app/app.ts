@@ -1,4 +1,4 @@
-import { createReducer, createAction, Action, createAsyncAction } from '../../../utils/actions';
+import { createReducer, createAction, Action } from '../../../utils/actions';
 import { from, ImmutableObject } from 'seamless-immutable';
 
 /**

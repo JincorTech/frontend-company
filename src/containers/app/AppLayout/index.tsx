@@ -55,7 +55,7 @@ class AppLayout extends Component<Props, StateProps> {
   render() {
     const { sidebarOpen, children, user, isAuth, location } = this.props;
     const { openSidebar, closeSidebar, openProfileCard } = this.props;
-    const { id, profile, contacts, company } = user;
+    const { id, profile } = user;
 
     return (
       <div styleName="app-layout">

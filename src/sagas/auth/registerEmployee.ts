@@ -4,7 +4,7 @@ import { push } from 'react-router-redux';
 import { routes } from '../../routes';
 
 import { Action } from '../../utils/actions';
-import { post, get } from '../../utils/api';
+import { post } from '../../utils/api';
 import { FormFields } from '../../components/auth/RegisterEmployeeForm';
 import { registerEmployee } from '../../redux/modules/auth/registerEmployee';
 import { login } from '../../redux/modules/app/app';
@@ -19,8 +19,7 @@ function* registerEmployeeIterator({ payload: employee }: Action<FormFields>): S
     password,
     position,
     verificationId,
-    pin,
-    email
+    pin
   } = employee;
 
   try {

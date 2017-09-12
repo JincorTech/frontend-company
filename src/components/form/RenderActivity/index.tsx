@@ -3,7 +3,6 @@ import { SFC } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { InjectedCSSModuleProps } from 'react-css-modules';
 import { WrappedFieldProps } from 'redux-form';
-import { connect } from 'react-redux';
 
 import FieldError from '../../common/FieldError';
 import ActivityTypes from '../../../containers/common/ActivityTypes';
@@ -34,9 +33,7 @@ export const RenderActivity: SFC<Props> = (props) => {
     ...inputProps
   } = props;
 
-  const { invalid, touched, active, dirty, error } = meta;
   const { value, onChange } = input;
-  const hasError = touched && !active && invalid && dirty;
   const button = <SelectInput className={styles['select-input']}/>;
 
   return (

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { SFC } from 'react';
 import * as CSSModules from 'react-css-modules';
-import { format } from 'date-fns';
 import { getBackgroundColor, getInitials } from '../../../utils/colorFunction';
 
 import { Self as SelfProps } from '../../../redux/modules/employees/employees';
@@ -18,7 +17,7 @@ export type DispatchProps = {
 
 const Self: SFC<Props> = (props) => {
   const { employee, onOpenProfile } = props;
-  const { id, profile, contacts, meta } = employee;
+  const { id, profile, contacts } = employee;
   const backgroundColor = getBackgroundColor(id);
   const initials = getInitials(profile.name);
 

@@ -60,7 +60,7 @@ class EmailTextarea extends Component<Props, {}> {
   }
 
   public componentDidUpdate(): void {
-    const { value, setInputWidth, inputWidth, emails } = this.props;
+    const { value, setInputWidth, inputWidth } = this.props;
 
     const hiddenInputWidth = this.calcInputValueWidth(value);
     const availableWidth = this.calcAvailableSpace();
@@ -125,7 +125,7 @@ class EmailTextarea extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { value, emails, placeholder, inputWidth, selectedEmail, selectEmail, unselectEmail } = this.props;
+    const { value, emails, placeholder, inputWidth, selectedEmail } = this.props;
 
     return (
       <div styleName="textarea-wrap" onClick={() => this.textareaValue.focus()}>

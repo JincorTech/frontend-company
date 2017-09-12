@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Component, ChangeEvent, KeyboardEvent, ReactElement } from 'react';
+import { Component, ChangeEvent, KeyboardEvent } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { Scrollbars } from 'react-custom-scrollbars';
 
@@ -91,7 +91,6 @@ class EmailTextarea extends Component<TextAreaProps, TextAreaState> {
   // action
   private setValue(value: string): void {
     const { onChange } = this.props;
-    const { inputWidth } = this.state;
     const textareaWidth = this.textarea.clientWidth;
     const availableWidth = this.availableSpace();
 

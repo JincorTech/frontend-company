@@ -47,8 +47,7 @@ class CreateCompanyForm extends Component<Props, {}> {
     const {
       spinner,
       handleSubmit,
-      invalid,
-      error
+      invalid
     } = this.props;
 
     return (

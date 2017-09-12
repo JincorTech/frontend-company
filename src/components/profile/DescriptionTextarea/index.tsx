@@ -68,7 +68,7 @@ class DescriptionTextarea extends Component<Props, State> {
   }
 
   public render(): JSX.Element {
-    const { invalid, value, placeholder } = this.props;
+    const { invalid, value } = this.props;
     const { countVisible } = this.state;
 
     return (

@@ -18,7 +18,7 @@ export type Props = HTMLProps<HTMLDivElement> & {
  * Component
  */
 const UserDialog: SFC<Props> = (props) => {
-  const { id, name, preview, avatar, writeable } = props;
+  const { name, preview, avatar, writeable } = props;
 
   return (
     <div styleName="dialog">

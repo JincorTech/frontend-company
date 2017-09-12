@@ -1,6 +1,6 @@
 /* TODO LEGACY */
 
-import { createReducer, createAction, createAsyncAction, createSubmitAction, Action } from '../../../utils/actions';
+import { createReducer, createAction, createSubmitAction, Action } from '../../../utils/actions';
 import { from, ImmutableObject } from 'seamless-immutable';
 
 /**

@@ -31,7 +31,6 @@ class InviteEmployees extends Component<Props, {}> {
   public componentDidMount(): void {
     const { location, router } = this.props;
     const { token } = location.query;
-    let decoded = null;
 
     try {
       const { verificationId, pin } = jwtDecode(token);

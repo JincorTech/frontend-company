@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { SFC, HTMLProps } from 'react';
-import { RouterProps} from 'react-router';
 
 export type Props = HTMLProps<HTMLSpanElement> & {
   pathname: string

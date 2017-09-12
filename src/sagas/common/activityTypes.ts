@@ -20,7 +20,6 @@ import {
 import {
   setNodes,
   fetchActivities,
-  closeNode,
   disableLeaf,
   activateLeaf,
   setSelectValue,

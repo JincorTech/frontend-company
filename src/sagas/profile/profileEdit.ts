@@ -1,5 +1,5 @@
 import { SagaIterator } from 'redux-saga';
-import { takeLatest, call, put, select, fork } from 'redux-saga/effects';
+import { takeLatest, call, put, fork } from 'redux-saga/effects';
 import { initialize } from 'redux-form';
 import { push } from 'react-router-redux';
 import { routes } from '../../routes';
@@ -9,7 +9,6 @@ import { Action } from '../../utils/actions';
 import { req, profileFormFields } from '../../helpers/profile/profileEdit';
 import {
   updateProfile,
-  updateCities,
   hidePreloader,
   setLogo
 } from '../../redux/modules/profile/profileEdit';
@@ -17,7 +16,7 @@ import { FETCH_PROFILE, UPDATE_CITIES } from '../../redux/modules/profile/profil
 import { setOptions } from '../../redux/modules/common/select';
 import { optionTransformer } from '../../helpers/common/select';
 
-const getState = (state) => state.profile.profileView.company;
+// const getState = (state) => state.profile.profileView.company;
 const transformFunc = ({name, id: value }) => ({ value, name });
 
 function* getProfileIterator(): SagaIterator {
@@ -84,7 +83,6 @@ function* updateCitiesSaga(): SagaIterator {
  */
 function* updateProfileIterator({ payload }): SagaIterator {
   try {
-    const state = yield select(getState);
     yield call(putFunc, '/company/my', req(payload));
     yield put(updateProfile.success());
     yield put(push(routes.profile));

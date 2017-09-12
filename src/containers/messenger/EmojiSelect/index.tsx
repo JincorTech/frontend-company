@@ -110,7 +110,6 @@ class EmojiSelect extends Component<Props, {}> {
       open,
       scrollPosition,
       currentGroup,
-      setCurrentGroup,
       scrollTo
     } = this.props;
 

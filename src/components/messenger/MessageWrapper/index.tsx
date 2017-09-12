@@ -20,8 +20,7 @@ const MessageWrapper: SFC<Props> = (props) => {
     src,
     fullName,
     company,
-    messages,
-    ...divProps
+    messages
   } = props;
 
   const [firstMsg, ...msgs] = messages;
