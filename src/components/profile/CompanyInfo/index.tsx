@@ -12,15 +12,18 @@ import InfoItem from '../../../components/profile/InfoItem';
 import SocialLink, { LinkProps } from '../../../components/profile/SocialLink';
 import ContactItem from '../../../components/profile/ContactItem';
 import Text from '../../../components/profile/Text';
+import { translate } from 'react-i18next';
 
 export type Props = {
   company: Company
   auth: AuthProps
-  openCompanyCard: (company: Company) => void
+  openCompanyCard: (company: Company) => void,
+  t: any
 };
 
 const CompanyInfo: SFC<Props> = (props) => {
-  const { company, auth, openCompanyCard } = props;
+  const { t, company, auth, openCompanyCard } = props;
+
   const { legalName, employeesCount, profile, economicalActivityTypes, companyType } = company;
   const { picture, links, email, phone, address, description } = profile;
 
@@ -77,7 +80,7 @@ const CompanyInfo: SFC<Props> = (props) => {
       </div>
 
       <div styleName="controls-block">
-        {auth.admin && <Link to={routes.profileEdit} styleName="edit-button">Редактировать</Link>}
+        {auth.admin && <Link to={routes.profileEdit} styleName="edit-button">{t('edit')}</Link>}
 
         <a
           onClick={() => openCompanyCard(company)}
@@ -90,4 +93,4 @@ const CompanyInfo: SFC<Props> = (props) => {
   );
 };
 
-export default CSSModules(CompanyInfo, require('./styles.css'));
+export default translate('common')(CSSModules(CompanyInfo, require('./styles.css')));
