@@ -3,6 +3,7 @@ import { SFC } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { routes } from '../../../routes';
 import { Link } from 'react-router';
+import { translate } from 'react-i18next';
 
 import { Company } from '../../../redux/modules/profile/profileView';
 import { AuthProps } from '../../../redux/modules/app/app';
@@ -12,7 +13,6 @@ import InfoItem from '../../../components/profile/InfoItem';
 import SocialLink, { LinkProps } from '../../../components/profile/SocialLink';
 import ContactItem from '../../../components/profile/ContactItem';
 import Text from '../../../components/profile/Text';
-import { translate } from 'react-i18next';
 
 export type Props = {
   company: Company

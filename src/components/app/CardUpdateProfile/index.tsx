@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form';
+import { translate } from 'react-i18next';
 
 import { required, minLength, maxLength } from '../../../utils/validators';
 
@@ -20,7 +21,8 @@ export type ComponentProps = {
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>
   onCancel: () => void
   avatar: string
-  spinner: boolean
+  spinner: boolean,
+  t: any
 };
 
 export type FormFields = {
@@ -72,7 +74,11 @@ class CardUpdateProfile extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { invalid, handleSubmit, onCancel, avatar, spinner } = this.props;
+    const { t, invalid, handleSubmit, onCancel, avatar, spinner } = this.props;
+
+    const NameMaxLength = 36;
+    const PositionMinLength = 2;
+    const PositionMaxLength = 60;
 
     return (
       <div styleName="edit-profile">
@@ -94,37 +100,37 @@ class CardUpdateProfile extends Component<Props, {}> {
           <Field
             component={RenderInput}
             validate={[
-              required('Поле не может быть пустым'),
-              maxLength(36, 'Максимум 36 символов')
+              required(t('fieldCantBeEmpty')),
+              maxLength(36, t('maxSymbols', { count: NameMaxLength }))
             ]}
             name="firstName"
             type="text"
-            placeholder="Имя"/>
+            placeholder={t('firstName')}/>
 
           <Field
             component={RenderInput}
             validate={[
-              required('Поле не может быть пустым'),
-              maxLength(36, 'Максимум 36 символов')
+              required(t('fieldCantBeEmpty')),
+              maxLength(36, t('maxSymbols', { count: NameMaxLength }))
             ]}
             name="lastName"
             type="text"
-            placeholder="Фамилия"/>
+            placeholder={t('lastName')}/>
 
           <Field
             component={RenderInput}
             validate={[
               required(),
-              minLength(2, 'Минимум 2 символа'),
-              maxLength(60, 'Максимум 60 символов')
+              minLength(2, t('minSymbols', { count: PositionMinLength })),
+              maxLength(60, t('maxSymbols', { count: PositionMaxLength }))
             ]}
             name="position"
             type="text"
-            placeholder="Должность"/>
+            placeholder={t('position')}/>
 
           <div styleName="form-buttons">
-            <Button type="button" styleName="form-cancel-button" onClick={onCancel}>отменить</Button>
-            <Button type="submit" styleName="form-submit-button" disabled={invalid} spinner={spinner}>Сохранить</Button>
+            <Button type="button" styleName="form-cancel-button" onClick={onCancel}>{t('cancel')}</Button>
+            <Button type="submit" styleName="form-submit-button" disabled={invalid} spinner={spinner}>{t('save')}</Button>
           </div>
         </form>
       </div>
@@ -136,7 +142,7 @@ class CardUpdateProfile extends Component<Props, {}> {
  * Export
  */
 
-const StyledComponent = CSSModules(CardUpdateProfile, require('./styles.css'));
+const StyledComponent = translate('app')(CSSModules(CardUpdateProfile, require('./styles.css')));
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'cardUpdateProfile'

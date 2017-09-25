@@ -1,9 +1,15 @@
 import * as i18n from 'i18next';
-import * as XHR from 'i18next-xhr-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-let ru = require('../locales/ru/common.json');
-let en = require('../locales/en/common.json');
+const ru = {
+  common: require('../locales/ru/common.json'),
+  app: require('../locales/ru/app.json')
+};
+
+const en = {
+  common: require('../locales/en/common.json'),
+  app: require('../locales/en/app.json')
+};
 
 export const config = {
   lng: 'ru',
@@ -16,10 +22,12 @@ export const config = {
   },
   resources: {
     en: {
-      common: en,
+      common: en.common,
+      app: en.app
     },
     ru: {
-      common: ru,
+      common: ru.common,
+      app: ru.app
     }
   },
   ns: ['common'],
@@ -33,7 +41,6 @@ export const config = {
 };
 
 const instance = i18n
-  .use(XHR)
   // .use(LanguageDetector)
   .init(config);
 
