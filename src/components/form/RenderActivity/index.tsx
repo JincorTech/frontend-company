@@ -3,6 +3,7 @@ import { SFC } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { InjectedCSSModuleProps } from 'react-css-modules';
 import { WrappedFieldProps } from 'redux-form';
+import { translate } from 'react-i18next';
 
 import FieldError from '../../common/FieldError';
 import ActivityTypes from '../../../containers/common/ActivityTypes';
@@ -17,11 +18,13 @@ export type Props = WrappedFieldProps<any> & InjectedCSSModuleProps & {
   placeholder: string
   openPopup: () => void
   closePopup: () => void
-  onActivitySelect: (activityId: string) => void
+  onActivitySelect: (activityId: string) => void,
+  t: any
 };
 
 export const RenderActivity: SFC<Props> = (props) => {
   const {
+    t,
     placeholder,
     input,
     meta,
@@ -41,7 +44,7 @@ export const RenderActivity: SFC<Props> = (props) => {
       <FieldError meta={meta}>
         <ActivityTypes
           button={button}
-          title="Основная сфера деятельности"
+          title={t('mainActivityField')}
           name={`profile-edit-at-${index}`}
           onActivitySelect={(id: any) => onChange(id)}
           activityValue={value}
@@ -52,4 +55,4 @@ export const RenderActivity: SFC<Props> = (props) => {
   );
 };
 
-export default CSSModules(RenderActivity, require('./styles.css'));
+export default translate('form')(CSSModules(RenderActivity, require('./styles.css')));
