@@ -2,6 +2,7 @@ import * as React from 'react';
 import { SFC } from 'react';
 import { connect } from 'react-redux';
 import * as CSSModules from 'react-css-modules';
+import { translate } from 'react-i18next';
 
 import { inviteEmployees } from '../../../redux/modules/employees/employees';
 
@@ -11,7 +12,8 @@ import EmailTextarea from '../../../containers/common/EmailTextarea';
 export type Props = DispatchProps & StateProps & ComponentProps;
 
 export type ComponentProps = {
-  spinner: boolean
+  spinner: boolean,
+  t: any
 };
 
 export type DispatchProps = {
@@ -23,13 +25,13 @@ export type StateProps = {
 };
 
 const InviteEmployee: SFC<Props> = (props) => {
-  const { inviteEmployees, textareaValid, spinner } = props;
+  const { t, inviteEmployees, textareaValid, spinner } = props;
 
   return (
     <div styleName="invite-employee">
       <div styleName="invite-input">
         <EmailTextarea
-          placeholder="Email через запятую"/>
+          placeholder={t('emailsPlaceholder')}/>
       </div>
 
       <Button
@@ -38,13 +40,13 @@ const InviteEmployee: SFC<Props> = (props) => {
         spinner={spinner}
         disabled={!textareaValid}
         onClick={inviteEmployees}>
-        Пригласить
+        {t('invite')}
       </Button>
     </div>
   );
 };
 
-const StyledComponent = CSSModules(InviteEmployee, require('./styles.css'));
+const StyledComponent = translate('employees')(CSSModules(InviteEmployee, require('./styles.css')));
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => ({ textareaValid : state.common.emailTextarea.valid }),

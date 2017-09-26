@@ -2,6 +2,7 @@ import * as React from 'react';
 import { SFC } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { format } from 'date-fns';
+import { translate } from 'react-i18next';
 import { getBackgroundColor, getInitials } from '../../../utils/colorFunction';
 
 import { DeletedEmployee as DeletedEmployeeProps } from '../../../redux/modules/employees/employees';
@@ -9,10 +10,11 @@ import { DeletedEmployee as DeletedEmployeeProps } from '../../../redux/modules/
 export type Props = ComponentProps;
 
 export type ComponentProps = {
-  employee: DeletedEmployeeProps
+  employee: DeletedEmployeeProps,
+  t: any
 };
 
-const DeletedEmployee: SFC<Props> = ({ employee }) => {
+const DeletedEmployee: SFC<Props> = ({ t, employee }) => {
   const { id, profile, contacts, meta } = employee;
   const backgroundColor = getBackgroundColor(id);
   const initials = getInitials(profile.name);
@@ -35,9 +37,9 @@ const DeletedEmployee: SFC<Props> = ({ employee }) => {
         </div>
       </div>
 
-      <div styleName="status">Удален {format(meta.deletedAt, 'DD.MM.YYYY')}</div>
+      <div styleName="status">{t('removed')} {format(meta.deletedAt, 'DD.MM.YYYY')}</div>
     </div>
   );
 };
 
-export default CSSModules(DeletedEmployee, require('./styles.css'));
+export default translate('employees')(CSSModules(DeletedEmployee, require('./styles.css')));

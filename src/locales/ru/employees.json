@@ -1,0 +1,14 @@
+{
+  "disableAdminRights": "Лишить прав администратора",
+  "assignAdministrator": "Назначить администратором",
+  "openProfile": "Открыть профиль",
+  "removeUser": "Удалить пользователя",
+  "removed": "Удален",
+  "message": "Сообщение",
+  "addToContacts": "Добавить в контакты",
+  "block": "Заблокировать",
+  "invited": "Приглашен",
+  "emailsPlaceholder": "Email через запятую",
+  "invite": "Пригласить",
+  "administrator": "Администратор"
+}

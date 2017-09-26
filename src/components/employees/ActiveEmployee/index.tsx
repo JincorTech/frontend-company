@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { SFC, MouseEvent } from 'react';
 import * as CSSModules from 'react-css-modules';
+import { translate } from 'react-i18next';
 
 import { getBackgroundColor, getInitials } from '../../../utils/colorFunction';
 
@@ -13,7 +14,8 @@ export type Props = ComponentProps & DispatchProps;
 
 export type ComponentProps = {
   employee: ActiveEmployeeProps
-  auth: AuthProps
+  auth: AuthProps,
+  t: any
 };
 
 export type DispatchProps = {
@@ -24,7 +26,7 @@ export type DispatchProps = {
 };
 
 const ActiveEmployee: SFC<Props> = props => {
-  const { auth, employee, onDelete, onMakeAdmin, onUnmakeAdmin, onOpenProfile } = props;
+  const { t, auth, employee, onDelete, onMakeAdmin, onUnmakeAdmin, onOpenProfile } = props;
   const { id, contacts, profile } = employee;
   const backgroundColor = getBackgroundColor(id);
   const initials = getInitials(profile.name);
@@ -55,27 +57,27 @@ const ActiveEmployee: SFC<Props> = props => {
             type="button"
             styleName="menu-button"
             onClick={e => onUnmakeAdmin(e, employee.id)}>
-            Лишить прав администратора</button>
+            {t('disableAdminRights')}</button>
           : <button
             type="button"
             styleName="menu-button"
             onClick={e => onMakeAdmin(e, employee.id)}>
-            Назначить администратором</button>}
+            {t('assignAdministrator')}</button>}
 
         <button
           type="button"
           styleName="menu-button"
           onClick={() => onOpenProfile(employee)}>
-          Открыть профиль</button>
+          {t('openProfile')}</button>
 
         <button
           type="button"
           styleName="menu-button-danger"
           onClick={e => onDelete(e, employee.id)}>
-          Удалить пользователя</button>
+          {t('removeUser')}</button>
       </EmployeeMenu>}
     </div>
   );
 };
 
-export default CSSModules(ActiveEmployee, require('./styles.css'));
+export default translate('employees')(CSSModules(ActiveEmployee, require('./styles.css')));

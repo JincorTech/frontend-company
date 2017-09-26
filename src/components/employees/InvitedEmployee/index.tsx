@@ -2,16 +2,18 @@ import * as React from 'react';
 import { SFC } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { format } from 'date-fns';
+import { translate } from 'react-i18next';
 
 import { InvitedEmployee as InvitedEmployeeProps } from '../../../redux/modules/employees/employees';
 
 export type Props = ComponentProps;
 
 export type ComponentProps = {
-  employee: InvitedEmployeeProps
+  employee: InvitedEmployeeProps,
+  t: any
 };
 
-const InvitedEmployee: SFC<Props> = ({ employee }) => {
+const InvitedEmployee: SFC<Props> = ({ t, employee }) => {
   const { contacts, meta } = employee;
 
   return (
@@ -24,9 +26,9 @@ const InvitedEmployee: SFC<Props> = ({ employee }) => {
         <div styleName="email">{contacts.email}</div>
       </div>
 
-      <div styleName="status">Приглашен {format(meta.invitedAt, 'DD.MM.YYYY')}</div>
+      <div styleName="status">{t('invited')} {format(meta.invitedAt, 'DD.MM.YYYY')}</div>
     </div>
   );
 };
 
-export default CSSModules(InvitedEmployee, require('./styles.css'));
+export default translate('employees')(CSSModules(InvitedEmployee, require('./styles.css')));
