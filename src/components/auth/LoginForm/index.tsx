@@ -4,6 +4,7 @@ import * as CSSModules from 'react-css-modules';
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form';
 import { routes } from '../../../routes';
 import { Link } from 'react-router';
+import { translate } from 'react-i18next';
 
 import { ActionCreator } from '../../../utils/actions';
 import { email, password, required } from '../../../utils/validators';
@@ -20,7 +21,8 @@ export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>;
 
 export type ComponentProps = {
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>
-  spinner: boolean
+  spinner: boolean,
+  t: any
 };
 
 export type FormFields = {
@@ -33,19 +35,19 @@ export type FormFields = {
  */
 class LogInForm extends Component<Props, {}> {
   public render(): JSX.Element {
-    const { invalid, handleSubmit, spinner } = this.props;
+    const { t, invalid, handleSubmit, spinner } = this.props;
 
     return (
       <Form
         onSubmit={handleSubmit}
         styleName="login-form"
-        title="Вход">
+        title={t('entry')}>
 
         <Field
           component={RenderInput}
           name="email"
           type="text"
-          placeholder="Email"
+          placeholder={t('email')}
           validate={[
             required(),
             email()
@@ -54,22 +56,22 @@ class LogInForm extends Component<Props, {}> {
         <Field
           component={RenderPassword}
           name="password"
-          placeholder="Пароль"
+          placeholder={t('password')}
           validate={[
             required(),
             password()
           ]}
-          warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}/>
+          warn={password(t('passwordWarning'))}/>
 
-        <Button type="submit" spinner={spinner} disabled={invalid}>Войти</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>{t('enter')}</Button>
 
-        <Link styleName="restore-password" to={routes.restorePassword}>Забыли пароль?</Link>
+        <Link styleName="restore-password" to={routes.restorePassword}>{t('forgotPassword')}</Link>
       </Form>
     );
   }
 }
 
-const StyledComponent = CSSModules(LogInForm, require('./styles.css'));
+const StyledComponent = translate('auth')(CSSModules(LogInForm, require('./styles.css')));
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'account',

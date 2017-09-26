@@ -3,6 +3,7 @@ import { Component } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { reduxForm, FormProps, Field, SubmitHandler } from 'redux-form';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 
 import { fetchDict } from '../../../redux/modules/auth/signUp';
 import { ActionCreator } from '../../../utils/actions';
@@ -26,7 +27,8 @@ export type ReduxFormProps = ComponentProps & FormProps<FormFields, ComponentPro
 
 export type ComponentProps = {
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
-  spinner: boolean
+  spinner: boolean,
+  t: any
 };
 
 export type FormFields = {
@@ -45,45 +47,46 @@ class CreateCompanyForm extends Component<Props, {}> {
 
   public render(): JSX.Element {
     const {
+      t,
       spinner,
       handleSubmit,
-      invalid
+      invalid,
     } = this.props;
 
     return (
       <Form
         onSubmit={handleSubmit}
         styleName="create-company"
-        title="Регистрация компании"
-        hint="Чтобы начать совместную работу со своими коллегами, нужно добавить свою компанию">
+        title={t('companyRegistration')}
+        hint={t('companyRegistrationHint')}>
 
         <Field
           filter
           component={RenderSelect}
           name="countryId"
           modalId="select-country"
-          placeholder="Страна"
+          placeholder={t('country')}
           validate={required()}/>
 
         <Field
           component={RenderSelect}
           name="companyType"
           modalId="select-company-type"
-          placeholder="Тип компании"
+          placeholder={t('companyType')}
           validate={required()}/>
 
         <Field
           component={RenderInput}
           name="legalName"
           type="text"
-          placeholder="Название компании"
+          placeholder={t('companyName')}
           validate={[
             required(),
             minLength(3),
             maxLength(60)
           ]}/>
 
-        <Button type="submit" spinner={spinner} disabled={invalid}>Добавить</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>{t('add')}</Button>
       </Form>
     );
   }
@@ -92,7 +95,7 @@ class CreateCompanyForm extends Component<Props, {}> {
 /**
  * Decorators
  */
-const StyledComponent = CSSModules(CreateCompanyForm, require('./styles.css'));
+const StyledComponent = translate('auth')(CSSModules(CreateCompanyForm, require('./styles.css')));
 
 const FormComponent = reduxForm<FormFields, ComponentProps>({
   form: 'company',

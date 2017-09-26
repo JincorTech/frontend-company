@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as CSSModules from 'react-css-modules';
+import { translate } from 'react-i18next';
 import { routes } from '../../../routes';
 
 import { inviteEmployee } from '../../../redux/modules/auth/signUp';
@@ -18,7 +19,8 @@ import EmailTextarea from '../../../containers/common/EmailTextarea';
 export type Props = DispatchProps & StateProps & ComponentProps;
 
 export type ComponentProps = {
-  spinner: boolean
+  spinner: boolean,
+  t: any
 };
 
 export type DispatchProps = {
@@ -39,29 +41,29 @@ class InviteEmployee extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { inviteEmployee, textareaValid, spinner } = this.props;
+    const { t, inviteEmployee, textareaValid, spinner } = this.props;
 
     return (
       <Form
         styleName="invite-employee-form"
-        title="Пригласите сотрудников"
-        hint="Чтобы начать совместную работу со своими коллегами, пригласите их через электронную почту">
+        title={t('inviteEmployees')}
+        hint={t('inviteEmployeesHint')}>
 
         <EmailTextarea
-          placeholder="Введите email"/>
+          placeholder={t('enterEmail')}/>
 
         <Button
           type="button"
           spinner={spinner}
           disabled={!textareaValid}
           onClick={inviteEmployee}>
-          Пригласить
+          {t('invite')}
         </Button>
 
         <Link
           styleName="skip"
           to={routes.profile}
-          children="Пропустить"/>
+          children={t('skip')}/>
       </Form>
     );
   }
@@ -70,7 +72,7 @@ class InviteEmployee extends Component<Props, {}> {
 /**
  * Decorators
  */
-const StyledComponent = CSSModules(InviteEmployee, require('./styles.css'));
+const StyledComponent = translate('auth')(CSSModules(InviteEmployee, require('./styles.css')));
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => ({ textareaValid : state.common.emailTextarea.valid }),
