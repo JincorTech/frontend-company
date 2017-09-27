@@ -2,13 +2,23 @@ import * as i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 const ru = {
+  app: require('../locales/ru/auth.json'),
+  auth: require('../locales/ru/app.json'),
   common: require('../locales/ru/common.json'),
-  app: require('../locales/ru/app.json')
+  employees: require('../locales/ru/employees.json'),
+  form: require('../locales/ru/form.json'),
+  profile: require('../locales/ru/profile.json'),
+  search: require('../locales/ru/search.json')
 };
 
 const en = {
+  app: require('../locales/en/app.json'),
+  auth: require('../locales/ru/auth.json'),
   common: require('../locales/en/common.json'),
-  app: require('../locales/en/app.json')
+  employees: require('../locales/ru/employees.json'),
+  form: require('../locales/ru/form.json'),
+  profile: require('../locales/ru/profile.json'),
+  search: require('../locales/ru/search.json')
 };
 
 export const config = {
@@ -22,12 +32,22 @@ export const config = {
   },
   resources: {
     en: {
+      app: en.app,
+      auth: en.auth,
       common: en.common,
-      app: en.app
+      employees: en.employees,
+      form: en.form,
+      profile: en.profile,
+      search: en.search
     },
     ru: {
+      app: ru.app,
+      auth: ru.auth,
       common: ru.common,
-      app: ru.app
+      employees: ru.employees,
+      form: ru.form,
+      profile: ru.profile,
+      search: ru.search
     }
   },
   ns: ['common'],

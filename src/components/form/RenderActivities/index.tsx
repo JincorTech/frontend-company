@@ -17,7 +17,7 @@ export type Props = ComponentProps & WrappedFieldArrayProps<string>;
 
 export type ComponentProps = {
   t: any
-}
+};
 
 const RenderActivities: SFC<Props> = (props) => {
   const { t, fields } = props;

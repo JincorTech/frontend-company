@@ -10,7 +10,7 @@ import Alert from '../../../containers/common/Alert';
 
 export type Props = HTMLProps<HTMLSpanElement> & {
   children: React.ReactNode,
-  t: any,
+  t: any
 };
 
 const Header: SFC<Props> = ({ t, children }) => {

@@ -13,7 +13,7 @@ export type Props = DispatchProps & StateProps & ComponentProps;
 
 export type ComponentProps = {
   spinner: boolean,
-  t: any
+  t?: any
 };
 
 export type DispatchProps = {

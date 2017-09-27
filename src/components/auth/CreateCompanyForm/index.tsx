@@ -28,7 +28,7 @@ export type ReduxFormProps = ComponentProps & FormProps<FormFields, ComponentPro
 export type ComponentProps = {
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
   spinner: boolean,
-  t: any
+  t?: any
 };
 
 export type FormFields = {
@@ -50,7 +50,7 @@ class CreateCompanyForm extends Component<Props, {}> {
       t,
       spinner,
       handleSubmit,
-      invalid,
+      invalid
     } = this.props;
 
     return (

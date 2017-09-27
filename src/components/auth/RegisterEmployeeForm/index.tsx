@@ -132,7 +132,7 @@ class CreateAccountForm extends Component<Props, {}> {
 /**
  * Decorators
  */
-const StyledComponent = translate("auth")(CSSModules(CreateAccountForm, require('./styles.css')));
+const StyledComponent = translate('auth')(CSSModules(CreateAccountForm, require('./styles.css')));
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'employee',

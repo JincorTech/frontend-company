@@ -7,7 +7,7 @@ import InfoItem from '../InfoItem';
 
 export type Props = {
   t: any
-}
+};
 
 const CompanyInfoPreloader: SFC<Props> = ({ t }) => (
   <div styleName="company-profile-preloader">
