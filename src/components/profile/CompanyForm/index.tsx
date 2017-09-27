@@ -4,6 +4,7 @@ import * as CSSModules from 'react-css-modules';
 import { reduxForm, Field, FieldArray, FormProps, SubmitHandler } from 'redux-form';
 import { routes } from '../../../routes';
 import { Link } from 'react-router';
+import { translate } from 'react-i18next';
 
 import { updateProfile, FormFields } from '../../../redux/modules/profile/profileEdit';
 import { required, minLength, maxLength } from '../../../utils/validators';
@@ -23,7 +24,8 @@ export type Props = ReduxFormProps & ComponentProps & HTMLProps<HTMLFormElement>
 export type ComponentProps = {
   updateCities: (id: string) => void
   spinner: boolean
-  logo: string
+  logo: string,
+  t: any
 };
 
 export type ReduxFormProps = FormProps<FormFields, {}, any>;
@@ -42,7 +44,7 @@ class CompanyForm extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { handleSubmit, updateCities, spinner, logo, invalid, style } = this.props;
+    const { t, handleSubmit, updateCities, spinner, logo, invalid, style } = this.props;
 
     return (
       <form style={style} styleName="company-profile-edit" onSubmit={handleSubmit(updateProfile)}>
@@ -55,14 +57,14 @@ class CompanyForm extends Component<Props, {}> {
             width={165}
             height={165}/>
 
-          <button type="button" onClick={() => this.deleteLogo()} styleName="delete-logo">удалить</button>
+          <button type="button" onClick={() => this.deleteLogo()} styleName="delete-logo">{t('remove')}</button>
         </div>
 
         <div styleName="company-info">
           <Field
             name="name"
             styleName="company-name"
-            placeholder="Имя компании"
+            placeholder={t('companyName')}
             validate={[
               required(),
               minLength(3),
@@ -88,60 +90,60 @@ class CompanyForm extends Component<Props, {}> {
               styleName="select-input"/>
           </div>
 
-          <InfoItem styleName="section-small" title="Тип компании">
+          <InfoItem styleName="section-small" title={t('companyType')}>
             <Field
               name="type"
               validate={required()}
               modalId="select-company-type"
-              placeholder="Тип компании"
+              placeholder={t('companyType')}
               component={RenderSelect}
               styleName="select-input"/>
           </InfoItem>
 
-          <InfoItem styleName="section" title="Описание компании">
+          <InfoItem styleName="section" title={t('companyDescription')}>
             <Field
               name="description"
-              placeholder="Описание компании"
+              placeholder={t('companyDescription')}
               component={RenderTextarea}/>
           </InfoItem>
 
-          <InfoItem styleName="section" title="Сферы деятельности">
+          <InfoItem styleName="section" title={t('activityAreas')}>
             <FieldArray
               name="activityTypes"
               component={RenderActivities}/>
           </InfoItem>
 
-          <InfoItem styleName="section" title="Ссылки">
+          <InfoItem styleName="section" title={t('links')}>
             <FieldArray
               name="socialLinks"
               component={RenderLinkInputs}/>
           </InfoItem>
 
-          <InfoItem styleName="section" title="Контакты">
+          <InfoItem styleName="section" title={t('contacts')}>
             <Field
               name="email"
-              placeholder="Email"
+              placeholder={t('email')}
               component={RenderInput}
               styleName="text-input"/>
 
             <Field
               name="phone"
-              placeholder="Номер телефона"
+              placeholder={t('phoneNumber')}
               component={RenderInput}
               styleName="text-input"/>
           </InfoItem>
         </div>
 
         <div styleName="company-controls">
-          <Button styleName="submit-btn" type="submit" spinner={spinner} disabled={invalid}>Сохранить</Button>
-          <Link to={routes.profile} styleName="cancel-btn">отменить</Link>
+          <Button styleName="submit-btn" type="submit" spinner={spinner} disabled={invalid}>{t('save')}</Button>
+          <Link to={routes.profile} styleName="cancel-btn">{t('cancel')}</Link>
         </div>
       </form>
     );
   }
 }
 
-const StyledComponent = CSSModules(CompanyForm, require('./styles.css'));
+const StyledComponent = translate('profile')(CSSModules(CompanyForm, require('./styles.css')));
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'profileEdit'

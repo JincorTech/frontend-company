@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Component, HTMLProps } from 'react';
 import * as CSSModules from 'react-css-modules';
+import { translate } from 'react-i18next';
 
 export type Props = HTMLProps<HTMLDivElement> & {
-  value: string
+  value: string,
+  t: any
 };
 
 export type State = {
@@ -32,14 +34,14 @@ class Text extends Component<Props, State> {
   }
 
   private renderExpand(): JSX.Element {
-    const { value, ...props } = this.props;
+    const { t, value, ...props } = this.props;
 
     return (
       <div styleName="text" {...props}>
         {value}
         {value.length > TEXT_MAX_LENGTH && <span
           styleName="expand"
-          children="Свернуть"
+          children={t('collapse')}
           onClick={this.handleExpand}/>
         }
       </div>
@@ -47,7 +49,7 @@ class Text extends Component<Props, State> {
   }
 
   private renderCollapsed(): JSX.Element {
-    const { value, ...props } = this.props;
+    const { t, value, ...props } = this.props;
     const shouldCut = value.length > TEXT_MAX_LENGTH;
 
     return (
@@ -55,7 +57,7 @@ class Text extends Component<Props, State> {
         {shouldCut ? value.substr(0, TEXT_MAX_LENGTH) + '... ' : value}
         {shouldCut && <span
           styleName="expand"
-          children="Развернуть"
+          children={t('expand')}
           onClick={this.handleExpand}/>
         }
       </div>
@@ -71,4 +73,4 @@ class Text extends Component<Props, State> {
   }
 }
 
-export default CSSModules(Text, require('./styles.css'));
+export default translate('profile')(CSSModules(Text, require('./styles.css')));

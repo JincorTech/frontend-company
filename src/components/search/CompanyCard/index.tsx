@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { SFC, HTMLProps } from 'react';
 import * as CSSModules from 'react-css-modules';
+import { translate } from 'react-i18next';
 
 import Button from '../../common/Button';
 import Icon from '../../common/Icon';
@@ -13,10 +14,11 @@ import CompanyLogo from '../../profile/CompanyLogo';
 import stringCut from '../../../helpers/common/stringCut';
 
 export type Props = HTMLProps<HTMLDivElement> & {
-  company: Company
+  company: Company,
+  t: any
 };
 
-const CompanyCard: SFC<Props> = ({ company, ...divProps }) => {
+const CompanyCard: SFC<Props> = ({ t, company, ...divProps }) => {
   const { legalName, profile, economicalActivityTypes } = company;
   const { picture, links, address } = profile;
   const city = address.city ? address.city.name : '';
@@ -35,7 +37,7 @@ const CompanyCard: SFC<Props> = ({ company, ...divProps }) => {
 
       <div styleName="name">{stringCut(legalName, 20)}</div>
       <div styleName="address">{city ? `${country}, ${city}` : country}</div>
-      <div styleName="button"><Button styleName="btn" bStyle="outline" onClick={e => e.stopPropagation()}>Написать</Button></div>
+      <div styleName="button"><Button styleName="btn" bStyle="outline" onClick={e => e.stopPropagation()}>{t('write')}</Button></div>
       {at && <div styleName="activity" title={at}><Icon styleName="icon" name="activity"/>{stringCut(at, 35)}</div>}
       <div styleName="socials">
         {Boolean(links.length) && links.map((link, i) => <SocialLink styleName="social" displayName={false} size={28} {...link} key={link.value + i}/>)}
@@ -44,4 +46,4 @@ const CompanyCard: SFC<Props> = ({ company, ...divProps }) => {
   );
 };
 
-export default CSSModules(CompanyCard, require('./styles.css'));
+export default translate('search')(CSSModules(CompanyCard, require('./styles.css')));

@@ -39,42 +39,42 @@ const CompanyInfo: SFC<Props> = (props) => {
       <div styleName="company-info">
         <h1 styleName="company-name">{legalName}</h1>
 
-        <InfoItem title="Регион">
+        <InfoItem title={t('region')}>
           <p styleName="value">{city ? `${country}, ${city}` : country}</p>
         </InfoItem>
 
-        <InfoItem title="Тип компании">
+        <InfoItem title={t('companyType')}>
           <p styleName="value">{companyType.name}</p>
         </InfoItem>
 
-        <InfoItem title="Описание компании">
+        <InfoItem title={t('companyDescription')}>
           {description
             ? <Text styleName="company-desc" value={description}/>
-            : <div styleName="empty-value">Не заполнено</div>
+            : <div styleName="empty-value">{t('empty')}</div>
           }
         </InfoItem>
 
-        <InfoItem title="Сферы деятельности">
+        <InfoItem title={t('activityAreas')}>
           {economicalActivityTypes.length
             ? <ul styleName="activities">
               {economicalActivityTypes.map((activity, i) => <li styleName="activity" key={i}>{activity.name}</li>)}
             </ul>
-            : <div styleName="empty-value">Не заполнено</div>}
+            : <div styleName="empty-value">{t('empty')}</div>}
         </InfoItem>
 
         <div styleName="contacts-block">
-          <InfoItem styleName="social" title="Ссылки">
+          <InfoItem styleName="social" title={t('links')}>
             {links.length
               ? <ul styleName="social-links">
                 {links.map((social, i) => <SocialLink {...social} key={i}/>)}
               </ul>
-              : <div styleName="empty-value">Не заполнено</div>}
+              : <div styleName="empty-value">{t('empty')}</div>}
           </InfoItem>
 
-          <InfoItem styleName="contacts" title="Контакты">
+          <InfoItem styleName="contacts" title={t('contacts')}>
             {phone && <ContactItem type="phone" value={phone}/>}
             {email && <ContactItem type="email" value={email}/>}
-            {email || phone ? '' : <div styleName="empty-value">Не заполнено</div>}
+            {email || phone ? '' : <div styleName="empty-value">{t('empty')}</div>}
           </InfoItem>
         </div>
       </div>
@@ -85,12 +85,12 @@ const CompanyInfo: SFC<Props> = (props) => {
         <a
           onClick={() => openCompanyCard(company)}
           styleName="company-link"
-          children="Посмотреть в виде карточки"/>
+          children={t('viewAsCard')}/>
 
-        <Link to={routes.employees} styleName="company-link">Сотрудники ({employeesCount})</Link>
+        <Link to={routes.employees} styleName="company-link">{t('employees')} ({employeesCount})</Link>
       </div>
     </div>
   );
 };
 
-export default translate('common')(CSSModules(CompanyInfo, require('./styles.css')));
+export default translate('profile')(CSSModules(CompanyInfo, require('./styles.css')));
