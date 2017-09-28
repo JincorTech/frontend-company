@@ -20,7 +20,7 @@ export type FormFields = {
 export type ComponentProps = {
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>
   spinner: boolean,
-  t: any
+  t: Function
 };
 
 export type ConfirmFormProps = ComponentProps & FormProps<FormFields, ComponentProps, any>;

@@ -25,7 +25,7 @@ export type ComponentProps = {
   updateCities: (id: string) => void
   spinner: boolean
   logo: string,
-  t: any
+  t: Function
 };
 
 export type ReduxFormProps = FormProps<FormFields, {}, any>;

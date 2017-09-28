@@ -14,7 +14,7 @@ import Icon from '../../common/Icon';
 export type Props = {
   changeView: (view: BottomViewProps) => void
   logout: () => void,
-  t: any
+  t: Function
 };
 
 /**

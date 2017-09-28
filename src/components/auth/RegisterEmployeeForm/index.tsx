@@ -32,7 +32,7 @@ export type ComponentProps = {
   pin: string
   email: string
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
-  t: any
+  t: Function
 };
 
 /**

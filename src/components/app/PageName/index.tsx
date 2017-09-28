@@ -4,7 +4,7 @@ import { translate } from 'react-i18next';
 
 export type Props = HTMLProps<HTMLSpanElement> & {
   pathname: string,
-  t: any,
+  t: Function,
   i18nLoadedAt?: any,
   i18n?: any
 };

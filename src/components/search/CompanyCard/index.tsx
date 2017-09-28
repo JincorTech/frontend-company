@@ -15,7 +15,7 @@ import stringCut from '../../../helpers/common/stringCut';
 
 export type Props = HTMLProps<HTMLDivElement> & {
   company: Company,
-  t: any
+  t: Function
 };
 
 const CompanyCard: SFC<Props> = ({ t, company, ...divProps }) => {

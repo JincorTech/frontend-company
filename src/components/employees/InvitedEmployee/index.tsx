@@ -10,7 +10,7 @@ export type Props = ComponentProps;
 
 export type ComponentProps = {
   employee: InvitedEmployeeProps,
-  t: any
+  t: Function
 };
 
 const InvitedEmployee: SFC<Props> = ({ t, employee }) => {

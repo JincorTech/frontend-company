@@ -15,7 +15,7 @@ export type Props = ComponentProps & DispatchProps;
 export type ComponentProps = {
   employee: ActiveEmployeeProps
   auth: AuthProps,
-  t: any
+  t: Function
 };
 
 export type DispatchProps = {

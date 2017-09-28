@@ -19,7 +19,7 @@ export type ComponentProps = {
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
   onCancel: () => void
   spinner: boolean,
-  t: any
+  t: Function
 };
 
 export type FormFields = {

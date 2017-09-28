@@ -5,7 +5,7 @@ import { translate } from 'react-i18next';
 
 export type Props = HTMLProps<HTMLDivElement> & {
   value: string,
-  t: any
+  t: Function
 };
 
 export type State = {

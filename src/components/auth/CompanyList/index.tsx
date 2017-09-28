@@ -17,7 +17,7 @@ export type Company = {
 export type Props = {
   companies: Company[],
   onSelect: (companyId: string) => void,
-  t: any
+  t: Function
 };
 
 const CompanyList: SFC<Props> = ({ t, companies, onSelect }) => {

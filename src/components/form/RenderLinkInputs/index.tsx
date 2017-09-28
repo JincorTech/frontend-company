@@ -13,7 +13,7 @@ import AddButton from '../../profile/AddButton';
  * Types
  */
 export type Props = WrappedFieldArrayProps<string> & {
-  t: any
+  t: Function
 };
 
 const RenderLinkInputs: SFC<Props> = (props) => {

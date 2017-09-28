@@ -19,7 +19,7 @@ export type Props =
 
 export type EmployeeCardProps = {
   company: UserCompanyProps,
-  t: any
+  t: Function
 };
 
 const EmployeeCard: SFC<Props> = ({ t, employee, company, ...popupProps }) => {

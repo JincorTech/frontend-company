@@ -19,7 +19,7 @@ export type ConfirmComponentProps = {
   spinner: boolean
   verificationId: string,
   onSubmit: SubmitHandler<FormFields, ConfirmComponentProps, any>,
-  t: any
+  t: Function
 };
 
 export type ConfirmFormProps = ConfirmComponentProps & FormProps<FormFields, ConfirmComponentProps, any>;

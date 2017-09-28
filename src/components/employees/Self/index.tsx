@@ -10,7 +10,7 @@ export type Props = ComponentProps & DispatchProps;
 
 export type ComponentProps = {
   employee: SelfProps,
-  t: any
+  t: Function
 };
 
 export type DispatchProps = {

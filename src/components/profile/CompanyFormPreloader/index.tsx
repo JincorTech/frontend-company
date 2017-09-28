@@ -6,7 +6,7 @@ import { translate } from 'react-i18next';
 import InfoItem from '../InfoItem';
 
 export type Props = {
-  t: any
+  t: Function
 };
 
 const CompanyFormPreloader: SFC<Props> = ({ t }) => (

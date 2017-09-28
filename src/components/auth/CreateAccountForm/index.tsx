@@ -27,7 +27,7 @@ export type ComponentProps = {
   spinner: boolean
   verificationId: string,
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
-  t: any
+  t: Function
 };
 
 export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>;

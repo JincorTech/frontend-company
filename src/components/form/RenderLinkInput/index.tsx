@@ -10,7 +10,7 @@ import Input from '../../../components/common/Input';
 export type InputProps = WrappedFieldProps<any> & {
   placeholder?: string
   onRemove: () => void,
-  t: any
+  t: Function
 };
 
 const RenderLinkInput: SFC<InputProps> = (props) => {

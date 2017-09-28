@@ -18,7 +18,7 @@ export type Props = {
   company: Company
   auth: AuthProps
   openCompanyCard: (company: Company) => void,
-  t: any
+  t: Function
 };
 
 const CompanyInfo: SFC<Props> = (props) => {

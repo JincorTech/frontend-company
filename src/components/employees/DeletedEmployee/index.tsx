@@ -11,7 +11,7 @@ export type Props = ComponentProps;
 
 export type ComponentProps = {
   employee: DeletedEmployeeProps,
-  t: any
+  t: Function
 };
 
 const DeletedEmployee: SFC<Props> = ({ t, employee }) => {

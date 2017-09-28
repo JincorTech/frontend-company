@@ -19,7 +19,7 @@ export type Props = WrappedFieldProps<any> & InjectedCSSModuleProps & {
   openPopup: () => void
   closePopup: () => void
   onActivitySelect: (activityId: string) => void,
-  t: any
+  t: Function
 };
 
 export const RenderActivity: SFC<Props> = (props) => {

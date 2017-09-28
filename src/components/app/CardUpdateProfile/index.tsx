@@ -22,7 +22,7 @@ export type ComponentProps = {
   onCancel: () => void
   avatar: string
   spinner: boolean,
-  t: any
+  t: Function
 };
 
 export type FormFields = {

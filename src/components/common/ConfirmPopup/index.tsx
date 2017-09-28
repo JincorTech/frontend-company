@@ -16,7 +16,7 @@ export type Props =
 export type ComponentProps = {
   title: string,
   userId: string,
-  t: any
+  t: Function
 };
 
 export type DispatchProps = {

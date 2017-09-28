@@ -24,7 +24,7 @@ export type FormFields = {
 export type ComponentProps = {
   spinner: boolean
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
-  t: any
+  t: Function
 };
 
 /**

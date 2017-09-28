@@ -16,7 +16,7 @@ import RenderActivity from '../RenderActivity';
 export type Props = ComponentProps & WrappedFieldArrayProps<string>;
 
 export type ComponentProps = {
-  t: any
+  t: Function
 };
 
 const RenderActivities: SFC<Props> = (props) => {

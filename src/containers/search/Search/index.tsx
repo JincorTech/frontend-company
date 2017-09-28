@@ -19,7 +19,7 @@ import SelectDropdown from '../../../components/common/SelectDropdown';
 
 export type Props = ComponentProps & DispatchProps & StateProps & {
   loadingBar: number,
-  t: any
+  t: Function
 };
 
 export type ComponentProps = {

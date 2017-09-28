@@ -14,7 +14,7 @@ import Icon from '../../common/Icon';
 export type Props = HTMLProps<HTMLDivElement> & InjectedCSSModuleProps & {
   open?: boolean
   onClose: () => void,
-  t: any,
+  t: Function,
   i18nLoadedAt?: any,
   i18n?: any
 };
