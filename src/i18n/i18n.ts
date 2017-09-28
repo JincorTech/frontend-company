@@ -1,9 +1,8 @@
 import * as i18n from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
 
 const ru = {
-  app: require('../locales/ru/auth.json'),
-  auth: require('../locales/ru/app.json'),
+  app: require('../locales/ru/app.json'),
+  auth: require('../locales/ru/auth.json'),
   common: require('../locales/ru/common.json'),
   employees: require('../locales/ru/employees.json'),
   form: require('../locales/ru/form.json'),
@@ -61,7 +60,6 @@ export const config = {
 };
 
 const instance = i18n
-  // .use(LanguageDetector)
   .init(config);
 
 export default instance;

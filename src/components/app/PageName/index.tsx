@@ -4,7 +4,9 @@ import { translate } from 'react-i18next';
 
 export type Props = HTMLProps<HTMLSpanElement> & {
   pathname: string,
-  t: any
+  t: any,
+  i18nLoadedAt?: any,
+  i18n?: any
 };
 
 const pages = {
@@ -16,7 +18,7 @@ const pages = {
   '/cmp/app/bookmarks': 'favorites'
 };
 
-const PageName: SFC<Props> = ({ t, pathname, ...spanProps }) => (
+const PageName: SFC<Props> = ({ t, pathname, i18nLoadedAt, i18n, ...spanProps }) => (
   <span {...spanProps}>
     {t(pages[pathname])}
   </span>
