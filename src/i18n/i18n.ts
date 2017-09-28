@@ -12,16 +12,16 @@ const ru = {
 
 const en = {
   app: require('../locales/en/app.json'),
-  auth: require('../locales/ru/auth.json'),
+  auth: require('../locales/en/auth.json'),
   common: require('../locales/en/common.json'),
-  employees: require('../locales/ru/employees.json'),
-  form: require('../locales/ru/form.json'),
-  profile: require('../locales/ru/profile.json'),
-  search: require('../locales/ru/search.json')
+  employees: require('../locales/en/employees.json'),
+  form: require('../locales/en/form.json'),
+  profile: require('../locales/en/profile.json'),
+  search: require('../locales/en/search.json')
 };
 
 export const config = {
-  lng: 'ru',
+  lng: 'en',
   fallbackLng: 'en',
   supportedLngs: ['en', 'ru'],
   debug: process.env.NODE_ENV === 'development',

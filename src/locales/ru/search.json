@@ -1,3 +1,8 @@
 {
-  "write": "Написать"
+  "write": "Написать",
+  "companySearch": "Поиск компаний",
+  "selectCountry": "Выбрать страну",
+  "allCountries": "Все страны",
+  "selectBranch": "Выбрать отрасль",
+  "allBranches": "Все отрасли"
 }
