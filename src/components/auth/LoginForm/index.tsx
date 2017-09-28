@@ -41,7 +41,7 @@ class LogInForm extends Component<Props, {}> {
       <Form
         onSubmit={handleSubmit}
         styleName="login-form"
-        title={t('entry')}>
+        title={t('login')}>
 
         <Field
           component={RenderInput}
@@ -63,7 +63,7 @@ class LogInForm extends Component<Props, {}> {
           ]}
           warn={password(t('passwordWarning'))}/>
 
-        <Button type="submit" spinner={spinner} disabled={invalid}>{t('enter')}</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>{t('signIn')}</Button>
 
         <Link styleName="restore-password" to={routes.restorePassword}>{t('forgotPassword')}</Link>
       </Form>

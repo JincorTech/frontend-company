@@ -22,7 +22,7 @@ const Header: SFC<Props> = ({ t, children }) => {
           <Logo to={routes.base}/>
 
           <nav styleName="pull-right">
-            <Link styleName="enter-link" to={routes.signIn}>{t('enter')}</Link>
+            <Link styleName="enter-link" to={routes.signIn}>{t('signIn')}</Link>
             <Link to={routes.signUp} withBorder>{t('newCompany')}</Link>
           </nav>
         </div>

@@ -1,3 +1,14 @@
 {
-  
+  "disableAdminRights": "Disable admin rights",
+  "assignAdministrator": "Assign administrator",
+  "openProfile": "Open profile",
+  "removeUser": "Remove user",
+  "removed": "Removed",
+  "message": "Message",
+  "addToContacts": "Add to contacts",
+  "block": "Block",
+  "invited": "Invited",
+  "emailsPlaceholder": "Emails separated by commas",
+  "invite": "Invite",
+  "administrator": "Administrator"
 }

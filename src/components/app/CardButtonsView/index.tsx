@@ -41,7 +41,7 @@ const CardButtonsView: SFC<Props> = (props) => {
       <button
         type="button"
         onClick={() => logout()}>
-        <Icon name="logout" styleName="icon"/> {t('quit')}
+        <Icon name="logout" styleName="icon"/> {t('signOut')}
       </button>
     </div>
   );
