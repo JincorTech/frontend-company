@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import { pathCreator, checkHttpStatus, parseJSON, authHeader } from './helpers';
+import * as i18n from 'i18next';
 
 /**
  * Fetch wrapper function
@@ -13,6 +14,7 @@ function apiFetch(path: string, options: RequestInit = {}): Promise<Response> {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Locale': i18n.language,
       ...authHeader()
     },
     ...options

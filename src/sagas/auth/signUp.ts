@@ -5,7 +5,6 @@ import { takeLatest, call, put, fork, select } from 'redux-saga/effects';
 import { get, post } from '../../utils/api';
 import { setUser, getUser, removeUser } from '../../utils/auth';
 import { push } from 'react-router-redux';
-import * as i18n from 'i18next';
 import { routes } from '../../routes';
 
 import { isEmail } from '../../helpers/common/emailTextarea';
@@ -37,7 +36,7 @@ const transformFunc = ({name, id: value }) => ({ value, name });
 export function* fetchCountriesAndTypesIterator(): SagaIterator {
   try {
     const [countries, types] = yield [
-      call(get, `/dictionary/country?locale=${i18n.language}`),
+      call(get, '/dictionary/country'),
       call(get, '/company/types')
     ];
 

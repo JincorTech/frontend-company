@@ -2,7 +2,6 @@ import { SagaIterator } from 'redux-saga';
 import { takeLatest, call, put, fork } from 'redux-saga/effects';
 import { initialize } from 'redux-form';
 import { push } from 'react-router-redux';
-import * as i18n from 'i18next';
 import { routes } from '../../routes';
 import { put as putFunc, get } from '../../utils/api';
 import { Action } from '../../utils/actions';
@@ -23,9 +22,9 @@ const transformFunc = ({name, id: value }) => ({ value, name });
 function* getProfileIterator(): SagaIterator {
   try {
     const [countries, types, { data: profile }] = yield [
-      call(get, `/dictionary/country?locale=${i18n.language}`),
-      call(get, `/company/types?locale=${i18n.language}`),
-      call(get, `/company/my?locale=${i18n.language}`)
+      call(get, '/dictionary/country'),
+      call(get, '/company/types'),
+      call(get, '/company/my')
     ];
 
     const { id: countryId } = profile.profile.address.country;

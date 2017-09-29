@@ -1,6 +1,5 @@
 import { SagaIterator, delay } from 'redux-saga';
 import { takeLatest, call, put, fork } from 'redux-saga/effects';
-import * as i18n from 'i18next';
 import { get } from '../../utils/api';
 import { Action } from '../../utils/actions';
 
@@ -12,7 +11,7 @@ import { request } from '../../helpers/search/search';
 
 function* getCountriesIterator(): SagaIterator {
   try {
-    const { data } = yield call(get, `/dictionary/country?locale=${i18n.language}`);
+    const { data } = yield call(get, '/dictionary/country');
     const countryOptions = yield call(
       optionTransformer,
       data,
