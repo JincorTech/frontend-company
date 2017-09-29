@@ -1,5 +1,6 @@
 import { SagaIterator } from 'redux-saga';
 import { takeLatest, takeEvery, put, call, select, fork } from 'redux-saga/effects';
+import * as i18n from 'i18next';
 import { Action, ActionMeta } from '../../utils/actions';
 import { get } from '../../utils/api';
 
@@ -35,7 +36,7 @@ const getState = state => state.common.activityTypes;
  */
 function* fetchActivitiesIterator(): SagaIterator {
   try {
-    const { data: activities } = yield call(get, '/company/activityTypes');
+    const { data: activities } = yield call(get, `/company/activityTypes?locale=${i18n.language}`);
 
     const normalized = yield call(normalizeActivities, activities);
     yield put(fetchActivities.success(normalized));
