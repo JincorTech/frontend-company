@@ -14,7 +14,7 @@ const pages = {
   '/cmp/app/search': 'search',
   '/cmp/app/employees': 'myCompany',
   '/cmp/app/profile/edit': 'companyProfile',
-  '/cmp/app/messenger': 'messanger',
+  '/cmp/app/messenger': 'messenger',
   '/cmp/app/bookmarks': 'favorites'
 };
 
