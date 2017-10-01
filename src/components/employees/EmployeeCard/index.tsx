@@ -63,4 +63,7 @@ const EmployeeCard: SFC<Props> = ({ t, employee, company, ...popupProps }) => {
   );
 };
 
-export default translate('employees')(CSSModules(EmployeeCard, require('./styles.css')));
+const StyledComponent = CSSModules(EmployeeCard, require('./styles.css'));
+const TranslatedComponent = translate('employees')(StyledComponent);
+
+export default TranslatedComponent;

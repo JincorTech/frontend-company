@@ -59,11 +59,12 @@ class NewPasswordForm extends Component<Props, {}> {
 /**
  * Decorators
  */
-const StyledComponent = translate('auth')(CSSModules(NewPasswordForm, require('./styles.css')));
+const StyledComponent = CSSModules(NewPasswordForm, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'newPassword',
   initialValues: {
     password: ''
   }
-})(StyledComponent);
+})(TranslatedComponent);

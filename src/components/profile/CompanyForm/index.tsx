@@ -143,8 +143,9 @@ class CompanyForm extends Component<Props, {}> {
   }
 }
 
-const StyledComponent = translate('profile')(CSSModules(CompanyForm, require('./styles.css')));
+const StyledComponent = CSSModules(CompanyForm, require('./styles.css'));
+const TranslatedComponent = translate('profile')(StyledComponent);
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'profileEdit'
-})(StyledComponent);
+})(TranslatedComponent);

@@ -142,8 +142,9 @@ class CardUpdateProfile extends Component<Props, {}> {
  * Export
  */
 
-const StyledComponent = translate('app')(CSSModules(CardUpdateProfile, require('./styles.css')));
+const StyledComponent = CSSModules(CardUpdateProfile, require('./styles.css'));
+const TranslatedComponent = translate('app')(StyledComponent);
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'cardUpdateProfile'
-})(StyledComponent);
+})(TranslatedComponent);

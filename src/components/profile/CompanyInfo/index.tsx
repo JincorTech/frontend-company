@@ -93,4 +93,7 @@ const CompanyInfo: SFC<Props> = (props) => {
   );
 };
 
-export default translate('profile')(CSSModules(CompanyInfo, require('./styles.css')));
+const StyledComponent = CSSModules(CompanyInfo, require('./styles.css'));
+const TranslatedComponent = translate('profile')(StyledComponent);
+
+export default TranslatedComponent;

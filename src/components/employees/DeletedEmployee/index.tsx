@@ -42,4 +42,7 @@ const DeletedEmployee: SFC<Props> = ({ t, employee }) => {
   );
 };
 
-export default translate('employees')(CSSModules(DeletedEmployee, require('./styles.css')));
+const StyledComponent = CSSModules(DeletedEmployee, require('./styles.css'));
+const TranslatedComponent = translate('employees')(StyledComponent);
+
+export default TranslatedComponent;

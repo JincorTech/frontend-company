@@ -77,7 +77,8 @@ class CardChangePassword extends Component<Props, {}> {
  * Export
  */
 
-const StyledComponent = translate('app')(CSSModules(CardChangePassword, require('./styles.css')));
+const StyledComponent = CSSModules(CardChangePassword, require('./styles.css'));
+const TranslatedComponent = translate('app')(StyledComponent);
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'cardChangePassword',
@@ -85,4 +86,4 @@ export default reduxForm<FormFields, ComponentProps>({
     oldPassword: '',
     password: ''
   }
-})(StyledComponent);
+})(TranslatedComponent);

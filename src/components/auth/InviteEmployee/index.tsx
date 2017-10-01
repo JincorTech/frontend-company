@@ -72,9 +72,10 @@ class InviteEmployee extends Component<Props, {}> {
 /**
  * Decorators
  */
-const StyledComponent = translate('auth')(CSSModules(InviteEmployee, require('./styles.css')));
+const StyledComponent = CSSModules(InviteEmployee, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => ({ textareaValid : state.common.emailTextarea.valid }),
   { inviteEmployee, resetTextarea }
-)(StyledComponent);
+)(TranslatedComponent);

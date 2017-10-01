@@ -46,9 +46,10 @@ const InviteEmployee: SFC<Props> = (props) => {
   );
 };
 
-const StyledComponent = translate('employees')(CSSModules(InviteEmployee, require('./styles.css')));
+const StyledComponent = CSSModules(InviteEmployee, require('./styles.css'));
+const TranslatedComponent = translate('employees')(StyledComponent);
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => ({ textareaValid : state.common.emailTextarea.valid }),
   { inviteEmployees }
-)(StyledComponent);
+)(TranslatedComponent);

@@ -55,4 +55,7 @@ export const RenderActivity: SFC<Props> = (props) => {
   );
 };
 
-export default translate('form')(CSSModules(RenderActivity, require('./styles.css')));
+const StyledComponent = CSSModules(RenderActivity, require('./styles.css'));
+const TranslatedComponent = translate('form')(StyledComponent);
+
+export default TranslatedComponent;

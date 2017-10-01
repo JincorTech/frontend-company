@@ -164,7 +164,8 @@ class Search extends Component<Props, ComponentProps> {
   }
 }
 
-const StyledComponent = translate('search')(CSSModules(Search, require('./styles.css')));
+const StyledComponent = CSSModules(Search, require('./styles.css'));
+const TranslatedComponent = translate('search')(StyledComponent);
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => ({
@@ -172,4 +173,4 @@ export default connect<StateProps, DispatchProps, ComponentProps>(
     ...state.search.search
   }),
   { fetchActivities, fetchCountries, search, nextPage, openCompanyCard }
-)(StyledComponent);
+)(TranslatedComponent);

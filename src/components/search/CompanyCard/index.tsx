@@ -46,4 +46,7 @@ const CompanyCard: SFC<Props> = ({ t, company, ...divProps }) => {
   );
 };
 
-export default translate('search')(CSSModules(CompanyCard, require('./styles.css')));
+const StyledComponent = CSSModules(CompanyCard, require('./styles.css'));
+const TranslatedComponent = translate('search')(StyledComponent);
+
+export default TranslatedComponent;

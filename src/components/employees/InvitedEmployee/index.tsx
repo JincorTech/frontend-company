@@ -31,4 +31,7 @@ const InvitedEmployee: SFC<Props> = ({ t, employee }) => {
   );
 };
 
-export default translate('employees')(CSSModules(InvitedEmployee, require('./styles.css')));
+const StyledComponent = CSSModules(InvitedEmployee, require('./styles.css'));
+const TranslatedComponent = translate('employees')(StyledComponent);
+
+export default TranslatedComponent;

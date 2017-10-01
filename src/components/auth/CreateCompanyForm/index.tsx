@@ -95,7 +95,8 @@ class CreateCompanyForm extends Component<Props, {}> {
 /**
  * Decorators
  */
-const StyledComponent = translate('auth')(CSSModules(CreateCompanyForm, require('./styles.css')));
+const StyledComponent = CSSModules(CreateCompanyForm, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
 
 const FormComponent = reduxForm<FormFields, ComponentProps>({
   form: 'company',
@@ -104,7 +105,7 @@ const FormComponent = reduxForm<FormFields, ComponentProps>({
     companyType: '',
     legalName: ''
   }
-})(StyledComponent);
+})(TranslatedComponent);
 
 export default connect<{}, DispatchProps, ReduxFormProps>(
   () => ({}),

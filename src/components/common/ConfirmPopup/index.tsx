@@ -36,4 +36,7 @@ const ConfirmPopup: SFC<Props> = ({ t, title, userId, onClose, onConfirm, ...pop
   </Popup>
 );
 
-export default translate('common')(CSSModules(ConfirmPopup, require('./styles.css')));
+const StyledComponent = CSSModules(ConfirmPopup, require('./styles.css'));
+const TranslatedComponent = translate('common')(StyledComponent);
+
+export default TranslatedComponent;

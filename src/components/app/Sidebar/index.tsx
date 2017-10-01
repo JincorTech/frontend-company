@@ -72,4 +72,7 @@ class Sidebar extends PureComponent<Props, {}> {
   }
 }
 
-export default translate('app')(CSSModules(Sidebar, require('./styles.css')));
+const StyledComponent = CSSModules(Sidebar, require('./styles.css'));
+const TranslatedComponent = translate('app')(StyledComponent);
+
+export default TranslatedComponent;

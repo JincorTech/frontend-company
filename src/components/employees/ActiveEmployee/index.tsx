@@ -80,4 +80,7 @@ const ActiveEmployee: SFC<Props> = props => {
   );
 };
 
-export default translate('employees')(CSSModules(ActiveEmployee, require('./styles.css')));
+const StyledComponent = CSSModules(ActiveEmployee, require('./styles.css'));
+const TranslatedComponent = translate('employees')(StyledComponent);
+
+export default TranslatedComponent;

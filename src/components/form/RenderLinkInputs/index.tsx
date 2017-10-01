@@ -38,4 +38,7 @@ const RenderLinkInputs: SFC<Props> = (props) => {
 /**
  * Decorators
  */
-export default translate('form')(CSSModules(RenderLinkInputs, require('./styles.css')));
+const StyledComponent = CSSModules(RenderLinkInputs, require('./styles.css'));
+const TranslatedComponent = translate('form')(StyledComponent);
+
+export default TranslatedComponent;

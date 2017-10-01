@@ -37,4 +37,7 @@ const Header: SFC<Props> = ({ t, children }) => {
   );
 };
 
-export default translate('auth')(CSSModules(Header, require('./styles.css')));
+const StyledComponent = CSSModules(Header, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
+
+export default TranslatedComponent;

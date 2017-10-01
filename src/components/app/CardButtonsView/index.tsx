@@ -51,4 +51,7 @@ const CardButtonsView: SFC<Props> = (props) => {
  * Export
  */
 
-export default translate('app')(CSSModules(CardButtonsView, require('./styles.css')));
+const StyledComponent = CSSModules(CardButtonsView, require('./styles.css'));
+const TranslatedComponent = translate('app')(StyledComponent);
+
+export default TranslatedComponent;

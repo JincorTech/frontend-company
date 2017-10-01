@@ -60,7 +60,8 @@ class ConfirmEmailForm extends Component<ConfirmFormProps, {}> {
   }
 }
 
-const StyledComponent = translate('auth')(CSSModules(ConfirmEmailForm, require('./styles.css')));
+const StyledComponent = CSSModules(ConfirmEmailForm, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
 
 export default reduxForm<FormFields, ConfirmComponentProps>({
   form: 'confirmEmail',
@@ -68,4 +69,4 @@ export default reduxForm<FormFields, ConfirmComponentProps>({
     verificationCode: '',
     verificationId: ''
   }
-})(StyledComponent);
+})(TranslatedComponent);

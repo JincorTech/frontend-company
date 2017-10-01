@@ -55,10 +55,12 @@ class ConfirmPasswordForm extends Component<ConfirmFormProps, {}> {
 /**
  * Decorators
  */
-const StyledComponent = translate('auth')(CSSModules(ConfirmPasswordForm, require('./styles.css')));
+const StyledComponent = CSSModules(ConfirmPasswordForm, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
+
 export default reduxForm<FormFields, ComponentProps>({
   form: 'confirmPassword',
   initialValues: {
     verificationCode: ''
   }
-})(StyledComponent);
+})(TranslatedComponent);

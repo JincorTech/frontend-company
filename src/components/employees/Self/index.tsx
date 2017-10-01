@@ -44,4 +44,7 @@ const Self: SFC<Props> = (props) => {
   );
 };
 
-export default translate('employees')(CSSModules(Self, require('./styles.css')));
+const StyledComponent = CSSModules(Self, require('./styles.css'));
+const TranslatedComponent = translate('employees')(StyledComponent);
+
+export default TranslatedComponent;

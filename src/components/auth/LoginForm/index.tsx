@@ -71,7 +71,8 @@ class LogInForm extends Component<Props, {}> {
   }
 }
 
-const StyledComponent = translate('auth')(CSSModules(LogInForm, require('./styles.css')));
+const StyledComponent = CSSModules(LogInForm, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'account',
@@ -79,4 +80,4 @@ export default reduxForm<FormFields, ComponentProps>({
     email: '',
     password: ''
   }
-})(StyledComponent);
+})(TranslatedComponent);

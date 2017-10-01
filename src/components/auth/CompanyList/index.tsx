@@ -39,4 +39,7 @@ const CompanyList: SFC<Props> = ({ t, companies, onSelect }) => {
   );
 };
 
-export default translate('auth')(CSSModules(CompanyList, require('./styles.css')));
+const StyledComponent = CSSModules(CompanyList, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
+
+export default TranslatedComponent;

@@ -69,4 +69,7 @@ const CompanyInfoPreloader: SFC<Props> = ({ t }) => (
   </div>
 );
 
-export default translate('profile')(CSSModules(CompanyInfoPreloader, require('./styles.css')));
+const StyledComponent = CSSModules(CompanyInfoPreloader, require('./styles.css'));
+const TranslatedComponent = translate('profile')(StyledComponent);
+
+export default TranslatedComponent;

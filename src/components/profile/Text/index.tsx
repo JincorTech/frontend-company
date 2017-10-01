@@ -73,4 +73,7 @@ class Text extends Component<Props, State> {
   }
 }
 
-export default translate('profile')(CSSModules(Text, require('./styles.css')));
+const StyledComponent = CSSModules(Text, require('./styles.css'));
+const TranslatedComponent = translate('profile')(StyledComponent);
+
+export default TranslatedComponent;

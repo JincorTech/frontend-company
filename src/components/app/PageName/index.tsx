@@ -24,4 +24,6 @@ const PageName: SFC<Props> = ({ t, pathname, i18nLoadedAt, i18n, ...spanProps })
   </span>
 );
 
-export default translate('app')(PageName);
+const TranslatedComponent = translate('app')(PageName);
+
+export default TranslatedComponent;

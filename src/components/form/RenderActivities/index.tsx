@@ -44,4 +44,7 @@ const RenderActivities: SFC<Props> = (props) => {
 /**
  * Decorator
  */
-export default translate('form')(CSSModules(RenderActivities, require('./styles.css')));
+const StyledComponent = CSSModules(RenderActivities, require('./styles.css'));
+const TranslatedComponent = translate('form')(StyledComponent);
+
+export default TranslatedComponent;

@@ -98,9 +98,10 @@ const CompanyCard: SFC<Props> = props => {
   );
 };
 
-const StyledComponent = translate('common')(CSSModules(CompanyCard, require('./styles.css')));
+const StyledComponent = CSSModules(CompanyCard, require('./styles.css'));
+const TranslatedComponent = translate('common')(StyledComponent);
 
 export default connect<StateProps, DispatchProps, {}>(
   (state) => state.common.companyCard,
   { closeCompanyCard }
-)(StyledComponent);
+)(TranslatedComponent);
