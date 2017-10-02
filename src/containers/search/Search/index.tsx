@@ -3,6 +3,7 @@ import { Component } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { connect } from 'react-redux';
 import * as isEqual from 'shallowequal';
+import { translate } from 'react-i18next';
 
 import { fetchActivities } from '../../../redux/modules/common/activityTypes';
 import { search, fetchCountries, nextPage, StateMap as StateProps, SearchRequest } from '../../../redux/modules/search/search';
@@ -17,7 +18,8 @@ import ActivityTypes from '../../common/ActivityTypes';
 import SelectDropdown from '../../../components/common/SelectDropdown';
 
 export type Props = ComponentProps & DispatchProps & StateProps & {
-  loadingBar: number
+  loadingBar: number,
+  t: Function
 };
 
 export type ComponentProps = {
@@ -97,7 +99,7 @@ class Search extends Component<Props, ComponentProps> {
   }
 
   public render(): JSX.Element {
-    const { companies, openCompanyCard, loadingBar } = this.props;
+    const { t, companies, openCompanyCard, loadingBar } = this.props;
 
     return (
       <div>
@@ -106,7 +108,7 @@ class Search extends Component<Props, ComponentProps> {
             <input
               type="text"
               styleName="search-field"
-              placeholder="Поиск компаний"
+              placeholder={t('companySearch')}
               value={this.state.request}
               onChange={this.handleRequestChange}/>
               {!!loadingBar
@@ -125,24 +127,24 @@ class Search extends Component<Props, ComponentProps> {
               <Select
                 modalId="select-country"
                 filter
-                title="Выбрать страну"
+                title={t('selectCountry')}
                 options={[]}
                 button={<SelectDropdown/>}
                 optionValue={this.state.country}
-                defaultOption="Все страны"
+                defaultOption={t('allCountries')}
                 onChange={this.handleCountryChange}
                 onBlur={() => void(0)}
-                placeholder="Все страны"/>
+                placeholder={t('allCountries')}/>
             </div>
             <div styleName="filter">
               <ActivityTypes
                 name="select-activity-type"
                 button={<SelectDropdown/>}
-                title="Выбрать отрасль"
+                title={t('selectBranch')}
                 onActivitySelect={this.handleActivityChange}
                 activityValue={this.state.activity}
-                defaultOption="Все отрасли"
-                placeholder="Все отрасли"/>
+                defaultOption={t('allBranches')}
+                placeholder={t('allBranches')}/>
             </div>
           </div>
         </div>
@@ -163,6 +165,7 @@ class Search extends Component<Props, ComponentProps> {
 }
 
 const StyledComponent = CSSModules(Search, require('./styles.css'));
+const TranslatedComponent = translate('search')(StyledComponent);
 
 export default connect<StateProps, DispatchProps, ComponentProps>(
   (state) => ({
@@ -170,4 +173,4 @@ export default connect<StateProps, DispatchProps, ComponentProps>(
     ...state.search.search
   }),
   { fetchActivities, fetchCountries, search, nextPage, openCompanyCard }
-)(StyledComponent);
+)(TranslatedComponent);

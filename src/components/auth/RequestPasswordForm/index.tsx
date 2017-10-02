@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form';
+import { translate } from 'react-i18next';
 
 import { email, required } from '../../../utils/validators';
 
@@ -18,7 +19,8 @@ export type FormFields = {
 
 export type ComponentProps = {
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
-  spinner: boolean
+  spinner: boolean,
+  t: Function
 };
 
 export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>;
@@ -28,14 +30,14 @@ export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>;
  */
 class RequestPasswordForm extends Component<Props, {}> {
   public render(): JSX.Element {
-    const { spinner, invalid, handleSubmit } = this.props;
+    const { t, spinner, invalid, handleSubmit } = this.props;
 
     return (
       <Form
         onSubmit={handleSubmit}
         styleName="request-password-form"
-        title="Восстановление пароля"
-        hint="Введите email, указанный при регистрации, на который придет ссылка и код для сброса пароля.">
+        title={t('passwordRecovery')}
+        hint={t('passwordRecoveryEmailHint')}>
 
         <Field
           component={RenderInput}
@@ -47,7 +49,7 @@ class RequestPasswordForm extends Component<Props, {}> {
             email()
           ]}/>
 
-        <Button type="submit" spinner={spinner} disabled={invalid}>Подтвердить</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>{t('confirm')}</Button>
       </Form>
     );
   }
@@ -57,9 +59,11 @@ class RequestPasswordForm extends Component<Props, {}> {
  * Decorators
  */
 const StyledComponent = CSSModules(RequestPasswordForm, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
+
 export default reduxForm<FormFields, ComponentProps>({
   form: 'requestPassword',
   initialValues: {
     email: ''
   }
-})(StyledComponent);
+})(TranslatedComponent);

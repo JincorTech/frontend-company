@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form';
+import { translate } from 'react-i18next';
 
 import { length, number, required } from '../../../utils/validators';
 
@@ -17,7 +18,8 @@ export type FormFields = {
 export type ConfirmComponentProps = {
   spinner: boolean
   verificationId: string,
-  onSubmit: SubmitHandler<FormFields, ConfirmComponentProps, any>
+  onSubmit: SubmitHandler<FormFields, ConfirmComponentProps, any>,
+  t: Function
 };
 
 export type ConfirmFormProps = ConfirmComponentProps & FormProps<FormFields, ConfirmComponentProps, any>;
@@ -30,14 +32,14 @@ class ConfirmEmailForm extends Component<ConfirmFormProps, {}> {
   }
 
   public render(): JSX.Element {
-    const { invalid, handleSubmit, spinner } = this.props;
+    const { t, invalid, handleSubmit, spinner } = this.props;
 
     return (
       <Form
         onSubmit={handleSubmit}
         styleName="confirm-email-form"
-        title="Подтверждение регистрации"
-        hint="Чтобы успешно зарегистрироваться, подтвердите регистрацию с помощью кода, присланного на ваш email">
+        title={t('registrationConfirm')}
+        hint={t('registrationHint')}>
 
         <Field
           component="input"
@@ -49,16 +51,17 @@ class ConfirmEmailForm extends Component<ConfirmFormProps, {}> {
           component={RenderInput}
           name="verificationCode"
           type="text"
-          placeholder="Введите код"
+          placeholder={t('enterCode')}
           validate={[number(), length(6)]}/>
 
-        <Button type="submit" spinner={spinner} disabled={invalid}>Далее</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>{t('next')}</Button>
       </Form>
     );
   }
 }
 
 const StyledComponent = CSSModules(ConfirmEmailForm, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
 
 export default reduxForm<FormFields, ConfirmComponentProps>({
   form: 'confirmEmail',
@@ -66,4 +69,4 @@ export default reduxForm<FormFields, ConfirmComponentProps>({
     verificationCode: '',
     verificationId: ''
   }
-})(StyledComponent);
+})(TranslatedComponent);

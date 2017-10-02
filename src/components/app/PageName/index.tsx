@@ -1,23 +1,29 @@
 import * as React from 'react';
 import { SFC, HTMLProps } from 'react';
+import { translate } from 'react-i18next';
 
 export type Props = HTMLProps<HTMLSpanElement> & {
-  pathname: string
+  pathname: string,
+  t: Function,
+  i18nLoadedAt?: any,
+  i18n?: any
 };
 
 const pages = {
-  '/cmp/app/profile': 'Профиль компании',
-  '/cmp/app/search': 'Поиск',
-  '/cmp/app/employees': 'Моя компания',
-  '/cmp/app/profile/edit': 'Профиль компании',
-  '/cmp/app/messenger': 'Messenger',
-  '/cmp/app/bookmarks': 'Избранное'
+  '/cmp/app/profile': 'companyProfile',
+  '/cmp/app/search': 'search',
+  '/cmp/app/employees': 'myCompany',
+  '/cmp/app/profile/edit': 'companyProfile',
+  '/cmp/app/messenger': 'messenger',
+  '/cmp/app/bookmarks': 'favorites'
 };
 
-const PageName: SFC<Props> = ({ pathname, ...spanProps }) => (
+const PageName: SFC<Props> = ({ t, pathname, i18nLoadedAt, i18n, ...spanProps }) => (
   <span {...spanProps}>
-    {pages[pathname]}
+    {t(pages[pathname])}
   </span>
 );
 
-export default PageName;
+const TranslatedComponent = translate('app')(PageName);
+
+export default TranslatedComponent;

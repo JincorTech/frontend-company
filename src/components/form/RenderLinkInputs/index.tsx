@@ -2,6 +2,7 @@ import * as React from 'react';
 import { SFC } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { Field, WrappedFieldArrayProps } from 'redux-form';
+import { translate } from 'react-i18next';
 
 import { required } from '../../../utils/validators';
 
@@ -11,10 +12,12 @@ import AddButton from '../../profile/AddButton';
 /**
  * Types
  */
-export type Props = WrappedFieldArrayProps<string>;
+export type Props = WrappedFieldArrayProps<string> & {
+  t: Function
+};
 
 const RenderLinkInputs: SFC<Props> = (props) => {
-  const { fields } = props;
+  const { t, fields } = props;
 
   return (
     <div styleName="link-inputs">
@@ -27,7 +30,7 @@ const RenderLinkInputs: SFC<Props> = (props) => {
           component={RenderLinkInput}
           onRemove={() => fields.remove(i)}/>
       ))}
-      {fields.length < 4 && <AddButton children="добавить ссылку" onClick={() => fields.push('')}/>}
+      {fields.length < 4 && <AddButton children={t('addLink')} onClick={() => fields.push('')}/>}
     </div>
   );
 };
@@ -35,4 +38,7 @@ const RenderLinkInputs: SFC<Props> = (props) => {
 /**
  * Decorators
  */
-export default CSSModules(RenderLinkInputs, require('./styles.css'));
+const StyledComponent = CSSModules(RenderLinkInputs, require('./styles.css'));
+const TranslatedComponent = translate('form')(StyledComponent);
+
+export default TranslatedComponent;

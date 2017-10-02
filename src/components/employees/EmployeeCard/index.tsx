@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { SFC, HTMLProps } from 'react';
 import * as CSSModules from 'react-css-modules';
+import { translate } from 'react-i18next';
 
 import { Props as PopupProps } from '../../common/Popup';
 import { EmployeeCard as EmployeeCardState } from '../../../redux/modules/employees/employees';
@@ -17,10 +18,11 @@ export type Props =
   EmployeeCardState;
 
 export type EmployeeCardProps = {
-  company: UserCompanyProps
+  company: UserCompanyProps,
+  t: Function
 };
 
-const EmployeeCard: SFC<Props> = ({ employee, company, ...popupProps }) => {
+const EmployeeCard: SFC<Props> = ({ t, employee, company, ...popupProps }) => {
   const {
     id,
     profile
@@ -52,13 +54,16 @@ const EmployeeCard: SFC<Props> = ({ employee, company, ...popupProps }) => {
         companyName={legalName}
         companyLogo={picture}>
         <div styleName="buttons">
-          <button type="button">Сообщение</button>
-          <button type="button">Добавить в контакты</button>
-          <button type="button">Заблокировать</button>
+          <button type="button">{t('message')}</button>
+          <button type="button">{t('addToContacts')}</button>
+          <button type="button">{t('block')}</button>
         </div>
       </CardAvatar>
     </Popup>
   );
 };
 
-export default CSSModules(EmployeeCard, require('./styles.css'));
+const StyledComponent = CSSModules(EmployeeCard, require('./styles.css'));
+const TranslatedComponent = translate('employees')(StyledComponent);
+
+export default TranslatedComponent;

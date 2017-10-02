@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Component, MouseEvent } from 'react';
 import * as CSSModules from 'react-css-modules';
+import { translate } from 'react-i18next';
 
 import { Props } from '../../../containers/employees/Employees';
 import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/employees/employees';

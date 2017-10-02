@@ -2,6 +2,7 @@ import * as React from 'react';
 import { PureComponent, HTMLProps } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { InjectedCSSModuleProps } from 'react-css-modules';
+import { translate } from 'react-i18next';
 
 import { Link } from 'react-router';
 import { routes } from '../../../routes';
@@ -12,7 +13,10 @@ import Icon from '../../common/Icon';
  */
 export type Props = HTMLProps<HTMLDivElement> & InjectedCSSModuleProps & {
   open?: boolean
-  onClose: () => void
+  onClose: () => void,
+  t: Function,
+  i18nLoadedAt?: any,
+  i18n?: any
 };
 
 /**
@@ -46,7 +50,7 @@ class Sidebar extends PureComponent<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { open, onClose, styles, ...divProps } = this.props;
+    const { t, open, onClose, styles, i18nLoadedAt, i18n, ...divProps } = this.props;
     const { link, active } = styles;
 
     return (
@@ -58,14 +62,17 @@ class Sidebar extends PureComponent<Props, {}> {
         <Icon styleName="close-icon" name="close" onClick={onClose}/>
 
         <nav>
-          <a className={link} href="/msg">Мессенджер</a>
-          <Link className={link} activeClassName={active} to={routes.profile}>Моя компания</Link>
+          <a className={link} href="/msg">{t('messenger')}</a>
+          <Link className={link} activeClassName={active} to={routes.profile}>{t('myCompany')}</Link>
           {/*<Link className={link} activeClassName={active} to="/app/favorites">Избранное</Link>*/}
-          <Link className={link} activeClassName={active} to={routes.search}>Поиск</Link>
+          <Link className={link} activeClassName={active} to={routes.search}>{t('search')}</Link>
         </nav>
       </aside>
     );
   }
 }
 
-export default CSSModules(Sidebar, require('./styles.css'));
+const StyledComponent = CSSModules(Sidebar, require('./styles.css'));
+const TranslatedComponent = translate('app')(StyledComponent);
+
+export default TranslatedComponent;

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form';
+import { translate } from 'react-i18next';
 
 import { required, email, password, maxLength, minLength } from '../../../utils/validators';
 
@@ -25,7 +26,8 @@ export type FormFields = {
 export type ComponentProps = {
   spinner: boolean
   verificationId: string,
-  onSubmit: SubmitHandler<FormFields, ComponentProps, any>
+  onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
+  t: Function
 };
 
 export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>;
@@ -41,14 +43,14 @@ class CreateAccountForm extends Component<Props, {}> {
   }
 
   public render(): JSX.Element {
-    const { invalid, handleSubmit, spinner } = this.props;
+    const { t, invalid, handleSubmit, spinner } = this.props;
 
     return (
       <Form
         onSubmit={handleSubmit}
         styleName="create-account-form"
-        title="Регистрация пользователя"
-        hint="Чтобы начать совместную работу со своими коллегами, зарегистрируйте первого пользователя">
+        title={t('userRegistration')}
+        hint={t('userRegistrationHint')}>
 
         <Field
           component="input"
@@ -60,7 +62,7 @@ class CreateAccountForm extends Component<Props, {}> {
           component={RenderInput}
           name="firstName"
           type="text"
-          placeholder="Имя"
+          placeholder={t('firstName')}
           validate={[
             required(),
             maxLength(15)
@@ -70,7 +72,7 @@ class CreateAccountForm extends Component<Props, {}> {
           component={RenderInput}
           name="lastName"
           type="text"
-          placeholder="Фамилия"
+          placeholder={t('lastName')}
           validate={[
             required(),
             maxLength(15)
@@ -80,7 +82,7 @@ class CreateAccountForm extends Component<Props, {}> {
           component={RenderInput}
           name="position"
           type="text"
-          placeholder="Должность"
+          placeholder={t('position')}
           validate={[
             required(),
             minLength(2),
@@ -91,7 +93,7 @@ class CreateAccountForm extends Component<Props, {}> {
           component={RenderInput}
           name="email"
           type="email"
-          placeholder="Email"
+          placeholder={t('email')}
           validate={[
             required(),
             email()
@@ -100,14 +102,14 @@ class CreateAccountForm extends Component<Props, {}> {
         <Field
           component={RenderPassword}
           name="password"
-          placeholder="Пароль"
+          placeholder={t('password')}
           validate={[
             required(),
             password()
           ]}
-          warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}/>
+          warn={password(t('passwordWarning'))}/>
 
-        <Button type="submit" spinner={spinner} disabled={invalid}>Далее</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>{t('next')}</Button>
       </Form>
     );
   }
@@ -117,6 +119,7 @@ class CreateAccountForm extends Component<Props, {}> {
  * Decorators
  */
 const StyledComponent = CSSModules(CreateAccountForm, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'account',
@@ -128,4 +131,4 @@ export default reduxForm<FormFields, ComponentProps>({
     password: '',
     verificationId: ''
   }
-})(StyledComponent);
+})(TranslatedComponent);

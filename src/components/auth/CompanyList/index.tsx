@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { SFC } from 'react';
 import * as CSSModules from 'react-css-modules';
+import { translate } from 'react-i18next';
 
 import CompanyItem from '../CompanyItem';
 
@@ -15,13 +16,14 @@ export type Company = {
 
 export type Props = {
   companies: Company[],
-  onSelect: (companyId: string) => void
+  onSelect: (companyId: string) => void,
+  t: Function
 };
 
-const CompanyList: SFC<Props> = ({ companies, onSelect }) => {
+const CompanyList: SFC<Props> = ({ t, companies, onSelect }) => {
   return (
     <div styleName="company-list-wrap">
-      <h1 styleName="company-list-title">Выберите компанию</h1>
+      <h1 styleName="company-list-title">{t('chooseCompany')}</h1>
 
       <div styleName="company-list">
         {
@@ -37,4 +39,7 @@ const CompanyList: SFC<Props> = ({ companies, onSelect }) => {
   );
 };
 
-export default CSSModules(CompanyList, require('./styles.css'));
+const StyledComponent = CSSModules(CompanyList, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
+
+export default TranslatedComponent;

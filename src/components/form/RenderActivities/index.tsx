@@ -3,6 +3,7 @@ import { SFC } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { WrappedFieldProps, WrappedFieldArrayProps, Field } from 'redux-form';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 
 import { required } from '../../../utils/validators';
 
@@ -12,10 +13,14 @@ import RenderActivity from '../RenderActivity';
 /**
  * Render activity field array
  */
-export type Props = WrappedFieldArrayProps<string>;
+export type Props = ComponentProps & WrappedFieldArrayProps<string>;
+
+export type ComponentProps = {
+  t: Function
+};
 
 const RenderActivities: SFC<Props> = (props) => {
-  const { fields } = props;
+  const { t, fields } = props;
 
   return (
     <div styleName="activity-list">
@@ -27,11 +32,11 @@ const RenderActivities: SFC<Props> = (props) => {
             component={RenderActivity}
             validate={required()}
             styleName="activity-field"
-            placeholder={i > 0 ? 'Дополнительная сфера деятельности' : 'Oсновная сфера деятельности'}/>
-            <a styleName="activity-remove" onClick={() => fields.remove(i)}>удалить</a>
+            placeholder={i > 0 ? t('additionalActivityField') : t('mainActivityField')}/>
+            <a styleName="activity-remove" onClick={() => fields.remove(i)}>{t('remove')}</a>
         </div>
       ))}
-      {fields.length < 3 && <AddInput children="добавить отрасль" onClick={() => fields.push('')}/>}
+      {fields.length < 3 && <AddInput children={t('addBranch')} onClick={() => fields.push('')}/>}
     </div>
   );
 };
@@ -39,4 +44,7 @@ const RenderActivities: SFC<Props> = (props) => {
 /**
  * Decorator
  */
-export default CSSModules(RenderActivities, require('./styles.css'));
+const StyledComponent = CSSModules(RenderActivities, require('./styles.css'));
+const TranslatedComponent = translate('form')(StyledComponent);
+
+export default TranslatedComponent;

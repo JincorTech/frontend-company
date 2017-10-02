@@ -2,6 +2,7 @@ import * as React from 'react';
 import { SFC, HTMLProps } from 'react';
 import { connect } from 'react-redux';
 import * as CSSModules from 'react-css-modules';
+import { translate } from 'react-i18next';
 
 import { closeCompanyCard } from '../../../redux/modules/common/companyCard';
 import { Company as CompanyProps } from '../../../redux/modules/profile/profileView';
@@ -15,7 +16,9 @@ import CompanyLogo from '../../../components/profile/CompanyLogo';
 
 import stringCut from '../../../helpers/common/stringCut';
 
-export type Props = StateProps & DispatchProps;
+export type Props = StateProps & DispatchProps & {
+  t: Function
+};
 
 export type StateProps = {
   open: boolean
@@ -30,7 +33,7 @@ export type DispatchProps = {
  * CompanyCard
  */
 const CompanyCard: SFC<Props> = props => {
-  const { open, company, closeCompanyCard } = props;
+  const { t, open, company, closeCompanyCard } = props;
   const { legalName, profile, economicalActivityTypes, companyType } = company;
   const { picture, links, email, phone, address, description } = profile;
   const city = address.city ? address.city.name : '';
@@ -52,7 +55,7 @@ const CompanyCard: SFC<Props> = props => {
             <div styleName="name">{stringCut(legalName, 30)}</div>
             <span styleName="address">{city ? `${country}, ${city}` : country}</span>
             <div styleName="buttons">
-              <Button styleName="transparent-button">Написать</Button>
+              <Button styleName="transparent-button">{t('write')}</Button>
               <button styleName="bookmark" type="button"><Icon styleName="bookmark-icon" name="bookmark"/></button>
             </div>
           </div>
@@ -72,15 +75,15 @@ const CompanyCard: SFC<Props> = props => {
             {economicalActivityTypes.length
               ? economicalActivityTypes.map((activity, i) =>
                 <li styleName="item" key={i}><div styleName="activity-icon"/>{activity.name}</li>)
-              : <li styleName="item-empty"><div styleName="activity-icon"/>Отрасли не указаны</li>}
+              : <li styleName="item-empty"><div styleName="activity-icon"/>{t('activityFieldsAreEmpty')}</li>}
 
             {phone
               ? <li styleName="item"><div styleName="phone-icon"/>{phone}</li>
-              : <li styleName="item-empty"><div styleName="phone-icon"/>Телефон не указан</li>}
+              : <li styleName="item-empty"><div styleName="phone-icon"/>{t('phoneIsEmpty')}</li>}
 
             {email
               ? <li styleName="item"><div styleName="email-icon"/>{email}</li>
-              : <li styleName="item-empty"><div styleName="email-icon"/>Email не указан</li>}
+              : <li styleName="item-empty"><div styleName="email-icon"/>{t('emailIsEmpty')}</li>}
           </ul>
 
           <div styleName="socials">
@@ -96,8 +99,9 @@ const CompanyCard: SFC<Props> = props => {
 };
 
 const StyledComponent = CSSModules(CompanyCard, require('./styles.css'));
+const TranslatedComponent = translate('common')(StyledComponent);
 
 export default connect<StateProps, DispatchProps, {}>(
   (state) => state.common.companyCard,
   { closeCompanyCard }
-)(StyledComponent);
+)(TranslatedComponent);

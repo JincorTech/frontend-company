@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { SFC } from 'react';
 import * as CSSModules from 'react-css-modules';
+import { translate } from 'react-i18next';
 import { getBackgroundColor, getInitials } from '../../../utils/colorFunction';
 
 import { Self as SelfProps } from '../../../redux/modules/employees/employees';
@@ -8,7 +9,8 @@ import { Self as SelfProps } from '../../../redux/modules/employees/employees';
 export type Props = ComponentProps & DispatchProps;
 
 export type ComponentProps = {
-  employee: SelfProps
+  employee: SelfProps,
+  t: Function
 };
 
 export type DispatchProps = {
@@ -16,7 +18,7 @@ export type DispatchProps = {
 };
 
 const Self: SFC<Props> = (props) => {
-  const { employee, onOpenProfile } = props;
+  const { t, employee, onOpenProfile } = props;
   const { id, profile, contacts } = employee;
   const backgroundColor = getBackgroundColor(id);
   const initials = getInitials(profile.name);
@@ -30,7 +32,7 @@ const Self: SFC<Props> = (props) => {
       }
 
       <div styleName="info">
-        <div styleName="full-name">{profile.name} {profile.role === 'company-admin' && <span styleName="label">Администратор</span>}</div>
+        <div styleName="full-name">{profile.name} {profile.role === 'company-admin' && <span styleName="label">{t('administrator')}</span>}</div>
         <div styleName="email-n-position">
           <div styleName="email-slide">
             <div>{profile.position}</div>
@@ -42,4 +44,7 @@ const Self: SFC<Props> = (props) => {
   );
 };
 
-export default CSSModules(Self, require('./styles.css'));
+const StyledComponent = CSSModules(Self, require('./styles.css'));
+const TranslatedComponent = translate('employees')(StyledComponent);
+
+export default TranslatedComponent;

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form';
+import { translate } from 'react-i18next';
 
 import { required, password } from '../../../utils/validators';
 
@@ -17,7 +18,8 @@ export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>;
 export type ComponentProps = {
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
   onCancel: () => void
-  spinner: boolean
+  spinner: boolean,
+  t: Function
 };
 
 export type FormFields = {
@@ -31,7 +33,7 @@ export type FormFields = {
 
 class CardChangePassword extends Component<Props, {}> {
   public render(): JSX.Element {
-    const { invalid, handleSubmit, onCancel, spinner } = this.props;
+    const { t, invalid, handleSubmit, onCancel, spinner } = this.props;
 
     return (
       <div styleName="change-password">
@@ -42,28 +44,28 @@ class CardChangePassword extends Component<Props, {}> {
           <Field
             component={RenderPassword}
             validate={[
-              required('Поле не может быть пустым'),
+              required(t('fieldCantBeEmpty')),
               password()
             ]}
-            warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}
+            warn={password(t('passwordMustBeStrong'))}
             name="oldPassword"
             type="password"
-            placeholder="Старый пароль"/>
+            placeholder={t('oldPassword')}/>
 
           <Field
             component={RenderPassword}
             validate={[
-              required('Поле не может быть пустым'),
+              required(t('fieldCantBeEmpty')),
               password()
             ]}
-            warn={password('Пароль должен состоять как минимум из 6 символов, содержать буквы разного регистра и цифры.')}
+            warn={password(t('passwordMustBeStrong'))}
             name="password"
             type="password"
-            placeholder="Новый пароль"/>
+            placeholder={t('newPassword')}/>
 
           <div styleName="form-buttons">
-            <Button type="button" styleName="form-cancel-button" onClick={onCancel}>отменить</Button>
-            <Button type="submit" styleName="form-submit-button" disabled={invalid} spinner={spinner}>Сохранить</Button>
+            <Button type="button" styleName="form-cancel-button" onClick={onCancel}>{t('cancel')}</Button>
+            <Button type="submit" styleName="form-submit-button" disabled={invalid} spinner={spinner}>{t('save')}</Button>
           </div>
         </form>
       </div>
@@ -76,6 +78,7 @@ class CardChangePassword extends Component<Props, {}> {
  */
 
 const StyledComponent = CSSModules(CardChangePassword, require('./styles.css'));
+const TranslatedComponent = translate('app')(StyledComponent);
 
 export default reduxForm<FormFields, ComponentProps>({
   form: 'cardChangePassword',
@@ -83,4 +86,4 @@ export default reduxForm<FormFields, ComponentProps>({
     oldPassword: '',
     password: ''
   }
-})(StyledComponent);
+})(TranslatedComponent);

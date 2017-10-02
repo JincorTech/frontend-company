@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import * as CSSModules from 'react-css-modules';
 import { reduxForm, Field, FormProps, SubmitHandler } from 'redux-form';
+import { translate } from 'react-i18next';
 
 import { number, length } from '../../../utils/validators';
 
@@ -18,7 +19,8 @@ export type FormFields = {
 
 export type ComponentProps = {
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>
-  spinner: boolean
+  spinner: boolean,
+  t: Function
 };
 
 export type ConfirmFormProps = ComponentProps & FormProps<FormFields, ComponentProps, any>;
@@ -28,23 +30,23 @@ export type ConfirmFormProps = ComponentProps & FormProps<FormFields, ComponentP
  */
 class ConfirmPasswordForm extends Component<ConfirmFormProps, {}> {
   public render(): JSX.Element {
-    const { invalid, spinner, handleSubmit } = this.props;
+    const { t, invalid, spinner, handleSubmit } = this.props;
 
     return (
       <Form
         onSubmit={handleSubmit}
         styleName="confirm-password-form"
-        title="Восстановление пароля"
-        hint="Введите код из письма или перейдите по ссылке, отправленного на ваш email, после чего вы сможете назначить себе новый пароль.">
+        title={t('passwordRecovery')}
+        hint={t('passwordRecoveryHint')}>
 
         <Field
           component={RenderInput}
           name="verificationCode"
           type="text"
-          placeholder="Введите код"
+          placeholder={t('enterCode')}
           validate={[number(), length(6)]}/>
 
-        <Button type="submit" spinner={spinner} disabled={invalid}>Сбросить</Button>
+        <Button type="submit" spinner={spinner} disabled={invalid}>{t('reset')}</Button>
       </Form>
     );
   }
@@ -54,9 +56,11 @@ class ConfirmPasswordForm extends Component<ConfirmFormProps, {}> {
  * Decorators
  */
 const StyledComponent = CSSModules(ConfirmPasswordForm, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
+
 export default reduxForm<FormFields, ComponentProps>({
   form: 'confirmPassword',
   initialValues: {
     verificationCode: ''
   }
-})(StyledComponent);
+})(TranslatedComponent);
