@@ -5,4 +5,4 @@ WORKDIR /usr/src/companies
 
 RUN npm i
 
-CMD /bin/true
+CMD npm start
