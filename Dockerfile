@@ -5,4 +5,4 @@ ADD . /usr/src/companies/
 
 RUN npm i
 
-CMD npm start
+CMD npm run build
