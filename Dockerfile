@@ -6,6 +6,5 @@ ADD package.json /usr/src/companies/
 ADD package-lock.json /usr/src/companies/
 
 RUN npm i
-ADD . /usr/src/companies/
 
 CMD npm start
