@@ -45,8 +45,8 @@ export type Company = {
  * Action types
  */
 export const CREATE_COMPANY = 'auth/signUp/CREATE_COMPANY';
+export const CREATE_ACCOUNT = 'auth/signUp/CREATE_ACCOUNT';
 export const SET_USER_INFO = 'auth/signUp/SET_USER_INFO';
-export const VERIFY_EMAIL = 'auth/signUp/VERIFY_EMAIL';
 export const CONFIRM_EMAIL = 'auth/signUp/CONFIRM_EMAIL';
 export const ACCOUNT_CREATED = 'auth/signUp/CREATE_ACCOUNT_SUCCESS';
 export const INVITE_EMPLOYEE = 'auth/signUp/EMPLOYEE';
@@ -60,8 +60,8 @@ export const SIGNUP_EMAIL = 'auth/signUp/SIGNUP_EMAIL';
  */
 export const fetchDict = createAsyncAction<void, void>(FETCH_DICT);
 export const createCompany = createSubmitAction<CompanyFields, Company>(CREATE_COMPANY);
+export const createAccount = createSubmitAction<AccountFields, void>(CREATE_ACCOUNT);
 export const setUserInfo = createAction<Employee>(SET_USER_INFO);
-export const verifyEmail = createSubmitAction<AccountFields, void>(VERIFY_EMAIL);
 export const confirmEmail = createSubmitAction<ConfirmFields, void>(CONFIRM_EMAIL);
 export const accountCreated = createAction<void>(ACCOUNT_CREATED);
 export const inviteEmployee = createAsyncAction<void, void>(INVITE_EMPLOYEE);
@@ -102,17 +102,11 @@ export default createReducer<State>({
     })
   ),
 
-  [verifyEmail.REQUEST]: (state: State): State => (
+  [createAccount.REQUEST]: (state: State): State => (
     state.merge({ spinner: true })
   ),
 
-  [SET_USER_INFO]: (state: State, { payload }: Action<Employee>): State => (
-    state.merge({
-      employee: payload
-    })
-  ),
-
-  [verifyEmail.SUCCESS]: (state: State): State => (
+  [createAccount.SUCCESS]: (state: State): State => (
     state.merge({
       step: 'email',
       spinner: false
@@ -121,6 +115,12 @@ export default createReducer<State>({
 
   [confirmEmail.REQUEST]: (state: State): State => (
     state.merge({ spinner: true })
+  ),
+
+  [SET_USER_INFO]: (state: State, { payload }: Action<Employee>): State => (
+    state.merge({
+      employee: payload
+    })
   ),
 
   [ACCOUNT_CREATED]: (state: State): State => (

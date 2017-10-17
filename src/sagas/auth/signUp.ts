@@ -3,7 +3,6 @@ import { SagaIterator } from 'redux-saga';
 import { SubmissionError } from 'redux-form';
 import { takeLatest, call, put, fork, select } from 'redux-saga/effects';
 import { get, post } from '../../utils/api';
-import { setUser, getUser, removeUser } from '../../utils/auth';
 import { push } from 'react-router-redux';
 import { routes } from '../../routes';
 
@@ -13,7 +12,7 @@ import { optionTransformer } from '../../helpers/common/select';
 import {
   fetchDict,
   createCompany,
-  verifyEmail,
+  createAccount,
   setUserInfo,
   confirmEmail,
   inviteEmployee,
@@ -85,34 +84,35 @@ export function* createCompanySaga(): SagaIterator {
 }
 
 /**
- * Verify email
+ * Create account
  */
-function* verifyEmailRequestSaga({ payload }: Action<AccountFields>): SagaIterator {
-  const {
-    email,
-    verificationId,
-    firstName,
-    lastName,
-    position,
-    password
-  } = payload;
-  const employee = { firstName, lastName, position, password };
-
+function* createAccountIterator({ payload }: Action<AccountFields>): SagaIterator {
   try {
-    yield call(get, `/employee/verifyEmail?verificationId=${verificationId}&email=${email}`);
+    const {
+      email,
+      verificationId,
+      firstName,
+      lastName,
+      position,
+      password
+    } = payload;
+    const employee = { firstName, lastName, position, password };
+    const employeeData = { ...employee, verificationId };
 
-    yield call(setUser, { verificationId, ...employee });
+    yield call(post, '/employee/register', employeeData);
+    yield call(get, `/employee/verifyEmail?verificationId=${verificationId}`);
     yield put(setUserInfo(employee));
-    yield put(verifyEmail.success());
+
+    yield put(createAccount.success());
   } catch (e) {
-    yield put(verifyEmail.failure(new SubmissionError(e.errors)));
+    yield put(createAccount.failure(new SubmissionError(e.errors)));
   }
 }
 
-export function* verifyEmailSaga(): SagaIterator {
+export function* createAccountSaga(): SagaIterator {
   yield takeLatest(
-    verifyEmail.REQUEST,
-    verifyEmailRequestSaga
+    createAccount.REQUEST,
+    createAccountIterator
   );
 }
 
@@ -126,10 +126,8 @@ function* confirmEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator
   const employeeData = { ...employee, verificationId };
 
   try {
-    yield call(post, '/employee/verifyEmail', payload);
+    const { data } = yield call(post, '/employee/verifyEmail', payload);
     yield put(confirmEmail.success());
-
-    const { data } = yield call(post, '/employee/register', employeeData);
 
     yield put(login(data.token));
     yield put(accountCreated());
@@ -150,11 +148,8 @@ export function* confirmEmailSaga() {
  */
 function* signupEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator {
   try {
-    const user = yield call(getUser);
-    yield call(post, '/employee/verifyEmail', payload);
-    const { data } = yield call(post, '/employee/register', user);
+    const { data } = yield call(post, '/employee/verifyEmail', payload);
     yield put(login(data.token));
-    yield call(removeUser);
   } catch (e) {
     yield put(signupEmail.failure(e));
     yield put(push(routes.signIn));
@@ -218,7 +213,7 @@ export function* resetSignInSaga() {
 export default function*(): SagaIterator {
   yield [
     fork(createCompanySaga),
-    fork(verifyEmailSaga),
+    fork(createAccountSaga),
     fork(confirmEmailSaga),
     fork(signupEmailSaga),
     fork(inviteEmployeeSaga),
