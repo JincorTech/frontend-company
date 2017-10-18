@@ -42,3 +42,6 @@ dist
 # Tmp files
 tmp
 .awcache
+Dockerfile
+Dockerfile.itsumma
+docker-compose.yml
