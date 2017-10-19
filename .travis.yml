@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+- '8'
+sudo: false
+branches:
+  only:
+  - master
+  - develop
+cache:
+  directories:
+  - node_modules
+install:
+- npm install
+script:
+- npm run tslint
+- npm run stylelint
+- npm run build
+notifications:
+  slack:
+    secure: uXmdlWf0GmVlaOi3ggBcq0DLaFxWFr46opAH1mBuHYbncOCCS6oAz4bwcSIqVgCFdkSI/9pv3tt5Z/LCjIDuA7yNO5S6pBxTjlKvj4JuOniRJH6slmKip5XhBAqA7DHWG+UEFfrc1isLPx46/5OBv0r7w1XujsWQMXx/8DnEuBH9bMo2pO6nqY2KcJgCRvD0KUDtSnXiky9ReEuaIAsgn7jQwgpo1ZsCxscOx15dBctIvWvvvoZVP3ij5OO3smKbWM/+7k92tTNBpNTW3IoA68K+vGOcX3DzpJYqwgag0nlxdxA6apqQsifcAeHNI1kBlyCSK60ov6QHKXJLNiG27C3+qTCTUzIFeO33pkBwyuGyQUSeuyNB3TqRJmUqXByVdJJ1e00ePirTKuTjJvnok33pEKic/BhKxzIBQlmAFO/fi7Ub6uQJbF+Rk5TguiPQv0nys2AA87WXybqa3SaCnHU3o4BCjzBp/m5ErzkHMW/t81ghUtGFWyws6AqbSWBAr+GdQbPXxBtEbRFEx4HPc7CPGosRACDmqBAuQkkPcYvpHXdEjGvUNLL3BwQIotTEpLaOW1MZ8eA2hcK4DJZl3M/fV01qApmrP6aftEituDdY3oEPTWk8j2gS6Fx9WjY97rWubq7IZ0Az2nC/qMcasaxuBrEcBcbM7KI+PUhXIRw=
