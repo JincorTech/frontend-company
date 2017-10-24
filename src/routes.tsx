@@ -42,6 +42,14 @@ const UserIsAuthenticated = UserAuthWrapper({
   allowRedirectBack: false
 });
 
+const UserIsNotAuthenticated = UserAuthWrapper({
+  authSelector: (state) => state.app.app,
+  predicate: (app) => !app.authorized,
+  redirectAction: push,
+  failureRedirectPath: routes.base,
+  allowRedirectBack: false
+});
+
 const UserIsAdmin = UserAuthWrapper({
   authSelector: (state) => state.app.app,
   predicate: (app) => app.admin,
@@ -54,7 +62,7 @@ export default (
   <Route path="/cmp" component={App}>
     <IndexRedirect to="/cmp/app/profile"/>
 
-    <Route path="auth" component={AuthLayout}>
+    <Route path="auth" component={UserIsNotAuthenticated(AuthLayout)}>
       <Route path="signup" component={SignUp}/>
       <Route path="signin" component={SignIn}/>
       <Route path="password" component={RestorePassword}/>
