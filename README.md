@@ -12,8 +12,6 @@
 
 `npm run build` - build on production mode
 
-[Other useful commands](https://github.com/JincorTech/frontend-laughing-robot/blob/develop/package.json)
-
 ---------------------------
 
 [Jincor Tech](https://github.com/JincorTech)
