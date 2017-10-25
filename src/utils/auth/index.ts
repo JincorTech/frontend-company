@@ -12,8 +12,13 @@ export function getEmail(): string {
   const token = getToken();
 
   if (token) {
-    const decoded = jwtDecode(token);
-    return decoded.login.split(':')[1];
+    try {
+      const decoded = jwtDecode(token);
+      return decoded.login.split(':')[1];
+    } catch (e) {
+      removeToken();
+      return '';
+    }
   }
 
   return null;
@@ -23,10 +28,20 @@ export function isAuth(): boolean {
   const token = getToken();
 
   if (token) {
-    const decoded = jwtDecode(token);
-    const expireDate = parseInt(decoded.exp, 10);
+    try {
+      const decoded = jwtDecode(token);
+      const expireDate = parseInt(decoded.exp, 10);
 
-    return Date.now() < expireDate * 1000;
+      const isValid = Date.now() < expireDate * 1000;
+      if (!isValid) {
+        removeToken();
+      }
+
+      return isValid;
+    } catch (e) {
+      removeToken();
+      return false;
+    }
   } else {
     return false;
   }
@@ -36,9 +51,13 @@ export function isAdmin(): boolean {
   const token = getToken();
 
   if (token) {
-    const decoded = jwtDecode(token);
-
-    return decoded.scope === 'company-admin';
+    try {
+      const decoded = jwtDecode(token);
+      return decoded.scope === 'company-admin';
+    } catch (e) {
+      removeToken();
+      return false;
+    }
   } else {
     return false;
   }
