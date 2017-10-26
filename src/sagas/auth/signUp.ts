@@ -97,7 +97,7 @@ function* createAccountIterator({ payload }: Action<AccountFields>): SagaIterato
       password
     } = payload;
     const employee = { firstName, lastName, position, password };
-    const employeeData = { ...employee, verificationId };
+    const employeeData = { ...employee, verificationId, email };
 
     yield call(post, '/employee/register', employeeData);
     yield call(get, `/employee/verifyEmail?verificationId=${verificationId}`);
