@@ -48,7 +48,6 @@ export const CREATE_COMPANY = 'auth/signUp/CREATE_COMPANY';
 export const CREATE_ACCOUNT = 'auth/signUp/CREATE_ACCOUNT';
 export const SET_USER_INFO = 'auth/signUp/SET_USER_INFO';
 export const CONFIRM_EMAIL = 'auth/signUp/CONFIRM_EMAIL';
-export const ACCOUNT_CREATED = 'auth/signUp/CREATE_ACCOUNT_SUCCESS';
 export const INVITE_EMPLOYEE = 'auth/signUp/EMPLOYEE';
 export const RESET_STATE = 'auth/signUp/RESET_STATE';
 export const FETCH_DICT = 'jincor/auth/signUp/FETCH_DICT';
@@ -63,7 +62,6 @@ export const createCompany = createSubmitAction<CompanyFields, Company>(CREATE_C
 export const createAccount = createSubmitAction<AccountFields, void>(CREATE_ACCOUNT);
 export const setUserInfo = createAction<Employee>(SET_USER_INFO);
 export const confirmEmail = createSubmitAction<ConfirmFields, void>(CONFIRM_EMAIL);
-export const accountCreated = createAction<void>(ACCOUNT_CREATED);
 export const inviteEmployee = createAsyncAction<void, void>(INVITE_EMPLOYEE);
 export const resetState = createAction<void>(RESET_STATE);
 
@@ -117,17 +115,17 @@ export default createReducer<State>({
     state.merge({ spinner: true })
   ),
 
-  [SET_USER_INFO]: (state: State, { payload }: Action<Employee>): State => (
-    state.merge({
-      employee: payload
-    })
-  ),
-
-  [ACCOUNT_CREATED]: (state: State): State => (
+  [confirmEmail.SUCCESS]: (state: State): State => (
     state.merge({
       step: 'employee',
       stepIndex: 3,
       spinner: false
+    })
+  ),
+
+  [SET_USER_INFO]: (state: State, { payload }: Action<Employee>): State => (
+    state.merge({
+      employee: payload
     })
   ),
 

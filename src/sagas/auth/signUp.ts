@@ -16,7 +16,6 @@ import {
   setUserInfo,
   confirmEmail,
   inviteEmployee,
-  accountCreated,
   resetState,
   signupEmail
 } from '../../redux/modules/auth/signUp';
@@ -99,7 +98,9 @@ function* createAccountIterator({ payload }: Action<AccountFields>): SagaIterato
     const employee = { firstName, lastName, position, password };
     const employeeData = { ...employee, verificationId, email };
 
-    yield call(post, '/employee/register', employeeData);
+    const { data } = yield call(post, '/employee/register', employeeData);
+    yield put(login(data.token));
+
     yield call(get, `/employee/verifyEmail?verificationId=${verificationId}`);
     yield put(setUserInfo(employee));
 
@@ -126,11 +127,8 @@ function* confirmEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator
   const employeeData = { ...employee, verificationId };
 
   try {
-    const { data } = yield call(post, '/employee/verifyEmail', payload);
+    yield call(post, '/employee/verifyEmail', payload);
     yield put(confirmEmail.success());
-
-    yield put(login(data.token));
-    yield put(accountCreated());
   } catch (e) {
     yield put(confirmEmail.failure(new SubmissionError(e.errors)));
   }
@@ -148,8 +146,7 @@ export function* confirmEmailSaga() {
  */
 function* signupEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator {
   try {
-    const { data } = yield call(post, '/employee/verifyEmail', payload);
-    yield put(login(data.token));
+    yield call(post, '/employee/verifyEmail', payload);
   } catch (e) {
     yield put(signupEmail.failure(e));
     yield put(push(routes.signIn));
