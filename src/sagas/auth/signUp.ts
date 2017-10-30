@@ -120,12 +120,7 @@ export function* createAccountSaga(): SagaIterator {
 /**
  * Confirm email
  */
-const getState = (state) => state.auth.signUp;
-
 function* confirmEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator {
-  const { employee, company: { verificationId }} = yield select(getState);
-  const employeeData = { ...employee, verificationId };
-
   try {
     yield call(post, '/employee/verifyEmail', payload);
     yield put(confirmEmail.success());
