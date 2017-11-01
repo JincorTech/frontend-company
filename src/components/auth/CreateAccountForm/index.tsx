@@ -65,6 +65,7 @@ class CreateAccountForm extends Component<Props, {}> {
           placeholder={t('firstName')}
           validate={[
             required(),
+            minLength(2),
             maxLength(15)
           ]}/>
 
@@ -75,6 +76,7 @@ class CreateAccountForm extends Component<Props, {}> {
           placeholder={t('lastName')}
           validate={[
             required(),
+            minLength(2),
             maxLength(15)
           ]}/>
 

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import {
   createCompany,
-  verifyEmail,
+  createAccount,
   confirmEmail,
   StateMap as StateProps,
   Step
@@ -38,7 +38,7 @@ const SignUp: SFC<Props> = (props) => {
       case 'account':
         return <CreateAccountForm
           spinner={spinner}
-          onSubmit={verifyEmail}
+          onSubmit={createAccount}
           verificationId={verificationId}/>;
       case 'email':
         return <ConfirmEmailForm
