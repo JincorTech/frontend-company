@@ -2,7 +2,7 @@
 
 .social-input {
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .input {
@@ -12,7 +12,6 @@
 }
 
 .remove {
-  position: absolute 6px -75px * *;
   font: normal 16px/22px 'Open Sans';
   color: #d0011b !important;
   letter-spacing: -0.2px;

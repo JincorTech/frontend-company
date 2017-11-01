@@ -47,3 +47,11 @@ export function number(msg?: string): Validator {
     ? ''
     : msg || 'not number';
 }
+
+const URL_REGEXP = /^(ftp|http|https):\/\/[^ "]+$/;
+
+export function url(msg?: string): Validator {
+  return (value: string): string => value && URL_REGEXP.test(value)
+    ? ''
+    : msg || 'invalid url';
+}

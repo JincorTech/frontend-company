@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 import { routes } from '../../routes';
 import { put as putFunc, get } from '../../utils/api';
 import { Action } from '../../utils/actions';
+import { emitAlert } from '../../redux/modules/common/alert';
 
 import { req, profileFormFields } from '../../helpers/profile/profileEdit';
 import {
@@ -88,6 +89,7 @@ function* updateProfileIterator({ payload }): SagaIterator {
     yield put(push(routes.profile));
   } catch (e) {
     yield put(updateProfile.failure(e));
+    yield put(emitAlert(`${e}`));
   }
 }
 
