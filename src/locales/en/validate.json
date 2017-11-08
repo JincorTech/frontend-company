@@ -1,0 +1,9 @@
+{
+  "required": "Field is required",
+  "minLength": "Minimal length is {{limit}}",
+  "maxLength": "Maximum length is {{limit}}",
+  "length": "Length should be {{length}}",
+  "invalidEmail": "Email format is incorrect",
+  "incorrectPassword": "Password format is incorrect",
+  "notNumber": "Value should be a number"
+}

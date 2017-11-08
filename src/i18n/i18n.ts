@@ -7,7 +7,8 @@ const ru = {
   employees: require('../locales/ru/employees.json'),
   form: require('../locales/ru/form.json'),
   profile: require('../locales/ru/profile.json'),
-  search: require('../locales/ru/search.json')
+  search: require('../locales/ru/search.json'),
+  validate: require('../locales/ru/validate.json')
 };
 
 const en = {
@@ -17,7 +18,8 @@ const en = {
   employees: require('../locales/en/employees.json'),
   form: require('../locales/en/form.json'),
   profile: require('../locales/en/profile.json'),
-  search: require('../locales/en/search.json')
+  search: require('../locales/en/search.json'),
+  validate: require('../locales/en/validate.json')
 };
 
 export const config = {
@@ -37,7 +39,8 @@ export const config = {
       employees: en.employees,
       form: en.form,
       profile: en.profile,
-      search: en.search
+      search: en.search,
+      validate: en.validate
     },
     ru: {
       app: ru.app,
@@ -46,7 +49,8 @@ export const config = {
       employees: ru.employees,
       form: ru.form,
       profile: ru.profile,
-      search: ru.search
+      search: ru.search,
+      validate: ru.validate
     }
   },
   ns: ['common'],
