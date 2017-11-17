@@ -66,39 +66,3 @@ export function isAdmin(): boolean {
 export function removeToken(): void {
   localStorage.removeItem('token');
 }
-
-// sign up
-
-export type User = {
-  verificationId: string
-  firstName: string
-  lastName: string
-  position: string
-  password: string
-};
-
-export const setUser = (user: User): void => {
-  const keys = Object.keys(user);
-
-  keys.forEach((key) => {
-    localStorage.setItem(key, user[key]);
-  });
-};
-
-export const getUser = (): User => {
-  const verificationId = localStorage.getItem('verificationId');
-  const firstName = localStorage.getItem('firstName');
-  const lastName = localStorage.getItem('lastName');
-  const position = localStorage.getItem('position');
-  const password = localStorage.getItem('password');
-
-  return { verificationId, firstName, lastName, position, password };
-};
-
-export const removeUser = (): void => {
-  localStorage.removeItem('verificationId');
-  localStorage.removeItem('firstName');
-  localStorage.removeItem('lastName');
-  localStorage.removeItem('position');
-  localStorage.removeItem('password');
-};
