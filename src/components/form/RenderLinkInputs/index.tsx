@@ -4,7 +4,7 @@ import * as CSSModules from 'react-css-modules';
 import { Field, WrappedFieldArrayProps } from 'redux-form';
 import { translate } from 'react-i18next';
 
-import { required } from '../../../utils/validators';
+import { required, url } from '../../../utils/validators';
 
 import RenderLinkInput from '../RenderLinkInput';
 import AddButton from '../../profile/AddButton';
@@ -26,7 +26,10 @@ const RenderLinkInputs: SFC<Props> = (props) => {
           key={i}
           name={field}
           placeholder="URL"
-          validate={required()}
+          validate={[
+            required(),
+            url()
+          ]}
           component={RenderLinkInput}
           onRemove={() => fields.remove(i)}/>
       ))}

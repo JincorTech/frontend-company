@@ -21,6 +21,7 @@ import Sidebar from '../../../components/app/Sidebar';
 import PageName from '../../../components/app/PageName';
 import ProfileCard from '../ProfileCard';
 import CompanyCard from '../../common/CompanyCard';
+import Alert from '../../../containers/common/Alert';
 
 /**
  * Types
@@ -59,6 +60,7 @@ class AppLayout extends Component<Props, StateProps> {
 
     return (
       <div styleName="app-layout">
+        <Alert/>
         <Sidebar open={sidebarOpen} onClose={closeSidebar}/>
 
         <header styleName="header">
