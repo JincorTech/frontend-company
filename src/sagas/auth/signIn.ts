@@ -4,6 +4,7 @@ import { SubmissionError } from 'redux-form';
 import { Action } from '../../utils/actions';
 import { push } from 'react-router-redux';
 import { routes } from '../../routes';
+import { t } from 'i18next';
 
 import { get, post } from '../../utils/api';
 
@@ -37,7 +38,7 @@ function* employeeCompaniesIterator(action: Action<LoginFields>): SagaIterator {
     if (companyCount === 0) {
       const error = new SubmissionError<LoginFields>({ email: '', password: '' });
       yield put(fetchCompanies.failure(error));
-      yield put(emitAlert('Не удается войти. Пожалуйста, проверьте правильность написания логина и пароля.'));
+      yield put(emitAlert(t('auth:wrongPasswordAlert')));
     }
 
     if (companyCount === 1) {
