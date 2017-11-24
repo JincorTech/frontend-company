@@ -2,6 +2,7 @@
   "cancel": "Отменить",
   "confirm": "Подтвердить",
   "write": "Написать",
+  "payment": "Перевести средства",
   "activityFieldsAreEmpty": "Отрасли не указаны",
   "phoneIsEmpty": "Телефон не указан",
   "emailIsEmpty": "Email не указан"

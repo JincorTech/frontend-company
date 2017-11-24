@@ -99,11 +99,11 @@ function* createAccountIterator({ payload }: Action<AccountFields>): SagaIterato
     const employeeData = { ...employee, verificationId, email };
 
     const { data } = yield call(post, '/employee/register', employeeData);
-    yield put(login(data.token));
 
     yield call(get, `/employee/verifyEmail?verificationId=${verificationId}`);
     yield put(setUserInfo(employee));
 
+    yield put(login(data.token));
     yield put(createAccount.success());
   } catch (e) {
     yield put(createAccount.failure(new SubmissionError(e.errors)));
@@ -122,7 +122,7 @@ export function* createAccountSaga(): SagaIterator {
  */
 function* confirmEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator {
   try {
-    yield call(post, '/employee/verifyEmail', payload);
+    yield call(post, '/employee/verifyEmail', payload, false);
     yield put(confirmEmail.success());
   } catch (e) {
     yield put(confirmEmail.failure(new SubmissionError(e.errors)));
@@ -141,7 +141,7 @@ export function* confirmEmailSaga() {
  */
 function* signupEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator {
   try {
-    yield call(post, '/employee/verifyEmail', payload);
+    yield call(post, '/employee/verifyEmail', payload, false);
   } catch (e) {
     yield put(signupEmail.failure(e));
     yield put(push(routes.signIn));

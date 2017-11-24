@@ -19,14 +19,15 @@ function* registerEmployeeIterator({ payload: employee }: Action<FormFields>): S
     password,
     position,
     verificationId,
-    pin
+    pin,
+    email
   } = employee;
 
   try {
-    yield call(post, 'employee/verifyEmail', { verificationId, verificationCode: pin });
-
-    const reqData = { firstName, lastName, password, position, verificationId };
+    const reqData = { firstName, lastName, password, position, verificationId, email };
     const { data: { token }} = yield call(post, '/employee/register', reqData);
+
+    yield call(post, 'employee/verifyEmail', { verificationId, verificationCode: pin });
 
     yield put(login(token));
     yield put(registerEmployee.success());

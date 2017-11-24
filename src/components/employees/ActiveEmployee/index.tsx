@@ -41,7 +41,7 @@ const ActiveEmployee: SFC<Props> = props => {
 
       <div styleName="info">
         <div styleName="full-name">
-          {profile.name} {profile.role === 'company-admin' && <span styleName="label">Администратор</span>}
+          {profile.name} {profile.role === 'company-admin' && <span styleName="label">{t('administrator')}</span>}
         </div>
         <div styleName="email-n-position">
           <div styleName="email-slide">

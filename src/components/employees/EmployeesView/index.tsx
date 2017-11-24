@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Component, MouseEvent } from 'react';
 import * as CSSModules from 'react-css-modules';
+import { translate } from 'react-i18next';
 
-import { Props } from '../../../containers/employees/Employees';
+import { Props as ComponentProps } from '../../../containers/employees/Employees';
 import { ActiveEmployee as ActiveEmployeeProps } from '../../../redux/modules/employees/employees';
 
 import InviteEmployee from '../../../components/employees/InviteEmployee';
@@ -14,6 +15,10 @@ import DeletedEmployee from '../../../components/employees/DeletedEmployee';
 import ConfirmPopup from '../../../components/common/ConfirmPopup';
 import EmployeeCard from '../../../components/employees/EmployeeCard';
 import BackButton from '../../../components/common/BackButton';
+
+export type Props = ComponentProps & {
+  t: Function
+};
 
 class EmployeesView extends Component<Props, {}> {
   constructor(props) {
@@ -46,6 +51,7 @@ class EmployeesView extends Component<Props, {}> {
 
   public render(): JSX.Element {
     const {
+      t,
       auth,
       self,
       active,
@@ -117,7 +123,7 @@ class EmployeesView extends Component<Props, {}> {
           open={confirmDelete.open}
           onClose={closeConfirmDeletePopup}
           onConfirm={deleteEmployee}
-          title="Вы уверены, что хотите удалить этого сотрудника?"/>
+          title={t('removeConfirm')}/>
 
         <ConfirmPopup
           modalId="make-admin"
@@ -125,7 +131,7 @@ class EmployeesView extends Component<Props, {}> {
           open={confirmAdmin.open}
           onClose={closeConfirmAdminPopup}
           onConfirm={makeAdmin}
-          title="Вы уверены, что хотите назначить этого сотрудника администратором?"/>
+          title={t('adminConfirm')}/>
 
         <ConfirmPopup
           modalId="unmake-admin"
@@ -133,7 +139,7 @@ class EmployeesView extends Component<Props, {}> {
           open={confirmRmAdmin.open}
           onClose={closeConfirmRmAdminPopup}
           onConfirm={unmakeAdmin}
-          title="Вы уверены, что хотите лишить данного пользователя прав администратора?"/>
+          title={t('rmAdminConfirm')}/>
 
         <EmployeeCard
           modalId="employee-card"
@@ -146,4 +152,7 @@ class EmployeesView extends Component<Props, {}> {
   }
 }
 
-export default CSSModules(EmployeesView, require('./styles.css'));
+const StyledComponent = CSSModules(EmployeesView, require('./styles.css'));
+const TranslatedComponent = translate('employees')(StyledComponent);
+
+export default TranslatedComponent;

@@ -57,14 +57,26 @@
   background-color: transparent;
   border: 1px solid #dbdfe4;
   color: #0070e0;
-  font: normal 20px 'Open Sans';
-  size: 200px 48px;
+  font: normal 18px 'Open Sans';
+  size: 170px 40px;
   padding: 1px 0 5px;
+  margin-right: 10px;
 
   &:hover {
     background-color: transparent;
     color: #0070e0;
     border: 1px solid #0070e0;
+  }
+
+  &:disabled {
+    color: #9c9c9c;
+    background-color: #f9f9f9 !important;
+
+    &:hover {
+      color: #9c9c9c;
+      border: 1px solid #dbdfe4;
+      background-color: #f9f9f9 !important;
+    }
   }
 }
 
