@@ -42,13 +42,13 @@ const UserIsAuthenticated = UserAuthWrapper({
   allowRedirectBack: false
 });
 
-const UserIsNotAuthenticated = UserAuthWrapper({
+/*const UserIsNotAuthenticated = UserAuthWrapper({
   authSelector: (state) => state.app.app,
   predicate: (app) => !app.authorized,
   redirectAction: push,
   failureRedirectPath: routes.base,
   allowRedirectBack: false
-});
+});*/
 
 const UserIsAdmin = UserAuthWrapper({
   authSelector: (state) => state.app.app,

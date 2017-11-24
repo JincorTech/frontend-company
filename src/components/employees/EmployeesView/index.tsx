@@ -155,4 +155,4 @@ class EmployeesView extends Component<Props, {}> {
 const StyledComponent = CSSModules(EmployeesView, require('./styles.css'));
 const TranslatedComponent = translate('employees')(StyledComponent);
 
-export default TranslatedComponent
+export default TranslatedComponent;

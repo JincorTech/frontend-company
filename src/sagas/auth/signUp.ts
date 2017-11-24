@@ -122,7 +122,7 @@ export function* createAccountSaga(): SagaIterator {
  */
 function* confirmEmailIterator({ payload }: Action<ConfirmFields>): SagaIterator {
   try {
-    const { data } = yield call(post, '/employee/verifyEmail', payload, false);
+    yield call(post, '/employee/verifyEmail', payload, false);
     yield put(confirmEmail.success());
   } catch (e) {
     yield put(confirmEmail.failure(new SubmissionError(e.errors)));

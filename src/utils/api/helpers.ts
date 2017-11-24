@@ -72,7 +72,7 @@ export function authHeader(sign: boolean = true): { Authorization?: string } {
   }
 
   if (isAuth()) {
-    return { 'Authorization': `Bearer ${getToken()}` }
+    return { 'Authorization': `Bearer ${getToken()}` };
   }
 
   return {};
