@@ -62,7 +62,7 @@ export default (
   <Route path="/cmp" component={App}>
     <IndexRedirect to="/cmp/app/profile"/>
 
-    <Route path="auth" component={UserIsNotAuthenticated(AuthLayout)}>
+    <Route path="auth" component={AuthLayout}>
       <Route path="signup" component={SignUp}/>
       <Route path="signin" component={SignIn}/>
       <Route path="password" component={RestorePassword}/>

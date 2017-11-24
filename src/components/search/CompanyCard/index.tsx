@@ -37,7 +37,8 @@ const CompanyCard: SFC<Props> = ({ t, company, ...divProps }) => {
 
       <div styleName="name">{stringCut(legalName, 20)}</div>
       <div styleName="address">{city ? `${country}, ${city}` : country}</div>
-      <div styleName="button"><Button styleName="btn" bStyle="outline" onClick={e => e.stopPropagation()}>{t('write')}</Button></div>
+      <div styleName="button"><Button styleName="btn" disabled={true} bStyle="outline" onClick={e => e.stopPropagation()}>{t('write')}</Button></div>
+      <div styleName="button"><Button styleName="btn" disabled={true} bStyle="outline" onClick={e => e.stopPropagation()}>{t('payment')}</Button></div>
       {at && <div styleName="activity" title={at}><Icon styleName="icon" name="activity"/>{stringCut(at, 35)}</div>}
       <div styleName="socials">
         {Boolean(links.length) && links.map((link, i) => <SocialLink styleName="social" displayName={false} size={28} {...link} key={link.value + i}/>)}

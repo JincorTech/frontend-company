@@ -66,8 +66,14 @@ export function parseJSON(response: Response | ErrorData): Promise<any> {
   throw new RequestError(response);
 }
 
-export function authHeader(): { Authorization?: string } {
-  return isAuth()
-    ? { 'Authorization': `Bearer ${getToken()}` }
-    : {};
+export function authHeader(sign: boolean = true): { Authorization?: string } {
+  if (!sign) {
+    return {};
+  }
+
+  if (isAuth()) {
+    return { 'Authorization': `Bearer ${getToken()}` }
+  }
+
+  return {};
 }

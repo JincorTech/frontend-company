@@ -55,7 +55,8 @@ const CompanyCard: SFC<Props> = props => {
             <div styleName="name">{stringCut(legalName, 30)}</div>
             <span styleName="address">{city ? `${country}, ${city}` : country}</span>
             <div styleName="buttons">
-              <Button styleName="transparent-button">{t('write')}</Button>
+              <Button styleName="transparent-button" disabled={true}>{t('write')}</Button>
+              <Button styleName="transparent-button" disabled={true}>{t('payment')}</Button>
               <button styleName="bookmark" type="button"><Icon styleName="bookmark-icon" name="bookmark"/></button>
             </div>
           </div>
