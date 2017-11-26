@@ -1,0 +1,16 @@
+@use postcss-short;
+
+.avatar {
+  /* TODO is it need here? */
+}
+
+.empty {
+  size: 60px;
+  border-radius: 4px;
+  font: 600 20px/27px 'Open Sans';
+  letter-spacing: -0.3px;
+  padding: 16px *;
+  text-align: center;
+  color: #fff;
+  cursor: default;
+}

@@ -1,33 +1,75 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { connect } from 'react-redux';
 
-import RequestPasswordForm from '../RequestPasswordForm'
-import ConfirmPasswordForm from '../ConfirmPasswordForm'
-import NewPasswordForm from '../NewPasswordForm'
-import CompanyList from '../../../components/auth/CompanyList'
+import {
+  restorePassword,
+  confirmEmail,
+  setNewPassword,
+  selectCompany,
+  Step
+} from '../../../redux/modules/auth/restorePassword';
+import { companySelector } from '../../../selectors/auth/signIn';
 
-export type SignInProps = HTMLProps<HTMLDivElement>
+import RequestPasswordForm from '../../../components/auth/RequestPasswordForm';
+import ConfirmPasswordForm from '../../../components/auth/ConfirmPasswordForm';
+import NewPasswordForm from '../../../components/auth/NewPasswordForm';
+import CompanyList, { Company } from '../../../components/auth/CompanyList';
 
-const SignUp: SFC<SignInProps> = (props) => {
-  const renderStep = (step: string) => {
+/**
+ * Types
+ */
+export type Props = ComponentProps & StateProps & DispatchProps;
+
+export type ComponentProps = HTMLProps<HTMLDivElement>;
+
+export type StateProps = {
+  step: Step
+  spinner: boolean
+  verificationId: string
+  companyId: string
+  companies: Company[]
+};
+
+export type DispatchProps = {
+  selectCompany: (companyId: string) => void
+};
+
+/**
+ * Component
+ */
+const RestorePassword: SFC<Props> = (props) => {
+  const { spinner, selectCompany, step, companies } = props;
+
+  const renderStep = (step: Step): JSX.Element => {
     switch (step) {
-      case 'requestEmail':
-        return <RequestPasswordForm onSubmit={null}/>
-      case 'confirmEmail':
-        return <ConfirmPasswordForm onSubmit={null}/>
+      case 'email':
+        return <RequestPasswordForm spinner={spinner} onSubmit={restorePassword}/>;
+      case 'confirm':
+        return <ConfirmPasswordForm spinner={spinner} onSubmit={confirmEmail}/>;
       case 'companies':
-        return <CompanyList companies={[]} onSelect={null}/>
-      case 'newPassword':
-        return <NewPasswordForm passwordVisible={false} onSubmit={null} onChangePasswordVisibility={null}/>
+        return <CompanyList companies={companies} onSelect={selectCompany}/>;
+      case 'new':
+        return <NewPasswordForm spinner={spinner} onSubmit={setNewPassword}/>;
     }
-  }
+  };
 
   return (
     <div styleName="restore-password">
-      {renderStep('newPassword')}
+      {renderStep(step)}
     </div>
-  )
-}
+  );
+};
 
-export default CSSModules(SignUp, require('./styles.css'))
+/**
+ * Decorators
+ */
+const StyledComponent = CSSModules(RestorePassword, require('./styles.css'));
+export default connect<StateProps, DispatchProps, ComponentProps>(
+  ({ auth: { restorePassword }}) => ({
+    ...restorePassword,
+    companies: companySelector(restorePassword)
+  }),
+  { selectCompany }
+)(StyledComponent);

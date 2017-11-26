@@ -1,22 +1,51 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { WrappedFieldProps } from 'redux-form'
+import * as React from 'react';
+import { SFC, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { WrappedFieldProps } from 'redux-form';
 
-import Select, { Props as SelectProps } from './components/Select'
+import Select, { Props as SelectProps } from '../../../containers/common/Select';
+import FieldError from '../../../components/common/FieldError';
 
+/**
+ * Types
+ */
+export type Props = SelectProps & WrappedFieldProps<any> & {
+  onOptionSelect: (value: string) => void
+};
 
-export type RenderSelectProps = SelectProps & WrappedFieldProps<any>
+/**
+ * Props
+ */
+const RenderSelect: SFC<Props> = (props) => {
+  const { title, onOptionSelect, placeholder, input, meta, options, modalId, filter, button, select, actions, ...divProps } = props;
 
-const RenderFilterSelect: SFC<RenderSelectProps> = (props) => {
-  const { placeholder, input, meta, options } = props
-  const { invalid, touched, active, dirty } = meta
+  const handleChange = (value: any) => {
+    input.onChange(value);
+    onOptionSelect(value);
+  };
 
-  return <Select
-          options={options}
-          placeholder={placeholder}
-          invalid={touched && !active && invalid && dirty}
-          {...input}/>
-}
+  return (
+    <FieldError meta={meta}>
+      <Select
+        modalId={modalId}
+        filter={filter}
+        title={placeholder}
+        options={options}
+        button={button}
+        optionValue={input.value}
+        onChange={handleChange}
+        onBlur={input.onBlur}
+        placeholder={placeholder}
+        {...divProps}/>
+    </FieldError>
+  );
+};
 
-export default CSSModules(RenderFilterSelect, require('./styles.css'))
+RenderSelect.defaultProps = {
+  onOptionSelect: () => void(0)
+};
+
+/**
+ * Decorators
+ */
+export default CSSModules(RenderSelect, require('./styles.css'));

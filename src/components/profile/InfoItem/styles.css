@@ -4,6 +4,8 @@
 
 .company-section-title {
   font-size: 13px;
+  font-weight: 300;
   margin: 0 0 6px;
-  color: #9da0a4;;
+  color: #9da0a4;
+  letter-spacing: -0.1px;
 }

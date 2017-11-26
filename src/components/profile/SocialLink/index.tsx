@@ -1,34 +1,37 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { SFC, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { convertToAbsolute } from '../../../helpers/common/url';
 
+export type Props = HTMLProps<HTMLLIElement> & LinkProps;
 
-export type Props = HTMLProps<HTMLLIElement> & SocialLinkProps
-
-export type SocialLinkProps = {
+export type LinkProps = {
+  name: string
+  value: string
   iconUrl?: string
-  name?: string
-  hideName?: boolean
-  url: string
-}
+  displayName?: boolean
+  size?: number
+};
 
 const SocialLink: SFC<Props> = (props) => {
-  const { name, iconUrl, url, hideName, ...liProps } = props
+  const { name, iconUrl, value: url, displayName, size, ...liProps } = props;
+  const style = { width: size, height: size };
 
   return (
     <li styleName="social-link" {...liProps}>
-      <a styleName="link-icon" href={url}>
+      <a styleName="link-icon" target="_blank" href={convertToAbsolute(url)} style={style}>
         {iconUrl
           ? <img src={iconUrl}/>
           : <img src={require('./svg/default.svg')}/>}
       </a>
-      {!hideName && <span styleName="link-name">{name}</span>}
+      {displayName && <span styleName="link-name">{name}</span>}
     </li>
-  )
-}
+  );
+};
 
 SocialLink.defaultProps = {
-  hideName: false
-}
+  displayName: true,
+  size: 36
+};
 
-export default CSSModules(SocialLink, require('./styles.css'))
+export default CSSModules(SocialLink, require('./styles.css'));

@@ -1,24 +1,28 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import { WrappedFieldProps } from 'redux-form'
+import * as React from 'react';
+import { SFC } from 'react';
+import { WrappedFieldProps } from 'redux-form';
+import * as CSSModules from 'react-css-modules';
 
-import Input from '../../common/Input'
+import Input from '../../common/Input';
+import FieldError from '../../common/FieldError';
 
 export type InputProps = WrappedFieldProps<any> & {
   type: 'text' | 'email'
   placeholder?: string
-}
-
+};
 
 const RenderInput: SFC<InputProps> = (props) => {
-  const { type, placeholder, input, meta } = props
-  const { invalid, touched, active, dirty } = meta
-  const hasError = touched && !active && invalid && dirty
+  const { type, placeholder, input, meta, ...inputProps } = props;
 
-  return <Input
-    type={type}
-    placeholder={placeholder}
-    {...input}/>
-}
+  return (
+    <FieldError meta={meta}>
+      <Input
+        type={type}
+        placeholder={placeholder}
+        {...input}
+        {...inputProps}/>
+    </FieldError>
+  );
+};
 
-export default RenderInput
+export default RenderInput;

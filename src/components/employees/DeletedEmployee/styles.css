@@ -1,0 +1,69 @@
+@use postcss-short;
+
+.email-slide {
+  position: relative;
+  top: 0;
+  transition: 0.1s linear top;
+}
+
+.employee {
+  position: relative;
+  margin: 5px 0;
+  padding: 5px 10px 5px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.1s linear all;
+
+  &:hover {
+    background-color: #f8f8f8;
+    opacity: 1;
+
+    & .email-slide {
+      top: -23px;
+    }
+  }
+}
+
+.avatar {
+  size: 50px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 10px 0 0;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.avatar-empty {
+  composes: avatar;
+  /* stylelint-disable font-family-name-quotes */
+  font: semibold 20px/50px 'Open Sans';
+  /* stylelint-enable */
+  text-align: center;
+  color: #fff;
+}
+
+.info {
+  display: inline-block;
+  line-height: 23px;
+}
+
+.full-name {
+  color: #000;
+  font-size: 16px;
+}
+
+.email-n-position {
+  color: #9c9c9c;
+  font-size: 14px;
+  height: 23px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.status {
+  float: right;
+  color: #d0021b;
+  font-size: 13px;
+  line-height: 50px;
+}

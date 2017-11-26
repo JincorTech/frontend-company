@@ -1,27 +1,27 @@
-import config from '../../config'
+import config from '../../config';
+import { isAuth, getToken } from '../auth';
 
-const { apiPrefix, apiHost } = config
+const { apiPrefix, apiHost } = config;
 
-
-type ErrorData = {
+export type ErrorData = {
   message: string
   status_code: number
   errors?: ErrorMessages
-}
+};
 
-type ErrorMessages = {
+export type ErrorMessages = {
   [key: string]: string[]
-}
+};
 
-class RequestError extends Error {
-  status: number
-  errors: ErrorMessages
+export class RequestError extends Error {
+  status: number;
+  errors: ErrorMessages;
 
   constructor(error: ErrorData) {
-    super(error.message)
+    super(error.message);
 
-    this.errors = error.errors
-    this.status = error.status_code
+    this.errors = error.errors;
+    this.status = error.status_code;
   }
 }
 
@@ -32,9 +32,9 @@ class RequestError extends Error {
  * @return         full path, including api host and version
  */
 export function pathCreator(path: string): string {
-  const correctPath = path[0] === '/' ? path : `/${path}`
+  const correctPath = path[0] === '/' ? path : `/${path}`;
 
-  return `${apiHost}${apiPrefix}${correctPath}`
+  return `${apiHost}${apiPrefix}${correctPath}`;
 }
 
 /**
@@ -46,9 +46,9 @@ export function pathCreator(path: string): string {
  */
 export function checkHttpStatus(response: Response): Promise<any> | Response {
   if (response.ok) {
-    return response
+    return response;
   } else {
-    return response.json()
+    return response.json();
   }
 }
 
@@ -60,8 +60,20 @@ export function checkHttpStatus(response: Response): Promise<any> | Response {
  */
 export function parseJSON(response: Response | ErrorData): Promise<any> {
   if (response instanceof Response) {
-    return response.json()
+    return response.json();
   }
 
-  throw new RequestError(response)
+  throw new RequestError(response);
+}
+
+export function authHeader(sign: boolean = true): { Authorization?: string } {
+  if (!sign) {
+    return {};
+  }
+
+  if (isAuth()) {
+    return { 'Authorization': `Bearer ${getToken()}` };
+  }
+
+  return {};
 }

@@ -1,9 +1,23 @@
 @use postcss-short;
 
+/**
+* Render select
+*/
+.render-select {
+  position: relative;
+}
+
+.error {
+  position: absolute 0 * * 100%;
+  width: 210px;
+  padding-left: 15px;
+}
+
 /* Option */
 .option {
-  font: normal 19px/22px 'SF UI Text';
+  font: normal 16px/22px 'Open Sans';
   color: #222;
+  letter-spacing: -0.2px;
   padding: 0 30px;
   background: #fff;
   cursor: pointer;
@@ -14,17 +28,14 @@
 }
 
 .option-value {
-  padding: 14px 0;
+  padding: 13px 0;
   border-bottom: 1px solid #f3f5f8;
 }
 
 
-/*Select */
-.select {}
-
-.title {
-  padding: 0 30px;
-  margin: 0 0 24px;
+/* Select */
+.select {
+  text-align: left;
 }
 
 .select-popup {
@@ -33,7 +44,13 @@
 }
 
 .popup-title {
-  font-size: 24px/33px;
+  font: normal 24px/33px 'Open Sans';
   letter-spacing: -0.2px;
   color: #000;
+  margin: 0 0 24px;
+  padding: 0 30px;
+}
+
+.select-options {
+  /* TODO is it need here? */
 }

@@ -1,10 +1,9 @@
-FROM node:6.9.5
+FROM node:8.0.0-alpine
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+VOLUME /usr/src/companies
+WORKDIR /usr/src/companies
+ADD . /usr/src/companies/
 
-ADD package.json /usr/src/app/
 RUN npm i
-ADD . /usr/src/app/
 
-CMD npm start
+CMD npm run build

@@ -1,5 +1,6 @@
-import 'whatwg-fetch'
-import { pathCreator, checkHttpStatus, parseJSON } from './helpers'
+import 'whatwg-fetch';
+import { pathCreator, checkHttpStatus, parseJSON, authHeader } from './helpers';
+import * as i18n from 'i18next';
 
 /**
  * Fetch wrapper function
@@ -8,16 +9,18 @@ import { pathCreator, checkHttpStatus, parseJSON } from './helpers'
  * @param   options - fetch options
  * @returns         - promise
  */
-function apiFetch (path: string, options: RequestInit = {}): Promise<Response> {
+function apiFetch(path: string, sign: boolean = true, options: RequestInit = {}): Promise<Response> {
   return fetch(pathCreator(path), {
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Locale': i18n.language,
+      ...authHeader(sign)
     },
     ...options
   })
     .then(checkHttpStatus)
-    .then(parseJSON)
+    .then(parseJSON);
 }
 
 /**
@@ -26,10 +29,10 @@ function apiFetch (path: string, options: RequestInit = {}): Promise<Response> {
  * @param  path - endpoint
  * @return      - promise
  */
-export function get(path: string): Promise<Response> {
-  return apiFetch(path, {
+export function get(path: string, sign: boolean = true): Promise<Response> {
+  return apiFetch(path, sign, {
     method: 'GET'
-  })
+  });
 }
 
 /**
@@ -39,11 +42,11 @@ export function get(path: string): Promise<Response> {
  * @param body - POST request body
  * @return     - promise
  */
-export function post<T>(path: string, body: T): Promise<Response> {
-  return apiFetch(path, {
+export function post<T>(path: string, body: T, sign: boolean = true): Promise<Response> {
+  return apiFetch(path, sign, {
     method: 'POST',
     body: JSON.stringify(body)
-  })
+  });
 }
 
 /**
@@ -53,11 +56,11 @@ export function post<T>(path: string, body: T): Promise<Response> {
  * @param  body - PUT request body
  * @return      - promise
  */
-export function put<T>(path: string, body: T): Promise<Response> {
-  return apiFetch(path, {
+export function put<T>(path: string, body: T, sign: boolean = true): Promise<Response> {
+  return apiFetch(path, sign, {
     method: 'PUT',
     body: JSON.stringify(body)
-  })
+  });
 }
 
 /**
@@ -66,8 +69,8 @@ export function put<T>(path: string, body: T): Promise<Response> {
  * @param  path - endpoint
  * @return      - promise
  */
-export function del(path: string): Promise<Response> {
-  return apiFetch(path, {
+export function del(path: string, sign: boolean = true): Promise<Response> {
+  return apiFetch(path, sign, {
     method: 'DELETE'
-  })
+  });
 }

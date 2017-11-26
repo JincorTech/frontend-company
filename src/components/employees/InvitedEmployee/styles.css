@@ -1,0 +1,53 @@
+@use postcss-inline-svg;
+@use postcss-short;
+
+.employee {
+  position: relative;
+  margin: 5px 0;
+  padding: 5px 10px 5px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.1s linear background-color;
+
+  &:hover {
+    background-color: #f8f8f8;
+  }
+}
+
+.avatar {
+  size: 50px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 10px 0 0;
+  background-color: #d8d8d8;
+  border-radius: 4px;
+
+  & > img {
+    display: block;
+    border-radius: 4px;
+    user-select: none;
+  }
+}
+
+.invited-image {
+  size: 100%;
+  background: svg-load('./svg/at.svg') no-repeat 50%;
+}
+
+.info {
+  display: inline-block;
+  line-height: 23px;
+}
+
+.email {
+  color: #000;
+  font-size: 16px;
+  line-height: 50px;
+}
+
+.status {
+  float: right;
+  color: #999;
+  font-size: 13px;
+  line-height: 50px;
+}

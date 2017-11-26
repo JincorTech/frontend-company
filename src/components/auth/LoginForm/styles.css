@@ -1,0 +1,9 @@
+.login-form {
+  max-width: 450px;
+}
+
+.restore-password {
+  display: inline-block;
+  font-size: 15px;
+  margin-top: 60px;
+}

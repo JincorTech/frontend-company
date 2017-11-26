@@ -1,0 +1,49 @@
+@use postcss-short;
+
+/* confirm popup styles */
+.confirm-popup {
+  composes: popup from '../Popup/styles.css';
+  background-color: #fff;
+  width: 420px;
+  border-radius: 4px;
+  height: auto;
+  padding: 30px;
+}
+
+.popup-title {
+  margin: 0;
+  color: #000;
+  font-weight: normal;
+  font-size: 24px/33px;
+  letter-spacing: -0.2px;
+}
+
+.popup-body {
+  margin: 30px 0 0;
+  text-align: right;
+}
+
+.popup-buttons {
+  display: block;
+  text-align: right;
+
+  & button {
+    width: 160px;
+    margin: 0 10px;
+  }
+}
+
+.popup-cancel-button {
+  font-weight: normal;
+  background-color: transparent;
+  color: #0070e0;
+
+  &:hover {
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+  &:active {
+    background-color: transparent;
+  }
+}

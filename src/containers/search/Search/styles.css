@@ -1,0 +1,40 @@
+@use postcss-short;
+
+.search {
+  width: 965px;
+  margin: 40px auto 50px;
+}
+
+.filters {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.filter {
+  display: inline-block;
+}
+
+.select {
+  color: #f00;
+}
+
+.result {
+  margin: -20px -16px;
+  min-height: 300px;
+}
+
+.search-field-wrapper {
+  position: relative;
+}
+
+.search-field {
+  font: normal 48px 'Open Sans';
+  color: #222;
+  size: 100% 65px;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #c6c6c6;
+  border-radius: 0;
+  padding: 2px 30px;
+  outline: none;
+}

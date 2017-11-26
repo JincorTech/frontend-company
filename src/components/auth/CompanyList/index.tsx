@@ -1,10 +1,9 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import * as CSSModules from 'react-css-modules'
-import { ActionCreator } from '../../../utils/actions'
+import * as React from 'react';
+import { SFC } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { translate } from 'react-i18next';
 
-import CompanyItem from './components/CompanyItem'
-
+import CompanyItem from '../CompanyItem';
 
 export type Company = {
   id: string
@@ -12,33 +11,35 @@ export type Company = {
   country: string
   formattedAddress: string
   type: string
-}
+  src: string
+};
 
-export type CompanyListProps = {
+export type Props = {
   companies: Company[],
-  onSelect: ActionCreator<string>
-}
+  onSelect: (companyId: string) => void,
+  t: Function
+};
 
-
-const CompanyList: SFC<CompanyListProps> = ({ companies, onSelect }) => {
+const CompanyList: SFC<Props> = ({ t, companies, onSelect }) => {
   return (
-    <div styleName="list-wrap">
-      <h1 styleName="list-title">Выберите компанию</h1>
+    <div styleName="company-list-wrap">
+      <h1 styleName="company-list-title">{t('chooseCompany')}</h1>
 
-      <div styleName="list">
+      <div styleName="company-list">
         {
-          companies.map(({legalName, type, country, id}, i) => (
+          companies.map((company) => (
             <CompanyItem
-              key={i}
-              name={legalName}
-              country={country}
-              type={type}
-              onClick={() => onSelect(id)}/>
+              key={company.id}
+              company={company}
+              onClick={() => onSelect(company.id)}/>
           ))
         }
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CSSModules(CompanyList, require('./styles.css'))
+const StyledComponent = CSSModules(CompanyList, require('./styles.css'));
+const TranslatedComponent = translate('auth')(StyledComponent);
+
+export default TranslatedComponent;

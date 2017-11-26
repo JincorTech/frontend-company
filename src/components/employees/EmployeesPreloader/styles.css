@@ -1,0 +1,69 @@
+@use postcss-short;
+@use postcss-clearfix;
+
+:root {
+  --background-color: #fbfbfb;
+}
+
+.container {
+  width: 605px;
+  margin: 0 auto;
+  padding: 50px 0;
+}
+
+.invite-employee {
+  clear: fix;
+  margin-bottom: 30px;
+}
+
+.invite-input,
+.invite-button {
+  float: left;
+}
+
+.invite-input {
+  width: 415px;
+  height: 45px;
+  border-radius: 4px;
+  margin-right: 15px;
+  background-color: var(--background-color);
+}
+
+.invite-button {
+  width: 165px;
+  height: 45px;
+  border-radius: 4px;
+  background-color: var(--background-color);
+}
+
+.employee {
+  clear: fix;
+  margin-bottom: 15px;
+}
+
+.avatar {
+  size: 50px;
+  margin-right: 10px;
+  border-radius: 4px;
+  background-color: var(--background-color);
+}
+
+.info,
+.avatar {
+  float: left;
+}
+
+.name {
+  margin-bottom: 9px;
+  width: 208px;
+  height: 16px;
+  border-radius: 4px;
+  background-color: var(--background-color);
+}
+
+.position {
+  width: 170px;
+  height: 14px;
+  border-radius: 4px;
+  background-color: var(--background-color);
+}

@@ -1,0 +1,38 @@
+@use postcss-center;
+@use postcss-short;
+
+.input {
+  position: relative;
+  text-align: left;
+  size: 100% 45px;
+  border-radius: 4px;
+  padding: 10px 40px 12px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font: normal 20px 'Open Sans';
+  color: #0070e0;
+}
+
+.input-default {
+  composes: input;
+}
+
+.input-invalid {
+  composes: input;
+}
+
+.placeholder-invalid {
+  color: #d0011b;
+}
+
+.placeholder-default {
+  color: #0070e0;
+}
+
+.icon {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+}

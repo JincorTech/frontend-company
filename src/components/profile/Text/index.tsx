@@ -1,39 +1,79 @@
-import * as React from 'react'
-import { SFC, HTMLProps } from 'react'
-import * as CSSModules from 'react-css-modules'
+import * as React from 'react';
+import { Component, HTMLProps } from 'react';
+import * as CSSModules from 'react-css-modules';
+import { translate } from 'react-i18next';
 
+export type Props = HTMLProps<HTMLDivElement> & {
+  value: string,
+  t: Function
+};
 
-export type TextProps = HTMLProps<HTMLDivElement> & {
-  value: string
-  collapsed?: boolean
-  onCollapse: (collapsed: boolean) => void
-}
+export type State = {
+  expand: boolean
+};
 
-const Text: SFC<TextProps> = (props) => {
-  const { collapsed, value, onCollapse, ...divProps } = props
-  const shouldCollapse = value.length > 200
+const TEXT_MAX_LENGTH = 250;
 
-  const cutText = (text: string): string => {
-    return shouldCollapse ? `${text.substr(0, 200)}... ` : text
+class Text extends Component<Props, State> {
+  public state: State = {
+    expand: false
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.handleExpand = this.handleExpand.bind(this);
+    this.renderCollapsed = this.renderCollapsed.bind(this);
+    this.renderExpand = this.renderExpand.bind(this);
   }
 
-  const handleCollapse = (): void => {
-    onCollapse(!collapsed)
+  private handleExpand(): void {
+    const { expand } = this.state;
+
+    this.setState({ expand: !expand });
   }
 
-  return (
-    <div styleName="text" {...divProps}>
-      {collapsed ? cutText(value) : value}
-      {
-        shouldCollapse &&
-        <span
-          styleName="text-collapse"
-          onClick={handleCollapse}>
-          {collapsed ? 'развернуть' : 'cвернуть'}
-        </span>
-      }
-    </div>
-  )
+  private renderExpand(): JSX.Element {
+    const { t, value, ...props } = this.props;
+
+    return (
+      <div styleName="text" {...props}>
+        {value}
+        {value.length > TEXT_MAX_LENGTH && <span
+          styleName="expand"
+          children={t('collapse')}
+          onClick={this.handleExpand}/>
+        }
+      </div>
+    );
+  }
+
+  private renderCollapsed(): JSX.Element {
+    const { t, value, ...props } = this.props;
+    const shouldCut = value.length > TEXT_MAX_LENGTH;
+
+    return (
+      <div styleName="text" {...props}>
+        {shouldCut ? value.substr(0, TEXT_MAX_LENGTH) + '... ' : value}
+        {shouldCut && <span
+          styleName="expand"
+          children={t('expand')}
+          onClick={this.handleExpand}/>
+        }
+      </div>
+    );
+  }
+
+  public render(): JSX.Element {
+    const { expand } = this.state;
+
+    return expand
+      ? this.renderExpand()
+      : this.renderCollapsed();
+  }
 }
 
-export default CSSModules(Text, require('./styles.css'))
+const StyledComponent = CSSModules(Text, require('./styles.css'));
+const TranslatedComponent = translate('profile')(StyledComponent);
+
+export default TranslatedComponent;

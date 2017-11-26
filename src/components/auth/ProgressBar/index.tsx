@@ -1,13 +1,13 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import * as CSSModules from 'react-css-modules'
-import * as classNames from 'classnames'
+import * as React from 'react';
+import { SFC } from 'react';
+import * as CSSModules from 'react-css-modules';
+import * as classNames from 'classnames';
 
-import Step from './components/Step'
+import Step from '../Step';
 
 type ProgressBarProps = {
   currentStep: 1 | 2 | 3
-}
+};
 
 const ProgressBar: SFC<ProgressBarProps> = ({ currentStep }) => {
   const getType = (step: 1 | 2 | 3): string => (
@@ -16,7 +16,7 @@ const ProgressBar: SFC<ProgressBarProps> = ({ currentStep }) => {
       completed: step < currentStep,
       uncompleted: step > currentStep
     })
-  )
+  );
 
   return (
     <div styleName="progress-bar">
@@ -26,7 +26,7 @@ const ProgressBar: SFC<ProgressBarProps> = ({ currentStep }) => {
       <span styleName="progress-seporator"/>
       <Step type={getType(3)}/>
     </div>
-  )
-}
+  );
+};
 
-export default CSSModules(ProgressBar, require('./styles.css'))
+export default CSSModules(ProgressBar, require('./styles.css'));

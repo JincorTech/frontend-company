@@ -1,4 +1,5 @@
 .form {
+  position: relative;
   width: 360px;
   margin: 0 auto;
 }
@@ -12,6 +13,11 @@
   font: normal 36px/36px 'Open Sans';
   letter-spacing: -1px;
   margin-bottom: 15px;
+}
+
+.without-hint {
+  composes: form-title;
+  margin-bottom: 40px;
 }
 
 .form-hint {

@@ -1,0 +1,20 @@
+@use postcss-short;
+
+
+.container {
+  width: 605px;
+  margin: 0 auto;
+  padding: 50px 0;
+}
+
+.list {
+  border-bottom: 1px solid #dbdfe4;
+
+  &:last-child {
+    border-bottom: 0 solid transparent;
+  }
+}
+
+.back {
+  position: absolute 104px * * 55px;
+}

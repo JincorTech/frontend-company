@@ -1,0 +1,22 @@
+@use postcss-short;
+
+.profile-card {
+  size: 325px 570px;
+  position: relative;
+  background-color: #fff;
+  border-radius: 5px 5px 4px 4px;
+}
+
+.top {
+  size: 325px;
+  position: relative;
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+}
+
+.bottom {
+  size: 325px 245px;
+  position: relative;
+  background-color: #fff;
+  border-radius: 0 0 4px 4px;
+}

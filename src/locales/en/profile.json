@@ -1,0 +1,20 @@
+{
+  "remove": "remove",
+  "companyName": "Company name",
+  "companyType": "Company type",
+  "companyDescription": "Company description",
+  "activityAreas": "Fields of activity",
+  "links": "Links",
+  "contacts": "Contacts",
+  "email": "Email",
+  "edit": "Edit",
+  "phoneNumber": "Phone number",
+  "save": "Save",
+  "cancel": "cancel",
+  "region": "Region",
+  "empty": "Empty",
+  "viewAsCard": "View as a card",
+  "employees": "Employees",
+  "collapse": "Collapse",
+  "expand": "Expand"
+}

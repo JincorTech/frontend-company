@@ -1,39 +1,72 @@
-import { combineReducers, routerReducer } from 'redux-seamless-immutable'
-import { reducer as formReducer } from 'redux-form'
+import { combineReducers, routerReducer } from 'redux-seamless-immutable';
+import { reducer as formReducer } from 'redux-form';
+import { loadingBarReducer } from 'react-redux-loading-bar';
 
+import app from './modules/app/app';
+import appLayout from './modules/app/appLayout';
+import profileCard from './modules/app/profileCard';
 
-import companyCard from './modules/common/companyCard'
-import emailTextarea from './modules/common/emailTextarea'
+import companyCard from './modules/common/companyCard';
+import emailTextarea from './modules/common/emailTextarea';
+import alert from './modules/common/alert';
+import select from './modules/common/select';
+import activityTypes from './modules/common/activityTypes';
 
-import renderSelect from './modules/form/renderSelect'
-import renderFilterSelect from './modules/form/renderFilterSelect'
+import signUp from './modules/auth/signUp';
+import signIn from './modules/auth/signIn';
+import restorePassword from './modules/auth/restorePassword';
+import registerEmployee from './modules/auth/registerEmployee';
+import inviteEmployees from './modules/auth/inviteEmployees';
 
-import createCompany from './modules/auth/createCompany'
+import profileView from './modules/profile/profileView';
+import profileEdit from './modules/profile/profileEdit';
 
-import activityTypes from './modules/profile/activityTypes'
-import profileEdit from './modules/profile/profileEdit'
+import employees from './modules/employees/employees';
+import search from './modules/search/search';
 
+import emojiSelect from './modules/messenger/emojiSelect';
 
 export default combineReducers({
   routing: routerReducer,
   form: formReducer,
+  loadingBar: loadingBarReducer,
 
-  formFields: combineReducers({
-    renderSelect,
-    renderFilterSelect
+  app: combineReducers({
+    app,
+    appLayout,
+    profileCard
   }),
 
   common: combineReducers({
     companyCard,
-    emailTextarea
+    emailTextarea,
+    alert,
+    select,
+    activityTypes
   }),
 
   auth: combineReducers({
-    createCompany
+    signIn,
+    signUp,
+    restorePassword,
+    registerEmployee,
+    inviteEmployees
   }),
 
   profile: combineReducers({
-    activityTypes,
-    profileEdit
+    profileEdit,
+    profileView
+  }),
+
+  employees: combineReducers({
+    employees
+  }),
+
+  search: combineReducers({
+    search
+  }),
+
+  messenger: combineReducers({
+    emojiSelect
   })
-})
+});

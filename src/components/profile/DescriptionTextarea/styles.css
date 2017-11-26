@@ -1,0 +1,87 @@
+@use postcss-short;
+
+
+/**
+* Textarea
+*/
+:root {
+  --color: #222;
+  --background: #fff;
+  --border-default: #dbdfe4;
+  --placeholder-default: #9da0a4;
+  --border-focused: #0070e0;
+  --placeholder-focused: #ebeced;
+  --invalid: #d0011b;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.textarea-wrap {
+  & .textarea {
+    resize: none !important;
+    outline: 0 !important;
+    width: 100%;
+    min-height: 66px;
+    box-sizing: border-box;
+    font-size: 16px/22px;
+    letter-spacing: -0.2px;
+    color: #222;
+    overflow-y: hidden;
+    border-radius: 4px;
+    padding: 9px 12px 5px;
+    transition: border-color linear 0.2s;
+
+    &::placeholder {
+      transition: color linear 0.2s;
+    }
+  }
+}
+
+.counter {
+  position: absolute 0 * * calc(100% + 10px);
+  color: #9da0a4;
+  font-size: 16px;
+}
+/* stylelint-disable no-descending-specificity */
+.default {
+  composes: textarea-wrap;
+
+  & .textarea {
+    border: solid 1px var(--border-default);
+
+    &::placeholder {
+      color: var(--placeholder-default);
+    }
+
+    &:focus {
+      outline: 0;
+      border-color: var(--border-focused);
+
+      &::placeholder {
+        color: var(--placeholder-focused);
+      }
+    }
+  }
+}
+
+.invalid {
+  composes: textarea-wrap;
+
+  & .textarea {
+    border: solid 1px var(--invalid);
+    color: var(--invalid);
+
+    &::placeholder {
+      color: var(--invalid);
+    }
+
+    &:focus {
+      &::placeholder {
+        color: var(--placeholder-focused);
+      }
+    }
+  }
+}
+/* stylelint-enable no-descending-specificity */

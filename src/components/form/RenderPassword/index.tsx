@@ -1,23 +1,57 @@
-import * as React from 'react'
-import { SFC } from 'react'
-import { WrappedFieldProps } from 'redux-form'
+import * as React from 'react';
+import { SFC, Component } from 'react';
+import { WrappedFieldProps } from 'redux-form';
+import * as CSSModules from 'react-css-modules';
 
-import Password, { PasswordProps } from './components/Password'
+import Password from './components/Password';
+import FieldError from '../../common/FieldError';
+import FieldHint from '../../common/FieldHint';
 
+/**
+ * Types
+ */
+export type Props = WrappedFieldProps<any> & {
+  placeholder?: string
+};
 
-export type ControlPasswordProps = PasswordProps & WrappedFieldProps<any>
+export type State = {
+  visible: boolean
+};
 
-const ControlPassword: SFC<ControlPasswordProps> = (props) => {
-  const { visible, onChangeVisibility, placeholder, input, meta } = props
-  const { invalid, touched, active, dirty } = meta
-  const hasErrors = invalid && touched && !active && dirty
+/**
+ * Component
+ */
+class RenderPassword extends Component<Props, State> {
+  public state: State = {
+    visible: false
+  };
 
-  return <Password
-    invalid={hasErrors}
-    visible={visible}
-    placeholder={placeholder}
-    onChangeVisibility={onChangeVisibility}
-    {...input}/>
+  constructor(props) {
+    super(props);
+
+    this.handleChangeVisibility = this.handleChangeVisibility.bind(this);
+  }
+
+  private handleChangeVisibility(visible: boolean): void {
+    this.setState({ visible });
+  }
+
+  public render(): JSX.Element {
+    const { visible } = this.state;
+    const { placeholder, input, meta } = this.props;
+
+    return (
+      <FieldHint meta={meta}>
+        <FieldError meta={meta}>
+          <Password
+            visible={visible}
+            placeholder={placeholder}
+            onChangeVisibility={this.handleChangeVisibility}
+            {...input}/>
+        </FieldError>
+      </FieldHint>
+    );
+  }
 }
 
-export default ControlPassword
+export default CSSModules(RenderPassword, require('./styles.css'));

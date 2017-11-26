@@ -1,0 +1,111 @@
+@use postcss-short;
+@use postcss-clearfix;
+
+.company-profile-edit {
+  position: relative;
+  padding: 60px * 20px;
+  clear: fix;
+}
+
+.company-logo {
+  float: left;
+}
+
+.delete-logo {
+  font: normal 16px 'Open Sans';
+  background-color: transparent;
+  padding: 0;
+  color: #d0011b;
+  cursor: pointer;
+  display: block;
+  margin: 15px auto 0;
+  transition: 0.1s linear opacity;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.company-name {
+  height: 80px;
+  font: normal 40px/48px 'Open Sans';
+  margin-bottom: 20px;
+}
+
+.company-info {
+  float: left;
+  padding-left: 30px;
+  width: 585px;
+}
+
+.company-controls {
+  position: absolute 60px 0 * *;
+  text-align: center;
+  width: 165px;
+}
+
+.submit-btn {
+  color: #fff;
+  width: 165px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #0070e0;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  margin-bottom: 13px;
+
+  :disabled {
+    background-color: #cdcecf;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.cancel-btn {
+  font-size: 16px/26px;
+}
+
+.region {
+  clear: fix;
+  margin-bottom: 2px;
+
+  & > div {
+    float: left;
+    width: 200px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+  }
+}
+
+.section {
+  margin-bottom: 32px;
+
+  & > h4 {
+    margin-bottom: 12px;
+    letter-spacing: 0.1px;
+  }
+}
+
+.section-small {
+  composes: section;
+  width: 420px;
+}
+
+.select-input {
+  height: 40px;
+  line-height: 18px;
+}
+
+.text-input {
+  height: 40px;
+}
+
+/**
+* Render activity type
+*/
+.error {
+  position: absolute 0 * * 100%;
+  width: 210px;
+  padding-left: 15px;
+}

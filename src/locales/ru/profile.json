@@ -1,0 +1,20 @@
+{
+  "remove": "удалить",
+  "companyName": "Имя компании",
+  "companyType": "Тип компании",
+  "companyDescription": "Описание компании",
+  "activityAreas": "Сферы деятельности",
+  "links": "Ссылки",
+  "contacts": "Контакты",
+  "email": "Email",
+  "edit": "Редактировать",
+  "phoneNumber": "Номер телефона",
+  "save": "Сохранить",
+  "cancel": "отменить",
+  "region": "Регион",
+  "empty": "Не заполнено",
+  "viewAsCard": "Посмотреть в виде карточки",
+  "employees": "Сотрудники",
+  "collapse": "Свернуть",
+  "expand": "Развернуть"
+}

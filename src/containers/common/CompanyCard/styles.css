@@ -1,131 +1,184 @@
 @use postcss-short;
+@use postcss-clearfix;
+@use postcss-inline-svg;
 
-/*Card*/
 .company-card {
-  text-align: center;
+  background-color: #fff;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 75px 0 0;
 }
 
-.open {
-  composes: company-card;
-  display: block;
-}
-
-.close {
-  composes: company-card;
-  display: none;
-}
-
-.popup {
-  perspective: 1000px;
-  position: relative;
-  background: transparent;
-}
-
-.front {
-  z-index: 2;
-  transform: rotateY(0deg);
-}
-
-.back {
-  transform: rotateY(180deg);
-  z-index: 1;
-}
-
-.flipper {
-  transition: 0.6s;
-  transform-style: preserve-3d;
-}
-
-.flipper, .front, .back {
-  position: absolute 0 0 0 0;
-}
-
-.front, .back {
-  backface-visibility: hidden;
-  background: #fff;
-}
-
-.flipper-flipped {
-  composes: flipper;
-  transform: rotateY(180deg);
-}
-
-/*Front*/
-.company-card-front {
-  padding-top: 50px;
+.top {
+  width: 600px;
+  margin: 0 auto;
 }
 
 .logo {
-  size: 130px;
-  margin: 0 auto 30px;
-}
-
-.name {
-  font-size: 30px;
-  margin-bottom: 0px;
-  line-height: 1.4;
-}
-
-.region {
-  font-size: 13px;
-  line-height: 1.85;
-  letter-spacing: -0.4px;
-  color: #9da0a4;
-  margin-bottom: 20px;
-}
-
-.write-button {
-  margin-bottom: 40px;
-}
-
-.links {
-  position: absolute  * 0 40px 0;
-}
-
-.favorite {
-  left: 39px;
-}
-
-.flip {
-  right: 39px;
-}
-
-.favorite, .flip {
-  position: absolute;
-  cursor: pointer;
-  bottom: 49px;
-}
-
-/*Back*/
-.company-card-back {
-  text-align: left;
-  padding: 40px 30px;
+  display: inline-block;
+  size: 175px;
+  margin-right: 30px;
 }
 
 .title {
-  font-size: 30px/41px;
-  font-weight: 400;
-  color: #222222;
-  margin: 0px;
-}
-
-.social-links {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 40px;
-}
-
-.contacts {
-  text-align: left;
-  padding-left: 30px;
-}
-
-.contact {
-  margin-bottom: 6px; 
-}
-
-.social-link {
   display: inline-block;
-  margin: 0 8px 0;
+  position: relative;
+  size: 395px 175px;
+  vertical-align: top;
+
+  & > .inner {
+    position: absolute;
+    top: 48%;
+    transform: translateY(-50.3%);
+  }
+}
+
+.name {
+  font: bold 36px/40px 'Open Sans';
+  letter-spacing: -0.5px;
+  color: #222;
+  overflow: hidden;
+}
+
+.address {
+  font: normal 20px 'Open Sans';
+  letter-spacing: -0.6px;
+  color: #222;
+  opacity: 0.75;
+  margin-top: 3px;
+}
+
+.buttons {
+  margin-top: 7px;
+}
+
+.transparent-button {
+  background-color: transparent;
+  border: 1px solid #dbdfe4;
+  color: #0070e0;
+  font: normal 18px 'Open Sans';
+  size: 170px 40px;
+  padding: 1px 0 5px;
+  margin-right: 10px;
+
+  &:hover {
+    background-color: transparent;
+    color: #0070e0;
+    border: 1px solid #0070e0;
+  }
+
+  &:disabled {
+    color: #9c9c9c;
+    background-color: #f9f9f9 !important;
+
+    &:hover {
+      color: #9c9c9c;
+      border: 1px solid #dbdfe4;
+      background-color: #f9f9f9 !important;
+    }
+  }
+}
+
+.bookmark {
+  display: none;
+  background-color: transparent;
+  height: 48px;
+  vertical-align: top;
+  cursor: pointer;
+  position: relative 3px * * 3px;
+
+  & > .bookmark-icon:hover {
+    fill: #0070e0;
+  }
+}
+
+
+.bottom {
+  width: 850px;
+  margin: 26px auto 0;
+  clear: fix;
+}
+
+.bottom-small {
+  composes: bottom;
+  width: 618px;
+}
+
+.about {
+  width: 500px;
+  margin-right: 47px;
+  float: left;
+
+  & > p {
+    font: normal 15px/20px 'Open Sans';
+    margin: 0 0 0.5em;
+  }
+}
+
+.info {
+  width: 300px;
+  float: left;
+}
+
+.activities {
+  margin: -10px 0;
+}
+
+.item {
+  font: normal 15px/20px 'Open Sans';
+  letter-spacing: -0.2px;
+  color: #222;
+  position: relative;
+  padding-left: 30px;
+  margin: 10px 0;
+}
+
+.item-empty {
+  composes: item;
+  color: #c2c8d0;
+}
+
+.icon {
+  size: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+  margin-right: 9px;
+  position: absolute -4px * * -5px;
+}
+
+.company-icon {
+  composes: icon;
+  background-image: svg-load('./svg/company.svg');
+}
+
+.activity-icon {
+  composes: icon;
+  background-image: svg-load('./svg/activity.svg');
+}
+
+.phone-icon {
+  composes: icon;
+  background-image: svg-load('./svg/phone.svg');
+}
+
+.email-icon {
+  composes: icon;
+  background-image: svg-load('./svg/email.svg');
+}
+
+.socials {
+  margin: 34px -11px 0;
+}
+
+.social {
+  display: inline-block;
+  margin: 0 12px;
+}
+
+.empty-value {
+  font-size: 15px;
+  color: #9da0a4;
 }

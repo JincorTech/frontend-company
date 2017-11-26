@@ -1,0 +1,17 @@
+{
+  "disableAdminRights": "Disable admin rights",
+  "assignAdministrator": "Assign administrator",
+  "openProfile": "Open profile",
+  "removeUser": "Remove user",
+  "removed": "Removed",
+  "message": "Message",
+  "addToContacts": "Add to contacts",
+  "block": "Block",
+  "invited": "Invited",
+  "emailsPlaceholder": "Emails separated by commas",
+  "invite": "Invite",
+  "administrator": "Administrator",
+  "removeConfirm": "Are you sure to delete this employee?",
+  "adminConfirm": "Are you sure you want to grant admin permissions to this employee?",
+  "rmAdminConfirm": "Are you sure you want to revoke admin permissions from this employee?"
+}

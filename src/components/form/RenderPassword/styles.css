@@ -1,12 +1,16 @@
+@use postcss-short;
 @use postcss-center;
 
+
+/**
+* Password
+*/
 .password-input-wrap {
   position: relative;
-  margin-bottom: 15px;
 }
 
 .password-input {
-  margin-bottom: 0px !important;
+  margin-bottom: 0 !important;
 }
 
 .password-icon {

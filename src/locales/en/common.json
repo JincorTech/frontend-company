@@ -1,0 +1,9 @@
+{
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "write": "Contact",
+  "payment": "Make Payment",
+  "activityFieldsAreEmpty": "Fields of activity are empty",
+  "phoneIsEmpty": "Phone is empty",
+  "emailIsEmpty": "Email is empty"
+}

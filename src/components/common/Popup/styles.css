@@ -1,10 +1,10 @@
 @use postcss-short;
 
-.popup-wrap {
+.overlay {
   position: fixed 0 0 0 0;
   z-index: 10000;
-  overflow-y: scroll;
-  background: rgba(0,0,0, 0.5);
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .popup {
@@ -12,6 +12,7 @@
   width: 420px;
   height: 640px;
   margin: 105px auto 50px;
+  border-radius: 4px;
 }
 
 .close {

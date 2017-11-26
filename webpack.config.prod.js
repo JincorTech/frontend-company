@@ -3,6 +3,7 @@ var webpack = require('webpack')
 // Plugins
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 var WebpackMd5Hash = require('webpack-md5-hash')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 // Postcss
@@ -12,9 +13,6 @@ var stylelint = require('stylelint')
 var doiuse = require('doiuse')
 var reporter = require('postcss-reporter')
 var use = require('postcss-use')
-var autoprefixer = require('autoprefixer');
-var postcssImport = require('postcss-import');
-var postcssUrl = require('postcss-url');
 
 
 module.exports = {
@@ -22,14 +20,14 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.json', '.ts', '.tsx']
   },
   debug: true,
-  devtool: 'inline-source-map',
+  devtool: 'cheap-source-map',
   noInfo: true,
   entry: ['babel-polyfill', path.resolve('./src/index')],
   target: 'web',
   output: {
-    path: path.resolve('./nginx/dist'),
-    publicPath: '/',
-    filename: '[name].[chunkhash].js'
+    path: path.resolve('./dist'),
+    publicPath: '/cmp/',
+    filename: '[name  ].[chunkhash].js'
   },
   plugins: [
     new WebpackMd5Hash(),
@@ -42,9 +40,9 @@ module.exports = {
         __DEV__: false
       }
     }),
-    new ExtractTextPlugin('[name].[contenthash].css'),
+    new ExtractTextPlugin('[name].[contenthash].css', { allChunks: true }),
     new HtmlWebpackPlugin({
-      template: 'src/assets/index.html',
+      template: 'src/index.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -67,7 +65,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       { from: 'src/locales', to: 'locales'}
-    ])
+    ]),
+    new FaviconsWebpackPlugin('./src/assets/favicon.png')
   ],
   module: {
     preLoaders: [
@@ -75,15 +74,16 @@ module.exports = {
     ],
     loaders: [
       {test: /\.tsx?$/, exclude: /node_modules/, loader: 'awesome-typescript'},
-      {test: /\.css$/, include: /src\/modules/, loader: ExtractTextPlugin.extract('style-loader', ['css-loader?importLoader=1&modules&localIdentName=[local]___[hash:base64:5]', 'postcss-loader'])},
-      {test: /\.css$/, exclude: /src\/modules/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader')},
+      {test: /\.css$/, include: /src\/(containers|components)/, loader: ExtractTextPlugin.extract('style-loader', ['css-loader?importLoaders=1&modules&localIdentName=[local]___[hash:base64:5]', 'postcss-loader'])},
+      {test: /\.css$/, exclude: /src\/(containers|components)/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader')},
       {test: /\.html$/, exclude: /node_modules/, loader: 'html'},
       {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file'},
       {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
       {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
       {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'},
       {test: /\.(jpe?g|png|gif)$/i, loader: 'file?name=[name].[ext]'},
-      {test: /\.ico$/, loader: 'file?name=[name].[ext]'}
+      {test: /\.ico$/, loader: 'file?name=[name].[ext]'},
+      {test: /\.json$/, loader: 'json-loader'}
     ]
   },
 
@@ -93,13 +93,7 @@ module.exports = {
   },
 
   postcss: () => [
-    postcssImport({ addDependencyTo: webpack }),
-    postcssUrl(),
     stylelint(),
-    postcssNext(),
-    postcssAssets({
-      relative: true
-    }),
     use({
       modules: [
         'postcss-property-lookup',
@@ -110,12 +104,18 @@ module.exports = {
         'postcss-clearfix',
         'postcss-triangle',
         'postcss-autoreset',
-        'postcss-initial'
+        'postcss-initial',
+        'postcss-for',
+        'postcss-calc'
       ]
     }),
+    postcssNext(),
+    postcssAssets({
+      relative: true
+    }),
     doiuse({
-      browsers: ['ie >= 9', '> 5%'],
-      ignore: ['css-transitions', 'css3-cursors', 'css-gradients']
+      browsers: ['ie >= 10', '> 5%'],
+      ignore: ['css-transitions', 'calc', 'css3-cursors', 'css-gradients', 'transforms3d', 'viewport-units']
     }),
     reporter({
       clearAllMessages: true

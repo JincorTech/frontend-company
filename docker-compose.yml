@@ -1,0 +1,19 @@
+version: '3'
+services:
+
+  company:
+    image: registry.jincor.com/frontend/company:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/usr/src/companies
+    command: npm run build
+
+  nginx:
+     image: registry.jincor.com/frontend/nginx:latest
+     volumes:
+       - ./dist:/var/apps/cmp
+     ports:
+        - 80:80
+        - 443:443

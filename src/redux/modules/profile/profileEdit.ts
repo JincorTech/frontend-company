@@ -1,107 +1,89 @@
-import { createReducer, createAction, Action } from '../../../utils/actions'
-import { from, ImmutableObject } from 'seamless-immutable'
+/* TODO LEGACY */
 
+import { createReducer, createAction, createSubmitAction, Action } from '../../../utils/actions';
+import { from, ImmutableObject } from 'seamless-immutable';
 
 /**
  * Types
  */
-export type State = StateObj & ImmutableObject<StateObj>
+export type State = StateMap & ImmutableObject<StateMap>;
 
-export type StateObj = {
-  countryVisible: boolean
-  cityVisible: boolean
-  activityFields: ActivityField[]
-}
+export type StateMap = {
+  preloader: boolean
+  spinner: boolean
+  src: string
+};
 
-export type ActivityField = {
-  visible: boolean
-}
+export type FormFields = {
+  upload: string
+  name: string
+  country: string
+  city: string
+  type: string
+  description: string
+  activityTypes: string[]
+  socialLinks: string[]
+  email: string
+  phone: string
+};
 
 /**
  * Actions
  */
-export const ADD_FIELD = 'jincor/profile/profileEdit/ADD_ACTIVITY_FIELD'
-export const REMOVE_FIELD = 'jincor/profile/profileEdit/REMOVE_ACTIVITY_FIELD'
-export const OPEN_POPUP = 'jincor/profile/profileEdit/OPEN_ACTIVITY_POPUP'
-export const CLOSE_POPUP = 'jincor/profile/profileEdit/CLOSE_ACTIVITY_POPUP'
-export const OPEN_COUNTRIES = 'jincor/profile/profileEdit/OPEN_COUNTRIES'
-export const CLOSE_COUNTRIES = 'jincor/profile/profileEdit/CLOSE_COUNTRIES'
-export const OPEN_CITIES = 'jincor/profile/profileEdit/OPEN_CITIES'
-export const CLOSE_CITIES = 'jincor/profile/profileEdit/CLOSE_CITIES'
+export const UPDATE_PROFILE = 'profile/profileEdit/UPDATE_PROFILE';
+export const FETCH_PROFILE = 'profile/profileEdit/FETCH_PROFILE';
+export const UPDATE_CITIES = 'profile/profileEdit/UPDATE_CITIES';
+export const SET_LOGO = 'profile/profileEdit/SET_LOGO';
+export const HIDE_PRELOADER = 'profile/profileEdit/HIDE_PRELOADER';
+export const RESET_STATE = 'profile/profileEdit/RESET_PROFILE_EDIT_STATE';
 
 /**
  * Action creators
  */
-export const addActivityField = createAction<void>(ADD_FIELD)
-export const removeActivityField = createAction<number>(REMOVE_FIELD)
-export const openActivityPopup = createAction<number>(OPEN_POPUP)
-export const closeActivityPopup = createAction<number>(CLOSE_POPUP)
-export const openCountrySelect = createAction<void>(OPEN_COUNTRIES)
-export const closeCountrySelect = createAction<void>(CLOSE_COUNTRIES)
-export const openCitySelect = createAction<void>(OPEN_CITIES)
-export const closeCitySelect = createAction<void>(CLOSE_CITIES)
+export const updateProfile = createSubmitAction<FormFields, void>(UPDATE_PROFILE);
+export const fetchProfile = createAction<void>(FETCH_PROFILE);
+export const updateCities = createAction<string>(UPDATE_CITIES);
+export const setLogo = createAction<string>(SET_LOGO);
+export const hidePreloader = createAction<void>(HIDE_PRELOADER);
+export const resetState = createAction<void>(RESET_STATE);
 
 /**
  * Reducer
  */
-const initialState = from<StateObj>({
-  countryVisible: false,
-  cityVisible: false,
-  activityFields: []
-})
+const initialState = from<StateMap>({
+  preloader: true,
+  spinner: false,
+  src: ''
+});
 
 export default createReducer<State>({
-  [ADD_FIELD]: (state: State, action: Action<void>): State => (
+  [updateProfile.REQUEST]: (state: State): State => (
     state.merge({
-      activityFields: [
-        ...state.activityFields,
-        { visible: false }
-      ]
+      spinner: true
     })
   ),
 
-  [REMOVE_FIELD]: (state: State, { payload: index }: Action<number>): State => (
+  [updateProfile.SUCCESS]: (state: State): State => (
     state.merge({
-      activityFields: [
-        ...state.activityFields.slice(0, index),
-        ...state.activityFields.slice(index + 1)
-      ]
+      spinner: false
     })
   ),
 
-  [CLOSE_POPUP]: (state: State, { payload: index }: Action<number>): State => (
+  [updateProfile.FAILURE]: (state: State): State => (
     state.merge({
-      activityFields: [
-        ...state.activityFields.slice(0, index),
-        { visible: false },
-        ...state.activityFields.slice(index + 1)
-      ]
+      spinner: false
     })
   ),
 
-  [OPEN_POPUP]: (state: State, { payload: index }: Action<number>): State => (
-    state.merge({
-      activityFields: [
-        ...state.activityFields.slice(0, index),
-        { visible: true },
-        ...state.activityFields.slice(index + 1)
-      ]
-    })
+  [SET_LOGO]: (state: State, { payload: src }: Action<string>): State => (
+    state.merge({ src })
   ),
 
-  [OPEN_COUNTRIES]: (state: State): State => (
-    state.merge({ countryVisible: true })
+  [HIDE_PRELOADER]: (state: State): State => (
+    state.merge({ preloader: false })
   ),
 
-  [CLOSE_COUNTRIES]: (state: State): State => (
-    state.merge({ countryVisible: false })
-  ),
-
-  [OPEN_CITIES]: (state: State): State => (
-    state.merge({ cityVisible: true })
-  ),
-
-  [CLOSE_CITIES]: (state: State): State => (
-    state.merge({ cityVisible: false })
+  [RESET_STATE]: (state: State): State => (
+    state.merge(initialState)
   )
-}, initialState)
+}, initialState);

@@ -1,0 +1,66 @@
+@use postcss-short;
+@use postcss-center;
+@use postcss-clearfix;
+@use postcss-inline-svg;
+
+
+.company-item {
+  position: relative;
+  clear: fix;
+  padding: 16px;
+  border-bottom: solid 1px #dbdfe4;
+  background: #fff;
+  transition: background-color linear 0.2s;
+
+  &:hover {
+    background: #fcfcfc;
+    cursor: pointer;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.company-logo,
+.company-info {
+  float: left;
+}
+
+.icon {
+  position: absolute;
+  top: center;
+  right: 21px;
+}
+
+.company-logo {
+  size: 48px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.company-info {
+  padding-left: 17px;
+  max-width: 240px;
+}
+
+.company-name {
+  font: 600 16px/16px 'Open Sans';
+  margin: 2px * 1px;
+  height: 1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.company-type {
+  font: normal 10px/10px 'Open Sans';
+  color: #9da0a4;
+  margin-bottom: 4px;
+  margin-top: 3px;
+}
+
+.company-country {
+  font: normal 13px/13px 'Open Sans';
+  color: #9da0a4;
+}

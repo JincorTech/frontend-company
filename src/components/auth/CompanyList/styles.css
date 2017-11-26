@@ -1,64 +1,11 @@
 @use postcss-short;
-@use postcss-center;
 
-/*Item*/
-.item {
-  position: relative;
-  clear: fix;
-  padding: 16px;
-  border-bottom: solid 1px #dbdfe4;
-  background: #fff;
-  transition: background-color linear 0.2s;
 
-  &:hover {
-    background: #fcfcfc;
-    cursor: pointer;
-  }
-
-  &:last-child {
-    border-bottom: 0;
-  }
+.company-list-wrap {
+  margin-bottom: 20px;
 }
 
-.logo, .info {
-  float: left;
-}
-
-.icon {
-  position: absolute;
-  top: center;
-  right: 21px;
-}
-
-.logo {
-  size: 48px;
-  background-color: #d8d8d8;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.info {
-  padding-left: 17px;
-}
-
-.name {
-  font: 600 16px/1 'SF UI Display';
-  margin: 2px * 1px;
-}
-
-.type {
-  font: 400 10px/1 'SF UI Text';
-  color: #9da0a4;
-  margin-bottom: 6px;
-}
-
-.country {
-  font: 400 13px/1 'SF UI Text';
-  color: #9da0a4;
-}
-
-/*List*/
-.list {
+.company-list {
   max-width: 360px;
   margin: * auto;
   border: solid 1px #dbdfe4;
@@ -66,12 +13,9 @@
   overflow: hidden;
 }
 
-.list-wrap {}
-
-.list-title {
-  display: block;
-  font: normal 36px/1 'SF UI Display';
+.company-list-title {
+  font: normal 36px/36px 'Open Sans';
   color: #000;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
 }
