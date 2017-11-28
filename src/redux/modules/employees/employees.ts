@@ -41,6 +41,7 @@ export type Self = {
 
 export type ActiveEmployee = {
   id: string
+  matrixId: string
   contacts: {
     email: string
     phone?: string
@@ -185,6 +186,7 @@ const initialState: State = from<StateObj>({
     open: false,
     employee: {
       id: '',
+      matrixId: '',
       contacts: {
         email: '',
         phone: ''
