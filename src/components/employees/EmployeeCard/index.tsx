@@ -57,7 +57,7 @@ const EmployeeCard: SFC<Props> = ({ t, employee, company, ...popupProps }) => {
         companyName={legalName}
         companyLogo={picture}>
         <div styleName="buttons">
-          <a href={`/msg/room/${clearMatrixId(matrixId)}`} type="button">{t('message')}</a>
+          <a href={`/msg/room/${clearMatrixId(matrixId)}`}>{t('message')}</a>
         </div>
       </CardAvatar>
     </Popup>
