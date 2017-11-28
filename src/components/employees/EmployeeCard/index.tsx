@@ -10,6 +10,8 @@ import { UserCompany as UserCompanyProps } from '../../../redux/modules/app/appL
 import Popup from '../../common/Popup';
 import CardAvatar from '../../app/CardAvatar';
 
+import { clearMatrixId } from '../../../helpers/matrix';
+
 export type Props =
   JSX.IntrinsicAttributes &
   JSX.IntrinsicClassAttributes<any> &
@@ -25,6 +27,7 @@ export type EmployeeCardProps = {
 const EmployeeCard: SFC<Props> = ({ t, employee, company, ...popupProps }) => {
   const {
     id,
+    matrixId,
     profile
   } = employee;
 
@@ -54,9 +57,7 @@ const EmployeeCard: SFC<Props> = ({ t, employee, company, ...popupProps }) => {
         companyName={legalName}
         companyLogo={picture}>
         <div styleName="buttons">
-          <button type="button">{t('message')}</button>
-          <button type="button">{t('addToContacts')}</button>
-          <button type="button">{t('block')}</button>
+          <a href={`/msg/room/${clearMatrixId(matrixId)}`} type="button">{t('message')}</a>
         </div>
       </CardAvatar>
     </Popup>
