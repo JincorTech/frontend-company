@@ -9,7 +9,7 @@
   opacity: 0;
   transition: 0.2s linear all;
 
-  & button {
+  & a {
     width: 100%;
     display: block;
     float: right;
@@ -19,13 +19,14 @@
     text-align: right;
     background-color: transparent;
     font: normal 18px/28px 'Open Sans';
-    color: #fff;
+    color: #fff !important;
     letter-spacing: -0.1px;
     cursor: pointer;
     transition: 0.1s linear background-color;
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
     }
   }
 }
