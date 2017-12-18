@@ -30,11 +30,10 @@ export type DispatchProps = {
 class InviteEmployees extends Component<Props, {}> {
   public componentDidMount(): void {
     const { location, router } = this.props;
-    const { token } = location.query;
+    const { token, verificationId, verificationCode } = location.query;
 
     try {
-      const { verificationId, pin } = jwtDecode(token);
-      this.props.signupEmail({ verificationId, verificationCode: pin });
+      this.props.signupEmail({ verificationId, verificationCode });
     } catch (e) {
       router.replace('/cmp/auth/signin');
     }

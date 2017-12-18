@@ -26,7 +26,8 @@ const SignUp: SFC<Props> = (props) => {
     step,
     spinner,
     stepIndex,
-    company: { verificationId }
+    verificationId,
+    company: { token }
   } = props;
 
   const renderForm = (step: Step) => {
@@ -39,7 +40,7 @@ const SignUp: SFC<Props> = (props) => {
         return <CreateAccountForm
           spinner={spinner}
           onSubmit={createAccount}
-          verificationId={verificationId}/>;
+          token={token}/>;
       case 'email':
         return <ConfirmEmailForm
           spinner={spinner}

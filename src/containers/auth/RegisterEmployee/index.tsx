@@ -14,7 +14,7 @@ import RegisterEmployeeForm from '../../../components/auth/RegisterEmployeeForm'
 export type Props = StateProps & ComponentProps;
 
 export type ComponentProps = {
-  verificationId: string
+  token: string
   companyName: string
   pin: string
   email: string
@@ -25,6 +25,7 @@ export type ComponentProps = {
  * Component
  */
 export const RegisterEmployee: SFC<Props> = ({ companyName, t, ...props }) => {
+  console.log(props);
   return (
     <div styleName="register-employee">
       <p styleName="title">{t('companyInvite')} {companyName}</p>

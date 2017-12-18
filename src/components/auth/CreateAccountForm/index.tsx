@@ -20,12 +20,12 @@ export type FormFields = {
   position: string
   email: string
   password: string
-  verificationId: string
+  token: string
 };
 
 export type ComponentProps = {
   spinner: boolean
-  verificationId: string,
+  token: string,
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
   t: Function
 };
@@ -37,9 +37,9 @@ export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>;
  */
 class CreateAccountForm extends Component<Props, {}> {
   public componentDidMount(): void {
-    const { change, verificationId } = this.props;
+    const { change, token } = this.props;
 
-    change('verificationId', verificationId);
+    change('token', token);
   }
 
   public render(): JSX.Element {
@@ -54,7 +54,7 @@ class CreateAccountForm extends Component<Props, {}> {
 
         <Field
           component="input"
-          name="verificationId"
+          name="token"
           type="hidden"
           validate={required()}/>
 
@@ -131,6 +131,6 @@ export default reduxForm<FormFields, ComponentProps>({
     position: '',
     email: '',
     password: '',
-    verificationId: ''
+    token: ''
   }
 })(TranslatedComponent);
