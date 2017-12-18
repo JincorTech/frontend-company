@@ -13,7 +13,6 @@ import {
   fetchDict,
   createCompany,
   createAccount,
-  setUserInfo,
   confirmEmail,
   inviteEmployee,
   resetState,

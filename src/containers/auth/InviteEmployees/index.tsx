@@ -3,7 +3,6 @@ import { Component } from 'react';
 import { RouteComponentProps } from 'react-router';
 import * as CSSModules from 'react-css-modules';
 import { connect } from 'react-redux';
-import * as jwtDecode from 'jwt-decode';
 
 import { StateMap as StateProps } from '../../../redux/modules/auth/inviteEmployees';
 import { FormFields as ConfirmFields } from '../../../components/auth/ConfirmEmailForm';
@@ -30,7 +29,7 @@ export type DispatchProps = {
 class InviteEmployees extends Component<Props, {}> {
   public componentDidMount(): void {
     const { location, router } = this.props;
-    const { token, verificationId, verificationCode } = location.query;
+    const { verificationId, verificationCode } = location.query;
 
     try {
       this.props.signupEmail({ verificationId, verificationCode });
