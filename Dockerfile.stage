@@ -1,0 +1,24 @@
+FROM node:8.0.0-alpine
+
+WORKDIR /usr/src/app
+
+ARG APIHOST=http://companies-api.stage.jincor.com
+ARG APIPREFIX=/api/v1
+
+ENV API_HOST=$APIHOST
+ENV API_PREFIX=$APIPREFIX
+
+ADD . /usr/src/app/
+
+RUN apk add --no-cache --update nginx && \
+  rm -rf /var/cache/apk/*
+
+RUN npm i --silent && npm run tslint && npm run stylelint && npm run build && \
+  rm -rf ./node_modules /usr/src/app/src /usr/local/lib/node_modules /root/.npm/ /tmp/* && \
+  mkdir -p /run/nginx
+
+ADD ./nginx-stage/default.conf /etc/nginx/conf.d/default.conf
+
+ENTRYPOINT ["/usr/sbin/nginx", "-g", "daemon off;"]
+
+EXPOSE 80
