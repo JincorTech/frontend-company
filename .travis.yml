@@ -1,20 +1,24 @@
-language: node_js
-node_js:
-- '8'
 sudo: false
+services:
+- docker
 branches:
   only:
   - master
   - develop
-cache:
-  directories:
-  - node_modules
-install:
-- npm install
 script:
-- npm run tslint
-- npm run stylelint
-- npm run build
+- export DOCKERFILE=`if [ "$TRAVIS_BRANCH" == "develop" ]; then echo "Dockerfile.stage";
+  else echo "Dockerfile" ; fi`
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "production"; elif [
+  "$TRAVIS_BRANCH" == "develop" ]; then echo "stage"; else echo "dev-$(git rev-parse
+  --short HEAD)"; fi`
+- docker build -f $DOCKERFILE --no-cache -t jincort/frontend-company:${TAG} .
+after_success:
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+- docker push jincort/frontend-company:${TAG}
 notifications:
   slack:
     secure: uXmdlWf0GmVlaOi3ggBcq0DLaFxWFr46opAH1mBuHYbncOCCS6oAz4bwcSIqVgCFdkSI/9pv3tt5Z/LCjIDuA7yNO5S6pBxTjlKvj4JuOniRJH6slmKip5XhBAqA7DHWG+UEFfrc1isLPx46/5OBv0r7w1XujsWQMXx/8DnEuBH9bMo2pO6nqY2KcJgCRvD0KUDtSnXiky9ReEuaIAsgn7jQwgpo1ZsCxscOx15dBctIvWvvvoZVP3ij5OO3smKbWM/+7k92tTNBpNTW3IoA68K+vGOcX3DzpJYqwgag0nlxdxA6apqQsifcAeHNI1kBlyCSK60ov6QHKXJLNiG27C3+qTCTUzIFeO33pkBwyuGyQUSeuyNB3TqRJmUqXByVdJJ1e00ePirTKuTjJvnok33pEKic/BhKxzIBQlmAFO/fi7Ub6uQJbF+Rk5TguiPQv0nys2AA87WXybqa3SaCnHU3o4BCjzBp/m5ErzkHMW/t81ghUtGFWyws6AqbSWBAr+GdQbPXxBtEbRFEx4HPc7CPGosRACDmqBAuQkkPcYvpHXdEjGvUNLL3BwQIotTEpLaOW1MZ8eA2hcK4DJZl3M/fV01qApmrP6aftEituDdY3oEPTWk8j2gS6Fx9WjY97rWubq7IZ0Az2nC/qMcasaxuBrEcBcbM7KI+PUhXIRw=
+env:
+  global:
+  - secure: W87mG37As4X9EY+Yh2uxT7U5mBuu6x3Rom/MF9YvqdnEgSg2GLcB501A6UvF3GmuBsTgy8482UWYIt4JvjFoKEorDlquVC4rP5EziSas5oSO4ov5Z/TWom5cCxh6gnAcWfzLuBxH6QcFeuq7VFIBpuAF/K9aZ4KFpf/F53PEsSVUTY1R/HCBR1VHAZo9w/MKCO+44flmlFHPw4Qamu5ceYkD8JxLH++RtjmjJKhIrT7bDYAfxb6RfWAtnygpsZKWUOv6lH6LiYFW9jq9czXN1NNnQULSyKBZFSRLXMa1gEmo2KUaPxIVnryKaE2n24UL2O34hd22AF0gOGjXZ7IlI7fr1sEFNTo3UjLyLePXVfPrHQCofpKwWbeJhmE5wL+bVHAoBvP4GxYAANY+26xNhQ5Xa7iH/k8YBCxj/Y6H/0EEeWLMknzTcZ3Vn8LRwetHudJ8kzhEIbq8WAEK4fDluLGZFAysRSfy5OG/CpDgVoMcKyXCCPfVChyxq2YflXZ4GDognXVNjc8SDzsax8/lvWwDJt8iJXEj6YgNHV/BfeIe5c+oQr+nFwDnHpJUwryorpN01hoGUaDfySkASLvt3d+1xgqC9SNrf9Nsb9pTQeWZLwDkT7fs95d57LD9/W+OCgeaR2U96LUz2pghlnCrNBmxLszcXYWpDlIw56bmZ/4=
+  - secure: UzFtddRpRmTOCm1ENDjxAVXAlz8kJRx3UY35e2lG53pmtgcdFVHUd7Q4A/h7Dfn1+8svjND/hGqj0JvFrUqp+VKTgcTpcuxLs2q/D9fuiIEPK645KD7RBiep7YFvmYHXhGLUITtYGkl7IPhexkP7q6Qqvm7inE6KssLxDGRrLUEdUFaHd2Rd24cOfn5+cFd3JKRer8FlZGNiwJ1Qg5iIA+axLOg4SZ7pK4U42u40DeRCuMdSJUitFTf07ZqX4o4Dgv0g4dpz72C9u2p4Stj8Kze8gDJD1WnwBh512+MY1OhTdsy9VPWcU7bQItapbgFUNSpChr9va1L8vYGUUpbnFvTKy1QcweZg2iriCRkKHJdD0eVQDIZBLPIPDVUsxyBoyyJbnqqle3oMFxALi6HVNB5QduQzZE8cV2D7dNj6NeyIBk51/GNbgA/gUn5d4GtJPaD6obbzFLTP86JAwX12cNvHxGGQ2gg5PK5R/z2M42CX5tJy12YT75a6zdbWsbjDQtXGy/xueF2bRpZOzp0M908Pxy90gXirflck7tzfzomMC+61OkeQM4gWdQt9PSStkQRW6nlKefsfisc0358uQnyvfpGSF0pQM64Fjpos+6eTpNUsdZFp5nw5PKZy2Y8TGSK5ATMJHL/+Z44JqVZqvRgp70Fl6/wtog1dvld1oEY=
