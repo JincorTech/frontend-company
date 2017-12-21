@@ -65,7 +65,7 @@ class Sidebar extends PureComponent<Props, {}> {
           <Link className={link} activeClassName={active} to={routes.profile}>{t('myCompany')}</Link>
           <Link className={link} activeClassName={active} to={routes.search}>{t('search')}</Link>
           <a className={link} href="/wallets">Wallets</a>
-          <a className={disabled}>Contracts</a>
+          <a className={link} href="/contracts">Contracts</a>
           <a className={link} href="/msg">{t('messenger')}</a>
         </nav>
       </aside>
