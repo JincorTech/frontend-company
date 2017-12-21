@@ -18,7 +18,7 @@ export type Props = ComponentProps & FormProps<FormFields, ComponentProps, any>;
 
 export type FormFields = {
   verificationId: string
-  pin: string
+  token: string
   email: string
   firstName: string
   lastName: string
@@ -29,7 +29,7 @@ export type FormFields = {
 export type ComponentProps = {
   spinner: boolean
   verificationId: string
-  pin: string
+  token: string
   email: string
   onSubmit: SubmitHandler<FormFields, ComponentProps, any>,
   t: Function
@@ -40,11 +40,12 @@ export type ComponentProps = {
  */
 class CreateAccountForm extends Component<Props, {}> {
   public componentDidMount(): void {
-    const { change, verificationId, pin, email } = this.props;
+    const { change, email, token, verificationId } = this.props;
+    console.log(this.props);
 
-    change('verificationId', verificationId);
-    change('pin', pin);
+    change('token', token);
     change('email', email);
+    change('verificationId', verificationId);
   }
 
   public render(): JSX.Element {
@@ -59,13 +60,7 @@ class CreateAccountForm extends Component<Props, {}> {
 
         <Field
           component="input"
-          name="verificationId"
-          type="hidden"
-          validate={required()}/>
-
-        <Field
-          component="input"
-          name="pin"
+          name="token"
           type="hidden"
           validate={required()}/>
 
@@ -142,8 +137,8 @@ export default reduxForm<FormFields, ComponentProps>({
     firstName: '',
     position: '',
     password: '',
+    token: '',
     verificationId: '',
-    pin: '',
     email: ''
   }
 })(TranslatedComponent);

@@ -10,8 +10,8 @@ export type Props = RouteComponentProps<{}, {}>;
 
 const VerifyEmployeeToken = (ChildComponent: any): any => (props: Props) => {
   const { location, router } = props;
-  const { token } = location.query;
-  let decoded = null;
+  const { token, ...rest } = location.query;
+  let decoded = {};
 
   try {
     decoded = jwtDecode(token);
@@ -19,7 +19,7 @@ const VerifyEmployeeToken = (ChildComponent: any): any => (props: Props) => {
     router.replace('/cmp/auth/signin');
   }
 
-  return decoded && <ChildComponent {...decoded}/>;
+  return decoded && <ChildComponent {...decoded} {...rest} token={token}/>;
 };
 
 export default VerifyEmployeeToken;

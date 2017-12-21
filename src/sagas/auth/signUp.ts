@@ -13,7 +13,6 @@ import {
   fetchDict,
   createCompany,
   createAccount,
-  setUserInfo,
   confirmEmail,
   inviteEmployee,
   resetState,
@@ -67,9 +66,9 @@ function* createCompanyIterator({ payload }: Action<CompanyFields>): SagaIterato
 
   try {
     const { data } = yield call(post, '/company', { countryId, companyType, legalName });
-    const { id: verificationId, companyId: id } = data;
+    const { id, token } = data;
 
-    yield put(createCompany.success({ id, verificationId }));
+    yield put(createCompany.success({ id, token }));
   } catch (e) {
     yield put(createCompany.failure(new SubmissionError(e.errors)));
   }
@@ -89,22 +88,22 @@ function* createAccountIterator({ payload }: Action<AccountFields>): SagaIterato
   try {
     const {
       email,
-      verificationId,
+      token,
       firstName,
       lastName,
       position,
       password
     } = payload;
     const employee = { firstName, lastName, position, password };
-    const employeeData = { ...employee, verificationId, email };
+    const employeeData = { ...employee, token, email };
 
     const { data } = yield call(post, '/employee/register', employeeData);
+    yield call(console.log, data);
 
-    yield call(get, `/employee/verifyEmail?verificationId=${verificationId}`);
-    yield put(setUserInfo(employee));
+    // yield call(get, `/employee/verifyEmail?verificationId=${data.verificationId}&email=${email}`);
 
     yield put(login(data.token));
-    yield put(createAccount.success());
+    yield put(createAccount.success(data.verificationId));
   } catch (e) {
     yield put(createAccount.failure(new SubmissionError(e.errors)));
   }

@@ -23,6 +23,7 @@ export type StateMap = {
   stepIndex: StepIndex
   company: Company
   employee: Employee
+  verificationId: string
 };
 
 export type Step = 'company' | 'account' | 'email' | 'employee';
@@ -38,7 +39,7 @@ export type Employee = {
 
 export type Company = {
   id: string
-  verificationId: string
+  token: string
 };
 
 /**
@@ -76,14 +77,15 @@ const initialState: State = from<StateMap>({
   stepIndex: 1,
   company: {
     id: '',
-    verificationId: ''
+    token: ''
   },
   employee: {
     firstName: '',
     lastName: '',
     password: '',
     position: ''
-  }
+  },
+  verificationId: ''
 });
 
 export default createReducer<State>({
@@ -104,10 +106,11 @@ export default createReducer<State>({
     state.merge({ spinner: true })
   ),
 
-  [createAccount.SUCCESS]: (state: State): State => (
+  [createAccount.SUCCESS]: (state: State, { payload }: Action<string>): State => (
     state.merge({
       step: 'email',
-      spinner: false
+      spinner: false,
+      verificationId: payload
     })
   ),
 
