@@ -51,7 +51,7 @@ class Sidebar extends PureComponent<Props, {}> {
 
   public render(): JSX.Element {
     const { t, open, onClose, styles, i18nLoadedAt, i18n, ...divProps } = this.props;
-    const { link, active, disabled } = styles;
+    const { link, active } = styles;
 
     return (
       <aside
