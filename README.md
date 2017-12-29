@@ -19,7 +19,7 @@ This frontend application can help user to solve these tasks:
 
 ## Build & Run
 
-1. Install [Git](http://git-scm.com/) and [Node](http://nodejs.org/).
+  1. Install [Git](http://git-scm.com/) and [Node](http://nodejs.org/).
 
   2. Open your terminal and clone `JincorTech/frontend-company` by running:
     ```
@@ -51,6 +51,7 @@ This frontend application can help user to solve these tasks:
   To connect to the host you need to pass further NodeJS environment variables:
 
   API_HOST - path to the companies api host.
+
   API_PREFIX - api prefix for companies api (for example '/api/v1')
 
 ## Tools & libraries
@@ -64,6 +65,7 @@ This frontend application can help user to solve these tasks:
   5. [react-css-modules](https://github.com/gajus/react-css-modules)
   6. [seamless-immutable](https://github.com/rtfeldman/seamless-immutable)
   7. [i18next](https://github.com/i18next/i18next)
+  8. [TypeScript](https://github.com/Microsoft/TypeScript)
 
 ## Structure
 
